@@ -6,7 +6,7 @@
   <link rel="stylesheet" href="../styles/signup.css">
 </head>
 <body>
-  <form action="app/signup_validation.php" method="get">
+  <form action="../modules/signup_validation.php" method="get">
     <h1>Erregistratu</h1>
     <!-- Nickname -->
     <div class="input-container">

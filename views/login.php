@@ -6,7 +6,7 @@
   <link rel="stylesheet" href="../styles/login.css">
 </head>
 <body>
-  <form action="app/login_validation.php" method="get">
+  <form action="../modules/login_validation.php" method="get">
     <h1>Saioa hasi</h1>
     <div class="input-container">
       <i class="fa-solid fa-user"></i>
