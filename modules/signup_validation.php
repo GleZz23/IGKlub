@@ -1,6 +1,5 @@
 <?php
 include_once('connection.php');
-
 // Recoger en variables los datos introducidos en el formulario
 $nickname = $_GET["nickname"];
 $email = $_GET["email"];
@@ -9,6 +8,9 @@ $surnames = $_GET["surnames"];
 $date = $_GET["date"];
 $password = $_GET["password"];
 $password = password_hash($password, PASSWORD_DEFAULT);
+$role = $_GET["role"];
+
+
 
 // Comprobar que el nickname no existe en la base de datos
 $query = $miPDO->prepare('SELECT COUNT(*) FROM usuario WHERE nickname=:nickname');
@@ -31,8 +33,16 @@ if ($results > 0) {
     // Mostrar error en el formulario
   } else {
     // Inserto el usuario en la base de datos
-    $query = $miPDO->prepare('INSERT INTO usuario (nickname, email, nombre, apellidos, fecha_nacimiento, contrasena, rol) VALUES (:nickname, :email, :name, :surnames, :date, :password, "ikasle")');
-    $query->execute(['nickname' => $nickname, 'email' => $email, 'name' => $name, 'surnames' => $surnames, 'date' => $date, 'password' => $password]);
-    header('Location: ../login.php');
+    $query = $miPDO->prepare('INSERT INTO usuario (nickname, email, nombre, apellidos, fecha_nacimiento, contrasena, rol) VALUES (:nickname, :email, :name, :surnames, :date, :password, :role)');
+    $query->execute(['nickname' => $nickname, 'email' => $email, 'name' => $name, 'surnames' => $surnames, 'date' => $date, 'password' => $password, 'role' => $role]);
   }
+}
+
+// Comprobar el rol con el que se esta registrando el usuario
+if ($role === 'irakasle') {
+  $phone = $_GET["role"];
+  $query = $miPDO->prepare('INSERT INTO usuario (telefono) VALUES (:phone)');
+  $query->execute(['phone' => $phone]);
+} else {
+  header('Location: ../login.php');
 }
