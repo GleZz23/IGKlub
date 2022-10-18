@@ -7,7 +7,7 @@
 </head>
 <body>
   <div>
-    <h1>Nickname edo pasahitza desegokia</h1> 
+    <h1>Nickname, pasahitza edo taldearen kodea desegokia</h1> 
     <a href="login.php">Saiatu berriro</a> edo <a href="signup.php">Erregistratu</a>
   </div>
 </body>
