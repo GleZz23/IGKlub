@@ -7,7 +7,6 @@
 body {
   height: 100vh;
   display: flex;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
   text-align: center;
@@ -15,51 +14,27 @@ body {
   background-image: url(../src/img/background.jpg);
 }
 
-form {
-  width: 35rem;
+section {
   background-color: lightgray;
-  padding: 2rem;
+  padding: 3rem 4rem;
   border: 2px solid gray;
   border-radius: 1rem;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 1rem;
   box-shadow: .5rem .5rem 1rem #00000050;
 }
 
-.input-container {
-  width: 100%;
-  display: flex;
-  align-items: center;
-  background-color: gray;
+section h1 {
+  margin-bottom: 1rem;
+  text-transform: capitalize;
+  justify-content: space-between;
 }
 
-.input-container div {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
+section p {
+  margin-bottom: 1.5rem;
 }
 
-i {
-  width: 3rem;
-  padding-block: 1rem;
-  font-size: 1rem;
-  color: #eee;
-}
-
-input, select {
-  width: 100%;
-  height: 3rem;
-  padding-inline: .5rem;
-  outline: none;
-  border: none;
-  background-color: #eee;
-}
-
-input:focus { border: 1px solid gray; }
-
-button {
+section a {
+  color: black;
+  text-decoration: none;
   width: 20%;
   padding: .5rem 1rem;
   border: 1px solid gray;
@@ -68,7 +43,7 @@ button {
   transition: ease-in-out .25s;
 }
 
-button:hover {
+section a:hover {
   cursor: pointer;
   box-shadow: 0 0 .5rem #00000050;
 }
