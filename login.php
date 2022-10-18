@@ -13,6 +13,7 @@
   <link rel="stylesheet" href="styles/login.css">
 </head>
 <body>
+  
   <form action="app/login_validation.php" method="get">
     <h1>Saioa hasi</h1>
     <div class="input-container">
@@ -23,7 +24,7 @@
       <i class="fa-solid fa-key"></i>
       <input type="password" name="password" id="" placeholder="Pasahitza">
     </div>
-    <button>Saioa hasi</button>
+    <input type="submit" name="enviar" value="Saioa hasi"></input>
   </form>
 </body>
 </html>
