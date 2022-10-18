@@ -1,4 +1,3 @@
-<h1>Erregistratu</h1>
 <!-- Nickname -->
 <div class="input-container">
   <i class="fa-solid fa-user"></i>
@@ -24,8 +23,26 @@
 </div>
 <!-- Telefono -->
 <div class="input-container">
-  <i class="fa-solid fa-cake-candles"></i>
-  <input type="number" id="phone" name="phone" placeholder="Telefono zenbakia">
+  <i class="fa-solid fa-phone"></i>
+  <input type="tel" id="phone" name="phone" placeholder="Telefono zenbakia">
+</div>
+<!-- Centro -->
+<div class="input-container">
+<i class="fa-solid fa-school"></i>
+  <select name="school" id="school">
+    <option value="-" selected>Ikastetxea</option>
+  <?php
+    include_once('../modules/connection.php');
+
+    $query = $miPDO->prepare('SELECT * FROM centro');
+    $query->execute();
+    $results = $query->fetchAll();
+
+    foreach ($results as $posotion => $school) {
+      echo '<option value="'.$school['id_centro'].'">'.$school['nombre'].'</option>';
+    }
+  ?>
+</select>
 </div>
 <!-- Contraseñas -->
 <div class="input-container">

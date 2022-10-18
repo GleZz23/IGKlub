@@ -7,7 +7,15 @@
 </head>
 <body>
   <form action="../modules/signup_validation.php" method="get">
-    <?php include_once('../templates/signup_student.php'); ?>
+    <?php
+    $form = $_POST["form"];
+    echo '<h1>Erregistratu - '.$form.'a</h1>';
+    if ($form === 'Ikasle') {
+      include_once('../templates/signup_student.php');
+    } else if ($form === 'Irakasle') {
+      include_once('../templates/signup_teacher.php');
+    }
+    ?>
   </form>
 </body>
 </html>

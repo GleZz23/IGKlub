@@ -16,7 +16,7 @@
       <i class="fa-solid fa-key"></i>
       <input type="password" name="password" id="" placeholder="Pasahitza">
     </div>
-    <input type="submit" name="enviar" value="Saioa hasi"></input>
+    <button>Saioa hasi</button>
   </form>
 </body>
 </html>

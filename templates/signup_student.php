@@ -1,4 +1,3 @@
-<h1>Erregistratu</h1>
 <!-- Nickname -->
 <div class="input-container">
   <i class="fa-solid fa-user"></i>

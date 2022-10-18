@@ -6,9 +6,18 @@
   <link rel="stylesheet" href="styles/index.css">
 </head>
 <body>
-  <div>
+  <section>
     <h1>IGKlub</h1> <!-- Cambiar por logo -->
-    <a href="views/login.php">Saioa hasi</a> edo <a href="views/signup.php">Erregistratu</a>
-  </div>
+    <form action="views/signup.php" method="post">
+      <select name="form">
+        <option value="Irakasle">Irakasle</option>
+        <option value="Ikasle">Ikasle</option>
+      </select>
+      <p>bezala</p>
+      <button>erregistratu</button>
+    </form>
+    <div class="horizontal-bar"></div>
+    <a href="views/login.php">Saioa hasi</a>
+  </section>
 </body>
 </html>

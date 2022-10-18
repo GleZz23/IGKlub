@@ -17,7 +17,7 @@ $results = $query->fetchColumn();
 
 if ($results > 0) {
   $nickname_error = 'Nickname en uso';
-  header('Location: ../signup.php');
+  header('Location: ../views/signup.php');
   // Mostrar error en el formulario
 } else {
   // Comprobar que el email no existe en la base de datos
@@ -27,7 +27,7 @@ if ($results > 0) {
 
   if ($results > 0) {
     echo 'Email en uso';
-    header('Location: ../signup.php');
+    header('Location: ../views/signup.php');
     // Mostrar error en el formulario
   } else {
     // Inserto el usuario en la base de datos
@@ -35,10 +35,15 @@ if ($results > 0) {
     $query->execute(['nickname' => $nickname, 'email' => $email, 'name' => $name, 'surnames' => $surnames, 'date' => $date, 'password' => $password, 'role' => $role]);
     // Comprobar el rol con el que se esta registrando el usuario
     if ($role === 'irakasle') {
-      $phone = $_GET["role"];
-      $query = $miPDO->prepare('INSERT INTO usuario (telefono) VALUES (:phone)');
-      $query->execute(['phone' => $phone]);
+      $school = $_GET["school"];
+      $phone = $_GET["phone"];
+
+      $query = $miPDO->prepare('UPDATE usuario SET telefono = :phone, id_centro = :school WHERE nickname = :nickname;');
+      $query->execute(['phone' => $phone, 'school' => $school, 'nickname' => $nickname]);
+
+      // Enviar notificacion de que un nuevo profesor se ha registrado por email
+
     }
-    header('Location: ../login.php');
+    header('Location: ../views/login.php');
   }
 }
