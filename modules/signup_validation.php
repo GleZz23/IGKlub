@@ -42,7 +42,6 @@ if ($results > 0) {
       $query->execute(['phone' => $phone, 'school' => $school, 'nickname' => $nickname]);
 
       // Enviar notificacion de que un nuevo profesor se ha registrado por email
-
     }
     header('Location: ../views/login.php');
   }
