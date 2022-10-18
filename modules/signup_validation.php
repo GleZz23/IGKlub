@@ -21,7 +21,7 @@ $query->execute(['nickname' => $nickname, 'email' => $email]);
 $results = $query->fetch();
 
 // Si el nickname existe
-if ($results['nickname'] != '') {
+if (empty($results['nickname'])) {
   $registro = false;
   $nickname_error = 'Nickname en uso';
   header('Location: ../views/signup.php?role='.$role);
@@ -29,7 +29,7 @@ if ($results['nickname'] != '') {
 }
 
 // Si el email existe
-if ($results['email'] != '') {
+if (empty($results['email'])) {
   $registro = false;
   $nickname_error = 'Email en uso';
   header('Location: ../views/signup.php?role='.$role);
