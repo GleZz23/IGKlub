@@ -8,8 +8,8 @@
 <body>
   <section>
     <h1>IGKlub</h1> <!-- Cambiar por logo -->
-    <form action="views/signup.php" method="post">
-      <select name="form">
+    <form action="views/signup.php" method="get">
+      <select name="role">
         <option value="Irakasle">Irakasle</option>
         <option value="Ikasle">Ikasle</option>
       </select>

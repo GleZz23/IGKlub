@@ -10,46 +10,46 @@ $password = $_GET["password"];
 $password = password_hash($password, PASSWORD_DEFAULT);
 $role = $_GET["role"];
 
+// Guardar en sesion el nickname del usuario
 session_start();
 $_SESSION['nickname'] = $nickname;
 
-// Comprobar que el nickname no existe en la base de datos
-$query = $miPDO->prepare('SELECT COUNT(*) FROM usuario WHERE nickname=:nickname');
-$query->execute(['nickname' => $nickname]);
-$results = $query->fetchColumn();
+// Comprobar que el nickname o el email no existe en la base de datos
+$registro = true;
+$query = $miPDO->prepare('SELECT nickname, email FROM usuario WHERE nickname=:nickname OR email=:email');
+$query->execute(['nickname' => $nickname, 'email' => $email]);
+$results = $query->fetch();
 
-
-
-if ($results > 0) {
+// Si el nickname existe
+if ($results['nickname'] != '') {
+  $registro = false;
   $nickname_error = 'Nickname en uso';
-  header('Location: ../views/signup.php');
-  session_destroy();
+  header('Location: ../views/signup.php?role='.$role);
   // Mostrar error en el formulario
-} else {
-  // Comprobar que el email no existe en la base de datos
-  $query = $miPDO->prepare('SELECT COUNT(*) FROM usuario WHERE email=:email');
-  $query->execute(['email' => $email]);
-  $results = $query->fetchColumn();
+}
 
-  if ($results > 0) {
-    echo 'Email en uso';
-    header('Location: ../views/signup.php');
-    session_destroy();
-    // Mostrar error en el formulario
-  } else {
-    // Inserto el usuario en la base de datos
-    $query = $miPDO->prepare('INSERT INTO usuario (nickname, email, nombre, apellidos, fecha_nacimiento, contrasena, rol) VALUES (:nickname, :email, :name, :surnames, :date, :password, :role)');
-    $query->execute(['nickname' => $nickname, 'email' => $email, 'name' => $name, 'surnames' => $surnames, 'date' => $date, 'password' => $password, 'role' => $role]);
-    // Comprobar el rol con el que se esta registrando el usuario
-    if ($role === 'irakasle') {
-      $school = $_GET["school"];
-      $phone = $_GET["phone"];
+// Si el email existe
+if ($results['email'] != '') {
+  $registro = false;
+  $nickname_error = 'Email en uso';
+  header('Location: ../views/signup.php?role='.$role);
+  // Mostrar error en el formulario
+}
 
-      $query = $miPDO->prepare('UPDATE usuario SET telefono = :phone, id_centro = :school WHERE nickname = :nickname;');
-      $query->execute(['phone' => $phone, 'school' => $school, 'nickname' => $nickname]);
+// Si el registro es valido
+if ($registro) {
+  // Inserto el usuario en la base de datos
+  $query = $miPDO->prepare('INSERT INTO usuario (nickname, email, nombre, apellidos, fecha_nacimiento, contrasena, rol) VALUES (:nickname, :email, :name, :surnames, :date, :password, :role)');
+  $query->execute(['nickname' => $nickname, 'email' => $email, 'name' => $name, 'surnames' => $surnames, 'date' => $date, 'password' => $password, 'role' => $role]);
+  // Comprobar el rol con el que se esta registrando el usuario
+  if ($role === 'irakasle') {
+    $school = $_GET["school"];
+    $phone = $_GET["phone"];
 
-      // Enviar notificacion de que un nuevo profesor se ha registrado por email
-    }
-    header('Location: ../views/login.php');
+    $query = $miPDO->prepare('UPDATE usuario SET telefono = :phone, id_centro = :school WHERE nickname = :nickname;');
+    $query->execute(['phone' => $phone, 'school' => $school, 'nickname' => $nickname]);
+
+    // Enviar notificacion de que un nuevo profesor se ha registrado por email
   }
+  header('Location: ../views/login.php');
 }

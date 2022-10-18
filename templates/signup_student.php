@@ -32,5 +32,5 @@
 <!-- Contrato -->
 
 <!-- Rol -->
-<input type="hidden" name="role" value="ikasle">
+<input type="hidden" name="role" value="Ikasle">
 <button>Erregistratu</button>

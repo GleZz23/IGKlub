@@ -8,11 +8,11 @@
 <body>
   <form action="../modules/signup_validation.php" method="get">
     <?php
-    $form = $_POST["form"];
-    echo '<h1>Erregistratu - '.$form.'a</h1>';
-    if ($form === 'Ikasle') {
+    $role = $_GET['role'];
+    echo '<h1>Erregistratu - '.$role.'a</h1>';
+    if ($role === 'Ikasle') {
       include_once('../templates/signup_student.php');
-    } else if ($form === 'Irakasle') {
+    } else if ($role === 'Irakasle') {
       include_once('../templates/signup_teacher.php');
     }
     ?>

@@ -3,7 +3,6 @@
   include_once('../templates/head.php');
 
   session_start();
-
 ?>
 
   <title>Saioa hasi | IGKlub</title>
