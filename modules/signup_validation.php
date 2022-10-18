@@ -10,14 +10,20 @@ $password = $_GET["password"];
 $password = password_hash($password, PASSWORD_DEFAULT);
 $role = $_GET["role"];
 
+session_start();
+$_SESSION['nickname'] = $nickname;
+
 // Comprobar que el nickname no existe en la base de datos
 $query = $miPDO->prepare('SELECT COUNT(*) FROM usuario WHERE nickname=:nickname');
 $query->execute(['nickname' => $nickname]);
 $results = $query->fetchColumn();
 
+
+
 if ($results > 0) {
   $nickname_error = 'Nickname en uso';
   header('Location: ../views/signup.php');
+  session_destroy();
   // Mostrar error en el formulario
 } else {
   // Comprobar que el email no existe en la base de datos
@@ -28,6 +34,7 @@ if ($results > 0) {
   if ($results > 0) {
     echo 'Email en uso';
     header('Location: ../views/signup.php');
+    session_destroy();
     // Mostrar error en el formulario
   } else {
     // Inserto el usuario en la base de datos
