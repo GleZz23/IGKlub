@@ -4,6 +4,54 @@
 
   $role = $_GET['role'];
 
+  $nickname_error = false;
+  $email_error = false;
+
+  if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $nickname = $_POST["nickname"];
+    $email = $_POST["email"];
+    $name = $_POST["name"];
+    $surnames = $_POST["surnames"];
+    $date = $_POST["date"];
+    $password = $_POST["password"];
+    $password = password_hash($password, PASSWORD_DEFAULT);
+    $role = $_POST["role"];
+
+    // Comprobar que el nickname o el email no existe en la base de datos
+    $registro = true;
+
+    $query = $miPDO->prepare('SELECT nickname, email FROM usuario WHERE nickname=:nickname OR email=:email');
+    $query->execute(['nickname' => $nickname, 'email' => $email]);
+    $results = $query->fetch();
+  
+    // Si el nickname existe
+    if (!empty($results['nickname'])) {
+      $registro = false;
+      $nickname_error = true;
+    }
+  
+    // Si el email existe
+    if (!empty($results['email'])) {
+      $registro = false;
+      $email_error = true;
+    }
+
+    // Si el registro es valido
+    if ($signup) {
+      // Inserto el usuario en la base de datos
+      $query = $miPDO->prepare('INSERT INTO usuario (nickname, email, nombre, apellidos, fecha_nacimiento, contrasena, rol) VALUES (:nickname, :email, :name, :surnames, :date, :password, :role)');
+      $query->execute(['nickname' => $nickname, 'email' => $email, 'name' => $name, 'surnames' => $surnames, 'date' => $date, 'password' => $password, 'role' => $role]);
+
+      if ($role === 'irakasle') {
+        $phone = $_POST["phone"];
+        $school = $_POST["school"];
+
+        $query = $miPDO->prepare('UPDATE usuario SET telefono = :phone ,id_centro = :school WHERE nickname = :nickname;');
+        $query->execute(['phone' => $phone, 'school' => $school, 'nickname' => $nickname]);
+      }
+      header('Location: ../views/login.php');
+    }
+  }
 ?>
 
   <title>Erregistratu | IGKlub</title>
