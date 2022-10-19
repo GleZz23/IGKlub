@@ -15,7 +15,6 @@
     $date = $_POST["date"];
     $password = $_POST["password"];
     $password = password_hash($password, PASSWORD_DEFAULT);
-    $role = $_POST["role"];
 
     // Comprobar que el nickname o el email no existe en la base de datos
     $signup = true;
@@ -40,7 +39,7 @@
     if ($signup) {
       // Inserto el usuario en la base de datos
       $query = $miPDO->prepare('INSERT INTO usuario (nickname, email, nombre, apellidos, fecha_nacimiento, contrasena, rol) VALUES (:nickname, :email, :name, :surnames, :date, :password, :role)');
-      $query->execute(['nickname' => $nickname, 'email' => $email, 'name' => $name, 'surnames' => $surnames, 'date' => $date, 'password' => $password, 'role' => $role]);
+      $query->execute(['nickname' => $nickname, 'email' => $email, 'name' => $name, 'surnames' => $surnames, 'date' => $date, 'password' => $password, 'role' => $_GET['role']]);
 
       if ($role === 'irakasle') {
         $phone = $_POST["phone"];
@@ -140,7 +139,7 @@
   <!-- Contrato -->
     
   <!-- Rol -->
-  <input type="hidden" name="role" value="<?php $role ?>">
+  <input type="hidden" name="role" value="<?php $_GET['role'] ?>">
   <button>Erregistratu</button>
 </form>
 <script src="../js/signup_validation.js"></script>
