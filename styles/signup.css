@@ -72,3 +72,25 @@ button:hover {
   cursor: pointer;
   box-shadow: 0 0 .5rem #00000050;
 }
+
+.error {
+  width: 100%;
+  background-color: #E00A35;
+  color: #EEE;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding-inline: 1rem;
+  border-radius: .375rem;
+  font-size: .8rem;
+}
+
+.error p {
+  hyphens: auto;
+  -webkit-hyphens: auto;
+}
+
+.error i {
+  width: auto;
+  padding-right: .5rem;
+}
