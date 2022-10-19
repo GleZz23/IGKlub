@@ -18,21 +18,21 @@
     $role = $_POST["role"];
 
     // Comprobar que el nickname o el email no existe en la base de datos
-    $registro = true;
+    $signup = true;
 
     $query = $miPDO->prepare('SELECT nickname, email FROM usuario WHERE nickname=:nickname OR email=:email');
     $query->execute(['nickname' => $nickname, 'email' => $email]);
     $results = $query->fetch();
   
     // Si el nickname existe
-    if (!empty($results['nickname'])) {
-      $registro = false;
+    if ($results['nickname'] === $nickname) {
+      $signup = false;
       $nickname_error = true;
     }
   
     // Si el email existe
-    if (!empty($results['email'])) {
-      $registro = false;
+    if ($results['email'] === $email) {
+      $signup = false;
       $email_error = true;
     }
 
