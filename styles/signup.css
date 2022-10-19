@@ -71,3 +71,9 @@ button:hover {
   cursor: pointer;
   box-shadow: 0 0 .5rem #00000050;
 }
+.input_incorrecto{
+  border: 2px solid red;
+}
+.input_correcto{
+  border: 2px solid green;
+}

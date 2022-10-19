@@ -1,3 +1,4 @@
+
 <h1>Erregistratu</h1>
 <!-- Nickname -->
 <div class="input-container">
@@ -34,4 +35,6 @@
 
 <!-- Rol -->
 <input type="hidden" name="role" value="ikasle">
-<button>Erregistratu</button>
+
+<input type="checkbox" id="cb">Terminoak eta baldintzak onartu</input>
+<button id="botonRegistrar">Erregistratu</button>
