@@ -48,12 +48,13 @@ const validarFormulario= (e)=>{
             }
             break;  
         case "date":
-            if(expresiones.date.test(e.target.value)){
-                document.getElementById('date').classList.remove('input_incorrecto');
-                document.getElementById('date').classList.add('input_correcto');
-            }else{
+            if(e.target.value ===""){
                 document.getElementById('date').classList.add('input_incorrecto');
                 document.getElementById('date').classList.remove('input_correcto');
+            }else{
+                
+                document.getElementById('date').classList.remove('input_incorrecto');
+                document.getElementById('date').classList.add('input_correcto');
             }
             break;  
         case "password":
