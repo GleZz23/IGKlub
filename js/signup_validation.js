@@ -17,6 +17,7 @@ const validarFormulario= (e)=>{
                 document.getElementById('nickname').classList.add('input_correcto');
             }else{
                 document.getElementById('nickname').classList.add('input_incorrecto');
+                document.getElementById('nickname').classList.remove('input_correcto');
             }
             break;  
         case "email":
@@ -25,6 +26,7 @@ const validarFormulario= (e)=>{
                 document.getElementById('email').classList.add('input_correcto');
             }else{
                 document.getElementById('email').classList.add('input_incorrecto');
+                document.getElementById('email').classList.remove('input_correcto');
             }
             break;  
         case "name":
@@ -33,6 +35,7 @@ const validarFormulario= (e)=>{
                 document.getElementById('name').classList.add('input_correcto');
             }else{
                 document.getElementById('name').classList.add('input_incorrecto');
+                document.getElementById('name').classList.remove('input_correcto');
             }
             break;  
         case "surnames":
@@ -41,6 +44,7 @@ const validarFormulario= (e)=>{
                 document.getElementById('surnames').classList.add('input_correcto');
             }else{
                 document.getElementById('surnames').classList.add('input_incorrecto');
+                document.getElementById('surnames').classList.remove('input_correcto');
             }
             break;  
         case "date":
@@ -49,6 +53,7 @@ const validarFormulario= (e)=>{
                 document.getElementById('date').classList.add('input_correcto');
             }else{
                 document.getElementById('date').classList.add('input_incorrecto');
+                document.getElementById('date').classList.remove('input_correcto');
             }
             break;  
         case "password":
@@ -57,6 +62,7 @@ const validarFormulario= (e)=>{
                 document.getElementById('password').classList.add('input_correcto');
             }else{
                 document.getElementById('password').classList.add('input_incorrecto');
+                document.getElementById('password').classList.remove('input_correcto');
             }
             break;  
         case "password2":
@@ -65,6 +71,7 @@ const validarFormulario= (e)=>{
                 document.getElementById('password2').classList.add('input_correcto');
             }else{
                 document.getElementById('password2').classList.add('input_incorrecto');
+                document.getElementById('password2').classList.remove('input_correcto');
             }
             break;  
 
@@ -74,6 +81,7 @@ const validarFormulario= (e)=>{
 inputs.forEach((input) => {
 input.addEventListener('keyup', validarFormulario);
 input.addEventListener('blur', validarFormulario);
+
 });
 
 formulario.addEventListener('submit', (e) => {

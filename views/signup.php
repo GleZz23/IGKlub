@@ -58,7 +58,7 @@
   <link rel="stylesheet" href="../styles/signup.css">
 </head>
 <body>
-  <form action="" method="post">
+  <form id="formularioRegistrar" action="" method="post">
   <h1>Erregistratu</h1>
   <!-- Nickname -->
   <div class="input-container">
@@ -143,5 +143,6 @@
   <input type="hidden" name="role" value="<?php $role ?>">
   <button>Erregistratu</button>
 </form>
+<script src="../js/signup_validation.js"></script>
 </body>
 </html>

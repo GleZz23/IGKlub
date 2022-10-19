@@ -57,7 +57,7 @@ input, select {
   background-color: #eee;
 }
 
-input:focus { border: 1px solid gray; }
+/* input:focus { border: 1px solid gray; } */
 
 button {
   width: 20%;
@@ -93,4 +93,10 @@ button:hover {
 .error i {
   width: auto;
   padding-right: .5rem;
+}
+.input_incorrecto{
+border: 2px solid red;
+}
+.input_correcto{
+  border: 2px solid green;
 }
