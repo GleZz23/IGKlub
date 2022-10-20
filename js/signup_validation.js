@@ -2,9 +2,9 @@ const formulario = document.getElementById('formularioRegistrar');
 const inputs = document.querySelectorAll('#formularioRegistrar input');
 
 const expresiones = {
-    nickname: /^[a-zA-Z0-9\_\-]{4,20}$/,
-    name: /^[a-zA-Z]{1,40}$/,
-    surnames: /^[a-zA-Z]{1,40}$/,
+    nickname: /^[a-zA-Z0-9ñÑ\_\-]{4,20}$/,
+    name: /^[a-zA-ZñÑ]{1,40}$/,
+    surnames: /^[a-zA-ZñÑ]{1,40}$/,
     email:/^[a-zA-Z0-9_.+-]+@[a-z-A-Z0-9]+\.[a-zA-Z0-9-.]+$/, 
     password: /^.{4,20}$/,
     password2: /^.{4,20}$/,
