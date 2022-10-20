@@ -57,7 +57,16 @@ input, select {
   background-color: #eee;
 }
 
-/* input:focus { border: 1px solid gray; } */
+.input-checkbox {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.input-checkbox input {
+  width: auto;
+  margin-right: .5rem;
+}
 
 button {
   width: 20%;
@@ -73,6 +82,8 @@ button:hover {
   box-shadow: 0 0 .5rem #00000050;
 }
 
+.input_error{ border-right: 4px solid #E00A35; }
+
 .error {
   width: 100%;
   background-color: #E00A35;
@@ -80,6 +91,7 @@ button:hover {
   display: flex;
   justify-content: flex-start;
   align-items: center;
+  text-align: left;
   padding-inline: 1rem;
   border-radius: .375rem;
   font-size: .8rem;
@@ -94,9 +106,6 @@ button:hover {
   width: auto;
   padding-right: .5rem;
 }
-.input_incorrecto{
-border: 2px solid red;
-}
-.input_correcto{
-  border: 2px solid green;
-}
+
+.hidden { display: none; }
+
