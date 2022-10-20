@@ -42,7 +42,7 @@
       $phone = $_POST["phone"];
       $school = $_POST["school"];
 
-      $query = $miPDO->prepare('SELECT nickname, email, telefono FROM usuario WHERE telefono=:phone');
+      $query = $miPDO->prepare('SELECT telefono FROM usuario WHERE telefono=:phone');
       $query->execute(['phone' => $phone]);
       $results = $query->fetch();
 
