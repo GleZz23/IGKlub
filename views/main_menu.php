@@ -1,5 +1,8 @@
 <?php
   include_once('../templates/head.php');
+  include_once('../modules/connection.php');
+
+  
 ?>
     <link rel="stylesheet" href="../styles/main_menu.css">
     <title>Hasiera | IGKlub</title>
@@ -19,29 +22,29 @@
 
     </nav>
   </header>
-   
     <main>
 
     <div class="cover">
-        <div class="contenedor__libros1">
       
-       
-        <img src="../src/img/imagen1.jpg"  alt="">
-        <aside>Lo que queremos hacer es colocar este texto al lado derecho de la imagen, algo así como se observa en periódicos o revistas.</aside>
-        <input type="button" class="btn_ver-mas" value="Ver mas">
-        </div>
-        <div class="contenedor__libros2">
+      <?php 
+      // Recojo todos los valores de los libros en una variable
+  $query = $miPDO->prepare('SELECT libro.* FROM libro, solicitud_libro WHERE libro.id_libro = solicitud_libro.id_libro AND solicitud_libro.estado = "aceptado"');
+  $query->execute();
+  $results = $query->fetchAll();
+      foreach ($results as $posotion => $valorLibro){
         
-        <img src="../src/img/imagen2.jpg"  alt="">
-        <aside>Lo que queremos hacer es colocar este texto al lado derecho de la imagen, algo así como se observa en periódicos o revistas.</aside>
-        <input type="button" class="btn_ver-mas" value="Ver mas">
-        </div>
-        <div class="contenedor__libros3">
-        
-        <img src="../src/img/imagen3.jpg"  alt="">
-        <aside>Lo que queremos hacer es colocar este texto al lado derecho de la imagen, algo así como se observa en periódicos o revistas.</aside>
-        <input type="button" class="btn_ver-mas" value="Ver mas">
-        </div>
+        echo '<div class="contenedor__libro">'
+                  ,'<figure>'
+                    ,'<img src="../src/img/imagen1.jpg"  alt="">'
+                  ,'</figure>'
+                ,'<div class="informacion__libro">'
+                  ,'<h2 id="title">Tituloa:'.$valorLibro['titulo'].'</h2>'
+                  ,'<h2 id="autor">Idazlea:'.$valorLibro['escritor'].'</h1>'
+                  ,'<h2 id="valoration">Balorazioa:'.$valorLibro['nota_media'].'</h1>'
+                  ,'<input type="button" class="btn_ver-mas" value="Ver mas">'
+                ,'</div>'
+              ,'</div>';
+      }?>
     </div>
 
 
