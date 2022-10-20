@@ -8,24 +8,20 @@
   $phone_error = false;
 
   if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $signup = true;
+
     $nickname = $_POST["nickname"];
     $email = $_POST["email"];
     $name = $_POST["name"];
     $surnames = $_POST["surnames"];
     $date = $_POST["date"];
-    $phone = $_POST["phone"];
-    $school = $_POST["school"];
     $password = $_POST["password"];
     $password = password_hash($password, PASSWORD_DEFAULT);
-
-    // Comprobar que el nickname o el email no existe en la base de datos
-    $signup = true;
-
-    $query = $miPDO->prepare('SELECT nickname, email, telefono FROM usuario WHERE nickname=:nickname OR email=:email OR telefono=:phone');
-    $query->execute(['nickname' => $nickname, 'email' => $email, 'phone' => $phone]);
-    $results = $query->fetch();
-  
     
+    $query = $miPDO->prepare('SELECT nickname, email, telefono FROM usuario WHERE nickname=:nickname OR email=:email');
+    $query->execute(['nickname' => $nickname, 'email' => $email]);
+    $results = $query->fetch();
+
     // Si el nickname existe
     if ($nickname !== '') {
       if ($results['nickname'] === $nickname) {
@@ -42,18 +38,27 @@
       }
     }
 
-    // Si el telefono existe
-    if ($phone !== '') {
-      if ($results['telefono'] === $phone) {
-        $signup = false;
-        $phone_error = true;
+    if ($_GET['role'] === 'Irakasle') {
+      $phone = $_POST["phone"];
+      $school = $_POST["school"];
+
+      $query = $miPDO->prepare('SELECT nickname, email, telefono FROM usuario WHERE telefono=:phone');
+      $query->execute(['phone' => $phone]);
+      $results = $query->fetch();
+
+      // Si el telefono existe
+      if ($phone !== '') {
+        if ($results['telefono'] === $phone) {
+          $signup = false;
+          $phone_error = true;
+        }
       }
-    }
     
-    // Si el centro es por defecto
-    if ($school === '-') {
-      $signup = false;
-      $school_error = true;
+      // Si el centro es por defecto
+      if ($school === '-') {
+        $signup = false;
+        $school_error = true;
+      }
     }
 
     // Si el registro es valido
