@@ -13,51 +13,36 @@ header{
     width: 100%;
     position: sticky;
     background-color: lightgray;
-    padding: 2rem;
+    padding: 1.5rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid gray;
+    box-shadow: 0 0 1rem #00000050;
+    gap: 3rem;
 }
 
 /* LOGO */
-header .logo {
-  
+.logo {
+
 }
 
 /* BARRA DE BUSQUEDA */
-header .search-bar {
+.search-bar {
+  width: 100%;
   background-color: white;
-  padding: .5rem 1rem;
   border: 3px solid gray;
-  border-radius: 2rem;
   box-shadow: .5rem .5rem 1rem #00000050;
-}
-a:link, a:visited, a:active {
-    text-decoration:none;
+  overflow: hidden;
+  justify-content: space-between;
 }
 
-.container__header{
-    max-width: 90%;
-    height: 100%;
-    margin: auto;
-    padding: 40px;
-    padding-top: 80px;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-}
-.barra__filtros{
-    max-width: 90%;
-    height: 100%;
-    margin: auto;
-    padding: 40px;
-    padding-top: 40px;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-}
-.barra__filtros nav ul{
-    display: flex;
-
+.search-bar input{
+  background: transparent;
+  outline: none;
+  border: none;
+  font-size: 1rem;
+  padding-block:  1rem;
 }
 
 .barra__filtros nav ul li{

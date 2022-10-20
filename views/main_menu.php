@@ -1,16 +1,15 @@
 <?php
   include_once('../templates/head.php');
   include_once('../modules/connection.php');
-
-  
 ?>
+    <script src="../js/hamburgesa.js" defer></script>
     <link rel="stylesheet" href="../styles/main_menu.css">
     <title>Hasiera | IGKlub</title>
 </head>
 <body>
   <header>
     <div class="logo">
-
+      <img src="" alt="IGKlub">
     </div>
     <div class="search-bar">
       <form action="" method="get">
@@ -106,8 +105,8 @@
                 Bigarren Hezkuntzako gazte askok maite dute irakurketa. Hala ere, liburu-dendetan hainbeste liburu daude non ez dakigun nondik hasi. Webgune honetan gazteentzako eta ez hain gazteentzako liburuak daude: arrakastatsuenak, baita gustatu ez zaizkigunak ere. Bilatu eta gozatu!</span>
               </div>
             </div>
-          </footer>
+          </footer> -->
 
-    <script src="../js/hamburgesa.js"></script>
+    
 </body>
 </html>
