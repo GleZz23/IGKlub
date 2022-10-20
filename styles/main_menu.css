@@ -29,6 +29,9 @@ header .search-bar {
   border-radius: 2rem;
   box-shadow: .5rem .5rem 1rem #00000050;
 }
+a:link, a:visited, a:active {
+    text-decoration:none;
+}
 
 .container__header{
     max-width: 90%;
@@ -56,13 +59,10 @@ header .search-bar {
     display: flex;
 
 }
-.barra__filtros nav ul{
-    display: flex;
 
-}
 .barra__filtros nav ul li{
   list-style: none;
-  padding: 0px 20%;
+  padding: 0px 100px;
 
 }
 .cover{
@@ -193,6 +193,8 @@ height: 300px;
 
   
   .footer {
+ 
+   
     display: flex;
     flex-flow: row wrap;
     padding: 30px 30px 20px 30px;
@@ -289,7 +291,7 @@ height: 300px;
   .legal__links {
     display: flex;
     align-items: center;
-    font-size: 10px;
+    font-size: 9px;
 
   }
 
