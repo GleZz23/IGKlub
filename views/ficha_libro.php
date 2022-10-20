@@ -1,15 +1,13 @@
 <?php
   include_once('../templates/head.php');
-  include_once('../modules/connection.php');
 ?>
-    <script src="../js/hamburgesa.js" defer></script>
-    <link rel="stylesheet" href="../styles/main_menu.css">
+    <link rel="stylesheet" href="../styles/ficha_libro.css">
     <title>Hasiera | IGKlub</title>
 </head>
 <body>
   <header>
     <div class="logo">
-      <img src="" alt="IGKlub">
+
     </div>
     <div class="search-bar">
       <form action="" method="get">
@@ -21,32 +19,41 @@
 
     </nav>
   </header>
+   
     <main>
 
-    <div class="cover">
-      
-      <?php 
-      // Recojo todos los valores de los libros en una variable
-  $query = $miPDO->prepare('SELECT libro.* FROM libro, solicitud_libro WHERE libro.id_libro = solicitud_libro.id_libro AND solicitud_libro.estado = "aceptado"');
-  $query->execute();
-  $results = $query->fetchAll();
-      foreach ($results as $posotion => $valorLibro){
-        
-        echo '<div class="contenedor__libro">'
-                  ,'<figure>'
-                    ,'<img src="../src/img/imagen1.jpg"  alt="">'
-                  ,'</figure>'
-                ,'<div class="informacion__libro">'
-                  ,'<h1 id="title">'.$valorLibro['titulo'].'</h1>'
-                  ,'<p id="autor">'.$valorLibro['escritor'].'</p>'
-                  ,'<p id="valoration">Balorazioa: '.$valorLibro['nota_media'].'</p>'
-                  ,'<input type="button" class="btn_ver-mas" value="Ver mas">'
-                ,'</div>'
-              ,'</div>';
-      }?>
+    <section class="contenedor">
+        <figure>
+        <img src="../src/img/imagen1.jpg"  alt="">
+        </figure>
+    <article class="art1">
+        <h2>CREA TU PORTADA DEL LIBRO</h2><br>
+        <h1>Gerard L.Staff</h1><br>
+        <h3>Novela</h3><br>
+        <h3>Sinopsis</h3><br>
+        <p>
+            Charlie Bucket es un niño proveniente de una familia pobre que pasa la mayor parte de su tiempo soñando sobre el chocolate que rara vez se puede permitir comer. Las cosas cambian cuando Willy Wonka, el dueño del famoso imperio Wonka Chocolates, anuncia la celebración de un concurso en el que cinco billetes dorados han sido escondidos en cinco tabletas de chocolate. Charlie será uno de los cinco afortunados en encontrar uno de los billetes que dan acceso a un tour por la fábrica de chocolate.
+        </p><br>
+        <h2>Nota media: 4</h2><br>
+
+    </article>
+    <article class="art2">
+        <h1>Edad Media letores: 5 urte</h1><br>
+        <h2>Numero de lectores: 12</h2><br>
+        <h2>Idiomas leidas por los lectores:</h2>
+    </article>
+    </section>
+    <div>
+    <h1>Opina el libro:</h1><br>
+    <textarea rows="10" cols="20">Idatzi zure iritzia...</textarea>
+    <br>
+    <input type="button" name="boton" value="Opina"><br>
+    <h1>Opiniones:</h1>
     </div>
-  </main>
-<!-- 
+
+
+    </main>
+    <br>
     <footer class="footer">
             <div class="footer__addr">
               <h1 class="footer__logo">Guri buruz</h1>
@@ -103,8 +110,8 @@
                 Bigarren Hezkuntzako gazte askok maite dute irakurketa. Hala ere, liburu-dendetan hainbeste liburu daude non ez dakigun nondik hasi. Webgune honetan gazteentzako eta ez hain gazteentzako liburuak daude: arrakastatsuenak, baita gustatu ez zaizkigunak ere. Bilatu eta gozatu!</span>
               </div>
             </div>
-          </footer> -->
+          </footer>
 
-    
+    <script src="../js/hamburgesa.js"></script>
 </body>
 </html>

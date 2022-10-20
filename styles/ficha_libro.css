@@ -1,3 +1,42 @@
+img{
+    height: 80%;
+    width: 80%;
+}
+figure{
+    width: 30%;
+    /* max-height: 600px;
+    min-height: 100px; */
+}
+
+section{
+    display: flex;
+    flex-direction: row;
+    margin-top: 50px;
+    margin-right: 50px;
+    margin-left: 50px;
+    padding-top: 20px;
+    padding-left: 20px;
+    padding-right: 20px;
+
+}
+input{
+    height: 50px;
+    width: 100px;
+}
+.art1{
+    margin-left: 50px;
+    width: 40%;
+}
+.art2{
+    margin-left: 80px;
+    width: 30%;
+}
+div{
+    margin-left: 70px;
+    display: flex;
+    flex-direction: column;
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -13,36 +52,51 @@ header{
     width: 100%;
     position: sticky;
     background-color: lightgray;
-    padding: 1.5rem 2rem;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-bottom: 2px solid gray;
-    box-shadow: 0 0 1rem #00000050;
-    gap: 3rem;
+    padding: 2rem;
 }
 
 /* LOGO */
-.logo {
-
+header .logo {
+  
 }
 
 /* BARRA DE BUSQUEDA */
-.search-bar {
-  width: 100%;
+header .search-bar {
   background-color: white;
+  padding: .5rem 1rem;
   border: 3px solid gray;
+  border-radius: 2rem;
   box-shadow: .5rem .5rem 1rem #00000050;
-  overflow: hidden;
-  justify-content: space-between;
+}
+a:link, a:visited, a:active {
+    text-decoration:none;
 }
 
-.search-bar input{
-  background: transparent;
-  outline: none;
-  border: none;
-  font-size: 1rem;
-  padding-block:  1rem;
+.container__header{
+    max-width: 90%;
+    height: 100%;
+    margin: auto;
+    padding: 40px;
+    padding-top: 80px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+.barra__filtros{
+    max-width: 90%;
+    height: 100%;
+    margin: auto;
+    padding: 40px;
+    padding-top: 40px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+.barra__filtros nav ul{
+    display: flex;
+
 }
 
 .barra__filtros nav ul li{
@@ -50,7 +104,7 @@ header{
   padding: 0px 100px;
 
 }
-.cover{
+/* .cover{
     max-width: 90%;
     height: 100%;
     margin: auto;
@@ -72,7 +126,7 @@ height: 300px;
 .cover div aside {
     padding: 30px;
     padding-top: 30px;
-}
+} */
 
 
 .btn_ver-mas{
@@ -83,7 +137,7 @@ height: 300px;
     border:1px solid #f6f6f6;
 	border-radius:3px;
 	background-color:#f6f6f6;	
-  
+    float: right;
     padding: 0px 20px ;
 
 }
@@ -172,21 +226,11 @@ height: 300px;
 .activeline3__bars-menu{
     transform:rotate(-45deg) translate(-4px, 2px);
 }
-/* Resumen Libro */
-.contenedor__libro{
-  display: flex;
-  flex-direction: column;
-  text-align:center ;
-}
-.contenedor__libro h1,p{
-  font-size: 100%;
-}
-
-.informacion__libro{
-  padding-top: 3.4%;
-}
-
 /* FOOTER */
+
+
+
+  
   .footer {
  
    
