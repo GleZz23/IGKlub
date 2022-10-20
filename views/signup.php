@@ -171,7 +171,7 @@
       $query->execute();
       $results = $query->fetchAll();
     
-      foreach ($results as $posotion => $school) {
+      foreach ($results as $position => $school) {
         echo '<option value="'.$school['id_centro'].'">'.$school['nombre'].'</option>';
       }
 

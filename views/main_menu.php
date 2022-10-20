@@ -1,13 +1,15 @@
 <?php
   include_once('../templates/head.php');
+  include_once('../modules/connection.php');
 ?>
+    <script src="../js/hamburgesa.js" defer></script>
     <link rel="stylesheet" href="../styles/main_menu.css">
     <title>Hasiera | IGKlub</title>
 </head>
 <body>
   <header>
     <div class="logo">
-
+      <img src="" alt="IGKlub">
     </div>
     <div class="search-bar">
       <form action="" method="get">
@@ -19,33 +21,27 @@
 
     </nav>
   </header>
-   
-    <main>
-
-    <div class="cover">
-        <div class="contenedor__libros1">
-      
-       
-        <img src="../src/img/imagen1.jpg"  alt="">
-        <aside>Lo que queremos hacer es colocar este texto al lado derecho de la imagen, algo así como se observa en periódicos o revistas.</aside>
-        <input type="button" class="btn_ver-mas" value="Ver mas">
-        </div>
-        <div class="contenedor__libros2">
-        
-        <img src="../src/img/imagen2.jpg"  alt="">
-        <aside>Lo que queremos hacer es colocar este texto al lado derecho de la imagen, algo así como se observa en periódicos o revistas.</aside>
-        <input type="button" class="btn_ver-mas" value="Ver mas">
-        </div>
-        <div class="contenedor__libros3">
-        
-        <img src="../src/img/imagen3.jpg"  alt="">
-        <aside>Lo que queremos hacer es colocar este texto al lado derecho de la imagen, algo así como se observa en periódicos o revistas.</aside>
-        <input type="button" class="btn_ver-mas" value="Ver mas">
-        </div>
+  <main>
+    <?php
+      // $query = $miPDO->prepare('SELECT libro.* FROM libro, solicitud_libro WHERE libro.id_libro = solicitud_libro.id_libro AND estado = aceptado');
+      // $query->execute();
+      // $results = $query->fetchAll();
+    
+      // foreach ($results as $position => $book) {
+      //   echo '';
+      // }
+    ?>
+    <div class="book-container">
+      <img src="../src/img/imagen1.jpg" alt="">
+      <div class="book-specs">
+        <h1>Title</h1>
+        <h2>Writter</h2>
+        <p>Valoration</p>
+        <a href="#">More</a>
+      </div>
     </div>
-
-
-    </main>
+  </main>
+<!-- 
     <footer class="footer">
             <div class="footer__addr">
               <h1 class="footer__logo">Guri buruz</h1>
@@ -102,8 +98,8 @@
                 Bigarren Hezkuntzako gazte askok maite dute irakurketa. Hala ere, liburu-dendetan hainbeste liburu daude non ez dakigun nondik hasi. Webgune honetan gazteentzako eta ez hain gazteentzako liburuak daude: arrakastatsuenak, baita gustatu ez zaizkigunak ere. Bilatu eta gozatu!</span>
               </div>
             </div>
-          </footer>
+          </footer> -->
 
-    <script src="../js/hamburgesa.js"></script>
+    
 </body>
 </html>
