@@ -37,11 +37,34 @@
     <div class="barra__filtros"> 
         <nav>
         <ul>
-            <li>ghjtfghsdfg</li>
-            <li>ghjtfghsdfg</li>
-            <li>ghjtfghsdfg</li>
-            <li>ghjtfghsdfg</li>
-            <li>ghjtfghsdfg</li>
+            <li><a href="">Tipo</a></li>
+            <ul>
+                <li><a href="">Submenu1</a></li>
+                <li><a href="">Submenu2</a></li>
+                <li><a href="">Submenu3</a></li>
+                <li><a href="">Submenu4</a></li>
+            </ul>
+            <li><a href="">Hizkuntza</a></li>
+            <ul>  
+                <li><a href="">Submenu1</a></li>
+                <li><a href="">Submenu2</a></li>
+                <li><a href="">Submenu3</a></li>
+                <li><a href="">Submenu4</a></li>
+            </ul>
+            <li><a href="">Egikea</a></li>
+              <ul>
+                <li><a href="">Submenu1</a></li>
+                <li><a href="">Submenu2</a></li>
+                <li><a href="">Submenu3</a></li>
+                <li><a href="">Submenu4</a></li>
+              </ul>
+            <li><a href="">Gaia</a></li>
+            <ul>
+                <li><a href="">Submenu1</a></li>
+                <li><a href="">Submenu2</a></li>
+                <li><a href="">Submenu3</a></li>
+                <li><a href="">Submenu4</a></li>
+            </ul>
 
         </ul>
     </nav></div>
