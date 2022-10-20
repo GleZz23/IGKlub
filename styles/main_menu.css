@@ -98,7 +98,7 @@ height: 300px;
     border:1px solid #f6f6f6;
 	border-radius:3px;
 	background-color:#f6f6f6;	
-    float: right;
+  
     padding: 0px 20px ;
 
 }
@@ -187,11 +187,21 @@ height: 300px;
 .activeline3__bars-menu{
     transform:rotate(-45deg) translate(-4px, 2px);
 }
+/* Resumen Libro */
+.contenedor__libro{
+  display: flex;
+  flex-direction: column;
+  text-align:center ;
+}
+.contenedor__libro h1,p{
+  font-size: 100%;
+}
+
+.informacion__libro{
+  padding-top: 3.4%;
+}
+
 /* FOOTER */
-
-
-
-  
   .footer {
  
    

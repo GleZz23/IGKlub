@@ -38,9 +38,9 @@
                     ,'<img src="../src/img/imagen1.jpg"  alt="">'
                   ,'</figure>'
                 ,'<div class="informacion__libro">'
-                  ,'<h2 id="title">Tituloa:'.$valorLibro['titulo'].'</h2>'
-                  ,'<h2 id="autor">Idazlea:'.$valorLibro['escritor'].'</h1>'
-                  ,'<h2 id="valoration">Balorazioa:'.$valorLibro['nota_media'].'</h1>'
+                  ,'<h1 id="title">'.$valorLibro['titulo'].'</h1>'
+                  ,'<p id="autor">'.$valorLibro['escritor'].'</p>'
+                  ,'<p id="valoration">Balorazioa: '.$valorLibro['nota_media'].'</p>'
                   ,'<input type="button" class="btn_ver-mas" value="Ver mas">'
                 ,'</div>'
               ,'</div>';
