@@ -5,25 +5,23 @@
   $nickname_error = false;
   $email_error = false;
   $school_error = false;
+  $phone_error = false;
 
   if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $signup = true;
+
     $nickname = $_POST["nickname"];
     $email = $_POST["email"];
     $name = $_POST["name"];
     $surnames = $_POST["surnames"];
     $date = $_POST["date"];
-    $phone = $_POST["phone"];
-    $school = $_POST["school"];
     $password = $_POST["password"];
     $password = password_hash($password, PASSWORD_DEFAULT);
-
-    // Comprobar que el nickname o el email no existe en la base de datos
-    $signup = true;
-
-    $query = $miPDO->prepare('SELECT nickname, email FROM usuario WHERE nickname=:nickname OR email=:email');
+    
+    $query = $miPDO->prepare('SELECT nickname, email, telefono FROM usuario WHERE nickname=:nickname OR email=:email');
     $query->execute(['nickname' => $nickname, 'email' => $email]);
     $results = $query->fetch();
-  
+
     // Si el nickname existe
     if ($nickname !== '') {
       if ($results['nickname'] === $nickname) {
@@ -40,10 +38,27 @@
       }
     }
 
-    // Si el centro es por defecto
-    if ($school === '-') {
-      $signup = false;
-      $school_error = true;
+    if ($_GET['role'] === 'Irakasle') {
+      $phone = $_POST["phone"];
+      $school = $_POST["school"];
+
+      $query = $miPDO->prepare('SELECT telefono FROM usuario WHERE telefono=:phone');
+      $query->execute(['phone' => $phone]);
+      $results = $query->fetch();
+
+      // Si el telefono existe
+      if ($phone !== '') {
+        if ($results['telefono'] === $phone) {
+          $signup = false;
+          $phone_error = true;
+        }
+      }
+    
+      // Si el centro es por defecto
+      if ($school === '-') {
+        $signup = false;
+        $school_error = true;
+      }
     }
 
     // Si el registro es valido
@@ -140,6 +155,12 @@
               <i class="fa-solid fa-circle-exclamation"></i>
               <p>Telefonoak 6, 7 edo 9rekin hasi behar du. Zenbakiak eta gehienez 9 digitu izan ditzake.</p>
             </div>';
+      if ($phone_error) {
+        echo '<div class="error">
+                <i class="fa-solid fa-circle-exclamation"></i>
+                <p>Telefono-zenbaki hau beste kontu batekin erregistratuta dago jada.</p>
+              </div>';
+      }
       // Centro
       echo '<div class="input-container">
               <i class="fa-solid fa-school"></i>
