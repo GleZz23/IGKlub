@@ -1,50 +1,24 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../styles/menu-principal.css">
-    <title>IGKlub-MenuPrincipal </title>
+<?php
+  include_once('../templates/head.php');
+?>
+    <link rel="stylesheet" href="../styles/main_menu.css">
+    <title>Hasiera | IGKlub</title>
 </head>
 <body>
-    <header> 
-    <div class ="container__header">   
-        <div class="logo">
-            <img src="../src/img/logo.png" alt=""> 
-        </div> 
-       
-        <div class="barra__busqueda">
-            <form class="" action="" method="GET">
-            <input class="buscador" type="text" name="buscador"> 
-            <input class="botonBuscar" type="submit" name="enviar" value="buscar">
-            </form>
-        </div>  
-        <div class="agregar__libro">
-            <input class="botonAñadir" type="button" class="btn__añadir-libro" value="Subir nuevo libro"> 
-        </div>
-    
-    
-        <div class = "bars__menu">
-            <span class="line1__bars-menu"></span>
-            <span class="line2__bars-menu"></span>
-            <span class="line3__bars-menu"></span>
-        </div>
-        
-    </div> 
+  <header>
+    <div class="logo">
 
-    </header>
-    <div class="barra__filtros"> 
-        <nav>
-        <ul>
-            <li>ghjtfghsdfg</li>
-            <li>ghjtfghsdfg</li>
-            <li>ghjtfghsdfg</li>
-            <li>ghjtfghsdfg</li>
-            <li>ghjtfghsdfg</li>
+    </div>
+    <div class="search-bar">
+      <form action="" method="get">
+        <input type="text" placeholder="Izenburua, idazlea...">
+        <button><i class="fa-solid fa-magnifying-glass"></i></button>
+      </form>
+    </div>
+    <nav>
 
-        </ul>
-    </nav></div>
+    </nav>
+  </header>
    
     <main>
 
