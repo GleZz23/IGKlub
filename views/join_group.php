@@ -48,7 +48,7 @@
               <i class="fa-solid fa-circle-exclamation"></i>
               <p>Talde-kode hau okerra da. Saiatu beste batekin.</p>
             </div>';
-    }
+      }
     ?>
     <button>Taldean sartu</button>
   </form>

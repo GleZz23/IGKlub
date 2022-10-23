@@ -76,7 +76,7 @@
   }
 ?>
 
-<script src="../js/signup_validation.js" defer></script>
+<script src="../src/js/signup_validation.js" defer></script>
   <title>Erregistratu | IGKlub</title>
   <link rel="stylesheet" href="../styles/signup.css">
 </head>

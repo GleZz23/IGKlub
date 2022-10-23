@@ -36,12 +36,12 @@
       $results = $query->fetch();
 
       if ($results['rol'] !== 'ikasle') {
-        header('Location: ../views/main_menu.php');
+        header('Location: ../views/main_menu.php?orria=1');
       } else {
         if (empty($results['cod_grupo'])) {
           header('Location: ../views/join_group.php');
         } else {
-          header('Location: ../views/main_menu.php');
+          header('Location: ../views/main_menu.php?orria=1');
         }
       }
     }
