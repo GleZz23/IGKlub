@@ -13,15 +13,6 @@ body {
 /* HEADER */
 header{
   width: 100%;
-<<<<<<< HEAD
-  position: sticky;
-  background-color: lightgray;
-  padding: 2rem;
-}
-
-/* LOGO */
-header .logo {
-=======
   background-color: lightgray;
   padding: 1.5rem 2rem;
   display: flex;
@@ -41,7 +32,6 @@ header figure {
   text-align: center;
   transition: all .3s ease-in-out;
 }
->>>>>>> ebda8d656302094963ab55ee5506ad3f3fea7527
 
 header figure img {
   width: 100%;
@@ -61,39 +51,8 @@ header button {
   border: none;
   transition: all .3s ease-in-out;
 }
-header .logo img{
-/* margin-left: 15px; */
-width: 6rem;
-}
 
 /* BARRA DE BUSQUEDA */
-<<<<<<< HEAD
-header .search-bar {
-margin-left: 10%;
-margin-right: 10%;
-background-color: white;
-padding: .5rem 1rem;
-border: 3px solid gray;
-border-radius: 2rem;
-box-shadow: .5rem .5rem 1rem #00000050;
-}
-
-
-.search-bar input {
-width: 95%;
-border: none;
-outline: none;
-background: transparent;
-}
-
-.search-bar button {
-background: transparent;
-border: none;
-}
-
-.search-bar button:hover {
-cursor: pointer;
-=======
 .search-bar {
   background-color: white;
   width: 90%;
@@ -115,7 +74,6 @@ cursor: pointer;
   font-size: 1rem;
   padding-block:  1rem;
   width: 100%;
->>>>>>> ebda8d656302094963ab55ee5506ad3f3fea7527
 }
 
 .search-bar button{
