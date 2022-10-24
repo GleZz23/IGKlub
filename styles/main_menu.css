@@ -1,16 +1,19 @@
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 body {
   font-family: Arial, Helvetica, sans-serif;
   background-image: url(../src/img/background.jpg);
+  overflow-x: hidden;
 }
 
+/* HEADER */
 header{
   width: 100%;
+<<<<<<< HEAD
   position: sticky;
   background-color: lightgray;
   padding: 2rem;
@@ -18,7 +21,45 @@ header{
 
 /* LOGO */
 header .logo {
+=======
+  background-color: lightgray;
+  padding: 1.5rem 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  border-bottom: 2px solid gray;
+  box-shadow: 0 0 1rem #00000050;
+}
 
+/* LOGO */
+header figure {
+  width: 15%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  text-align: center;
+  transition: all .3s ease-in-out;
+}
+>>>>>>> ebda8d656302094963ab55ee5506ad3f3fea7527
+
+header figure img {
+  width: 100%;
+}
+
+header section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  gap: 2rem;
+}
+
+header button {
+  font-size: 2rem;
+  background: transparent;
+  border: none;
+  transition: all .3s ease-in-out;
 }
 header .logo img{
 /* margin-left: 15px; */
@@ -26,6 +67,7 @@ width: 6rem;
 }
 
 /* BARRA DE BUSQUEDA */
+<<<<<<< HEAD
 header .search-bar {
 margin-left: 10%;
 margin-right: 10%;
@@ -51,279 +93,141 @@ border: none;
 
 .search-bar button:hover {
 cursor: pointer;
+=======
+.search-bar {
+  background-color: white;
+  width: 90%;
+  padding-inline: 2rem;
+  border: 3px solid gray;
+  border-radius: 2rem;
+  box-shadow: .5rem .5rem 1rem #00000050;
+  overflow: hidden;
 }
 
-.barra__filtros nav ul li{
-  list-style: none;
-  padding: 0px 100px;
-
-}
-.cover{
-    max-width: 90%;
-    height: 100%;
-    margin: auto;
-    padding: 40px;
-    padding-top: 30px;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
+.search-bar form {
+  display: flex;
+  justify-content: space-between;
 }
 
-.cover div img{
-float: left;
-width: 200px;
-height: 300px;
-
+.search-bar input{
+  outline: none;
+  border: none;
+  font-size: 1rem;
+  padding-block:  1rem;
+  width: 100%;
+>>>>>>> ebda8d656302094963ab55ee5506ad3f3fea7527
 }
 
-.cover div aside {
-    padding: 30px;
-    padding-top: 30px;
+.search-bar button{
+  padding-inline: 1rem;
+  font-size: 1.5rem;
+  background-color: transparent;
+  border: none;
+  color: gray;
+  transition: all .3s ease-in-out;
 }
 
-
-.btn_ver-mas{
-    height: 20px;
-    text-decoration: none;
-    font-weight: 600;
-    font-size: 10px;
-    border:1px solid #f6f6f6;
-	border-radius:3px;
-	background-color:#f6f6f6;	
-  
-    padding: 0px 20px ;
-
+.search-bar button:hover{
+  transform: scale(1.2);
+  color: black;
 }
 
-.logo img{
-    width: 120px;
-    float: left;
+/* MAIN */
+main {
+  display: flex;
+  justify-content: center;
 }
 
-.buscador {
-    height: 33px;
-    width: 380px;
-    border:1px solid #f6f6f6;
-	border-radius:3px;
-	background-color:#f6f6f6;			
-	margin:8px 0;
-	/*resize: vertical | horizontal | none | both*/
-
-}
-.botonBuscar {
-    height: 30px;
-    text-decoration: none;
-    font-weight: 600;
-    font-size: 10px;
-    border:1px solid #f6f6f6;
-	border-radius:3px;
-	background-color:#f6f6f6;	
-}
-.botonAñadir{
-    height: 30px;
-    text-decoration: none;
-    font-weight: 600;
-    font-size: 10px;
-    border:1px solid #f6f6f6;
-	border-radius:3px;
-	background-color:#f6f6f6;	
+main section {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  grid-gap: 4rem 6rem;
+  margin: 5rem 7rem;
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/* Menu Hamburgesa */
-.bars__menu{
-    width: 30px;
-    height: 30px;
-    padding-top: 15px;
-    /* top: 50%;
-    left: 50%; */
-    transform: translate(-50%, -50%) ;
-    cursor: pointer;
-    /* display: none; */
+.book-container {
+  display: flex;
+  position: relative;
+  overflow: hidden;
+  transition: all .3s ease-in-out;
+  background-color: lightgray;
 }
 
-.bars__menu span{
-    display: block ;
-    width: 100%;
-    height: 2px;
-    background-color:black;
-    margin-top: 6px;
-    transform-origin:  0px 100%;
-   transition: 500ms;
+.book-container img {
+  width: 100%;
+  transition: all .6s ease-in-out;
 }
 
-
-.activeline1__bars-menu{
-    transform: rotate(45deg) translate(-2px, 1px);
+.book-overlay {
+  position: absolute;
+  background: #000000bf;
+  width: 100%;
+  height: 100%;
+  bottom: 0;
+  transform: translateY(-100%);
+  padding-inline: .5rem;
+  transition: all .3s ease-in-out;
 }
 
-.activeline2__bars-menu{
-    opacity: 0;
-    margin-left: -40px;
-}
-
-.activeline3__bars-menu{
-    transform:rotate(-45deg) translate(-4px, 2px);
-}
-/* Resumen Libro */
-.contenedor__libro{
+.book-info {
+  height: 100%;
   display: flex;
   flex-direction: column;
-  text-align:center ;
-}
-.contenedor__libro h1,p{
-  font-size: 100%;
-}
-
-.informacion__libro{
-  padding-top: 3.4%;
+  justify-content: center;
+  text-align: center;
+  align-items: center;
+  color: #EEE;
 }
 
-/* FOOTER */
-  .footer {
- 
-   
-    display: flex;
-    flex-flow: row wrap;
-    padding: 30px 30px 20px 30px;
-    color: #9a9a9a;
-    background-color: rgb(0, 0, 0);
-    border-top: 1px solid #e5e5e5;
-  }
-  
-  .footer > * {
-    flex:  1 100%;
-  }
-  
-  .footer__addr {
-    margin-right: 1.25em;
-    margin-bottom: 2em;
-  }
-  
-  .footer__logo {
-    font-family: 'Pacifico', cursive;
-    font-weight: 400;
-    text-transform: lowercase;
-    font-size: 1.5rem;
-  }
-  
-  .footer__addr h2 {
-    margin-top: 1.3em;
-    font-size: 15px;
-    font-weight: 400;
-  }
-  
-  .nav__title {
-    font-weight: 400;
-    font-size: 15px;
-  }
-  
-  .footer address {
-    font-style: normal;
-    color: #999;
-  }
-  
-  .footer__btn {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 36px;
-    max-width: max-content;
-    background-color:grey;
-    border-radius: 100px;
-    color: black;
-    line-height: 0;
-    margin: 0.6em 0;
-    font-size: 1rem;
-    padding: 0 1.3em;
-  }
-  
-  .footer ul {
-    list-style: none;
-    padding-left: 0;
-  }
-  
-  .footer li {
-    line-height: 2em;
-  }
-  
-  .footer a {
-    text-decoration: none;
-  }
-  
-  .footer__nav {
-    display: flex;
-    flex-flow: row wrap;
-  }
-  
-  .footer__nav > * {
-    flex: 1 50%;
-    margin-right: 1.25em;
-  }
-  
-  .nav__ul a {
-    color: #999;
-  }
-  
-  .nav__ul--extra {
-    column-count: 2;
-    column-gap: 1.25em;
-  }
-  
-  .legal {
-    display: flex;
-    flex-wrap: wrap;
-    color: #999;
-  }
-    
-  .legal__links {
-    display: flex;
-    align-items: center;
-    font-size: 9px;
+.book-info .stars {
+  font-size: 1.5rem;
+  margin-block: 1rem;
+}
 
-  }
+.stars > .calification {
+  color: #FFD700;
+  text-shadow: 0 0 .5rem #FFD700;
+}
 
-  
-  .heart {
-    color: #2f2f2f;
+.stars > *:not(.calification) {
+  color: gray;
+  opacity: .3;
+}
 
-  }
-  
-  @media screen and (min-width: 24.375em) {
-    .legal .legal__links {
-      margin-left: auto;
-    }
-  }
-  
-  @media screen and (min-width: 40.375em) {
-    .footer__nav > * {
-      flex: 1;
-    }
-    
-    .nav__item--extra {
-      flex-grow: 2;
-    }
-    
-    .footer__addr {
-      flex: 1 0px;
-    }
-    
-    .footer__nav {
-      flex: 2 0px;
-    }
-  }
+.book-info a {
+  padding: .5rem 1rem;
+  background-color: white;
+  border-radius: 1rem;
+  text-decoration: none;
+  color: black;
+}
+
+/* ASIDES */
+.filters, .profile {
+  background-color: lightgray;
+  position: absolute;
+  z-index: 3;
+  padding: 2rem;
+  border-bottom: 2px solid gray;
+  box-shadow: .5rem .5rem 1rem #00000050;
+  text-align: center;
+  justify-content: center;
+  transition: all .3s ease-in-out;
+}
+
+/* PERFIL DE USUARIO */
+.profile {
+  right: 0;
+  border-left: 2px solid gray;
+  border-bottom-left-radius: 1rem;
+  transform: translateX(100%);
+}
+
+/* FILTERS */
+.filters {
+  left: 0;
+  border-right: 2px solid gray;
+  border-bottom-right-radius: 1rem;
+  transform: translateX(-100%);
+}

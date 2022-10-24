@@ -1,8 +1,11 @@
 <?php
   include_once('../templates/head.php');
   include_once('../modules/connection.php');
+  session_start();
+  // FILTROS
 ?>
-    <script src="../js/hamburgesa.js" defer></script>
+    <!-- <script src="../src/js/hamburgesa.js" defer></script> -->
+    <script src="../src/js/main_menu.js" defer></script>
     <link rel="stylesheet" href="../styles/main_menu.css">
     <title>Hasiera | IGKlub</title>
 </head>
@@ -15,43 +18,39 @@
 </head>
 <body>
   <header>
-    <div class="logo">
-    <img src="../src/img/logo.png"alt="">
-    </div>
-    <div class="search-bar">
-      <form action="" method="get">
-        <input type="text" placeholder="Izenburua, idazlea...">
-        <button><i class="fa-solid fa-magnifying-glass"></i></button>
-      </form>
-    </div>
-    <nav>
-      <button id="añadirLibro" ><i class="fa-solid fa-file-circle-plus"></i></button>
-    </nav >
+    <figure>
+      <img src="../src/img/logo/logo.png">
+    </figure>
+    <section>
+      <button id="filters">
+        <i class="fa-solid fa-filter"></i>
+      </button>
+      <div class="search-bar">
+        <form action="" method="get">
+          <input type="text" placeholder="Izenburua, idazlea...">
+          <button><i class="fa-solid fa-magnifying-glass"></i></button>
+        </form>
+      </div>
+      <button id="profile">
+        <i class="fa-solid fa-bars"></i>
+      </button>
+    </section>
   </header>
-    <main>
-
-    <div class="cover">
-      
-      <?php 
+  <main>
+    <aside class="filters">
+      <h1>FILTROS</h1>
+      <form action="" method="post">
+        <!-- FILTROS -->
+        <button>Filtrar</button>
+      </form>
+    </aside>
+    <?php
       // Recojo todos los valores de los libros en una variable
-  $query = $miPDO->prepare('SELECT libro.* FROM libro, solicitud_libro WHERE libro.id_libro = solicitud_libro.id_libro AND solicitud_libro.estado = "aceptado"');
-  $query->execute();
-  $results = $query->fetchAll();
-      foreach ($results as $posotion => $valorLibro){
-        
-        echo '<div class="contenedor__libro">'
-                  ,'<figure>'
-                    ,'<img src="../src/img/imagen1.jpg"  alt="">'
-                  ,'</figure>'
-                ,'<div class="informacion__libro">'
-                  ,'<h1 id="title">'.$valorLibro['titulo'].'</h1>'
-                  ,'<p id="autor">'.$valorLibro['escritor'].'</p>'
-                  ,'<p id="valoration">Balorazioa: '.$valorLibro['nota_media'].'</p>'
-                  ,'<input type="button" class="btn_ver-mas" value="Ver mas">'
-                ,'</div>'
-              ,'</div>';
-      }?>
-    </div>
+      $mainQuery = 'SELECT libro.* FROM libro, solicitud_libro WHERE libro.id_libro = solicitud_libro.id_libro AND solicitud_libro.estado = "aceptado"';
+      $filter = 'ORDER BY id_libro DESC';
+      $query = $miPDO->prepare($mainQuery.$filter);
+      $query->execute();
+      $results = $query->fetchAll();
 
     
 

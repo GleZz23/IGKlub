@@ -54,11 +54,23 @@ header{
     background-color: lightgray;
     padding: 2rem;
 }
+#opinion{
+  text-align: center;
+}
+#opi{
+  background-color: #D3D3D3;
+  width: 101%;
+  margin-left: -20px;
+}
+.iritzi{
+  background-color: #D3D3D3;
+  text-align: center;
+  width: 101%;
+  margin-left: -20px;
+}
 
 /* LOGO */
-header .logo {
-  
-}
+
 
 /* BARRA DE BUSQUEDA */
 header .search-bar {

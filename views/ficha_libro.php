@@ -43,12 +43,16 @@
         <h2>Idiomas leidas por los lectores:</h2>
     </article>
     </section>
-    <div>
+    <div class="iritzi">
     <h1>Opina el libro:</h1><br>
     <textarea rows="10" cols="20">Idatzi zure iritzia...</textarea>
     <br>
-    <input type="button" name="boton" value="Opina"><br>
-    <h1>Opiniones:</h1>
+    <input type="button" name="boton" value="Opina">
+    </div>
+    <br>
+    <div id="opi">
+    <h1 id="opinion">Opiniones:</h1>
+
     </div>
 
 
