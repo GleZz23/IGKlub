@@ -99,7 +99,6 @@ main {
 main section {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
-  grid-template-rows: repeat(3, 1fr);
   grid-gap: 4rem 6rem;
   margin: 5rem 7rem;
 }
@@ -174,7 +173,7 @@ main section {
   transition: all .3s ease-in-out;
 }
 
-/* PERFIL DE USUARIO */
+/* PROFILE */
 .profile {
   right: 0;
   border-left: 2px solid gray;

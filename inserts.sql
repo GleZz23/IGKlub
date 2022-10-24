@@ -1,3 +1,131 @@
+drop database if exists igklub_database;
+create database igklub_database default character set utf8 default collate utf8_general_ci;
+use igklub_database;
+
+-- TABLA CENTRO
+create table if not exists centro(
+  id_centro int(5) auto_increment primary key,
+  nombre varchar(255) not null
+);
+
+-- TABLA GRUPO
+create table if not exists grupo (
+  codigo char(5) primary key,
+  nombre varchar(20) not null,
+  id_centro int(5),
+  nivel varchar(10),
+  curso varchar(10),
+  foreign key (id_centro) references centro(id_centro)
+);
+
+-- TABLA USUARIO
+create table if not exists usuario (
+  nickname varchar(255) primary key,
+  nombre varchar(255) not null,
+  apellidos varchar(255) not null,
+  fecha_nacimiento date,
+  email varchar(255) not null,
+  telefono int(9),
+  contrasena varchar(255) not null,
+  rol enum('admin', 'irakasle', 'ikasle') not null,
+  id_centro int(5),
+  cod_grupo char(5),
+  estado enum('aceptado','denegado','espera') default 'espera' not null,
+  foreign key (id_centro) references centro(id_centro),
+  foreign key (cod_grupo) references grupo(codigo)
+);
+
+-- TABLA SOLICITUD GRUPO
+create table if not exists solicitud_grupo (
+  nickname varchar(255),
+  cod_grupo char(5),
+  estado enum('aceptado','denegado','espera') default 'espera' not null,
+  foreign key (nickname) references usuario(nickname),
+  foreign key (cod_grupo) references grupo(codigo)
+);
+
+-- TABLA LIBRO
+create table if not exists libro (
+  id_libro int(5) auto_increment primary key,
+  titulo varchar(255) not null,
+  escritor varchar(255) not null,
+  sinopsis varchar(2300) not null,
+  formato enum('Nobela','Komikia','Nobela grafikoa','Manga') not null,
+  etiqueta varchar(255),
+  portada varchar(255),
+  edad_media int(2) unsigned not null,
+  num_lectores int unsigned not null,
+  nota_media int(1) unsigned not null
+);
+
+-- TABLA COMENTARIO
+create table if not exists comentario (
+  id_comentario int(5) auto_increment primary key,
+  nickname varchar(255),
+  id_libro int(5),
+  mensaje varchar(2300) not null,
+  foreign key (nickname) references usuario(nickname),
+  foreign key (id_libro) references libro(id_libro)
+);
+
+-- TABLA IDIOMA
+create table if not exists idioma (
+  id_idioma int(5) primary key,
+  nombre varchar(255) not null
+);
+
+-- TABLA VALORACION
+create table if not exists valoracion (
+  nickname varchar(255),
+  edad int(2) unsigned not null,
+  nota int unsigned not null,
+  id_comentario int(5),
+  id_idioma int(5),
+  foreign key (nickname) references usuario(nickname),
+  foreign key (id_comentario) references comentario(id_comentario),
+  foreign key (id_idioma) references idioma(id_idioma)
+);
+
+-- TABLA SOLICITUD LIBRO
+create table if not exists solicitud_libro (
+  nickname varchar(255),
+  id_libro int(5),
+  estado enum('aceptado','denegado','espera') default 'espera' not null,
+  foreign key (id_libro) references libro(id_libro) on update cascade,
+  foreign key (nickname) references usuario(nickname) on update cascade
+);
+
+-- TABLA SOLICITUD IDIOMA
+create table if not exists solicitud_idioma (
+  nickname varchar(255),
+  idioma varchar(255),
+  id_libro int(5),
+  titulo_idioma varchar(255),
+  estado enum('aceptado','denegado','espera') default 'espera' not null,
+  foreign key (nickname) references usuario(nickname),
+  foreign key (id_libro) references libro(id_libro)
+);
+
+-- TABLA IDIOMA LIBRO
+create table if not exists idioma_libro (
+  libro int(5),
+  idioma int(5),
+  titulo varchar(255) not null,
+  foreign key (libro) references libro(id_libro) on update cascade,
+  foreign key (idioma) references idioma(id_idioma) on update cascade
+);
+
+-- TABLA RESPUESTA
+create table if not exists respuesta (
+  id_comentario int(5),
+  id_respuesta int(5),
+  foreign key (id_comentario) references comentario(id_comentario),
+  foreign key (id_respuesta) references comentario(id_comentario)
+);
+
+INSERT INTO usuario (`nickname`, `nombre`, `apellidos`, `fecha_nacimiento`, `email`, `telefono`, `contrasena`, `rol`, `id_centro`, `cod_grupo`, `estado`) VALUES
+  ('Admin01', 'Admin', 'Administrador', '2000-01-01', 'admin@mail.com', NULL, '$2y$10$SZU5HY0RmiNkvpl7rOoPkeERGKXk0bTNZJoBDTAdzR.VYYEHuZx8q', 'admin', NULL, NULL, 'aceptado');
+
 INSERT INTO centro VALUES
   ('1', 'I.E.S. Miguel de Unamuno B.H.I.'),
   ('2', 'CIFP Txurdinaga LHII');
@@ -33,3 +161,7 @@ UPDATE `libro` SET `sinopsis` = 'Estamos en un mundo donde abundan los superhér
 UPDATE `libro` SET `sinopsis` = 'Charlie y la fábrica de chocolate es una historia de Roald Dahl, el gran autor de literatura infantil. El señor Wonka, dueño de la magnífica fábrica de chocolate, ha escondido cinco billetes de oro en sus chocolatinas. Quienes los encuentren serán los elegidos para visitar la fábrica. Charlie tiene la fortuna de encontrar uno de esos billetes y, a partir de ese momento, su vida cambiará para siempre.' WHERE `libro`.`id_libro` = 7;
 UPDATE `libro` SET `sinopsis` = 'Tras la invasión de Holanda, los Frank, comerciantes judíos alemanes emigrados a Amsterdam en 1933, se ocultaron de la Gestapo en una buhardilla anexa al edificio donde el padre de Anne tenía sus oficinas. Ocho personas permanecieron recluidas desde junio de 1942 hasta agosto de 1944, fecha en que fueron detenidas y enviadas a campos de concentración. Desde su escondite y en las más precarias condiciones, Anne, una niña de trece años, escribió su estremecedor Diario: un testimonio único en su género sobre el horror y la barbarie nazi, y sobre los sentimientos y experiencias de la propia Anne y sus acompañantes. Anne murió en el campo de Bergen-Belsen en marzo de 1945. Su Diario nunca morirá.' WHERE `libro`.`id_libro` = 8;
 UPDATE `libro` SET `sinopsis` = 'Smaug parecía profundamente dormido cuando Bilbo espió una vez más desde la entrada. ¡Pero fingía! ¡Estaba vigilando la entrada del túnel!... Sacado de su cómodo agujero-hobbit por Gandalf y una banda de enanos, Bilbo se encuentra de pronto en medio de una conspiración que pretende apoderarse del tesoro de Smaug el Magnífico, un enorme y muy peligroso dragón...' WHERE `libro`.`id_libro` = 9;
+
+-- USUARIO PARA LA BBDD
+create user 'igklub'@'%' identified by '655Yj6Rc$F@x';
+grant all on igklub_database.* to 'igklub'@'%';
