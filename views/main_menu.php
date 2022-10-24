@@ -2,14 +2,6 @@
   include_once('../templates/head.php');
   include_once('../modules/connection.php');
   session_start();
-  
-  if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $order = $_POST['order'];
-    $column = 'id_libro';
-  } else {
-    $column = 'id_libro';
-    $order = 'DESC';
-  }
 ?>
     <!-- <script src="../src/js/hamburgesa.js" defer></script> -->
     <script src="../src/js/main_menu.js" defer></script>
@@ -45,27 +37,33 @@
   </header>
   <aside class="filters">
     <h1>FILTROS</h1>
-    <form action="" method="post">
-      <!-- FILTROS -->
-      <p>Ordenar...</p>
-
-      <select name="order">
-        <option value="ASC">Goranzko</option>
-        <option value="DESC">Beheranzko</option>
-      </select>
-      <button>Filtrar</button>
-    </form>
+    <!-- FILTROS -->
+  </aside>
+  <aside class="profile">
+    <?php echo '<h1>'.$_SESSION['nickname'].'</h1>'; ?>
+    <a href="#"><i class="fa-solid fa-book"></i> Igo liburu berria</a>
+    <a href="#"><i class="fa-solid fa-book-bookmark"></i> Nire liburuak</a>
+    <a href="#"><i class="fa-solid fa-user"></i> Area pertsonala</a>
+    <?php
+      switch ($_SESSION['role']) {
+        case 'irakasle':
+          echo '<a href="#"><i class="fa-solid fa-chalkboard-user"></i> Mis grupos</a>';
+          break;
+        case 'admin':
+          echo "Administrador";
+          break;
+    }
+    ?>
   </aside>
   <main>
   <?php
     // Recojo todos los valores de los libros en una variable
     $mainQuery = 'SELECT libro.* FROM libro, solicitud_libro WHERE libro.id_libro = solicitud_libro.id_libro AND solicitud_libro.estado = "aceptado"';
     $condition = ' ';
-    $filter = ' ORDER BY '.$column.' '.$order;
+    $filter = ' ORDER BY id_libro DESC';
     $query = $miPDO->prepare($mainQuery.$condition.$filter);
     $query->execute();
     $results = $query->fetchAll();
-
     if ($results) {
       echo '<section>';
       foreach ($results as $position => $book){
@@ -104,11 +102,5 @@
     }
   ?>
   </main>
-  <aside class="profile">
-    <?php
-      echo '<h1>'.$_SESSION['nickname'].'</h1>';
-    ?>
-    <!-- PERFIL -->
-  </aside>
 </body>
 </html>

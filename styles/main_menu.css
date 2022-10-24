@@ -164,13 +164,15 @@ main section {
 .filters, .profile {
   background-color: lightgray;
   position: absolute;
-  top: 0;
   z-index: 3;
   padding: 2rem;
   border-bottom: 2px solid gray;
   box-shadow: .5rem .5rem 1rem #00000050;
-  text-align: center;
+  display: flex;
+  flex-direction: column;
+  text-align: left;
   justify-content: center;
+  gap: 1rem;
   transition: all .3s ease-in-out;
 }
 

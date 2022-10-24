@@ -5,44 +5,45 @@
   $error = false;
   
   if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $nickname = $_POST['nickname'];
-    $password = $_POST['password'];
-
     $login = true;
 
     $query = $miPDO->prepare('SELECT nickname, contrasena FROM usuario WHERE nickname =:nickname;');
-    $query->execute(['nickname' => $nickname]);
+    $query->execute(['nickname' => $_POST['nickname']]);
     $results = $query->fetch();
 
-    if (empty($results['nickname']) || !password_verify($password, $results['contrasena'])) {
+    if (empty($results['nickname']) || !password_verify($_POST['password'], $results['contrasena'])) {
       $login = false;
       $error = true;
     }
     
     if ($login) {
-      $query = $miPDO->prepare('SELECT nickname, nombre, apellidos, email, rol FROM usuario WHERE nickname =:nickname;');
-      $query->execute(['nickname' => $nickname]);
-      $results = $query->fetch();
-
       session_start();
-      $_SESSION['nickname'] = $results['nickname'];
-      $_SESSION['name'] = $results['nombre'];
-      $_SESSION['surnames'] = $results['apellidos'];
-      $_SESSION['email'] = $results['email'];
-      $_SESSION['role'] = $results['rol'];
+      $_SESSION['nickname'] = $_POST['nickname'];
 
-      $query = $miPDO->prepare('SELECT rol, cod_grupo FROM usuario WHERE nickname =:nickname;');
-      $query->execute(['nickname' => $nickname]);
+      $query = $miPDO->prepare('SELECT nickname, nombre, apellidos, email, estado, rol, cod_grupo FROM usuario WHERE nickname =:nickname;');
+      $query->execute(['nickname' => $_POST['nickname']]);
       $results = $query->fetch();
 
-      if ($results['rol'] !== 'ikasle') {
-        header('Location: ../views/main_menu.php?orria=1');
-      } else {
-        if (empty($results['cod_grupo'])) {
-          header('Location: ../views/join_group.php');
-        } else {
-          header('Location: ../views/main_menu.php?orria=1');
+      if ($results['rol'] !== 'admin') {
+        switch ($results['rol']) {
+          case 'irakasle':
+            header('Location: ../views/account_status.php');
+            break;
+          case 'ikasle':            
+            if (empty($results['cod_grupo'])) {
+              header('Location: ../views/join_group.php');
+            } else {
+              header('Location: ../views/account_status.php');
+            }
         }
+      } else {
+        $_SESSION['nickname'] = $results['nickname'];
+        $_SESSION['name'] = $results['nombre'];
+        $_SESSION['surnames'] = $results['apellidos'];
+        $_SESSION['email'] = $results['email'];
+        $_SESSION['role'] = $results['rol'];
+
+        header('Location: ../views/main_menu.php?orria=1');
       }
     }
   }
