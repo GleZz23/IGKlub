@@ -4,11 +4,12 @@
 
   $book = $_GET['liburua'];
 
-  $query = $miPDO->prepare('SELECT * FROM libro WHERE titulo = :book');
+  $query = $miPDO->prepare('SELECT * FROM libro WHERE id_libro = :book');
   $query->execute(['book' => $book]);
   $results = $query->fetch();
 ?>
     <link rel="stylesheet" href="../styles/book_info.css">
+<<<<<<< HEAD
     <title> <?php echo $book ?> | IGKlub</title>
     <script>
       function myFunction() {
@@ -50,6 +51,9 @@ function addElement () {
 
 }
 </script>
+=======
+    <title> <?php echo $results['titulo'] ?> | IGKlub</title>
+>>>>>>> 5e47c63c65b578b7afb3db04ddabffc53f9ce0d6
 </head>
 <body>
   <main>

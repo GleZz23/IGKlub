@@ -2,7 +2,14 @@
   include_once('../templates/head.php');
   include_once('../modules/connection.php');
   session_start();
-  // FILTROS
+  
+  if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $order = $_POST['order'];
+    $column = 'id_libro';
+  } else {
+    $column = 'id_libro';
+    $order = 'DESC';
+  }
 ?>
     <!-- <script src="../src/js/hamburgesa.js" defer></script> -->
     <script src="../src/js/main_menu.js" defer></script>
@@ -40,6 +47,12 @@
     <h1>FILTROS</h1>
     <form action="" method="post">
       <!-- FILTROS -->
+      <p>Ordenar...</p>
+
+      <select name="order">
+        <option value="ASC">Goranzko</option>
+        <option value="DESC">Beheranzko</option>
+      </select>
       <button>Filtrar</button>
     </form>
   </aside>
@@ -47,8 +60,9 @@
   <?php
     // Recojo todos los valores de los libros en una variable
     $mainQuery = 'SELECT libro.* FROM libro, solicitud_libro WHERE libro.id_libro = solicitud_libro.id_libro AND solicitud_libro.estado = "aceptado"';
-    $filter = 'ORDER BY id_libro DESC';
-    $query = $miPDO->prepare($mainQuery.$filter);
+    $condition = ' ';
+    $filter = ' ORDER BY '.$column.' '.$order;
+    $query = $miPDO->prepare($mainQuery.$condition.$filter);
     $query->execute();
     $results = $query->fetchAll();
 
@@ -79,7 +93,7 @@
                         }
                       }
         echo        '</div>
-                    <a href="book_info.php?liburua='.$book['titulo'].'">Liburu orria</a>
+                    <a href="book_info.php?liburua='.$book['id_libro'].'">Liburu orria</a>
                   </div>
                 </div>
               </div>';
