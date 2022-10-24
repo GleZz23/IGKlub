@@ -8,13 +8,6 @@
     <title>Hasiera | IGKlub</title>
 </head>
 <body>
-<?php
-  include_once('../templates/head.php');
-?>
-    <link rel="stylesheet" href="../styles/main_menu.css">
-    <title>Hasiera | IGKlub</title>
-</head>
-<body>
   <header>
     <figure>
       <img src="../src/img/logo/logo.png">
@@ -46,10 +39,10 @@
         <?php
           switch ($_SESSION['role']) {
             case 'irakasle':
-              echo '<a href="#"><i class="fa-solid fa-chalkboard-user"></i> Mis grupos</a>'; // Cambiar enlace
+              echo '<a href="#"><i class="fa-solid fa-chalkboard-user"></i> Nire taldeak</a>'; // Cambiar enlace
               break;
             case 'admin':
-              echo '<a href="#"><i class="fa-solid fa-gear"></i> Administrazioa</a>'; // Cambiar enlace
+              echo '<a href="management.php"><i class="fa-solid fa-gear"></i> Administrazioa</a>';
               break;
           }
         ?>
@@ -104,6 +97,7 @@
   </main>
   <!-- FOOTER -->
   <footer>
+
   </footer>
 </body>
 </html>
