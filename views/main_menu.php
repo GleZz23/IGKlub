@@ -79,7 +79,7 @@
                         }
                       }
         echo        '</div>
-                    <a href="book_info.php?liburua='.$book['titulo'].'">Liburu orria</a>
+                    <a href="book_info.php?liburua='.$book['id_libro'].'">Liburu orria</a>
                   </div>
                 </div>
               </div>';
