@@ -3,7 +3,6 @@
   include_once('../modules/connection.php');
   session_start();
 ?>
-    <!-- <script src="../src/js/hamburgesa.js" defer></script> -->
     <script src="../src/js/main_menu.js" defer></script>
     <link rel="stylesheet" href="../styles/main_menu.css">
     <title>Hasiera | IGKlub</title>
