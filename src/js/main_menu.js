@@ -35,16 +35,23 @@ filtersButton.addEventListener('mouseleave', () => {
 });
 
 filtersButton.addEventListener('click', () => {
-  filters.style.transform = "translateX(0)";
+  filters.style.display = "flex";
+  setTimeout(() => {
+    filters.style.transform = "translateX(0)";
+  }, 10);
 });
 
 filters.addEventListener('mouseleave', () => {
   filters.style.transform = "translateX(-100%)";
+  setTimeout(() => {
+    filters.style.display = "none";
+  }, 500);
 })
 
 // PERFIL
 const profileButton = document.querySelector('#profile');
 const profile = document.querySelector('.profile');
+const profileLinks = document.querySelectorAll('.profile a');
 
 profileButton.addEventListener('mouseover', () => {
   profileButton.style.transform = 'rotate(-10deg)';
@@ -58,9 +65,27 @@ profileButton.addEventListener('mouseleave', () => {
 });
 
 profileButton.addEventListener('click', () => {
-  profile.style.transform = "translateX(0)";
+  profile.style.display = "flex";
+  setTimeout(() => {
+    profile.style.transform = "translateX(0)";
+  }, 10);
 });
 
 profile.addEventListener('mouseleave', () => {
   profile.style.transform = "translateX(100%)";
+  setTimeout(() => {
+    profile.style.display = "none";
+  }, 500);
 })
+
+profileLinks.forEach((link) => {
+  link.addEventListener('mouseover', () => {
+    link.style.color = "black";
+    link.style.transform = "translateX(1rem)";
+  });
+
+  link.addEventListener('mouseout', () => {
+    link.style.color = "gray";
+    link.style.transform = "translateX(0)";
+  });
+});

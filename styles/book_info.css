@@ -7,50 +7,36 @@
 body {
   font-family: Arial, Helvetica, sans-serif;
   background-image: url(../src/img/background.jpg);
-  margin: 5rem;
+  margin: 4rem;
 }
-
+  
 main {
-  display: grid;
-  grid-template-columns: 1fr 2fr 1fr;
-  grid-template-rows: .7fr 1.3fr; 
+  display: flex;
+  margin-block: 4rem;
 }
 
 /* Portada del libro */
 figure {
-  grid-area: 1 / 1 / 3 / 2;
-  width: 100%;
-  border: 1px solid orange;
-  border-radius: 15px;
+  width: 30%;
 }
 
 figure img {
   width: 100%;
-  height: 100%;
-  border: 1px solid orange;
-  border-radius: 15px;
 }
 
 /* Titulo y escritor */
-section {
-  grid-area: 1 / 2 / 2 / 4;
+main header {
   display: flex;
   flex-direction: column;
   padding: 2rem;
   gap: 1rem;
 }
 
-section h1 {
-  font-size: 6rem;
-}
+main header h1 { font-size: 5rem; }
 
-section h2 {
-  font-size: 2rem;
-}
+main header h2 { font-size: 2rem; }
 
-.stars {
-  font-size: 4rem;
-}
+.stars { font-size: 4rem; }
 
 .stars > .calification {
   color: #FFD700;
@@ -61,39 +47,76 @@ section h2 {
   color: gray;
   opacity: .3;
 }
+
+main section {
+  width: 70%;
+  margin-inline: 2rem;
+}
+
+/* Contenedor central */
+.middle-container {
+  display: flex;
+  border: 2px solid gray;
+  border-radius: 2rem;
+  overflow: hidden;
+  background-color: #ffffff50;
+  font-size: 1.4rem;
+}
+
 /* Sinopsis */
 .sinopsis {
-  grid-area: 2 / 2 / 3 / 3;
-  background-color: yellow;
-  border: 1px soli yellow;
-  border-radius: 15px;
+  padding: 2rem;
+  width: 75%;
+  height: 100%;
+}
+
+.sinopsis p {
+  text-align: justify;
+  hyphens: auto;
+  -webkit-hyphens: auto;
 }
 
 /* Demas datos */
-.div5 {
-  grid-area: 2 / 3 / 3 / 4;
-  background-color: orange;
-  padding: 20px;
-  border: 1px solid orange;
-  border-radius: 15px;
-}
-.nota > .calification {
-  color: #FFD700;
-  text-shadow: 0 0 .5rem #FFD700;
+.more-info {
+  padding: 1rem;
+  width: 25%;
+  border-left: 2px solid gray;
 }
 
-.nota > *:not(.calification) {
-  color: gray;
-  opacity: .3;
+.more-info > div {
+  display: flex;
+  align-items: center;
 }
 
+.more-info h3 {
+  margin-right: .5rem;
+}
+
+/* Acciones */
+.actions {
+  margin-top: 2rem;
+  padding: 1rem;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.actions a {
+  text-decoration: none;
+  padding: .5rem 1rem;
+  border: 1px solid gray;
+  background-color: #eee;
+  color: black;
+  transition: ease-in-out .25s;
+}
+
+/* ---------------------------------------- */
 #opinar{
-  grid-area: 3 / 1 / 4/ 4;
+  grid-area: 2 / 3 / 3 / 4;
   background-color: antiquewhite;
   padding: 20px;
   border: 1px solid antiquewhite;
   border-radius: 15px;
-
 }
 
 input{
