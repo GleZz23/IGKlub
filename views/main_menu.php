@@ -7,9 +7,16 @@
     <title>Hasiera | IGKlub</title>
 </head>
 <body>
+<?php
+  include_once('../templates/head.php');
+?>
+    <link rel="stylesheet" href="../styles/main_menu.css">
+    <title>Hasiera | IGKlub</title>
+</head>
+<body>
   <header>
     <div class="logo">
-      <img src="" alt="IGKlub">
+    <img src="../src/img/logo.png"alt="">
     </div>
     <div class="search-bar">
       <form action="" method="get">
@@ -18,8 +25,8 @@
       </form>
     </div>
     <nav>
-
-    </nav>
+      <button id="añadirLibro" ><i class="fa-solid fa-file-circle-plus"></i></button>
+    </nav >
   </header>
     <main>
 
@@ -105,7 +112,7 @@
                 Bigarren Hezkuntzako gazte askok maite dute irakurketa. Hala ere, liburu-dendetan hainbeste liburu daude non ez dakigun nondik hasi. Webgune honetan gazteentzako eta ez hain gazteentzako liburuak daude: arrakastatsuenak, baita gustatu ez zaizkigunak ere. Bilatu eta gozatu!</span>
               </div>
             </div>
-          </footer> -->
+          </footer>
 
     
 </body>
