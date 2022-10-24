@@ -36,24 +36,65 @@
       </button>
     </section>
   </header>
+  <aside class="filters">
+    <h1>FILTROS</h1>
+    <form action="" method="post">
+      <!-- FILTROS -->
+      <button>Filtrar</button>
+    </form>
+  </aside>
   <main>
-    <aside class="filters">
-      <h1>FILTROS</h1>
-      <form action="" method="post">
-        <!-- FILTROS -->
-        <button>Filtrar</button>
-      </form>
-    </aside>
-    <?php
-      // Recojo todos los valores de los libros en una variable
-      $mainQuery = 'SELECT libro.* FROM libro, solicitud_libro WHERE libro.id_libro = solicitud_libro.id_libro AND solicitud_libro.estado = "aceptado"';
-      $filter = 'ORDER BY id_libro DESC';
-      $query = $miPDO->prepare($mainQuery.$filter);
-      $query->execute();
-      $results = $query->fetchAll();
+  <?php
+    // Recojo todos los valores de los libros en una variable
+    $mainQuery = 'SELECT libro.* FROM libro, solicitud_libro WHERE libro.id_libro = solicitud_libro.id_libro AND solicitud_libro.estado = "aceptado"';
+    $filter = 'ORDER BY id_libro DESC';
+    $query = $miPDO->prepare($mainQuery.$filter);
+    $query->execute();
+    $results = $query->fetchAll();
 
-      
+    if ($results) {
+      echo '<section>';
+      foreach ($results as $position => $book){
+        echo '<div class="book-container">';
+        if ($book['portada']==='') {
+          echo '<img src="../src/img/books/default.jpg">';
+        } else {
+          echo '<img src="../src/img/books/'.$book['id_libro'].'.jpg"  alt="'.$book['titulo'].'">';
+        }
+        echo    '<div class="book-overlay">
+                  <div class="book-info">
+                    <h1 id="title">'.$book['titulo'].'</h1>
+                    <p id="autor">'.$book['escritor'].'</p>
+                    <div class="stars">';
+                      if ($book['nota_media'] === 0) {
+                        for ($i = 0; $i <= 4; $i++) {
+                          echo '<i class="fa-solid fa-star"></i>';
+                        }
+                      } else {
+                        for ($i = 0; $i <= $book['nota_media']-1; $i++) {
+                          echo '<i class="calification fa-solid fa-star"></i>';
+                        }
+                        for ($i = 0; $i <= 4-$book['nota_media']; $i++) {
+                          echo '<i class="fa-solid fa-star"></i>';
+                        }
+                      }
+        echo        '</div>
+                    <a href="book_info.php?liburua='.$book['titulo'].'">Liburu orria</a>
+                  </div>
+                </div>
+              </div>';
+      }
+      echo '</section>';
+    } else {
+      echo '<h1>Ez da ezer aurkito</h1>';
+    }
+  ?>
+  </main>
+  <aside class="profile">
+    <?php
+      echo '<h1>'.$_SESSION['nickname'].'</h1>';
     ?>
-    </main>
+    <!-- PERFIL -->
+  </aside>
 </body>
 </html>
