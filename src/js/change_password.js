@@ -66,9 +66,7 @@ form.addEventListener('submit', (e) => {
     }
 });
 
-document.addEventListener('DOMContentLoaded', () => {
-    setTimeout(() => {
-        document.getElementById('password-duplicate').classList.add('hidden');
-        document.getElementById('password-updated').classList.add('hidden');
-    }, 3500);
-});
+setTimeout(() => {
+    document.getElementById('password-duplicate').classList.add('hidden');
+    document.getElementById('password-updated').classList.add('hidden');
+}, 3500);
