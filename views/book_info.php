@@ -96,7 +96,7 @@
     $results = $query->fetchAll();
 
     if ($results) {
-      foreach ($results as $position => $coment){
+      foreach ($results as $position => $coment) {
         echo '<div class="comment">
                 <h1>'.$coment['nickname'].'</h1>
                 <div class="mensaje">

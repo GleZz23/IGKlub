@@ -20,7 +20,7 @@
       session_start();
       $_SESSION['nickname'] = $_POST['nickname'];
 
-      $query = $miPDO->prepare('SELECT nickname, nombre, apellidos, email, estado, rol, cod_grupo FROM usuario WHERE nickname =:nickname;');
+      $query = $miPDO->prepare('SELECT nickname, nombre, apellidos, email, estado, rol, cod_grupo, fecha_nacimiento FROM usuario WHERE nickname =:nickname;');
       $query->execute(['nickname' => $_POST['nickname']]);
       $results = $query->fetch();
 
@@ -42,6 +42,7 @@
         $_SESSION['surnames'] = $results['apellidos'];
         $_SESSION['email'] = $results['email'];
         $_SESSION['role'] = $results['rol'];
+        $_SESSION['date'] = $results['fecha_nacimiento'];
 
         header('Location: ../views/main_menu.php?orria=1');
       }
