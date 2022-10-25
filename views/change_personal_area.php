@@ -4,26 +4,29 @@
   session_start();
 
   $password_error = false;
+  $password_updated = false;
 
   if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $change = true;
 
     // Consulto la contraseña en la BBDD
-    $query = $miPDO->prepare('SELECT contrasena FROM usuario WHERE nickname=:nickname');
+    $query = $miPDO->prepare('SELECT * FROM usuario WHERE nickname=:nickname');
     $query->execute(['nickname' => $_POST["password"]]);
     $results = $query->fetch();
 
+    $passwordComparation = password_verify($_POST["password"], $results['contrasena']);
+
     // Compruebo que la contraseña introducida es igual a la contraseña de la BBDD
-    if (password_verify($_POST['password'], $results['contrasena'])) {
+    if ($passwordComparation) {
       $change = false;
       $password_error = true;
-    }
-
+    } else 
     // Cambio la contraseña en la BBDD
     if ($change) {
       $newPassword = password_hash($_POST['password'],PASSWORD_DEFAULT);
-      $query = $miPDO->prepare('UPDATE usuario (contrasena) VALUES (:password) WHERE nickname=:nickname');
-      $query->execute(['nickname' => $_SESSION['nickname'],'password' => $newPassword]);
+      $query = $miPDO->prepare('UPDATE usuario SET contrasena = :pass WHERE nickname = :nickname');
+      $query->execute(['nickname' => $_SESSION['nickname'],'pass' => $newPassword]);
+      $password_updated = true;
     }
   }
 ?>
@@ -31,7 +34,7 @@
   <script src="../src/js/profile.js" defer></script>
   <link rel="stylesheet" href="../styles/personal_area.css">
   
-  <title> | IGKlub</title>
+  <title>Pasahitza aldatu | IGKlub</title>
 </head>
 <body>
   <header>
@@ -79,19 +82,25 @@
         <i class="fa-solid fa-circle-exclamation"></i>
         <p>Bi pasahitzek berdinak izan behar dira.</p>
       </div>
+      <!-- Error: Formulario -->
+      <div class="error hidden" id="form-error">
+        <i class="fa-solid fa-circle-exclamation"></i>
+        <p>Bete formularioa behar bezala.</p>
+      </div>
+      <!-- Error: Cambio -->
       <?php
         if ($password_error) {
           echo '<div class="error">
                   <i class="fa-solid fa-circle-exclamation"></i>
                   <p>Pasahitza berdina sartzen ari zara.</p>
                 </div>';
+        } else if ($password_updated) {
+          echo '<div class="success">
+                  <i class="fa-solid fa-circle-check"></i>
+                  <p>Zure pasahitza aldatu da</p>
+                </div>';
         }
       ?>
-      <!-- Error: Formulario -->
-      <div class="error hidden" id="form-error">
-        <i class="fa-solid fa-circle-exclamation"></i>
-        <p>Bete formularioa behar bezala.</p>
-      </div>
       <button>Pasahitza aldatu</button>
     </form>
   </main>

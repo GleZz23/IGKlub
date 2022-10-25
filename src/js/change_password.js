@@ -11,7 +11,7 @@ const regexs = {
 }
 
 
-const correct = false;
+const correct = true;
 
 const form_validation= (e)=>{
     switch (e.target.name) {
