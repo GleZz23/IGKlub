@@ -171,6 +171,7 @@ main section {
   text-align: center;
   justify-content: center;
   transition: all .3s ease-in-out;
+  top: 0;
 }
 
 /* PERFIL DE USUARIO */

@@ -20,7 +20,7 @@
     }
     
     if ($login) {
-      $query = $miPDO->prepare('SELECT nickname, nombre, apellidos, email, rol FROM usuario WHERE nickname =:nickname;');
+      $query = $miPDO->prepare('SELECT nickname, nombre, apellidos,fecha_nacimiento, email, rol FROM usuario WHERE nickname =:nickname;');
       $query->execute(['nickname' => $nickname]);
       $results = $query->fetch();
 
@@ -28,6 +28,7 @@
       $_SESSION['nickname'] = $results['nickname'];
       $_SESSION['name'] = $results['nombre'];
       $_SESSION['surnames'] = $results['apellidos'];
+      $_SESSION['date'] = $results['fecha_nacimiento'];
       $_SESSION['email'] = $results['email'];
       $_SESSION['role'] = $results['rol'];
 
