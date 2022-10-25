@@ -39,17 +39,17 @@ session_start();
         </button>
         <aside class="profile">
       <?php
-      if($_SESSION['role'] === 'ikasle') {
-echo '<h1>' . $_SESSION['nickname'] . '</h1>';
-echo '<h1><a href="../views/personal_area.php">Area Pertsonala</a> </h1>';
-echo '<h1><a href="../views/main_menu.php">Liburutegia</a></h1>';
-      }else echo '<h1>' . $_SESSION['nickname'] . '</h1>';
-      echo '<h1><a href="../views/personal_area.php">Area Pertsonala</a> </h1>';
-      echo '<h1><a href="../views/main_menu.php">Liburutegia</a></h1>';
-      echo '<h1><a href="../views/class.php">Gela</a></h1>';
-      echo '<h1><a href="../views/requests.php">Eskaerak</a></h1>';
-
-?>
+      echo '<h1>' . $_SESSION['nickname'] . '</h1>';
+      if ($_SESSION['role'] === 'ikasle') {
+        echo '<h1><a href="../views/personal_area.php">Area Pertsonala</a> </h1>';
+        echo '<h1><a href="../views/main_menu.php">Liburutegia</a></h1>';
+      } else {
+        echo '<h1><a href="../views/personal_area.php">Area Pertsonala</a> </h1>';
+        echo '<h1><a href="../views/main_menu.php">Liburutegia</a></h1>';
+        echo '<h1><a href="../views/class.php">Gela</a></h1>';
+        echo '<h1><a href="../views/requests.php">Eskaerak</a></h1>';
+      }
+      ?>
   <!-- PERFIL -->
     </aside>
       </section>
@@ -57,52 +57,48 @@ echo '<h1><a href="../views/main_menu.php">Liburutegia</a></h1>';
     
     <main>
       <?php
-// Recojo todos los valores de los libros en una variable
-$mainQuery = 'SELECT libro.* FROM libro, solicitud_libro WHERE libro.id_libro = solicitud_libro.id_libro AND solicitud_libro.estado = "aceptado"';
-$filter = 'ORDER BY id_libro DESC';
-$query = $miPDO->prepare($mainQuery . $filter);
-$query->execute();
-$results = $query->fetchAll();
+      // Recojo todos los valores de los libros en una variable
+      $query = $miPDO->prepare('SELECT libro.* FROM libro, solicitud_libro WHERE libro.id_libro = solicitud_libro.id_libro AND solicitud_libro.estado = "aceptado"');
+      $query->execute();
+      $results = $query->fetchAll();
 
-if ($results) {
-  echo '<section>';
-  foreach ($results as $position => $book) {
-    echo '<div class="book-container">';
-    if ($book['portada'] === '') {
-     echo '<img src="../src/img/books/default.jpg">';
-    } else {
-     echo '<img src="../src/img/books/' . $book['id_libro'] . '.jpg" alt="' . $book['titulo'] . '">';
-   }
-    echo '<div class="book-overlay">
-        <div class="book-info">
-          <h1 id="title">' . $book['titulo'] . '</h1>
-          <p id="autor">' . $book['escritor'] . '</p>
-          <div class="stars">';
-   if ($book['nota_media'] === 0) {
-      for ($i = 0; $i <= 4; $i++) {
-        echo '<i class="fa-solid fa-star"></i>';
- }
-   } else {
- for ($i = 0; $i <= $book['nota_media'] - 1; $i++) {
-        echo '<i class="calification fa-solid fa-star"></i>';
-   }
-      for ($i = 0; $i <= 4 - $book['nota_media']; $i++) {
-        echo '<i class="fa-solid fa-star"></i>';
+      if ($results) {
+        echo '<section>';
+        foreach ($results as $position => $book) {
+          echo '<div class="book-container">';
+          if ($book['portada'] === '') {
+          echo '<img src="../src/img/books/default.jpg">';
+          } else {
+          echo '<img src="../src/img/books/'.$book['id_libro'].'.jpg">';
+        }
+          echo '<div class="book-overlay">
+                  <div class="book-info">
+                    <h1 id="title">' . $book['titulo'] . '</h1>
+                    <p id="autor">' . $book['escritor'] . '</p>
+                    <div class="stars">';
+                      if ($book['nota_media'] === 0) {
+                        for ($i = 0; $i <= 4; $i++) {
+                        echo '<i class="fa-solid fa-star"></i>';
+                        }
+                      } else {
+                        for ($i = 0; $i <= $book['nota_media'] - 1; $i++) {
+                          echo '<i class="calification fa-solid fa-star"></i>';
+                        }
+                        for ($i = 0; $i <= 4 - $book['nota_media']; $i++) {
+                          echo '<i class="fa-solid fa-star"></i>';
+                        }
+                      }
+              echo '</div>
+                  <a href="book_info.php?liburua=' . $book['id_libro'] . '">Liburu orria</a>
+                </div>
+              </div>
+            </div>';
+        }
+        echo '</section>';
+      } else {
+        echo '<h1>Ez da ezer aurkito</h1>';
       }
-    }
-    echo '</div>
-          <a href="book_info.php?liburua=' . $book['titulo'] . '">Liburu orria</a>
-        </div>
-      </div>
-      </div>';
-  }
-  echo '</section>';
-} else {
-  echo '<h1>Ez da ezer aurkito</h1>';
-}
-?>
-    </main>
-    
-  </body>
-
-  </html>
+      ?>
+  </main>  
+</body>
+</html>
