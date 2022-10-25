@@ -61,9 +61,6 @@ form.addEventListener('submit', (e) => {
     
     if(!correct) {
         e.preventDefault();
-        document.getElementById('form-error').classList.remove('hidden');
-        setTimeout(() => {
-			document.getElementById('form-error').classList.add('hidden');
-		}, 3500);
+        
     }
 });

@@ -3,9 +3,32 @@ include_once('../templates/head.php');
 include_once('../modules/connection.php');
 session_start();
 // FILTROS
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+  $signup = true;
+  $password = $_POST["password"];
+  $password = password_hash($password, PASSWORD_DEFAULT);
+
+  $query = $miPDO->prepare('SELECT contrasena FROM usuario WHERE nickname=:nickname');
+  $query->execute(['nickname' => $_SESSION['nickname']]);
+  $results = $query->fetch();
+
+  // Si la contraseña es igual
+  if ($password === $results) {
+      $password_error = true;
+      $signup = false;
+    }
+    if ($signup) {
+      // Inserto el usuario en la base de datos
+      $query = $miPDO->prepare('UPDATE usuario (contrasena) VALUES (:password) WHERE nickname=:nickname');
+      $query->execute(['nickname' => $_SESSION['nickname'],'password' => $password]);
+  }
+  
+}
 ?>
 
   <!-- <script src="../src/js/hamburgesa.js" defer></script> -->
+<html>
   <head>
   <script src="../src/js/profile_validation.js" defer></script>
   <script src="../src/js/profile.js" defer></script>
@@ -56,6 +79,14 @@ session_start();
       <i class="fa-solid fa-circle-exclamation"></i>
       <p>Bi pasahitzek berdinak izan behar dira.</p>
     </div>
+    <?php
+    // if ($password_error) {
+    //   echo '<div class="error">
+    //           <i class="fa-solid fa-circle-exclamation"></i>
+    //           <p>Pasahitza berdina sartzen ari zara.</p>
+    //         </div>';
+    // }
+    ?>
       </div>
         <button>Gorde</button>
     </form>
