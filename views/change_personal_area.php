@@ -21,8 +21,9 @@
 
     // Cambio la contraseña en la BBDD
     if ($change) {
+      $password=password_hash($_POST['password'],PASSWORD_DEFAULT);
       $query = $miPDO->prepare('UPDATE usuario (contrasena) VALUES (:password) WHERE nickname=:nickname');
-      $query->execute(['nickname' => $_SESSION['nickname'],'password' => $_POST["password"]]);
+      $query->execute(['nickname' => $_SESSION['nickname'],'password' => $password]);
     }
   }
 ?>

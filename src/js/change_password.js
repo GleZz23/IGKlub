@@ -57,8 +57,6 @@ inputs.forEach((input) => {
 });
 
 form.addEventListener('submit', (e) => {
-   
-    
     if(!correct) {
         e.preventDefault();
         
