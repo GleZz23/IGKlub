@@ -82,7 +82,7 @@
     <header>
       <div>
         <h1>Iruzkinak</h1>
-        <button>Komentatu <i class="fa-solid fa-arrow-down"></i></button>
+        <button><i class="fa-solid fa-comment"></i> Komentatu</button>
       </div>
       <form action="" method="post">
         <textarea id="mensaje" name="mensaje" placeholder="<?php echo $results['titulo'] ?> liburuari buruz uste dut..."
@@ -91,31 +91,62 @@
       </form>
     </header>
     <?php
-    $query = $miPDO->prepare('SELECT * FROM comentario WHERE id_libro = :book');
+    $query = $miPDO->prepare('SELECT * FROM comentario WHERE id_libro = :book ORDER BY id_comentario DESC');
     $query->execute(['book' => $book]);
     $results = $query->fetchAll();
 
     if ($results) {
       foreach ($results as $position => $comment) {
+        $id_comentario = $comment['id_comentario'];
         echo '<section class="comments">
-                <div class="comment">
-                  <h1>'.$comment['nickname'].'</h1>
+                <div class="main-comment">
+                  <header>
+                    <h1>'.$comment['nickname'].'</h1>';
+                    if ($comment['nickname'] === $_SESSION['nickname']) {
+                      echo '<button><i class="fa-solid fa-trash-can"></i></button>';
+                    } else {
+                      echo '<button class="answer-button"><i class="fa-solid fa-reply"></i> Erantzun</button>';
+                    }
+                    
+        echo      '</header>
                   <div class="mensaje">
                     '.$comment['mensaje'].'
                   </div>
-                  <button>Erantzun</button>
                 </div>';
-        $query = $miPDO->prepare('SELECT * FROM respuesta WHERE id_libro = :book');
-        $query->execute(['book' => $book]);
+    ?>
+      <div class="user-answer">
+        <header>
+          <h1><?php echo $_SESSION['nickname'] ?></h1>
+        </header>
+        <div class="mensaje">
+          <form action="../modules/new_answer.php" method="get">
+            <textarea id="mensaje" name="mensaje" autofocus required autocomplete="off" maxlength="2300"></textarea>
+            <input type="hidden" name="book" value="<?php echo $_GET['liburua'] ?>">
+            <input type="hidden" name="nickname" value="<?php echo $_SESSION['nickname'] ?>">
+            <input type="hidden" name="id_comment" value="<?php echo $comment['id_comentario'] ?>">
+            <button>Erantzuna eman</button>
+          </form>
+        </div>
+      </div>
+    <?php
+        $query = $miPDO->prepare('SELECT * FROM respuesta WHERE id_libro = :book AND id_comentario = :id_comentario ORDER BY id_respuesta DESC');
+        $query->execute(['book' => $book, 'id_comentario' => $id_comentario]);
         $results = $query->fetchAll();
 
-        foreach ($results as $position => $answer) {
-          echo '<div class="answer">
-                  <h1>'.$answer['nickname'].'</h1>
-                  <div class="mensaje">
-                    '.$answer['mensaje'].'
-                  </div>
-                </div>';
+        if ($results) {
+          foreach ($results as $position => $answer) {
+            echo '<div class="answer">
+                    <header>
+                      <h1>'.$answer['nickname'].'</h1>';
+                      if ($answer['nickname'] === $_SESSION['nickname']) {
+                        echo '<button><i class="fa-solid fa-trash-can"></i></button>';
+                      }
+            echo    '</header>
+                    <div class="mensaje">
+                      '.$answer['mensaje'].'
+                    </div>
+                  </div>';
+          }
         }
         echo '</section>';
       }
