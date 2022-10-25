@@ -16,7 +16,7 @@
 <body>
   <section>
     <?php
-      $query = $miPDO->prepare('SELECT nickname, nombre, apellidos, email, estado, rol FROM usuario WHERE nickname =:nickname;');
+      $query = $miPDO->prepare('SELECT nickname, nombre, apellidos, email, estado, rol, fecha_nacimiento FROM usuario WHERE nickname =:nickname;');
       $query->execute(['nickname' => $nickname]);
       $results = $query->fetch();
 
@@ -40,14 +40,14 @@
         echo '<a href="../index.php">Sortu kontu berri bat</a>';
         session_destroy();
       } else if ($results['estado'] === 'aceptado') {
+        $_SESSION['nickname'] = $results['nickname'];
         $_SESSION['name'] = $results['nombre'];
         $_SESSION['surnames'] = $results['apellidos'];
         $_SESSION['email'] = $results['email'];
         $_SESSION['role'] = $results['rol'];
+        $_SESSION['date'] = $results['fecha_nacimiento'];
 
-        echo "<h1>Zorionak $nickname</h1>";
-        echo '<p>Zure kontua <b>aktibatu</b> egin da.</p>';
-        echo '<a href="main_menu.php?orria=1">Nabigatzen hasi</a>';
+        header('Location: ../views/main_menu.php?orria=1');
       }
     ?>
   </section>

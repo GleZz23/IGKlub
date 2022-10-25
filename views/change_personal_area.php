@@ -24,15 +24,17 @@ session_start();
       </button>
       <aside class="profile">
     <?php
-      if($_SESSION['role'] === 'ikasle') {
+      if ($_SESSION['role'] === 'ikasle') {
         echo '<h1>' . $_SESSION['nickname'] . '</h1>';
         echo '<h1><a href="../views/personal_area.php">Area Pertsonala</a> </h1>';
         echo '<h1><a href="../views/main_menu.php">Liburutegia</a></h1>';
-              }else echo '<h1>' . $_SESSION['nickname'] . '</h1>';
-              echo '<h1><a href="../views/personal_area.php">Area Pertsonala</a> </h1>';
-              echo '<h1><a href="../views/main_menu.php">Liburutegia</a></h1>';
-              echo '<h1><a href="../views/class.php">Gela</a></h1>';
-              echo '<h1><a href="../views/requests.php">Eskaerak</a></h1>';
+      } else {
+        echo '<h1>' . $_SESSION['nickname'] . '</h1>';
+        echo '<h1><a href="../views/personal_area.php">Area Pertsonala</a> </h1>';
+        echo '<h1><a href="../views/main_menu.php">Liburutegia</a></h1>';
+        echo '<h1><a href="../views/class.php">Gela</a></h1>';
+        echo '<h1><a href="../views/requests.php">Eskaerak</a></h1>';
+      }
     ?>
     <!-- PERFIL -->
   </aside>

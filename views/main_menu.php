@@ -39,15 +39,15 @@ session_start();
         </button>
         <aside class="profile">
       <?php
-      echo '<h1>' . $_SESSION['nickname'] . '</h1>';
-      if ($_SESSION['role'] === 'ikasle') {
-        echo '<h1><a href="../views/personal_area.php">Area Pertsonala</a> </h1>';
-        echo '<h1><a href="../views/main_menu.php">Liburutegia</a></h1>';
-      } else {
-        echo '<h1><a href="../views/personal_area.php">Area Pertsonala</a> </h1>';
-        echo '<h1><a href="../views/main_menu.php">Liburutegia</a></h1>';
-        echo '<h1><a href="../views/class.php">Gela</a></h1>';
-        echo '<h1><a href="../views/requests.php">Eskaerak</a></h1>';
+      echo '<h1>'.$_SESSION['nickname'].'</h1>';
+      echo '<a href="personal_area.php"><i class="fa-solid fa-user"></i>Area pertsonala</a>
+            <a href="new_book.php"><i class="fa-solid fa-book"></i>Igo liburu bat</a>
+            <a href="#"><i class="fa-solid fa-book-bookmark"></i>Nire liburutegia</a>'; // Cambiar enlace
+      if ($_SESSION['role'] === 'irakasle') {
+        echo '<a href="class.php"><i class="fa-solid fa-chalkboard-user"></i>Nire taldeak</a>
+              <a href="requests.php"><i class="fa-solid fa-question"></i>Eskaerak</a>';
+      } else if ($_SESSION['role'] === 'admin') {
+        echo '<a href="management.php"><i class="fa-solid fa-gear"></i>Adminiztrazioa</a></h1>';
       }
       ?>
   <!-- PERFIL -->

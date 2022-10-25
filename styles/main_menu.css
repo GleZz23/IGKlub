@@ -192,6 +192,12 @@ main section {
   transition: all .3s ease-in-out;
 }
 
+.profile a i{
+  width: 2rem;
+  text-align: center;
+  margin-right: .5rem;
+}
+
 /* FILTERS */
 .filters {
   left: 0;

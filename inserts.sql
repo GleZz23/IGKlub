@@ -118,9 +118,13 @@ create table if not exists idioma_libro (
 -- TABLA RESPUESTA
 create table if not exists respuesta (
   id_comentario int(5),
-  id_respuesta int(5),
-  foreign key (id_comentario) references comentario(id_comentario),
-  foreign key (id_respuesta) references comentario(id_comentario)
+  id_respuesta int(5) auto_increment primary key,
+  nickname varchar(255),
+  id_libro int(5),
+  mensaje varchar(2300) not null,
+  foreign key (nickname) references usuario(nickname),
+  foreign key (id_libro) references libro(id_libro),
+  foreign key (id_comentario) references comentario(id_comentario)
 );
 
 INSERT INTO usuario (`nickname`, `nombre`, `apellidos`, `fecha_nacimiento`, `email`, `telefono`, `contrasena`, `rol`, `id_centro`, `cod_grupo`, `estado`) VALUES

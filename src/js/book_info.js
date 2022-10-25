@@ -2,6 +2,7 @@ const reviewForm = document.querySelector('.reviews form');
 const reviewButton = document.querySelector('.reviews header button');
 
 reviewButton.addEventListener('click', () => {
+  console.log(reviewButton.innerHTML);
   let elementStyle = window.getComputedStyle(reviewForm);
   let styleDisplay = elementStyle.getPropertyValue('display');
   if (styleDisplay === "none") {
@@ -9,6 +10,6 @@ reviewButton.addEventListener('click', () => {
     reviewButton.innerHTML = 'Komentatu <i class="fa-solid fa-arrow-up"></i>';
   } else if (styleDisplay === "flex") {
     reviewForm.style.display = "none";
-    reviewButton.innerHTML = 'Komentatu <i class="fa-solid fa-arrow-down"></i>';
+    reviewButton.innerHTML = 'Komentatu <i class="fa-solid fa-arrow-up"></i>';
   }
 });

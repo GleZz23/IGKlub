@@ -159,24 +159,31 @@ main section {
   outline: none;
 }
 
-.reviews .comment {
+.comments {
   margin: 1rem;
-  padding: 1rem;
-  border: 2px solid gray;
-  border-top-left-radius: 2rem;
-  background-color: white;
-  box-shadow: .5rem .5rem 1rem rgba(0, 0, 0, 0.7);
 }
 
-.reviews .comment h1 {
+.comments h1 {
   margin-bottom: .5rem;
 }
 
-.reviews .comment .mensaje {
+.comments .mensaje {
   padding: 1rem;
   border-top: 2px solid gray;
 }
 
-.reviews .comment button {
+.comments button {
   right: 0;
 }
+
+.comment, .answer {
+  padding: 1rem;
+  border: 2px solid gray;
+  background-color: white;
+  box-shadow: .5rem .5rem 1rem rgba(0, 0, 0, 0.7);
+  margin-bottom: .5rem;
+}
+
+.comment { margin-right: 3rem; }
+
+.answer { margin-left: 3rem; }

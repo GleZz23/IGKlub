@@ -96,21 +96,34 @@
     $results = $query->fetchAll();
 
     if ($results) {
-      foreach ($results as $position => $coment) {
-        echo '<div class="comment">
-                <h1>'.$coment['nickname'].'</h1>
-                <div class="mensaje">
-                  '.$coment['mensaje'].'
-                </div>
-                <button>Erantzun</button>
-              </div>';
+      foreach ($results as $position => $comment) {
+        echo '<section class="comments">
+                <div class="comment">
+                  <h1>'.$comment['nickname'].'</h1>
+                  <div class="mensaje">
+                    '.$comment['mensaje'].'
+                  </div>
+                  <button>Erantzun</button>
+                </div>';
+        $query = $miPDO->prepare('SELECT * FROM respuesta WHERE id_libro = :book');
+        $query->execute(['book' => $book]);
+        $results = $query->fetchAll();
+
+        foreach ($results as $position => $answer) {
+          echo '<div class="answer">
+                  <h1>'.$answer['nickname'].'</h1>
+                  <div class="mensaje">
+                    '.$answer['mensaje'].'
+                  </div>
+                </div>';
+        }
+        echo '</section>';
       }
     } else {
       echo '<h1>Oraindik ez dago komentariorik</h1>';
     }
     ?>
+    </section>
   </section>
 </body>
-
-
 </html>
