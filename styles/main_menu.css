@@ -168,9 +168,13 @@ main section {
   padding: 2rem;
   border-bottom: 2px solid gray;
   box-shadow: .5rem .5rem 1rem #00000050;
-  text-align: center;
+  flex-direction: column;
+  text-align: left;
   justify-content: center;
+  gap: 1rem;
   transition: all .3s ease-in-out;
+  display: none;
+  font-size: 1.5rem;
   top: 0;
 }
 
@@ -180,6 +184,12 @@ main section {
   border-left: 2px solid gray;
   border-bottom-left-radius: 1rem;
   transform: translateX(100%);
+}
+
+.profile a {
+  color: gray;
+  text-decoration: none;
+  transition: all .3s ease-in-out;
 }
 
 /* FILTERS */

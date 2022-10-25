@@ -2,6 +2,8 @@
   include_once('../templates/head.php');
   include_once('../modules/connection.php');
 
+  $activator = '';
+
   session_start();
   if (isset($_SESSION['nickname'])) {
     $nickname = $_SESSION['nickname'];
@@ -14,29 +16,38 @@
 <body>
   <section>
     <?php
-      echo "<h1>Kaixo $nickname</h1>";
-
-      $query = $miPDO->prepare('SELECT nickname, nombre, apellidos, email, estado FROM usuario WHERE nickname =:nickname;');
+      $query = $miPDO->prepare('SELECT nickname, nombre, apellidos, email, estado, rol FROM usuario WHERE nickname =:nickname;');
       $query->execute(['nickname' => $nickname]);
-      $result = $query->fetch();
+      $results = $query->fetch();
 
-      if ($result['estado'] === 'espera') {
-        echo '<p>Kontua oraindik ez da aktibatu. Itxaron zure irakasleak aktibatu arte.</p>';
+      if ($results['estado'] === 'espera') {
+        switch ($results['rol']) {
+          case 'irakasle':
+              $activator = '<b>administratzaile bat</b>';
+              break;
+          case 'ikasle':
+              $activator = '<b>zure irakaslea</b>';
+              break;
+        }
+        echo "<h1>Kaixo $nickname</h1>";
+        echo '<p>Kontua oraindik ez da aktibatu. Itxaron '.$activator.' aktibatu arte.</p>';
         echo '<a href="account_status.php">Egiaztatu berriro</a>';
-      } else if ($result['estado'] === 'denegado') {
+      } else if ($results['estado'] === 'denegado') {
         $query = $miPDO->prepare('DELETE FROM usuario WHERE nickname =:nickname;');
         $query->execute(['nickname' => $nickname]);
-        echo '<p>Zure kontua desaktibatu da, baldintzak betetzen ez dituelako. Saiatu kontu berri bat sortzen.</p>';
+        echo "<h1>Barkatu $nickname</h1>";
+        echo '<p>Zure kontua <b>desaktibatu</b> da, baldintzak betetzen ez dituelako. Saiatu kontu berri bat sortzen.</p>';
         echo '<a href="../index.php">Sortu kontu berri bat</a>';
         session_destroy();
-      } else if ($result['estado'] === 'aceptado') {
-        session_start();
-        $_SESSION['nickname'] = $result['nickname'];
-        $_SESSION['name'] = $result['nombre'];
-        $_SESSION['surnames'] = $result['apellidos'];
-        $_SESSION['email'] = $result['email'];
+      } else if ($results['estado'] === 'aceptado') {
+        $_SESSION['name'] = $results['nombre'];
+        $_SESSION['surnames'] = $results['apellidos'];
+        $_SESSION['email'] = $results['email'];
+        $_SESSION['role'] = $results['rol'];
 
-        header('Location: ../index.php'); //Cambiar por el menu principal
+        echo "<h1>Zorionak $nickname</h1>";
+        echo '<p>Zure kontua <b>aktibatu</b> egin da.</p>';
+        echo '<a href="main_menu.php?orria=1">Nabigatzen hasi</a>';
       }
     ?>
   </section>
