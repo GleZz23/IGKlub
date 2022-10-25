@@ -208,7 +208,7 @@
       <input type="checkbox" id="termns" name="termns">
       <label for="checkbox">Irakurri eta onartzen ditut <a href="#">zehaztapenak eta baldintzak</a></label>
     </div>
-    <!-- Error: Contraseñas -->
+    <!-- Error: Formulario -->
     <div class="error hidden" id="form-error">
       <i class="fa-solid fa-circle-exclamation"></i>
       <p>Bete formularioa behar bezala.</p>

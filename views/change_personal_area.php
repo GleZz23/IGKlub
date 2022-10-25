@@ -21,9 +21,9 @@
 
     // Cambio la contraseña en la BBDD
     if ($change) {
-      $password=password_hash($_POST['password'],PASSWORD_DEFAULT);
+      $newPassword = password_hash($_POST['password'],PASSWORD_DEFAULT);
       $query = $miPDO->prepare('UPDATE usuario (contrasena) VALUES (:password) WHERE nickname=:nickname');
-      $query->execute(['nickname' => $_SESSION['nickname'],'password' => $password]);
+      $query->execute(['nickname' => $_SESSION['nickname'],'password' => $newPassword]);
     }
   }
 ?>
@@ -87,6 +87,11 @@
                 </div>';
         }
       ?>
+      <!-- Error: Formulario -->
+      <div class="error hidden" id="form-error">
+        <i class="fa-solid fa-circle-exclamation"></i>
+        <p>Bete formularioa behar bezala.</p>
+      </div>
       <button>Pasahitza aldatu</button>
     </form>
   </main>
