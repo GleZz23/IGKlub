@@ -1,6 +1,7 @@
 <?php
   include_once('../modules/connection.php');
   include_once('../templates/head.php');
+  session_start();
 
   $book = $_GET['liburua'];
 
@@ -10,45 +11,7 @@
 ?>
     <link rel="stylesheet" href="../styles/book_info.css">
     <title> <?php echo $results['titulo'] ?> | IGKlub</title>
-    <script>
-      function myFunction() {
-      // var div= document.getElementById("opinar")
-      // var x = document.createElement("TEXTAREA");
-      // var t = document.createTextNode("Opina sobre el libro...");
-      // div.appendChild(x);
-      // x.appendChild(t);
-      // // document.div.appendChild(x);
-      // document.getElementbyId("si")=x;
-
-      var div= document.getElementById("opinar")
-      var textarea = document.createElement("TEXTAREA");
-      var br = document.createElement("br");
-      var but = document.createElement("button");
-      //textarea.style.rows=20;
-      newDiv.appendChild(br);
-      newDiv.appendChild(textarea);
-      newDiv.appendChild(but);
-}
-
-function addElement () {
-  // crea un nuevo div
-  // y añade contenido
-  var newDiv = document.getElementByClass("opinar").parentNode;
-  var textarea = document.createElement("TEXTAREA");
-  var br = document.createElement("br");
-  var but = document.createElement("button");
-  textarea.style.rows=20;
-  newDiv.appendChild(br);
-  newDiv.appendChild(textarea);
-  newDiv.appendChild(but);
-
-  // añade el elemento creado y su contenido al DOM
-  var currentDiv = document.getElementById("div1");
-  // document.body.insertBefore(textarea, newDiv);
-  // document.body.insertBefore(but, newDiv);
-
-}
-</script>
+    <script src="../src/js/book_info.js" defer></script>
 </head>
 <body>
   <main>
@@ -89,19 +52,19 @@ function addElement () {
         <!-- Demas datos -->
         <div class="more-info">
           <div>
-            <h3>Formato:</h3>
+            <h3>Formatua:</h3>
             <?php
               echo '<p>'.$results['formato'].'</p>';
             ?>
           </div>
           <div>
-            <h3>Edad media:</h3>
+            <h3>Adina:</h3>
             <?php
               echo '<p>'.$results['edad_media'].'</p>';
             ?>
           </div>
           <div>
-            <h3>Lectores:</h3>
+            <h3>Irakurleak:</h3>
             <?php
               echo '<p>'.$results['num_lectores'].'</p>';
             ?>
@@ -110,17 +73,44 @@ function addElement () {
       </div>
       <!-- Acciones -->
       <div class="actions">
-        <a href="#">Valorar este libro</a>
+        <a href="#">Liburu hau baloratzea</a> <!-- Cambiar enlace -->
       </div>
     </section>
   </main>
   <!-- Reviews -->
-  <div id="opinar">
-      <h1>Opiniones:</h1><br><br><br>
-      <hr>
-      <br>
-      <input type ="button" value="Opinar" class="opin" onclick="myFunction()">
-      <!-- <p id="si"></p> -->
-    </div>
+  <section class="reviews">
+    <header>
+      <div>
+        <h1>Iruzkinak</h1>
+        <button>Komentatu <i class="fa-solid fa-arrow-down"></i></button>
+      </div>
+      <form action="" method="post">
+        <textarea id="mensaje" name="mensaje" placeholder="<?php echo $results['titulo'] ?> liburuari buruz uste dut..."
+        required autocomplete="off" maxlength="2300"></textarea>
+        <button>Nire iritzia eman</button>
+      </form>
+    </header>
+    <?php
+    $query = $miPDO->prepare('SELECT * FROM comentario WHERE id_libro = :book');
+    $query->execute(['book' => $book]);
+    $results = $query->fetchAll();
+
+    if ($results) {
+      foreach ($results as $position => $coment){
+        echo '<div class="comment">
+                <h1>'.$coment['nickname'].'</h1>
+                <div class="mensaje">
+                  '.$coment['mensaje'].'
+                </div>
+                <button>Erantzun</button>
+              </div>';
+      }
+    } else {
+      echo '<h1>Oraindik ez dago komentariorik</h1>';
+    }
+    ?>
+  </section>
 </body>
+
+
 </html>

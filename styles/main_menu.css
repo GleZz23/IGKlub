@@ -175,6 +175,7 @@ main section {
   transition: all .3s ease-in-out;
   display: none;
   font-size: 1.5rem;
+  top: 0;
 }
 
 /* PERFIL DE USUARIO */

@@ -14,7 +14,7 @@
   <main>
   <!-- Aceptar nuevos profesores -->
   <?php
-    $query = $miPDO->prepare('SELECT usuario.*, centro.nombre FROM usuario, centro WHERE usuario.id_centro = centro.id_centro AND rol = "irakasle" AND estado = "aceptado"');
+    $query = $miPDO->prepare('SELECT * FROM usuario WHERE rol = "irakasle" AND estado = "aceptado"');
     $query->execute();
     $results = $query->fetchAll();
 
@@ -25,7 +25,7 @@
                 <th>Izena</th>
                 <th>Abizenak</th>
                 <th>Email-a</th>
-                <th>Ikastetxea</th>
+                <th>Telefonoa</th>
                 <th>Onartu</th>
               </tr>';
       foreach ($results as $position => $teacher){
@@ -34,13 +34,16 @@
                 <td>'.$teacher['nombre'].'</td>
                 <td>'.$teacher['apellidos'].'</td>
                 <td>'.$teacher['email'].'</td>
-                <button>Bai</button>
-                <button>Ez</button>
+                <td>'.$teacher['telefono'].'</td>
+                <td>
+                  <button>Bai</button>
+                  <button>Ez</button>
+                </td>
               </tr>';
       }
       echo '</table>';
     } else {
-      echo '<h1>Oraindik ez dago irakaslerik</h1>';
+      echo '<h1>Oraindik ez dago irakaslerik onartzeko</h1>';
     }
     ?>
   </main>
