@@ -11,7 +11,7 @@
 
     // Consulto la contraseña en la BBDD
     $query = $miPDO->prepare('SELECT * FROM usuario WHERE nickname=:nickname');
-    $query->execute(['nickname' => $_POST["password"]]);
+    $query->execute(['nickname' => $_SESSION['nickname']]);
     $results = $query->fetch();
 
     $passwordComparation = password_verify($_POST["password"], $results['contrasena']);
@@ -90,12 +90,12 @@
       <!-- Error: Cambio -->
       <?php
         if ($password_error) {
-          echo '<div class="error">
+          echo '<div class="error" id="password-duplicate">
                   <i class="fa-solid fa-circle-exclamation"></i>
                   <p>Pasahitza berdina sartzen ari zara.</p>
                 </div>';
         } else if ($password_updated) {
-          echo '<div class="success">
+          echo '<div class="success" id="password-updated">
                   <i class="fa-solid fa-circle-check"></i>
                   <p>Zure pasahitza aldatu da</p>
                 </div>';
