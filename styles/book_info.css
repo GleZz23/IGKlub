@@ -208,6 +208,9 @@ main section {
 .user-answer {
   display: none;
   flex-direction: column;
+  opacity: 0;
+  transform: translateY(-100%);
+  transition: all .3s ease-in-out;
 }
 
 .user-answer .mensaje form {
@@ -223,4 +226,8 @@ main section {
   padding: .75rem;
   resize: none;
   outline: none;
+}
+
+.empty {
+  margin: 2rem;
 }

@@ -23,9 +23,17 @@ answerButton.forEach((button) => {
       let styleDisplay = elementStyle.getPropertyValue('display');
       if (styleDisplay === "none") {
         comment.lastElementChild.style.display = "flex";
+        setTimeout(() => {
+          comment.lastElementChild.style.opacity = "1";
+          comment.lastElementChild.style.transform = "translateY(0)";
+        }, 10);
         button.innerHTML = '<i class="fa-solid fa-x"></i> Erantzun';
       } else if (styleDisplay === "flex") {
-        comment.lastElementChild.style.display = "none";
+        comment.lastElementChild.style.opacity = "0";
+        comment.lastElementChild.style.transform = "translateY(-100%)";
+        setTimeout(() => {
+          comment.lastElementChild.style.display = "none";
+        }, 500);
         button.innerHTML = '<i class="fa-solid fa-reply"></i> Erantzun';
       }
     });

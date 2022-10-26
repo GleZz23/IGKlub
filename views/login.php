@@ -45,9 +45,6 @@
         $_SESSION['date'] = $results['fecha_nacimiento'];
         $_SESSION['school'] = $results['id_centro'];
 
-        $query = $miPDO->prepare('UPDATE usuario SET online = 1 WHERE nickname = :nickname;');
-        $query->execute(['nickname' => $_POST['nickname']]);
-
         header('Location: ../views/main_menu.php?orria=1');
       }
     }

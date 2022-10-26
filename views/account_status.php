@@ -16,7 +16,7 @@
 <body>
   <section>
     <?php
-      $query = $miPDO->prepare('SELECT nickname, nombre, apellidos, email, estado, rol, fecha_nacimiento, centro FROM usuario WHERE nickname =:nickname;');
+      $query = $miPDO->prepare('SELECT nickname, nombre, apellidos, email, estado, rol, fecha_nacimiento, id_centro FROM usuario WHERE nickname =:nickname;');
       $query->execute(['nickname' => $nickname]);
       $results = $query->fetch();
 

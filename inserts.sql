@@ -31,7 +31,6 @@ create table if not exists usuario (
   id_centro int(5),
   cod_grupo char(5),
   estado enum('aceptado','denegado','espera') default 'espera' not null,
-  online boolean,
   foreign key (id_centro) references centro(id_centro),
   foreign key (cod_grupo) references grupo(codigo)
 );
@@ -130,8 +129,8 @@ create table if not exists respuesta (
   foreign key (id_comentario) references comentario(id_comentario)
 );
 
-INSERT INTO usuario (`nickname`, `nombre`, `apellidos`, `fecha_nacimiento`, `email`, `telefono`, `contrasena`, `rol`, `id_centro`, `cod_grupo`, `estado`, `online`) VALUES
-  ('Admin01', 'Admin', 'Administrador', '2000-01-01', 'admin@mail.com', NULL, '$2y$10$SZU5HY0RmiNkvpl7rOoPkeERGKXk0bTNZJoBDTAdzR.VYYEHuZx8q', 'admin', NULL, NULL, 'aceptado', 0);
+INSERT INTO usuario (`nickname`, `nombre`, `apellidos`, `fecha_nacimiento`, `email`, `telefono`, `contrasena`, `rol`, `id_centro`, `cod_grupo`, `estado`) VALUES
+  ('Admin01', 'Admin', 'Administrador', '2000-01-01', 'admin@mail.com', NULL, '$2y$10$SZU5HY0RmiNkvpl7rOoPkeERGKXk0bTNZJoBDTAdzR.VYYEHuZx8q', 'admin', NULL, NULL, 'aceptado');
 
 INSERT INTO centro VALUES
   ('1', 'I.E.S. Miguel de Unamuno B.H.I.'),
@@ -168,6 +167,8 @@ UPDATE `libro` SET `sinopsis` = 'Estamos en un mundo donde abundan los superhér
 UPDATE `libro` SET `sinopsis` = 'Charlie y la fábrica de chocolate es una historia de Roald Dahl, el gran autor de literatura infantil. El señor Wonka, dueño de la magnífica fábrica de chocolate, ha escondido cinco billetes de oro en sus chocolatinas. Quienes los encuentren serán los elegidos para visitar la fábrica. Charlie tiene la fortuna de encontrar uno de esos billetes y, a partir de ese momento, su vida cambiará para siempre.' WHERE `libro`.`id_libro` = 7;
 UPDATE `libro` SET `sinopsis` = 'Tras la invasión de Holanda, los Frank, comerciantes judíos alemanes emigrados a Amsterdam en 1933, se ocultaron de la Gestapo en una buhardilla anexa al edificio donde el padre de Anne tenía sus oficinas. Ocho personas permanecieron recluidas desde junio de 1942 hasta agosto de 1944, fecha en que fueron detenidas y enviadas a campos de concentración. Desde su escondite y en las más precarias condiciones, Anne, una niña de trece años, escribió su estremecedor Diario: un testimonio único en su género sobre el horror y la barbarie nazi, y sobre los sentimientos y experiencias de la propia Anne y sus acompañantes. Anne murió en el campo de Bergen-Belsen en marzo de 1945. Su Diario nunca morirá.' WHERE `libro`.`id_libro` = 8;
 UPDATE `libro` SET `sinopsis` = 'Smaug parecía profundamente dormido cuando Bilbo espió una vez más desde la entrada. ¡Pero fingía! ¡Estaba vigilando la entrada del túnel!... Sacado de su cómodo agujero-hobbit por Gandalf y una banda de enanos, Bilbo se encuentra de pronto en medio de una conspiración que pretende apoderarse del tesoro de Smaug el Magnífico, un enorme y muy peligroso dragón...' WHERE `libro`.`id_libro` = 9;
+
+INSERT INTO `comentario`(`id_comentario`, `nickname`, `id_libro`, `mensaje`, `estado`) VALUES ('1','Admin01','1','Esto es un mensaje de prueba','aceptado');
 
 -- USUARIO PARA LA BBDD
 create user 'igklub'@'%' identified by '655Yj6Rc$F@x';
