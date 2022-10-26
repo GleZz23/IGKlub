@@ -173,9 +173,10 @@ UPDATE `libro` SET `sinopsis` = 'Smaug parecía profundamente dormido cuando Bil
 
 INSERT INTO `comentario`(`id_comentario`, `nickname`, `id_libro`, `mensaje`, `estado`) VALUES ('1','Admin01','1','Esto es un mensaje de prueba','aceptado');
 -- IDIOMAS
-INSERT INTO `idioma`(`id_idioma`, `nombre`) VALUES ('1','Gaztelania');
-INSERT INTO `idioma`(`id_idioma`, `nombre`) VALUES ('2','Euskera');
-INSERT INTO `idioma`(`id_idioma`, `nombre`) VALUES ('3','Ingelesa');
+INSERT INTO `idioma`(`id_idioma`, `nombre`) VALUES
+  ('1','Gaztelania'),
+  ('2','Euskera'),
+  ('3','Ingelesa');
 -- USUARIO PARA LA BBDD
 create user 'igklub'@'%' identified by '655Yj6Rc$F@x';
 grant all on igklub_database.* to 'igklub'@'%';
