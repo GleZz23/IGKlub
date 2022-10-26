@@ -89,3 +89,17 @@ profileLinks.forEach((link) => {
     link.style.transform = "translateX(0)";
   });
 });
+
+//AÑADIR LIBRO
+const newBookButton = document.querySelector('#new_book');
+
+newBookButton.addEventListener('mouseover', () => {
+  newBookButton.style.transform = 'rotate(-10deg)';
+  newBookButton.style.textShadow = ".3rem .3rem .3rem #00000050";
+  newBookButton.style.cursor = "pointer";
+});
+
+newBookButton.addEventListener('mouseleave', () => {
+  newBookButton.style.transform = 'rotate(0)';
+  newBookButton.style.textShadow = "none";
+});
