@@ -64,7 +64,7 @@
     // Si el registro es valido
     if ($signup) {
       // Inserto el usuario en la base de datos
-      $query = $miPDO->prepare('INSERT INTO usuario (nickname, email, nombre, apellidos, fecha_nacimiento, contrasena, rol) VALUES (:nickname, :email, :name, :surnames, :date, :password, :role)');
+      $query = $miPDO->prepare('INSERT INTO usuario (nickname, email, nombre, apellidos, fecha_nacimiento, contrasena, rol, online) VALUES (:nickname, :email, :name, :surnames, :date, :password, :role, 0)');
       $query->execute(['nickname' => $nickname, 'email' => $email, 'name' => $name, 'surnames' => $surnames, 'date' => $date, 'password' => $password, 'role' => $_GET['role']]);
 
       if ($_GET['role'] === 'Irakasle') {

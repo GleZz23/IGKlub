@@ -31,6 +31,7 @@ create table if not exists usuario (
   id_centro int(5),
   cod_grupo char(5),
   estado enum('aceptado','denegado','espera') default 'espera' not null,
+  online boolean,
   foreign key (id_centro) references centro(id_centro),
   foreign key (cod_grupo) references grupo(codigo)
 );
@@ -64,6 +65,7 @@ create table if not exists comentario (
   nickname varchar(255),
   id_libro int(5),
   mensaje varchar(2300) not null,
+  estado enum('aceptado','denegado','espera') default 'espera' not null,
   foreign key (nickname) references usuario(nickname),
   foreign key (id_libro) references libro(id_libro)
 );
@@ -122,13 +124,14 @@ create table if not exists respuesta (
   nickname varchar(255),
   id_libro int(5),
   mensaje varchar(2300) not null,
+  estado enum('aceptado','denegado','espera') default 'espera' not null,
   foreign key (nickname) references usuario(nickname),
   foreign key (id_libro) references libro(id_libro),
   foreign key (id_comentario) references comentario(id_comentario)
 );
 
-INSERT INTO usuario (`nickname`, `nombre`, `apellidos`, `fecha_nacimiento`, `email`, `telefono`, `contrasena`, `rol`, `id_centro`, `cod_grupo`, `estado`) VALUES
-  ('Admin01', 'Admin', 'Administrador', '2000-01-01', 'admin@mail.com', NULL, '$2y$10$SZU5HY0RmiNkvpl7rOoPkeERGKXk0bTNZJoBDTAdzR.VYYEHuZx8q', 'admin', NULL, NULL, 'aceptado');
+INSERT INTO usuario (`nickname`, `nombre`, `apellidos`, `fecha_nacimiento`, `email`, `telefono`, `contrasena`, `rol`, `id_centro`, `cod_grupo`, `estado`, `online`) VALUES
+  ('Admin01', 'Admin', 'Administrador', '2000-01-01', 'admin@mail.com', NULL, '$2y$10$SZU5HY0RmiNkvpl7rOoPkeERGKXk0bTNZJoBDTAdzR.VYYEHuZx8q', 'admin', NULL, NULL, 'aceptado', 0);
 
 INSERT INTO centro VALUES
   ('1', 'I.E.S. Miguel de Unamuno B.H.I.'),
