@@ -35,7 +35,7 @@ session_start();
             <button><i class="fa-solid fa-magnifying-glass"></i></button>
           </form>
         </div>
-    <!-- BOTON AGREGAR NUEVO LIBRO -->
+        <!-- BOTON AGREGAR NUEVO LIBRO -->
         <button id="new_book" onclick="location.href='../views/new_book.php'">
         <i class="fa-solid fa-file-import"></i>
         </button>

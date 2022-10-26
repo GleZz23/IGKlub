@@ -129,7 +129,7 @@
         </div>
       </div>
     <?php
-        $query = $miPDO->prepare('SELECT * FROM respuesta WHERE id_libro = :book AND id_comentario = :id_comentario ORDER BY id_respuesta DESC');
+        $query = $miPDO->prepare('SELECT * FROM respuesta WHERE id_libro = :book AND id_comentario = :id_comentario AND estado = "aceptado" ORDER BY id_respuesta DESC');
         $query->execute(['book' => $book, 'id_comentario' => $id_comentario]);
         $results = $query->fetchAll();
 
@@ -151,7 +151,7 @@
         echo '</section>';
       }
     } else {
-      echo '<h1>Oraindik ez dago komentariorik</h1>';
+      echo '<h1 class="empty">Oraindik ez dago komentariorik</h1>';
     }
     ?>
     </section>
