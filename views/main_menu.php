@@ -28,17 +28,18 @@ session_start();
             <button>Filtrar</button>
           </form>
         </aside>
-        <div class="search-bar">
+        <!-- BARRA DE BUSQUEDA -->
+        <div class="search-bar" >
           <form action="" method="get">
             <input type="text" placeholder="Izenburua, idazlea...">
             <button><i class="fa-solid fa-magnifying-glass"></i></button>
           </form>
         </div>
-
-        <button id="new_book">
+    <!-- BOTON AGREGAR NUEVO LIBRO -->
+        <button id="new_book" onclick="location.href='../views/new_book.php'">
         <i class="fa-solid fa-file-import"></i>
         </button>
-
+        <!-- BOTON DEL MENU HAMBURGUESA -->
         <button id="profile">
           <i class="fa-solid fa-bars"></i>
         </button>
