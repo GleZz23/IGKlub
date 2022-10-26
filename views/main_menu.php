@@ -22,12 +22,12 @@ session_start();
           <i class="fa-solid fa-filter"></i>
         </button>
         <aside class="filters">
-      <h1>FILTROS</h1>
-      <form action="" method="post">
-        <!-- FILTROS -->
-        <button>Filtrar</button>
-      </form>
-    </aside>
+          <h1>FILTROS</h1>
+            <form action="" method="post">
+            <!-- FILTROS -->
+            <button>Filtrar</button>
+          </form>
+        </aside>
         <div class="search-bar">
           <form action="" method="get">
             <input type="text" placeholder="Izenburua, idazlea...">
@@ -42,24 +42,22 @@ session_start();
         <button id="profile">
           <i class="fa-solid fa-bars"></i>
         </button>
-        <aside class="profile">
-      <?php
-      echo '<h1>'.$_SESSION['nickname'].'</h1>';
-      echo '<a href="personal_area.php"><i class="fa-solid fa-user"></i>Area pertsonala</a>
-            <a href="new_book.php"><i class="fa-solid fa-book"></i>Igo liburu bat</a>
-            <a href="#"><i class="fa-solid fa-book-bookmark"></i>Nire liburutegia</a>'; // Cambiar enlace
-      if ($_SESSION['role'] === 'irakasle') {
-        echo '<a href="class.php"><i class="fa-solid fa-chalkboard-user"></i>Nire taldeak</a>
-              <a href="requests.php"><i class="fa-solid fa-question"></i>Eskaerak</a>';
-      } else if ($_SESSION['role'] === 'admin') {
-        echo '<a href="management.php"><i class="fa-solid fa-gear"></i>Adminiztrazioa</a></h1>';
-      }
-      ?>
-  <!-- PERFIL -->
-    </aside>
+          <aside class="profile">
+          <?php
+          echo '<h1>'.$_SESSION['nickname'].'</h1>';
+          echo '<a href="main_menu.php"><i class="fa-solid fa-house"></i>Hasiera</a>
+                <a href="new_book.php"><i class="fa-solid fa-book"></i>Igo liburu bat</a>
+                <a href="personal_area.php"><i class="fa-solid fa-user"></i>Area pertsonala</a>';
+          if ($_SESSION['role'] === 'irakasle') {
+            echo '<a href="class.php"><i class="fa-solid fa-chalkboard-user"></i>Nire taldeak</a>
+                  <a href="requests.php"><i class="fa-solid fa-question"></i>Eskaerak</a>';
+          } else if ($_SESSION['role'] === 'admin') {
+            echo '<a href="management.php"><i class="fa-solid fa-gear"></i>Adminiztrazioa</a></h1>';
+          }
+          ?>
+        </aside>
       </section>
     </header>
-    
     <main>
       <?php
       // Recojo todos los valores de los libros en una variable

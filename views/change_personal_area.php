@@ -26,7 +26,7 @@
       $newPassword = password_hash($_POST['password'],PASSWORD_DEFAULT);
       $query = $miPDO->prepare('UPDATE usuario SET contrasena = :pass WHERE nickname = :nickname');
       $query->execute(['nickname' => $_SESSION['nickname'],'pass' => $newPassword]);
-      $password_updated = true;
+      header('Location: ../views/personal_area.php');
     }
   }
 ?>

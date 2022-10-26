@@ -112,7 +112,7 @@ main section {
   transition: ease-in-out .25s;
 }
 
-/* REVIEWS */
+/* Reviews */
 .reviews header {
   width: 100%;
   display: flex; 
@@ -130,6 +130,13 @@ main section {
   width: 100%;
   display: flex;
   justify-content: space-between; 
+}
+
+.reviews header button {
+  font-size: 1rem;
+  padding: .75rem;
+  resize: none;
+  outline: none;
 }
 
 .reviews form {
@@ -159,31 +166,61 @@ main section {
   outline: none;
 }
 
-.comments {
-  margin: 1rem;
-}
+/* Comentarios */
+.comments { margin: 2.5rem 1rem; }
 
-.comments h1 {
-  margin-bottom: .5rem;
-}
-
-.comments .mensaje {
+.main-comment, .answer, .user-answer {
   padding: 1rem;
-  border-top: 2px solid gray;
-}
-
-.comments button {
-  right: 0;
-}
-
-.comment, .answer {
-  padding: 1rem;
-  border: 2px solid gray;
   background-color: white;
-  box-shadow: .5rem .5rem 1rem rgba(0, 0, 0, 0.7);
+  border: 2px solid gray;
+  box-shadow: .5rem .5rem 1rem rgba(0, 0, 0, 0.5);
   margin-bottom: .5rem;
 }
 
-.comment { margin-right: 3rem; }
+.main-comment {
+  margin-right: 5rem;
+}
 
-.answer { margin-left: 3rem; }
+.answer, .user-answer { margin-left: 5rem; }
+
+.main-comment header, .answer header {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.main-comment header h1, .answer header h1, .user-answer header h1 {
+  font-size: 2rem;
+  margin-left: 1rem;
+}
+
+.main-comment header button, .answer header button { padding: .5rem 1rem; }
+
+.main-comment .mensaje, .answer .mensaje {
+  padding: 1rem;
+  font-size: 1.5rem;
+  text-align: justify;
+  hyphens: auto;
+  -webkit-hyphens: auto;
+}
+
+.user-answer {
+  display: none;
+  flex-direction: column;
+}
+
+.user-answer .mensaje form {
+  display: flex;
+  background-color: transparent;
+  border: none;
+}
+
+.user-answer form textarea {
+  width: 100%;
+  height: 17.5rem;
+  font-size: 1rem;
+  padding: .75rem;
+  resize: none;
+  outline: none;
+}
