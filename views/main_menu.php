@@ -34,6 +34,11 @@ session_start();
             <button><i class="fa-solid fa-magnifying-glass"></i></button>
           </form>
         </div>
+
+        <button id="new_book">
+        <i class="fa-solid fa-file-import"></i>
+        </button>
+
         <button id="profile">
           <i class="fa-solid fa-bars"></i>
         </button>
