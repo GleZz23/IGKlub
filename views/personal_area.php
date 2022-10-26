@@ -59,8 +59,8 @@ session_start();
       <div id="valorated_book_list">
       <?php
       // Recojo todos los valores de los libros en una variable
-      $query = $miPDO->prepare('SELECT libro.* FROM libro, solicitud_libro WHERE libro.id_libro = solicitud_libro.id_libro AND solicitud_libro.estado = "aceptado"');
-      $query->execute();
+      $query = $miPDO->prepare('SELECT libro.* FROM libro, valoracion WHERE libro.id_libro = valoracion.id_libro AND valoracion.nickname =:nickname');
+      $query->execute(['nickname' => $_SESSION['nickname'] ]);
       $results = $query->fetchAll();
 
       if ($results) {
@@ -97,7 +97,7 @@ session_start();
         }
         echo '</section>';
       } else {
-        echo '<h1>Ez da ezer aurkito</h1>';
+        echo '<h1>Ez da ezer aurkitu</h1>';
       }
       ?>
       </div>

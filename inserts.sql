@@ -172,7 +172,10 @@ UPDATE `libro` SET `sinopsis` = 'Tras la invasión de Holanda, los Frank, comerc
 UPDATE `libro` SET `sinopsis` = 'Smaug parecía profundamente dormido cuando Bilbo espió una vez más desde la entrada. ¡Pero fingía! ¡Estaba vigilando la entrada del túnel!... Sacado de su cómodo agujero-hobbit por Gandalf y una banda de enanos, Bilbo se encuentra de pronto en medio de una conspiración que pretende apoderarse del tesoro de Smaug el Magnífico, un enorme y muy peligroso dragón...' WHERE `libro`.`id_libro` = 9;
 
 INSERT INTO `comentario`(`id_comentario`, `nickname`, `id_libro`, `mensaje`, `estado`) VALUES ('1','Admin01','1','Esto es un mensaje de prueba','aceptado');
-
+-- IDIOMAS
+INSERT INTO `idioma`(`id_idioma`, `nombre`) VALUES ('1','Gaztelania');
+INSERT INTO `idioma`(`id_idioma`, `nombre`) VALUES ('2','Euskera');
+INSERT INTO `idioma`(`id_idioma`, `nombre`) VALUES ('3','Ingelesa');
 -- USUARIO PARA LA BBDD
 create user 'igklub'@'%' identified by '655Yj6Rc$F@x';
 grant all on igklub_database.* to 'igklub'@'%';
