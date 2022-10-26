@@ -43,7 +43,7 @@ session_start();
     <main>
         <form action="" id="add_book_form">
             <div id="add_book_form_header">
-                <h1>Liburu barria sartu</h1>
+                <h1>Liburu berria sartu</h1>
             </div>
             <div id="add_book_form_container">
                 <!-- Titulo -->
@@ -96,10 +96,10 @@ session_start();
                     <i class="fa-solid fa-circle-exclamation"></i>
                     <p>Formatua sartzea beharrezkoa da.</p>
                 </div>
-                <!-- Imagen  -->
+                <!-- Imagen 
                 <div class="input_container">
                     <label>Irudia </label><input type="file" id="image" name="image" accept="image/jpg" required>
-                </div>
+                </div> -->
                 <!-- Etiqueta -->
                 <div class="input_container">
                     <input type="text" id="label" name="label">

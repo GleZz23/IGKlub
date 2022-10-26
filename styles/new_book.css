@@ -121,12 +121,7 @@ form {
     width: 100%;
 }
 
-i {
-    width: 3rem;
-    padding-block: 1rem;
-    font-size: 1rem;
-    color: #eee;
-}
+
 
 input, select {
     width: 100%;
@@ -146,20 +141,6 @@ input, select {
 .input-checkbox input {
     width: auto;
     margin-right: .5rem;
-}
-
-button {
-    width: 20%;
-    padding: .5rem 1rem;
-    border: 1px solid gray;
-    background-color: #eee;
-    color: black;
-    transition: ease-in-out .25s;
-}
-
-button:hover {
-    cursor: pointer;
-    box-shadow: 0 0 .5rem #00000050;
 }
 
 .input_error {

@@ -1,5 +1,5 @@
 const form = document.getElementById('add_book_form');
-const inputs = document.querySelectorAll('#add_book_form input');
+const inputs = document.querySelectorAll('.input_container input');
 
 
 
