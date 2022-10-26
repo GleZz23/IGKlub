@@ -1,0 +1,123 @@
+<main class="form-main">
+  <!-- FORM -->
+  <form id="register-form">
+    <div class="form-header">
+      <h1>Registrarse</h1>
+      <p id="required">Estos campos son obligatorios</p>
+    </div>
+    <div class="horizontal-bar"></div>
+    <!-- Nombre y apellidos -->
+    <div class="fullname-container">
+      <i class="icons fas fa-user"></i>
+      <div class="fullname-group">
+        <!-- Nombre -->
+        <div class="form-input" id="input-nombre">
+          <input type="text" id="nombre" name="nombre" placeholder="Nombre *" autofocus autocomplete="off">
+        </div>
+        <!-- Apellidos -->
+        <div class="form-input" id="input-apellidos">
+          <input type="text" id="apellidos" name="apellidos" placeholder="Apellidos *" autocomplete="off">
+        </div>
+      </div>
+    </div>
+    <!-- Mensajes de error -->
+      <!-- Nombre -->
+      <div class="mensaje-error" id="error-nombre">
+        <i class="fa-solid fa-circle-exclamation"></i>
+        <p>El nombre debe comenzar por una letra mayúscula y solo puede contener letras.</p>
+      </div>
+      <!-- Apellidos -->
+      <div class="mensaje-error" id="error-apellidos">
+        <i class="fa-solid fa-circle-exclamation"></i>
+        <p>Los apellidos solo pueden contener letras.</p>
+      </div>
+    <!-- Email -->
+    <div class="email-container">
+      <i class="icons fas fa-envelope"></i>
+      <div class="form-input" id="input-correo">
+        <input type="email" id="correo" name="correo" placeholder="Correo electrónico *" autocomplete="off">
+      </div>
+    </div>
+    <!-- Mensajes de error -->
+      <!-- Correo electrónico -->
+      <div class="mensaje-error" id="error-correo">
+        <i class="fa-solid fa-circle-exclamation"></i>
+        <p>El formato del correo electrónico no es valido.</p>
+      </div>
+    <!-- Número de teléfono y Fecha de nacimiento -->
+    <div class="phone-date-container">
+      <!-- Número de teléfono -->
+      <div class="phone-container">
+        <i class="icons fas fa-mobile-alt"></i>
+        <div class="form-input" id="input-telefono">
+          <input type="tel" id="telefono" name="telefono" placeholder="Número de teléfono *" autocomplete="off" maxlength="9">
+        </div>
+      </div>
+      <!-- Espacio entre los inputs -->
+      <div class="space-between"></div>
+      <!-- Fecha de nacimiento -->
+      <div class="date-container">
+        <i class="icons fa-solid fa-cake-candles"></i>
+        <div class="form-input" id="input-fecha">
+          <input type="text" id="fecha" name="fecha" placeholder="Fecha de nacimiento *" onfocus="(this.type='date')">
+        </div>
+      </div>
+    </div>
+    <!-- Mensajes de error -->
+      <!-- Teléfono -->
+      <div class="mensaje-error" id="error-telefono">
+        <i class="fa-solid fa-circle-exclamation"></i>
+        <p>El teléfono debe comenzar por 6, 7 o 9. Solo puede contener números y maximo 9 dígitos.</p>
+      </div>
+      <!-- Fecha de nacimiento -->
+      <div class="mensaje-error" id="error-fecha">
+        <i class="fa-solid fa-circle-exclamation"></i>
+        <p>Debes ser mayor de edad.</p>
+      </div>
+    <!-- Contraseñas -->
+    <div class="passwords-container">
+      <i class="icons fas fa-key"></i>
+      <div class="password-group">
+        <!-- Contraseña -->
+        <div class="form-input" id="input-password">
+          <input type="password" id="password" name="password" placeholder="Contraseña *">
+        </div>
+        <!-- Confirmar contraseña -->
+        <div class="form-input" id="input-password2">
+          <input type="password" id="password2" name="password2" placeholder="Confirmar contraseña *">
+        </div>
+      </div>
+    </div>
+    <!-- Mensajes de error -->
+      <!-- Contraseña -->
+      <div class="mensaje-error" id="error-password">
+        <i class="fa-solid fa-circle-exclamation"></i>
+        <p>La contraseña debe ser mínimo de 8 caracteres y contener una letra mayúscula, una letra minúscula, un número y un cáracter especial.</p>
+      </div>
+      <!-- Confirmar contraseña -->
+      <div class="mensaje-error" id="error-password2">
+        <i class="fa-solid fa-circle-exclamation"></i>
+        <p>Ambas contraseñas deben ser iguales.</p>
+      </div>
+    <!-- Checkbox -->
+    <div class="input-checkbox">
+      <input type="checkbox" id="terminos" name="terminos">
+      <label for="checkbox" id="label-terminos">He leido y acepto los <a href="#">terminos y condiciones</a> *</label>
+    </div>
+    <!-- Mensaje de error -->
+    <div class="mensaje-error" id="error-formulario">
+      <i class="fa-solid fa-circle-exclamation"></i>
+      <p>Completa el formulario correctamente.</p>
+    </div>
+    <!-- Boton registro -->
+    <button type="submit" id="registrarse" name="registrarse">Registrarse</button>
+    <!-- Mensaje de exito -->
+    <div class="mensaje-exito" id="exito-formulario">
+      <i class="fas fa-check-circle"></i>
+      <p>Registro de usuario correcto. Hay <span id="numero-registros"></span> usuario/s registrado/s</p>
+    </div>
+    <!-- Iniciar sesión -->
+    <div class="horizontal-bar"></div>
+    <p>¿Ya tienes una cuenta? <a href="login.html">Inicia sesión</a></p>
+  </form>
+</main>
