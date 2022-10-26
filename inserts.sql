@@ -72,19 +72,22 @@ create table if not exists comentario (
 -- TABLA IDIOMA
 create table if not exists idioma (
   id_idioma int(5) primary key,
-  nombre varchar(255) not null
+  nombre varchar(255) unique
 );
 
 -- TABLA VALORACION
 create table if not exists valoracion (
+  id_valoracion int(5) auto_increment primary key,
   nickname varchar(255),
-  edad int(2) unsigned not null,
   nota int unsigned not null,
+  edad int(2) unsigned not null,
+  idioma varchar(255),
   id_comentario int(5),
-  id_idioma int(5),
+  id_libro int(5),
+  estado enum('aceptado','denegado','espera') default 'espera' not null,
   foreign key (nickname) references usuario(nickname),
   foreign key (id_comentario) references comentario(id_comentario),
-  foreign key (id_idioma) references idioma(id_idioma)
+  foreign key (idioma) references idioma(nombre)
 );
 
 -- TABLA SOLICITUD LIBRO
