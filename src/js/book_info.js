@@ -44,4 +44,4 @@ answerButton.forEach((button) => {
       button.innerHTML = '<i class="fa-solid fa-reply"></i> Erantzun';
     }
   });
-}); 
+});

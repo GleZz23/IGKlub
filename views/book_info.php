@@ -15,7 +15,7 @@
 </head>
 <body>
   <main>
-    <a class="back" href="main-menu.php"><i class="fa-solid fa-house"></i> Hasiera joan</a>
+    <a class="back" href="main_menu.php"><i class="fa-solid fa-house"></i> Hasiera joan</a>
     <figure>
       <?php echo '<img src="../src/img/books/'.$results['id_libro'].'.jpg" alt="'.$results['titulo'].'">' ?>
     </figure>
@@ -74,7 +74,7 @@
       </div>
       <!-- Acciones -->
       <div class="actions">
-        <a href="#"><i class="fa-solid fa-star"></i> Liburu hau baloratzea</a> <!-- Cambiar enlace -->
+        <a class="rate-book" href="#"><i class="fa-solid fa-star"></i> Liburu hau baloratzea</a> <!-- Cambiar enlace -->
       </div>
     </section>
   </main>

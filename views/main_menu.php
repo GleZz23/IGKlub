@@ -35,15 +35,11 @@ session_start();
             <button><i class="fa-solid fa-magnifying-glass"></i></button>
           </form>
         </div>
-        <!-- BOTON AGREGAR NUEVO LIBRO -->
-        <button id="new_book" onclick="location.href='../views/new_book.php'">
-        <i class="fa-solid fa-file-import"></i>
-        </button>
         <!-- BOTON DEL MENU HAMBURGUESA -->
         <button id="profile">
           <i class="fa-solid fa-bars"></i>
         </button>
-          <aside class="profile">
+        <aside class="profile">
           <?php
           echo '<h1>'.$_SESSION['nickname'].'</h1>';
           echo '<a href="main_menu.php"><i class="fa-solid fa-house"></i>Hasiera</a>
@@ -104,6 +100,9 @@ session_start();
         echo '<h1>Ez da ezer aurkito</h1>';
       }
       ?>
-  </main>  
+  </main>
+  <footer>
+    
+  </footer>
 </body>
 </html>

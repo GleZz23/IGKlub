@@ -9,3 +9,33 @@ body {
   background-image: url(../src/img/background.jpg);
   overflow-x: hidden;
 }
+
+nav {
+  width: 100%;
+  background-color: lightgray;
+  padding: 1.5rem 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  border-bottom: 2px solid gray;
+  box-shadow: 0 0 1rem #00000050;
+}
+
+main {
+  margin: 5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: yellowgreen;
+
+}
+
+section {
+  background-color: lightgray;
+  padding: 2rem;
+}
+
+.accept-teachers {
+  
+}

@@ -257,13 +257,8 @@ main section {
   right: 0;
   top: 0;
   margin: 2rem;
-  padding: .5rem 1rem;
   color: gray;
   text-decoration: none;
-  text-decoration: none;
   padding: .5rem 1rem;
-  border: 1px solid gray;
-  background-color: #eee;
-  color: black;
   transition: all .3s ease-in-out;
 }
