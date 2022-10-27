@@ -14,7 +14,7 @@
     $query->execute(['nickname' => $_SESSION['nickname']]);
     $results = $query->fetch();
 
-    $passwordComparation = password_verify($_POST["password"], $results['contrasena']);
+    $passwordComparation = password_verify($_REQUEST["password"], $results['contrasena']);
 
     // Compruebo que la contraseña introducida es igual a la contraseña de la BBDD
     if ($passwordComparation) {
@@ -23,7 +23,7 @@
     } else 
     // Cambio la contraseña en la BBDD
     if ($change) {
-      $newPassword = password_hash($_POST['password'],PASSWORD_DEFAULT);
+      $newPassword = password_hash($_REQUEST['password'],PASSWORD_DEFAULT);
       $query = $miPDO->prepare('UPDATE usuario SET contrasena = :pass WHERE nickname = :nickname');
       $query->execute(['nickname' => $_SESSION['nickname'],'pass' => $newPassword]);
       header('Location: ../views/personal_area.php');

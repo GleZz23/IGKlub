@@ -3,7 +3,7 @@
   include_once('../templates/head.php');
   session_start();
 
-  $book = $_GET['liburua'];
+  $book = $_REQUEST['liburua'];
 
   $query = $miPDO->prepare('SELECT * FROM libro WHERE id_libro = :book');
   $query->execute(['book' => $book]);
@@ -94,7 +94,7 @@
       <div class="mensaje">
         <form action="../modules/new_comment.php" method="get">
           <textarea id="mensaje" name="mensaje" autofocus required autocomplete="off" maxlength="2300"></textarea>
-          <input type="hidden" name="book" value="<?php echo $_GET['liburua'] ?>">
+          <input type="hidden" name="book" value="<?php echo $_REQUEST['liburua'] ?>">
           <input type="hidden" name="nickname" value="<?php echo $_SESSION['nickname'] ?>">
           <input type="hidden" name="id_comment" value="<?php echo $comment['id_comentario'] ?>">
           <button>Komentatu</button>
@@ -115,7 +115,7 @@
                     <h1>'.$comment['nickname'].'</h1>';
                     if ($comment['nickname'] === $_SESSION['nickname']) {
                       echo '<form action="../modules/delete_comment.php" method="get">
-                              <input type="hidden" name="book" value="'.$_GET['liburua'].'">
+                              <input type="hidden" name="book" value="'.$_REQUEST['liburua'].'">
                               <input type="hidden" name="id_comment" value="'.$id_comentario.'">
                               <button><i class="fa-solid fa-trash-can"></i></button>
                             </form>';
@@ -140,7 +140,7 @@
         <div class="mensaje">
           <form action="../modules/new_answer.php" method="get">
             <textarea id="mensaje" name="mensaje" autofocus required autocomplete="off" maxlength="2300"></textarea>
-            <input type="hidden" name="book" value="<?php echo $_GET['liburua'] ?>">
+            <input type="hidden" name="book" value="<?php echo $_REQUEST['liburua'] ?>">
             <input type="hidden" name="nickname" value="<?php echo $_SESSION['nickname'] ?>">
             <input type="hidden" name="id_comment" value="<?php echo $comment['id_comentario'] ?>">
             <button>Erantzuna eman</button>
@@ -159,7 +159,7 @@
                       <h1>'.$answer['nickname'].'</h1>';
                       if ($answer['nickname'] === $_SESSION['nickname']) {
                         echo '<form action="../modules/delete_answer.php" method="get">
-                                <input type="hidden" name="book" value="'.$_GET['liburua'].'">
+                                <input type="hidden" name="book" value="'.$_REQUEST['liburua'].'">
                                 <input type="hidden" name="id_answer" value="'.$answer['id_respuesta'].'">
                                 <button><i class="fa-solid fa-trash-can"></i></button>
                               </form>';

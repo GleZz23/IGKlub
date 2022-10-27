@@ -8,20 +8,20 @@
     $login = true;
 
     $query = $miPDO->prepare('SELECT nickname, contrasena FROM usuario WHERE nickname =:nickname;');
-    $query->execute(['nickname' => $_POST['nickname']]);
+    $query->execute(['nickname' => $_REQUEST['nickname']]);
     $results = $query->fetch();
 
-    if (empty($results['nickname']) || !password_verify($_POST['password'], $results['contrasena'])) {
+    if (empty($results['nickname']) || !password_verify($_REQUEST['password'], $results['contrasena'])) {
       $login = false;
       $error = true;
     }
     
     if ($login) {
       session_start();
-      $_SESSION['nickname'] = $_POST['nickname'];
+      $_SESSION['nickname'] = $_REQUEST['nickname'];
 
       $query = $miPDO->prepare('SELECT nickname, nombre, apellidos, email, estado, rol, cod_grupo, fecha_nacimiento, id_centro FROM usuario WHERE nickname = :nickname;');
-      $query->execute(['nickname' => $_POST['nickname']]);
+      $query->execute(['nickname' => $_REQUEST['nickname']]);
       $results = $query->fetch();
 
       if ($results['rol'] !== 'admin') {

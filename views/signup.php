@@ -10,12 +10,12 @@
   if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $signup = true;
 
-    $nickname = $_POST["nickname"];
-    $email = $_POST["email"];
-    $name = $_POST["name"];
-    $surnames = $_POST["surnames"];
-    $date = $_POST["date"];
-    $password = $_POST["password"];
+    $nickname = $_REQUEST["nickname"];
+    $email = $_REQUEST["email"];
+    $name = $_REQUEST["name"];
+    $surnames = $_REQUEST["surnames"];
+    $date = $_REQUEST["date"];
+    $password = $_REQUEST["password"];
     $password = password_hash($password, PASSWORD_DEFAULT);
     
     $query = $miPDO->prepare('SELECT nickname, email, telefono FROM usuario WHERE nickname=:nickname OR email=:email');
@@ -39,8 +39,8 @@
     }
 
     if ($_GET['role'] === 'Irakasle') {
-      $phone = $_POST["phone"];
-      $school = $_POST["school"];
+      $phone = $_REQUEST["phone"];
+      $school = $_REQUEST["school"];
 
       $query = $miPDO->prepare('SELECT telefono FROM usuario WHERE telefono=:phone');
       $query->execute(['phone' => $phone]);
@@ -82,11 +82,11 @@
 </head>
 <body>
   <form id="singupForm" action="" method="post">
-    <?php echo '<h1>Erregistratu - '.$_GET['role'].'a</h1>'; ?>
+    <?php echo '<h1>Erregistratu - '.$_REQUEST['role'].'a</h1>'; ?>
     <!-- Nickname -->
     <div class="input-container">
       <i class="fa-solid fa-user"></i>
-      <input type="text" name="nickname" id="nickname" placeholder="Nickname" maxlength="20" autofocus>
+      <input type="text" name="nickname" id="nickname" placeholder="Nickname" maxlength="20" autofocus value="<?php if (isset($_REQUEST['nickname'])) echo $_REQUEST['nickname'] ?>">
     </div>
     <!-- Error: Nickname -->
     <div class="error hidden" id="nickname-error">
@@ -105,7 +105,7 @@
     <!-- Email -->
     <div class="input-container">
       <i class="fa-solid fa-at"></i>
-      <input type="email" name="email" id="email" placeholder="Email-a">
+      <input type="email" name="email" id="email" placeholder="Email-a" value="<?php if (isset($_REQUEST['email'])) echo $_REQUEST['email'] ?>">
     </div>
     <!-- Error: Email -->
     <div class="error hidden" id="email-error">
@@ -124,8 +124,8 @@
     <div class="input-container">
       <i class="fa-solid fa-address-card"></i>
       <div>
-        <input type="text" name="name" id="name" placeholder="Izena">
-        <input type="text" name="surnames" id="surnames" placeholder="Abizenak">
+        <input type="text" name="name" id="name" placeholder="Izena" value="<?php if (isset($_REQUEST['name'])) echo $_REQUEST['name'] ?>">
+        <input type="text" name="surnames" id="surnames" placeholder="Abizenak" value="<?php if (isset($_REQUEST['surnames'])) echo $_REQUEST['surnames'] ?>">
       </div>
     </div>
     <!-- Error: Nombre completo -->
@@ -140,16 +140,17 @@
     <!-- Fecha de nacimiento -->
     <div class="input-container">
       <i class="fa-solid fa-cake-candles"></i>
-      <input type="text" id="date" name="date" placeholder="Jaioteguna" onfocus="(this.type='date')">
+      <input type="text" id="date" name="date" placeholder="Jaioteguna" onfocus="(this.type='date')" value="<?php if (isset($_REQUEST['date'])) echo $_REQUEST['date'] ?>">
     </div>
     
     <?php
-    if ($_GET['role'] === 'Irakasle') {
+    if ($_REQUEST['role'] === 'Irakasle') {
       // Telefono
       echo '<div class="input-container">
               <i class="fa-solid fa-phone"></i>
-              <input type="tel" id="phone" name="phone" placeholder="Telefono zenbakia" maxlength="9">
-            </div>';
+              <input type="tel" id="phone" name="phone" placeholder="Telefono zenbakia" maxlength="9" value="';
+              if (isset($_REQUEST[''])) echo $_REQUEST[''];
+      echo    '"></div>';
       // Error: Telefono
       echo '<div class="error hidden" id="phone-error">
               <i class="fa-solid fa-circle-exclamation"></i>

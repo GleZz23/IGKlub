@@ -4,9 +4,6 @@ include_once('../modules/connection.php');
 session_start();
 // FILTROS
 ?>
-
-  <!-- <script src="../src/js/hamburgesa.js" defer></script> -->
-  <head>
   <script src="../src/js/profile.js" defer></script>
   <link rel="stylesheet" href="../styles/personal_area.css">
   <title>Hasiera | IGKlub</title>

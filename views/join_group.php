@@ -5,7 +5,7 @@
   $error = false;
 
   if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $group_code = $_POST['group_code'];
+    $group_code = $_REQUEST['group_code'];
 
     $join = true;
 
