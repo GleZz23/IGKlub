@@ -109,7 +109,7 @@ main section {
   border: 1px solid gray;
   background-color: #eee;
   color: black;
-  transition: ease-in-out .25s;
+  transition: all .3s ease-in-out;
 }
 
 /* Reviews */
@@ -167,9 +167,9 @@ main section {
 }
 
 /* Comentarios */
-.comments { margin: 2.5rem 1rem; }
+.comments, .user-comment { margin: 2.5rem 1rem; }
 
-.main-comment, .answer, .user-answer {
+.main-comment, .answer, .user-answer, .user-comment {
   padding: 1rem;
   background-color: white;
   border: 2px solid gray;
@@ -177,7 +177,7 @@ main section {
   margin-bottom: .5rem;
 }
 
-.main-comment {
+.main-comment, .user-comment {
   margin-right: 5rem;
 }
 
@@ -190,7 +190,7 @@ main section {
   justify-content: space-between;
 }
 
-.main-comment header h1, .answer header h1, .user-answer header h1 {
+.main-comment header h1, .answer header h1, .user-answer header h1, .user-comment header h1 {
   font-size: 2rem;
   margin-left: 1rem;
 }
@@ -205,21 +205,22 @@ main section {
   -webkit-hyphens: auto;
 }
 
-.user-answer {
+/* FORMULARIO DE COMENTARIO - RESPUESTA */
+.user-answer, .user-comment {
   display: none;
   flex-direction: column;
   opacity: 0;
-  transform: translateY(-100%);
+  transform: translateX(100%);
   transition: all .3s ease-in-out;
 }
 
-.user-answer .mensaje form {
+.user-answer .mensaje form, .user-comment .mensaje form {
   display: flex;
   background-color: transparent;
   border: none;
 }
 
-.user-answer form textarea {
+.user-answer form textarea, .user-comment form textarea {
   width: 100%;
   height: 17.5rem;
   font-size: 1rem;
@@ -228,6 +229,41 @@ main section {
   outline: none;
 }
 
+/* FECHA Y HORA DEL COMENTARIO */
+.date {
+  color: darkgray;
+  font-size: 1rem;
+  margin: .5rem;
+  text-align: end;
+  align-items: center;
+}
+
+/* BOTON BORRAR COMENTARIO */
+.answer header form, .main-comment header form {
+  display: flex;
+  background-color: transparent;
+  border: none;
+  padding: 0;
+  margin: 0;
+}
+
 .empty {
   margin: 2rem;
+}
+
+/* VOLVER A INICIO */
+.back {
+  position: absolute;
+  right: 0;
+  top: 0;
+  margin: 2rem;
+  padding: .5rem 1rem;
+  color: gray;
+  text-decoration: none;
+  text-decoration: none;
+  padding: .5rem 1rem;
+  border: 1px solid gray;
+  background-color: #eee;
+  color: black;
+  transition: all .3s ease-in-out;
 }
