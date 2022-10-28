@@ -5,7 +5,7 @@
 
   $book = $_REQUEST['liburua'];
 
-  $query = $miPDO->prepare('SELECT * FROM libro WHERE id_libro = :book');
+  $query = $miPDO->prepare('SELECT libro.*, solicitud_libro.estado AS estado FROM libro, solicitud_libro WHERE libro.id_libro = :book AND libro.id_libro = solicitud_libro.id_libro');
   $query->execute(['book' => $book]);
   $results = $query->fetch();
 ?>
@@ -15,7 +15,14 @@
 </head>
 <body>
   <main>
-    <a class="back" href="main_menu.php"><i class="fa-solid fa-house"></i> Hasiera joan</a>
+  <?php
+    if ($results['estado'] === "aceptado") {
+      echo ' <a class="back" href="main_menu.php"><i class="fa-solid fa-house"></i> Hasiera joan</a>';
+    } else if ($results['estado'] === "espera") {
+      echo ' <a class="back" href="management.php"><i class="fa-solid fa-house"></i> Administrazioara joan</a>';
+    }
+    ?>
+   
     <figure>
       <?php echo '<img src="../src/img/books/'.$results['id_libro'].'.jpg" alt="'.$results['titulo'].'">' ?>
     </figure>

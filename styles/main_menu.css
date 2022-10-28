@@ -100,7 +100,7 @@ main section {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   grid-gap: 4rem 6rem;
-  margin: 5rem 7rem;
+  margin: 4rem 6rem;
 }
 
 .book-container {

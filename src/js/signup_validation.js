@@ -10,7 +10,7 @@ const regexs = {
     password: /(?=(.*[0-9]))(?=.*[a-z])(?=(.*[A-Z]))(?=(.*)).{4,}/
 }
 
-const correct = false;
+let correct = false;
 
 const form_validation= (e)=>{
     switch (e.target.name) {
@@ -61,7 +61,7 @@ const form_validation= (e)=>{
                 document.getElementById('name-error').classList.remove('hidden');
                 correct = false;
             }
-            break;  
+            break;
 
         case "surnames":
             if (regexs.surnames.test(e.target.value)) {
@@ -77,7 +77,7 @@ const form_validation= (e)=>{
                 document.getElementById('surnames-error').classList.remove('hidden');
                 correct = false;
             }
-            break;  
+            break;
 
         case "phone":
             if (regexs.phone.test(e.target.value)) {

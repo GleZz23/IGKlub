@@ -10,7 +10,8 @@ body {
   overflow-x: hidden;
 }
 
-nav {
+/* HEADER */
+header{
   width: 100%;
   background-color: lightgray;
   padding: 1.5rem 2rem;
@@ -22,20 +23,138 @@ nav {
   box-shadow: 0 0 1rem #00000050;
 }
 
+/* Cabecera del header */
+header section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* LOGO */
+header figure {
+  width: 10%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  text-align: center;
+  transition: all .3s ease-in-out;
+}
+
+header figure img {
+  width: 100%;
+}
+
+/* CONTROLES */
+nav {
+  position: sticky;
+}
+
 main {
   margin: 5rem;
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: yellowgreen;
-
+  border: 2px solid gray;
+  border-radius: 1rem;
+  overflow: hidden;
 }
 
-section {
+main section {
   background-color: lightgray;
   padding: 2rem;
+  width: 100%;
 }
 
+/* Aceptar nuevos profesores */
 .accept-teachers {
-  
+  display: flex;
+  justify-content: center;
 }
+
+.accept-teachers table {
+  width: 100%;
+  display: flex;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+}
+
+.accept-teachers th, .accept-teachers td{
+  padding-inline: 2rem;
+  padding-bottom: 1rem;
+}
+
+.accept-teachers .actions {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.accept-teachers .actions button {
+  padding: .5rem;
+}
+
+/* Aceptar nuevos libros */
+.accept-books {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-gap: 4rem 6rem;
+}
+
+.book-container {
+  display: flex;
+  position: relative;
+  overflow: hidden;
+  transition: all .3s ease-in-out;
+  background-color: lightgray;
+}
+
+.book-container img {
+  width: 100%;
+  transition: all .6s ease-in-out;
+}
+
+.book-overlay {
+  position: absolute;
+  background: #000000bf;
+  width: 100%;
+  height: 100%;
+  bottom: 0;
+  transform: translateY(-100%);
+  padding-inline: .5rem;
+  transition: all .3s ease-in-out;
+}
+
+.book-info {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  align-items: center;
+  color: #EEE;
+  gap: .5rem;
+}
+
+.book-info .actions {
+  margin-top: 2rem;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.book-info .actions button {
+  padding: .5rem;
+}
+
+.book-info a {
+  padding: .5rem 1rem;
+  background-color: white;
+  border-radius: 1rem;
+  text-decoration: none;
+  color: black;
+}
+
+/* ESTILOS JS */
+.hidden { display: none; }
