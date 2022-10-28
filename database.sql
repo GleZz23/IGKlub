@@ -15,6 +15,8 @@ create table if not exists grupo (
   id_centro int(5),
   nivel varchar(10),
   curso varchar(10),
+  profesor varchar(255),
+  foreign key (profesor) references usuario(nickname) on delete cascade,
   foreign key (id_centro) references centro(id_centro)
 );
 

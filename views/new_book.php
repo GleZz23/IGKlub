@@ -31,7 +31,6 @@
                     echo '<h1><a href="../views/class.php">Gela</a></h1>';
                     echo '<h1><a href="../views/requests.php">Eskaerak</a></h1>';
                 ?>
-                <!-- PERFIL -->
             </aside>
         </section>
     </header>
@@ -112,7 +111,7 @@
     </div>
     <button>Igo liburua</button>
   </form>
-    </main>
+</main>
 
 </body>
 

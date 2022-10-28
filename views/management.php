@@ -51,8 +51,8 @@
     </section>
     <nav>
       <button id="accept-teachers">Irakasleak onartu</button>
-      <button id="accept-books">Irakasleak onartu</button>
-      <button id="new-admin">Administratzailea gehitu</button>
+      <button id="accept-books">Liburuak onartu</button>
+      <button id="new-admin">Administratzaileak</button>
       <button id="database">Datu-basea</button>
       <a href="main_menu.php">Hasiera joan</a>
     </nav>
@@ -60,14 +60,14 @@
   
   <main>
     <!-- Aceptar nuevos profesores -->
-    <section class="accept-teachers hidden">
       <?php
       $query = $miPDO->prepare('SELECT usuario.*, centro.nombre AS nombre_centro FROM usuario, centro WHERE usuario.rol = "irakasle" AND usuario.id_centro = centro.id_centro AND usuario.estado = "espera"');
       $query->execute();
       $results = $query->fetchAll();
 
       if ($results) {
-        echo '<table>
+        echo '<section class="accept-teachers hidden">
+              <table>
                 <tr>
                   <th>Nickname</th>
                   <th>Izen-abizenak</th>
@@ -100,12 +100,15 @@
                   </td>
                 </tr>';
         }
-        echo '</table>';
+        echo '</table>
+              </section>';
       } else {
-        echo '<h1>Oraindik ez dago irakaslerik onartzeko</h1>';
+        echo '<section class="accept-teachers hidden">
+                <h1>Oraindik ez dago irakaslerik onartzeko</h1>
+              </section>';
       }
       ?>
-    </section>
+    
     <!-- Aceptar nuevos libros -->
     <?php
       // Recojo todos los valores de los libros en una variable
@@ -148,7 +151,9 @@
         }
         echo '</section>';
       } else {
-        echo '<h1>Ez daude liburu berriak onartzeko</h1>';
+        echo '<section class="accept-books hidden">
+                <h1>Ez daude liburu berriak onartzeko</h1>
+              </section>';
       }
       ?>
   </main>

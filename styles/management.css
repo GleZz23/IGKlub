@@ -47,20 +47,37 @@ header figure img {
 /* CONTROLES */
 nav {
   position: sticky;
+  display: flex;
 }
 
+nav > * {
+  color: black;
+  font-size: 1rem;
+  text-decoration: none;
+  background-color: transparent;
+  border: none;
+  margin-inline: 1.5rem;
+}
+
+nav > *:hover {
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+/* MAIN */
 main {
   margin: 5rem;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
-  border: 2px solid gray;
-  border-radius: 1rem;
-  overflow: hidden;
+  gap: 3rem;
 }
 
 main section {
   background-color: lightgray;
+  border: 2px solid gray;
+  border-radius: 1rem;
   padding: 2rem;
   width: 100%;
 }
@@ -99,6 +116,11 @@ main section {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   grid-gap: 4rem 6rem;
+}
+
+.accept-books > h1 {
+  grid-area: 1 / 1 / 2 / 6;
+  text-align: center;
 }
 
 .book-container {

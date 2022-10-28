@@ -1,9 +1,10 @@
 // ACCIONES
 const actions = document.querySelectorAll('nav button')
+const sections = document.querySelectorAll('main section');
 
 actions.forEach((button) => {
   button.addEventListener('click', () => {
-    
+    sections.forEach((section) => {section.classList.add('hidden')});
     switch (button.id) {
       case 'accept-teachers':
 
@@ -17,9 +18,7 @@ actions.forEach((button) => {
         break;
 
       case 'accept-books':
-
         const acceptBooks = document.querySelector('.'+button.id);
-      
         if (window.getComputedStyle(acceptBooks).getPropertyValue('display') === "none") {
           acceptBooks.classList.remove('hidden');
         } else if (window.getComputedStyle(acceptBooks).getPropertyValue('display') === "grid") {

@@ -1,0 +1,111 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  background-image: url(../src/img/background.jpg);
+  overflow-x: hidden;
+}
+
+/* HEADER */
+header{
+  width: 100%;
+  background-color: lightgray;
+  padding: 1.5rem 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  border-bottom: 2px solid gray;
+  box-shadow: 0 0 1rem #00000050;
+}
+
+/* Cabecera del header */
+header section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* LOGO */
+header figure {
+  width: 10%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  text-align: center;
+  transition: all .3s ease-in-out;
+}
+
+header figure img {
+  width: 100%;
+}
+
+/* CONTROLES */
+nav {
+  position: sticky;
+  display: flex;
+}
+
+nav > * {
+  color: black;
+  font-size: 1rem;
+  text-decoration: none;
+  background-color: transparent;
+  border: none;
+  margin-inline: 1.5rem;
+}
+
+nav > *:hover {
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+/* MAIN */
+main {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 4rem 6rem;
+  margin: 4rem 6rem;
+}
+
+main > h1 {
+  margin-block: 10rem;
+}
+
+/* GRUPOS */
+.class-container {
+  height: 20rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 2px solid black;
+  border-radius: 1rem;
+  background-color: rgb(0, 0, 0, .5);
+}
+
+.class-container a {
+  color: black;
+  background-color: #eee;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.5rem;
+  padding: .5rem 1rem;
+  text-decoration: none;
+  border: 2px solid white;
+  border-radius: 1rem;
+  transition: all .3s ease-in-out;
+}
+
+.class-container a:hover {
+  transform: scale(1.2);
+  box-shadow: 0 0 1rem white;
+}
+
+.class-container a i{
+  padding: .5rem;
+}

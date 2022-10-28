@@ -53,7 +53,7 @@ session_start();
                 <a href="new_book.php"><i class="fa-solid fa-book"></i>Igo liburu bat</a>
                 <a href="personal_area.php"><i class="fa-solid fa-user"></i>Area pertsonala</a>';
           if ($_SESSION['role'] === 'irakasle') {
-            echo '<a href="class.php"><i class="fa-solid fa-chalkboard-user"></i>Nire taldeak</a>
+            echo '<a href="class.php"><i class="fa-solid fa-users-rectangle"></i>Nire taldeak</a>
                   <a href="requests.php"><i class="fa-solid fa-question"></i>Eskaerak</a>';
           } else if ($_SESSION['role'] === 'admin') {
             echo '<a href="management.php"><i class="fa-solid fa-gear"></i>Adminiztrazioa</a></h1>';
