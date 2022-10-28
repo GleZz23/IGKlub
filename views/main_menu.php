@@ -2,11 +2,7 @@
 include_once('../templates/head.php');
 include_once('../modules/connection.php');
 session_start();
-// FILTROS
 ?>
-
-  <!-- <script src="../src/js/hamburgesa.js" defer></script> -->
-  <head>
   <script src="../src/js/main_menu.js" defer></script>
   <link rel="stylesheet" href="../styles/main_menu.css">
   <title>Hasiera | IGKlub</title>
@@ -22,18 +18,29 @@ session_start();
           <i class="fa-solid fa-filter"></i>
         </button>
         <aside class="filters">
-          <h1>FILTROS</h1>
-            <form action="" method="post">
-            <!-- FILTROS -->
-            <button>Filtrar</button>
+          <h1>Iragazkiak</h1>
+          <h2>Ordenatu honela:</h2>
+          <form action="" method="post">
+            <select name="order-by" id="order-by">
+              <option value="id_libro">Igoera-denbora</option>
+              <option value="titulo">Izenburua</option>
+              <option value="escritor">Idazlea</option>
+              <option value="nota_media">Balorazio</option>
+              <option value="edad_media">Adina</option>
+            </select>
+            <select name="order" id="order">
+              <option value="ASC">Goranzkoa</option>
+              <option value="DESC">Beheranzkoa</option>
+            </select>
+            <button>Iragazi</button>
           </form>
         </aside>
         <!-- BARRA DE BUSQUEDA -->
         <div class="search-bar" >
-          <form action="" method="get">
-            <input type="text" placeholder="Izenburua, idazlea...">
-            <button><i class="fa-solid fa-magnifying-glass"></i></button>
-          </form>
+        <form action="" method="post"> 
+          <input type="text" placeholder="Izenburua, idazlea..." name="search" id="search" autocomplete="off" value="<?php if (isset($_REQUEST['search'])) echo $_REQUEST['search'] ?>">
+          <button><i class="fa-solid fa-magnifying-glass"></i></button>
+        </form>
         </div>
         <!-- BOTON DEL MENU HAMBURGUESA -->
         <button id="profile">
@@ -59,11 +66,31 @@ session_start();
     <main>
       <?php
       // Recojo todos los valores de los libros en una variable
-      $query = $miPDO->prepare('SELECT libro.* FROM libro, solicitud_libro WHERE libro.id_libro = solicitud_libro.id_libro AND solicitud_libro.estado = "aceptado"');
+      $query = 'SELECT libro.* FROM libro, solicitud_libro WHERE libro.id_libro = solicitud_libro.id_libro AND solicitud_libro.estado = "aceptado"';
+      
+      // Busqueda personalizada
+      if (isset($_REQUEST['search']) && $_REQUEST['search'] !== '') {
+        $search= $_REQUEST['search'];
+        $query = $query.' AND (titulo LIKE "%'.$search.'%" OR escritor LIKE "%'.$search.'%" OR etiqueta LIKE "%'.$search.'%")';
+      }
+
+      // Filtros de busqueda
+      if (isset($_REQUEST['order-by']) && isset($_REQUEST['order'])) {
+        $filter = $_REQUEST['order-by'];
+        $order = $_REQUEST['order'];
+        $query = $query.' ORDER BY '.$filter.' '.$order;
+      }
+
+      $query = $miPDO->prepare($query);
       $query->execute();
       $results = $query->fetchAll();
 
       if ($results) {
+        if (isset($_REQUEST['search']) && $_REQUEST['search'] !== '') {
+          echo '<div class="search-view">
+                  <h2>Bilaketa: "'.$_REQUEST['search'].'"</h2>
+                </div>';
+        }
         echo '<section>';
         foreach ($results as $position => $book) {
           echo '<div class="book-container">';
@@ -90,14 +117,14 @@ session_start();
                         }
                       }
               echo '</div>
-                  <a href="book_info.php?liburua=' . $book['id_libro'] . '">Liburu orria</a>
+                  <a href="book_info.php?liburua='.$book['id_libro'] .'">Liburu orria</a>
                 </div>
               </div>
             </div>';
         }
         echo '</section>';
       } else {
-        echo '<h1>Ez da ezer aurkito</h1>';
+        echo '<h1>Ez da ezer aurkitu</h1>';
       }
       ?>
   </main>

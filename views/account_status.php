@@ -48,7 +48,7 @@
         $_SESSION['date'] = $results['fecha_nacimiento'];
         $_SESSION['school'] = $results['centro'];
 
-        header('Location: ../views/main_menu.php?orria=1');
+        header('Location: ../views/main_menu.php');
       }
     ?>
   </section>

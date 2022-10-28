@@ -90,10 +90,22 @@ header button {
   color: black;
 }
 
+/* BUSQUEDA */
+.search-view {
+  margin: 2rem 2rem 0 2rem;
+  color: gray;
+}
+
 /* MAIN */
 main {
   display: flex;
+  flex-direction: column;
   justify-content: center;
+  text-align: center;
+}
+
+main > h1 {
+  margin-block: 10rem;
 }
 
 main section {
@@ -206,6 +218,30 @@ main section {
   transform: translateX(-100%);
 }
 
+.filters h2 {
+  font-size: 1rem;
+}
+
+.filters form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.filters select {
+  font-size: 1rem;
+}
+
+.filters button {
+  font-size: 1rem;
+  text-decoration: none;
+  padding: .5rem 1rem;
+  border: 1px solid gray;
+  background-color: #eee;
+  color: black;
+  transition: all .3s ease-in-out;
+}
+
 /* FOOTER */
 footer {
   width: 100%;
@@ -217,4 +253,7 @@ footer {
   gap: 1rem;
   border-top: 2px solid gray;
   box-shadow: 0 0 1rem #00000050;
+  position: static;
+  bottom: 0;
 }
+
