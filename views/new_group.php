@@ -21,19 +21,19 @@ session_start();
     </div>
     <!-- Centro -->
     <div class="input-container">
-        <i class="fa-solid fa-language"></i>
-        <select name="school" id="school">
-            <option value="-" selected>Ikastetxea</option>
-        <?php
-            $query = $miPDO->prepare('SELECT * FROM centro ORDER BY nombre ASC');
-            $query->execute();
-            $results = $query->fetchAll();
+      <i class="fa-solid fa-school"></i>
+      <select name="school" id="school">
+          <option value="-" selected>Ikastetxea</option>
+      <?php
+          $query = $miPDO->prepare('SELECT * FROM centro ORDER BY nombre ASC');
+          $query->execute();
+          $results = $query->fetchAll();
 
-            foreach ($results as $position => $school) {
-                echo '<option value="'.$school['id_centro'].'">'.$school['nombre'].'</option>';
-            }
-        ?>
-        </select>
+          foreach ($results as $position => $school) {
+              echo '<option value="'.$school['id_centro'].'">'.$school['nombre'].'</option>';
+          }
+      ?>
+      </select>
     </div>
     <!-- Nivel -->
     <div class="input-container">

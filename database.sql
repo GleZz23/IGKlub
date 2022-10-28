@@ -193,3 +193,6 @@ INSERT INTO `idioma`(`id_idioma`, `nombre`) VALUES
 -- USUARIO PARA LA BBDD
 create user 'igklub'@'%' identified by '655Yj6Rc$F@x';
 grant all on igklub_database.* to 'igklub'@'%';
+
+-- BORRAR DATOS DE ALUMNOS
+CREATE EVENT `delete_user` ON SCHEDULE AT '2023-06-24 19:24:38.000000' ON COMPLETION NOT PRESERVE ENABLE DO UPDATE usuario SET id_centro = NULL, cod_grupo = NULL WHERE rol = 'ikasle';
