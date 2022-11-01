@@ -24,28 +24,14 @@
       $query->execute(['nickname' => $_REQUEST['nickname']]);
       $results = $query->fetch();
 
-      if ($results['rol'] !== 'admin') {
-        switch ($results['rol']) {
-          case 'irakasle':
-            header('Location: ../views/account_status.php');
-            break;
-          case 'ikasle':            
-            if (empty($results['cod_grupo'])) {
-              header('Location: ../views/join_group.php');
-            } else {
-              header('Location: ../views/account_status.php');
-            }
-        }
+      if ($results['rol'] !== 'ikasle') {
+        header('Location: ../views/account_status.php');            
+      }
+    } else {
+      if (empty($results['cod_grupo'])) {
+        header('Location: ../views/join_group.php');
       } else {
-        $_SESSION['nickname'] = $results['nickname'];
-        $_SESSION['name'] = $results['nombre'];
-        $_SESSION['surnames'] = $results['apellidos'];
-        $_SESSION['email'] = $results['email'];
-        $_SESSION['role'] = $results['rol'];
-        $_SESSION['date'] = $results['fecha_nacimiento'];
-        $_SESSION['school'] = $results['id_centro'];
-
-        header('Location: ../views/main_menu.php');
+        header('Location: ../views/account_status.php');
       }
     }
   }
@@ -59,7 +45,7 @@
     <h1>Saioa hasi</h1>
     <div class="input-container">
       <i class="fa-solid fa-user"></i>
-      <input type="text" name="nickname" id="" placeholder="Nickname" autofocus>
+      <input type="text" name="nickname" id="" placeholder="Nickname" autofocus autocomplete="off">
     </div>
     <div class="input-container">
       <i class="fa-solid fa-key"></i>

@@ -109,7 +109,7 @@
       </div>
     </div>
     <?php
-    $query = $miPDO->prepare('SELECT * FROM comentario WHERE id_libro = :book ORDER BY fecha DESC');
+    $query = $miPDO->prepare('SELECT * FROM comentario WHERE id_libro = :book AND estado = "aceptado" ORDER BY fecha DESC');
     $query->execute(['book' => $book]);
     $results = $query->fetchAll();
 

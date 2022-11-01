@@ -1,11 +1,10 @@
 const form = document.getElementById('add_book_form');
 const inputs = document.querySelectorAll('.input_container input');
 
-
-
 const correct = false;
 
 const form_validation= (e)=>{
+
     switch (e.target.name) {
 
         case "title":

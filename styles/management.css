@@ -82,33 +82,47 @@ main section {
   width: 100%;
 }
 
-/* Aceptar nuevos profesores */
-.accept-teachers {
+/* Aceptar nuevos profesores, comentarios y respuestas, administradores */
+.accept-teachers,
+.accept-comments,
+.accept-answers {
   display: flex;
   justify-content: center;
 }
 
-.accept-teachers table {
+.accept-teachers table,
+.accept-comments table,
+.accept-answers table,
+.admins table {
   width: 100%;
   display: flex;
   text-align: center;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
 }
 
-.accept-teachers th, .accept-teachers td{
+.accept-teachers th, .accept-teachers td,
+.accept-comments th, .accept-comments td,
+.accept-answers th, .accept-answers td,
+.admins th, .admins td {
   padding-inline: 2rem;
   padding-bottom: 1rem;
 }
 
-.accept-teachers .actions {
+.accept-teachers .actions,
+.accept-comments .actions,
+.accept-answers .actions {
   display: flex;
   justify-content: center;
   gap: 1rem;
 }
 
-.accept-teachers .actions button {
+.accept-teachers .actions button,
+.accept-comments .actions button,
+.accept-answers .actions button,
+.admins button {
   padding: .5rem;
+  color: black;
 }
 
 /* Aceptar nuevos libros */
@@ -177,6 +191,111 @@ main section {
   text-decoration: none;
   color: black;
 }
+
+/* Administradores */
+.admins {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.admins .actions form {
+  border: none;
+  box-shadow: none;
+  background-color: none;
+  width: auto;
+  padding: 0;
+  margin: 0;
+}
+
+.admins .actions form button {
+  padding: .5rem;
+  color: black;
+}
+
+form {
+  width: 35rem;
+  background-color: lightgray;
+  padding: 2rem;
+  border: 2px solid gray;
+  border-radius: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  box-shadow: .5rem .5rem 1rem #00000050;
+}
+
+.input-container {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  background-color: gray;
+}
+
+.input-container div {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+i:not(.actions i) {
+  text-align: center;
+  width: 3rem;
+  padding-block: 1rem;
+  font-size: 1rem;
+  color: #eee;
+}
+
+input, select, .pass-info {
+  width: 100%;
+  height: 3rem;
+  padding-inline: .5rem;
+  outline: none;
+  border: none;
+  background-color: #eee;
+  display: flex;
+  align-items: center;
+}
+
+.admins button {
+  padding: .5rem 1rem;
+  border: 1px solid gray;
+  background-color: #eee;
+  color: black;
+  transition: ease-in-out .25s;
+}
+
+.admins button:hover {
+  cursor: pointer;
+  box-shadow: 0 0 .5rem #00000050;
+}
+
+.input_error{ border-right: 4px solid #E00A35; }
+
+.error {
+  width: 100%;
+  background-color: #E00A35;
+  color: #EEE;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  text-align: left;
+  padding-inline: 1rem;
+  border-radius: .375rem;
+  font-size: .8rem;
+}
+
+.error p {
+  hyphens: auto;
+  -webkit-hyphens: auto;
+}
+
+.error i {
+  width: auto;
+  padding-right: .5rem;
+}
+
+.hidden { display: none; }
 
 /* ESTILOS JS */
 .hidden { display: none; }

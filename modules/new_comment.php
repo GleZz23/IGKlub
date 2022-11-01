@@ -7,7 +7,7 @@
     $query = $miPDO->prepare('INSERT INTO comentario (nickname, id_libro, mensaje, estado, fecha) VALUES (:nickname, :id_libro, :mensaje, "espera", NOW())');
     $query->execute(['nickname' => $_GET['nickname'], 'id_libro' => $_GET['book'], 'mensaje' => nl2br($_GET['mensaje'])]);
 
-    if ($_SESSION['role'] !== 'ikasle') {
+    if ($_SESSION['role'] === 'admin') {
       $query = $miPDO->prepare('UPDATE comentario SET estado = "aceptado" WHERE nickname = :nickname AND id_libro = :id_libro AND mensaje = :mensaje');
       $query->execute(['nickname' => $_GET['nickname'], 'id_libro' => $_GET['book'], 'mensaje' => nl2br($_GET['mensaje'])]);
     }
