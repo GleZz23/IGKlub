@@ -2,7 +2,6 @@ const form = document.getElementById('singupForm');
 const inputs = document.querySelectorAll('#singupForm input');
 const errors = document.querySelectorAll('.php-error');
 
-errors.forEach((error) => {error.classList.remove('hidden')});
 setTimeout(() => {
     errors.forEach((error) => {error.classList.add('hidden')});
 }, 5000);

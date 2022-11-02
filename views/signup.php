@@ -210,6 +210,7 @@
     <!-- Rol -->
     <input type="hidden" name="role" value="<?php $_GET['role'] ?>">
     <button>Erregistratu</button>
+    <p>Baduzu kontu bat? <a href="login.php">Saioa hasi</a></p>
   </form>
 </body>
 </html>
