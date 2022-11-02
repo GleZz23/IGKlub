@@ -1,3 +1,4 @@
+drop database if exists igklub_database;
 create database igklub_database default character set utf8 default collate utf8_general_ci;
 use igklub_database;
 
