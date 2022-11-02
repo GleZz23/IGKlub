@@ -80,7 +80,7 @@ session_start();
         $order = $_REQUEST['order'];
         $query = $query.' ORDER BY '.$filter.' '.$order;
       }
-
+      
       $query = $miPDO->prepare($query);
       $query->execute();
       $results = $query->fetchAll();

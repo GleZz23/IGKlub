@@ -195,4 +195,7 @@ create user 'igklub'@'%' identified by '655Yj6Rc$F@x';
 grant all on igklub_database.* to 'igklub'@'%';
 
 -- BORRAR DATOS DE ALUMNOS
-CREATE EVENT `delete_user` ON SCHEDULE AT '2023-06-24 19:24:38.000000' ON COMPLETION NOT PRESERVE ENABLE DO UPDATE usuario SET id_centro = NULL, cod_grupo = NULL WHERE rol = 'ikasle';
+DROP EVENT IF EXISTS `delete_user`;
+CREATE DEFINER=`root`@`localhost` EVENT `desactivate_user`
+ON SCHEDULE EVERY 1 YEAR STARTS '2023-06-25 00:00:00' ON COMPLETION NOT PRESERVE ENABLE DO
+UPDATE usuario SET id_centro = NULL, cod_grupo = NULL WHERE rol = 'ikasle';

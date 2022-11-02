@@ -6,6 +6,8 @@
   $nickname_error = false;
   $email_error = false;
 
+  $signup_admin = true;
+
   if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     switch ($_REQUEST['form-action']) {
       // Aceptar nuevos profesores
@@ -66,47 +68,40 @@
           break;
         // Agregar y eliminar nuevos administradores
         case 'delete-admin':
-            $query = $miPDO->prepare('UPDATE role SET estado = "denegado" WHERE nickname = :nickname;');
-            $query->execute(['nickname' => $_REQUEST['nickname']]);
+            $query = $miPDO->prepare('UPDATE usuario SET estado = "denegado" WHERE nickname = :nickname;');
+            $query->execute(['nickname' => $_POST['nickname']]);
           break;
 
         case 'new-admin':
-          if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $signup = true;
-
-            $nickname = $_REQUEST["nickname"];
-            $email = $_REQUEST["email"];
-            $name = $_REQUEST["name"];
-            $surnames = $_REQUEST["surnames"];
-            $password = $_REQUEST["nickname"];
-            $password = password_hash($password, PASSWORD_DEFAULT);
-            
-            $query = $miPDO->prepare('SELECT nickname, email FROM usuario WHERE nickname=:nickname OR email=:email');
-            $query->execute(['nickname' => $nickname, 'email' => $email]);
-            $results = $query->fetch();
-
+          $nickname = $_POST["nickname"];
+          $email = $_POST["email"];
+          $name = $_POST["name"];
+          $surnames = $_POST["surnames"];
+          $password = password_hash($nickname, PASSWORD_DEFAULT);
+          
+          $query = $miPDO->prepare('SELECT nickname, email FROM usuario WHERE nickname=:nickname OR email=:email');
+          $query->execute(['nickname' => $nickname, 'email' => $email]);
+          $results = $query->fetch();
+      
+          if (!empty($results)) {
             // Si el nickname existe
-            if ($nickname !== '') {
-              if ($results['nickname'] === $nickname) {
-                $signup = false;
-                $nickname_error = true;
-              }
+            if ($results['nickname'] === $nickname) {
+              $signup_admin = false;
+              $nickname_error = true;
             }
           
             // Si el email existe
-            if ($email !== '') {
-              if ($results['email'] === $email) {
-                $signup = false;
-                $email_error = true;
-              }
+            if ($results['email'] === $email) {
+              $signup_admin = false;
+              $email_error = true;
             }
+          }
 
-            // Si el registro es valido
-            if ($signup) {
-              // Inserto el usuario en la base de datos
-              $query = $miPDO->prepare('INSERT INTO usuario (nickname, email, nombre, apellidos, contrasena, rol) VALUES (:nickname, :email, :name, :surnames,, :password, :role)');
-              $query->execute(['nickname' => $nickname, 'email' => $email, 'name' => $name, 'surnames' => $surnames, 'password' => $password, 'role' => $_GET['role']]);
-            }
+          // Si el registro es valido
+          if ($signup_admin) {
+            // Inserto el usuario en la base de datos
+            $query = $miPDO->prepare('INSERT INTO usuario (nickname, email, nombre, apellidos, contrasena, rol, estado) VALUES (:nickname, :email, :name, :surnames, :password, "admin", "aceptado")');
+            $query->execute(['nickname' => $nickname, 'email' => $email, 'name' => $name, 'surnames' => $surnames, 'password' => $password]);
           }
           break;
     }
@@ -325,7 +320,7 @@
       ?>
       <!-- Agregar nuevos administradores -->
     <?php
-      $query = $miPDO->prepare('SELECT * FROM usuario WHERE rol = "admin"');
+      $query = $miPDO->prepare('SELECT * FROM usuario WHERE rol = "admin" AND estado != "denegado"');
       $query->execute();
       $results = $query->fetchAll();
 
@@ -346,7 +341,7 @@
           echo    '<td class="actions">
                     <form action="" method="post">
                       <input type="hidden" name="form-action" value="delete-admin">
-                      <input type="hidden" name="id_respuesta" value="'.$admin['nickname'].'">
+                      <input type="hidden" name="nickname" value="'.$admin['nickname'].'">
                       <button><i class="fa-solid fa-trash-can"></i> Kendu</button>
                     </form>
                   </td>';
@@ -361,7 +356,7 @@
         <!-- Nickname -->
         <div class="input-container">
           <i class="fa-solid fa-user"></i>
-          <input type="text" name="nickname" id="nickname" placeholder="Nickname" maxlength="20" autofocus autocomplete="none">
+          <input type="text" name="nickname" id="nickname" placeholder="Nickname" maxlength="20" autocomplete="none">
         </div>
         <!-- Error: Nickname -->
         <div class="error hidden" id="nickname-error">
@@ -370,7 +365,7 @@
         </div>
         <?php
         if ($nickname_error) {
-          echo '<div class="error">
+          echo '<div class="error php-error">
                   <i class="fa-solid fa-circle-exclamation"></i>
                   <p>Nickname hau dagoeneko erabiltzen ari da. Saiatu beste bat.</p>
                 </div>';
@@ -388,7 +383,7 @@
         </div>
         <?php
         if ($email_error) {
-          echo '<div class="error">
+          echo '<div class="error php-error">
                   <i class="fa-solid fa-circle-exclamation"></i>
                   <p>Email hau dagoeneko erabiltzen ari da. Saiatu beste bat.</p>
                 </div>';
@@ -423,8 +418,6 @@
           <i class="fa-solid fa-circle-exclamation"></i>
           <p>Bete formularioa behar bezala.</p>
         </div>
-        <!-- Rol -->
-        <input type="hidden" name="role" value="admin">
         <input type="hidden" name="form-action" value="new-admin">
         <button>Erregistratu</button>
       </form>

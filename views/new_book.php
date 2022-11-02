@@ -67,7 +67,7 @@
       <i class="fa-solid fa-circle-exclamation"></i>
       <p>.</p>
     </div>
-    <!-- Idiaoma -->
+    <!-- Idioma -->
     <div class="input-container">
         <i class="fa-solid fa-language"></i>
         <select name="language" id="language">
