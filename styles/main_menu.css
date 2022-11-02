@@ -261,7 +261,7 @@ footer {
   bottom: 0;
 }
 
-@media screen and (max-width: 500px) {
+@media screen and (max-width: 530px) {
   main section {
     display: grid;
     grid-template-columns: repeat(1, 1fr);
@@ -287,7 +287,7 @@ footer {
   }
 } 
 
-@media screen and (min-width: 500px) {
+@media screen and (min-width: 530px) {
   main section {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
