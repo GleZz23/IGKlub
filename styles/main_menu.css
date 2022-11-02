@@ -92,8 +92,11 @@ header button {
 
 /* BUSQUEDA */
 .search-view {
+  display: flex;
+  align-items: center;
   margin: 2rem 2rem 0 2rem;
-  color: gray;
+  color: black;
+  gap: .5rem;
 }
 
 /* MAIN */

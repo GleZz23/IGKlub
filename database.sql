@@ -1,3 +1,4 @@
+drop database if exists igklub_database;
 create database igklub_database default character set utf8 default collate utf8_general_ci;
 use igklub_database;
 
@@ -190,9 +191,13 @@ INSERT INTO `idioma`(`id_idioma`, `nombre`) VALUES
   ('2','Euskera'),
   ('3','Ingelesa');
 
+
+-- BORRAR DATOS DE ALUMNOS
+DROP EVENT IF EXISTS `delete_user`;
+CREATE DEFINER=`root`@`localhost` EVENT `desactivate_user`
+ON SCHEDULE EVERY 1 YEAR STARTS '2023-06-25 00:00:00' ON COMPLETION NOT PRESERVE ENABLE DO
+UPDATE usuario SET id_centro = NULL, cod_grupo = NULL WHERE rol = 'ikasle';
+
 -- USUARIO PARA LA BBDD
 create user 'igklub'@'%' identified by '655Yj6Rc$F@x';
 grant all on igklub_database.* to 'igklub'@'%';
-
--- BORRAR DATOS DE ALUMNOS
-CREATE EVENT `delete_user` ON SCHEDULE AT '2023-06-24 19:24:38.000000' ON COMPLETION NOT PRESERVE ENABLE DO UPDATE usuario SET id_centro = NULL, cod_grupo = NULL WHERE rol = 'ikasle';

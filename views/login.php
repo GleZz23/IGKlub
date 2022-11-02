@@ -26,12 +26,12 @@
 
       if ($results['rol'] !== 'ikasle') {
         header('Location: ../views/account_status.php');            
-      }
-    } else {
-      if (empty($results['cod_grupo'])) {
-        header('Location: ../views/join_group.php');
       } else {
-        header('Location: ../views/account_status.php');
+        if (empty($results['cod_grupo'])) {
+          header('Location: ../views/join_group.php');
+        } else {
+          header('Location: ../views/account_status.php');
+        }
       }
     }
   }
