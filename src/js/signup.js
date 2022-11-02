@@ -101,13 +101,40 @@ const form_validation= (e)=>{
             break;
 
         case "date":
-            if (e.target.value === '') {
-                document.getElementById('date').classList.add('input_incorrecto');
-                document.getElementById('date').classList.remove('input_correcto');
-                campos.date = true;
+            // Guardar la fecha actual
+            const fechaActual = new Date();
+            // Separar la fecha actual en año, mes y dia
+            const anoActual = parseInt(fechaActual.getFullYear());
+            const mesActual = parseInt(fechaActual.getMonth()) + 1;
+            const diaActual = parseInt(fechaActual.getDay());
+
+            // Guardar la fecha introducida en el formulario
+            const fechaNacimiento = e.target.value;
+            // Separar la fecha en año, mes y dia
+            const anoNacimiento = parseInt(String(fechaNacimiento).substring(0, 4));
+            const mesNacimiento = parseInt(String(fechaNacimiento).substring(5, 7));
+            const diaNacimiento = parseInt(String(fechaNacimiento).substring(8, 10));
+
+            // Comprobar que la diferencia del año actual con el introducisa es 18 o mas
+            let edad = anoActual - anoNacimiento;
+            if (mesActual < mesNacimiento) {
+                edad--;
+            } else if (mesActual === mesNacimiento) {
+                if (diaActual < diaNacimiento) {
+                    edad--;
+                }
+            }
+
+            if (edad < 0) {
+                document.getElementById('date').classList.add('input_error');
+                document.getElementById('date-error').classList.remove('hidden');
+            } else if (fechaNacimiento === '') {
+                document.getElementById('date').classList.remove('input_error');
+                document.getElementById('date-error').classList.add('hidden');
             } else {
-                document.getElementById('date').classList.remove('input_incorrecto');
-                document.getElementById('date').classList.add('input_correcto');
+                document.getElementById('date').classList.remove('input_error');
+                document.getElementById('date-error').classList.add('hidden');
+                campos.date = true;
             }
             break;
 
@@ -116,7 +143,6 @@ const form_validation= (e)=>{
                 document.getElementById('password').classList.remove('input_error');
                 document.getElementById('password-error').classList.add('hidden');
                 campos.password = true;
-                console.log(e.target.value);
             } else if (e.target.value === '') {
                 document.getElementById('password').classList.remove('input_error');
                 document.getElementById('password-error').classList.add('hidden');

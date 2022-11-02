@@ -133,9 +133,13 @@
     <!-- Fecha de nacimiento -->
     <div class="input-container">
       <i class="fa-solid fa-cake-candles"></i>
-      <input type="text" id="date" name="date" placeholder="Jaioteguna" onfocus="(this.type='date')" value="<?php if (isset($_POST['date'])) echo $_POST['date'] ?>">
+      <input type="text" id="date" name="date" placeholder="Jaiotze-data" onfocus="(this.type='date')" value="<?php if (isset($_POST['date'])) echo $_POST['date'] ?>">
     </div>
-    
+    <!-- Error: Fecha de nacimiento -->
+    <div class="error hidden" id="date-error">
+      <i class="fa-solid fa-circle-exclamation"></i>
+      <p>Data hau ez da baliozkoa.</p>
+    </div>
     <?php
     if ($_GET['role'] === 'Irakasle') {
       // Telefono
