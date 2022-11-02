@@ -56,7 +56,7 @@ session_start();
             echo '<a href="class.php"><i class="fa-solid fa-users-rectangle"></i>Nire taldeak</a>
                   <a href="requests.php"><i class="fa-solid fa-question"></i>Eskaerak</a>';
           } else if ($_SESSION['role'] === 'admin') {
-            echo '<a href="management.php"><i class="fa-solid fa-gear"></i>Adminiztrazioa</a></h1>';
+            echo '<a href="management.php"><i class="fa-solid fa-gear"></i>Administrazioa</a></h1>';
           }
           echo '<a href="../modules/logout.php"><i class="fa-solid fa-user-slash"></i>Saioa itxi</a>';
           ?>

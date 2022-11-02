@@ -3,6 +3,9 @@
   include_once('../modules/connection.php');
   session_start();
 
+  $nickname_error = false;
+  $email_error = false;
+
   if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     switch ($_REQUEST['form-action']) {
       // Aceptar nuevos profesores
@@ -33,6 +36,79 @@
             break;
         }
         break;
+      // Aceptar comentarios y respuestas
+      case 'accept-comment':
+        switch ($_REQUEST['accept']) {
+          case 'yes':
+            $query = $miPDO->prepare('UPDATE comentario SET estado = "aceptado" WHERE id_comentario = :id_comentario;');
+            $query->execute(['id_comentario' => $_REQUEST['id_comentario']]);
+            break;
+  
+          case 'no':
+            $query = $miPDO->prepare('DELETE FROM comentario WHERE id_comentario = :id_comentario;');
+            $query->execute(['id_comentario' => $_REQUEST['id_comentario']]);
+            break;
+        }
+        break;
+
+        case 'accept-answer':
+          switch ($_REQUEST['accept']) {
+            case 'yes':
+              $query = $miPDO->prepare('UPDATE respuesta SET estado = "aceptado" WHERE id_respuesta = :id_respuesta;');
+              $query->execute(['id_respuesta' => $_REQUEST['id_respuesta']]);
+              break;
+    
+            case 'no':
+              $query = $miPDO->prepare('DELETE FROM comentario WHERE id_respuesta = :id_respuesta;');
+              $query->execute(['id_respuesta' => $_REQUEST['id_respuesta']]);
+              break;
+          }
+          break;
+        // Agregar y eliminar nuevos administradores
+        case 'delete-admin':
+            $query = $miPDO->prepare('UPDATE role SET estado = "denegado" WHERE nickname = :nickname;');
+            $query->execute(['nickname' => $_REQUEST['nickname']]);
+          break;
+
+        case 'new-admin':
+          if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $signup = true;
+
+            $nickname = $_REQUEST["nickname"];
+            $email = $_REQUEST["email"];
+            $name = $_REQUEST["name"];
+            $surnames = $_REQUEST["surnames"];
+            $password = $_REQUEST["nickname"];
+            $password = password_hash($password, PASSWORD_DEFAULT);
+            
+            $query = $miPDO->prepare('SELECT nickname, email FROM usuario WHERE nickname=:nickname OR email=:email');
+            $query->execute(['nickname' => $nickname, 'email' => $email]);
+            $results = $query->fetch();
+
+            // Si el nickname existe
+            if ($nickname !== '') {
+              if ($results['nickname'] === $nickname) {
+                $signup = false;
+                $nickname_error = true;
+              }
+            }
+          
+            // Si el email existe
+            if ($email !== '') {
+              if ($results['email'] === $email) {
+                $signup = false;
+                $email_error = true;
+              }
+            }
+
+            // Si el registro es valido
+            if ($signup) {
+              // Inserto el usuario en la base de datos
+              $query = $miPDO->prepare('INSERT INTO usuario (nickname, email, nombre, apellidos, contrasena, rol) VALUES (:nickname, :email, :name, :surnames,, :password, :role)');
+              $query->execute(['nickname' => $nickname, 'email' => $email, 'name' => $name, 'surnames' => $surnames, 'password' => $password, 'role' => $_GET['role']]);
+            }
+          }
+          break;
     }
   }
 
@@ -52,7 +128,8 @@
     <nav>
       <button id="accept-teachers">Irakasleak onartu</button>
       <button id="accept-books">Liburuak onartu</button>
-      <button id="new-admin">Administratzaileak</button>
+      <button id="accept-comments">Iruzkinak onartu</button>
+      <button id="admins">Administratzaileak</button>
       <button id="database">Datu-basea</button>
       <a href="main_menu.php">Hasiera joan</a>
     </nav>
@@ -60,54 +137,54 @@
   
   <main>
     <!-- Aceptar nuevos profesores -->
-      <?php
-      $query = $miPDO->prepare('SELECT usuario.*, centro.nombre AS nombre_centro FROM usuario, centro WHERE usuario.rol = "irakasle" AND usuario.id_centro = centro.id_centro AND usuario.estado = "espera"');
-      $query->execute();
-      $results = $query->fetchAll();
+    <?php
+    $query = $miPDO->prepare('SELECT usuario.*, centro.nombre AS nombre_centro FROM usuario, centro WHERE usuario.rol = "irakasle" AND usuario.estado = "espera" AND usuario.id_centro = centro.id_centro');
+    $query->execute();
+    $results = $query->fetchAll();
 
-      if ($results) {
-        echo '<section class="accept-teachers hidden">
-              <table>
-                <tr>
-                  <th>Nickname</th>
-                  <th>Izen-abizenak</th>
-                  <th>Ikastetxea</th>
-                  <th>Email-a</th>
-                  <th>Telefonoa</th>
-                  <th>Onartu</th>
-                </tr>';
-        foreach ($results as $position => $teacher){
-          echo '<tr>
-                  <td>'.$teacher['nickname'].'</td>
-                  <td>'.$teacher['nombre'].' '.$teacher['apellidos'].'</td>
-                  <td>'.$teacher['nombre_centro'].'</td>
-                  <td>'.$teacher['email'].'</td>
-                  <td>'.$teacher['telefono'].'</td>
-                  <td class="actions">
-                    <form action="" method="post">
-                      <input type="hidden" name="form-action" value="accept-teacher">
-                      <input type="hidden" name="nickname" value="'.$teacher['nickname'].'">
-                      <input type="hidden" name="accept" value="yes">
-                      <button><i class="fa-solid fa-thumbs-up"></i></button>
-                    </form>
-                
-                    <form action="" method="post">
-                      <input type="hidden" name="form-action" value="accept-teacher">
-                      <input type="hidden" name="nickname" value="'.$teacher['nickname'].'">
-                      <input type="hidden" name="accept" value="no">
-                      <button><i class="fa-solid fa-thumbs-down"></i></button>
-                    </form>
-                  </td>
-                </tr>';
-        }
-        echo '</table>
-              </section>';
-      } else {
-        echo '<section class="accept-teachers hidden">
-                <h1>Oraindik ez dago irakaslerik onartzeko</h1>
-              </section>';
+    if ($results) {
+      echo '<section class="accept-teachers hidden">
+            <table>
+              <tr>
+                <th>Nickname</th>
+                <th>Izen-abizenak</th>
+                <th>Ikastetxea</th>
+                <th>Email-a</th>
+                <th>Telefonoa</th>
+                <th>Onartu</th>
+              </tr>';
+      foreach ($results as $position => $teacher){
+        echo '<tr>
+                <td>'.$teacher['nickname'].'</td>
+                <td>'.$teacher['nombre'].' '.$teacher['apellidos'].'</td>
+                <td>'.$teacher['nombre_centro'].'</td>
+                <td>'.$teacher['email'].'</td>
+                <td>'.$teacher['telefono'].'</td>
+                <td class="actions">
+                  <form action="" method="post">
+                    <input type="hidden" name="form-action" value="accept-teacher">
+                    <input type="hidden" name="nickname" value="'.$teacher['nickname'].'">
+                    <input type="hidden" name="accept" value="yes">
+                    <button><i class="fa-solid fa-thumbs-up"></i></button>
+                  </form>
+              
+                  <form action="" method="post">
+                    <input type="hidden" name="form-action" value="accept-teacher">
+                    <input type="hidden" name="nickname" value="'.$teacher['nickname'].'">
+                    <input type="hidden" name="accept" value="no">
+                    <button><i class="fa-solid fa-thumbs-down"></i></button>
+                  </form>
+                </td>
+              </tr>';
       }
-      ?>
+      echo '</table>
+            </section>';
+    } else {
+      echo '<section class="accept-teachers hidden">
+              <h1>Oraindik ez dago irakaslerik onartzeko</h1>
+            </section>';
+    }
+    ?>
     
     <!-- Aceptar nuevos libros -->
     <?php
@@ -153,6 +230,209 @@
       } else {
         echo '<section class="accept-books hidden">
                 <h1>Ez daude liburu berriak onartzeko</h1>
+              </section>';
+      }
+      ?>
+
+      <!-- Aceptar comentarios y respuestas -->
+      <?php
+      $query = $miPDO->prepare('SELECT *, libro.titulo AS libro FROM comentario, libro WHERE estado = "espera" AND comentario.id_libro = libro.id_libro');
+      $query->execute();
+      $results = $query->fetchAll();
+
+      if ($results) {
+        echo '<section class="accept-comments hidden">
+              <table>
+                <tr>
+                  <th>Nickname</th>
+                  <th>Liburua</th>
+                  <th>Iruzkina</th>
+                  <th>Onartu</th>
+                </tr>';
+        foreach ($results as $position => $comment){
+          echo '<tr>
+                  <td>'.$comment['nickname'].'</td>
+                  <td>'.$comment['libro'].'</td>
+                  <td>'.$comment['mensaje'].'</td>
+                  <td class="actions">
+                    <form action="" method="post">
+                      <input type="hidden" name="form-action" value="accept-comment">
+                      <input type="hidden" name="id_comentario" value="'.$comment['id_comentario'].'">
+                      <input type="hidden" name="accept" value="yes">
+                      <button><i class="fa-solid fa-thumbs-up"></i></button>
+                    </form>
+                
+                    <form action="" method="post">
+                      <input type="hidden" name="form-action" value="accept-comment">
+                      <input type="hidden" name="id_comentario" value="'.$comment['id_comentario'].'">
+                      <input type="hidden" name="accept" value="no">
+                      <button><i class="fa-solid fa-thumbs-down"></i></button>
+                    </form>
+                  </td>
+                </tr>';
+        }
+        echo '</table>
+              </section>';
+      } else {
+        echo '<section class="accept-comments hidden">
+                <h1>Oraindik ez daude iruzkinik onartzeko</h1>
+              </section>';
+      }
+      
+      $query = $miPDO->prepare('SELECT *, libro.titulo AS libro FROM respuesta, libro WHERE estado = "espera" AND respuesta.id_libro = libro.id_libro');
+      $query->execute();
+      $results = $query->fetchAll();
+
+      if ($results) {
+        echo '<section class="accept-answers hidden">
+              <table>
+                <tr>
+                  <th>Nickname</th>
+                  <th>Liburua</th>
+                  <th>Iruzkina</th>
+                  <th>Onartu</th>
+                </tr>';
+        foreach ($results as $position => $answer){
+          echo '<tr>
+                  <td>'.$answer['nickname'].'</td>
+                  <td>'.$answer['libro'].'</td>
+                  <td>'.$answer['mensaje'].'</td>
+                  <td class="actions">
+                    <form action="" method="post">
+                      <input type="hidden" name="form-action" value="accept-answer">
+                      <input type="hidden" name="id_respuesta" value="'.$answer['id_comentario'].'">
+                      <input type="hidden" name="accept" value="yes">
+                      <button><i class="fa-solid fa-thumbs-up"></i></button>
+                    </form>
+                
+                    <form action="" method="post">
+                      <input type="hidden" name="form-action" value="accept-answer">
+                      <input type="hidden" name="id_respuesta" value="'.$answer['id_comentario'].'">
+                      <input type="hidden" name="accept" value="no">
+                      <button><i class="fa-solid fa-thumbs-down"></i></button>
+                    </form>
+                  </td>
+                </tr>';
+        }
+        echo '</table>
+              
+              </section>';
+      } else {
+        echo '<section class="accept-answers hidden">
+                <h1>Oraindik ez daude erantzunak onartzeko</h1>
+              </section>';
+      }
+      ?>
+      <!-- Agregar nuevos administradores -->
+    <?php
+      $query = $miPDO->prepare('SELECT * FROM usuario WHERE rol = "admin"');
+      $query->execute();
+      $results = $query->fetchAll();
+
+      if ($results) {
+        echo '<section class="admins hidden">
+              <table>
+                <tr>
+                  <th>Nickname</th>
+                  <th>Izen-abizenak</th>
+                  <th>Email-a</th>
+                </tr>';
+        foreach ($results as $position => $admin){
+          echo '<tr>
+                  <td>'.$admin['nickname'].'</td>
+                  <td>'.$admin['nombre'].' '.$admin['apellidos'].'</td>
+                  <td>'.$admin['email'].'</td>';
+          if ($admin['nickname'] !== $_SESSION['nickname']) {
+          echo    '<td class="actions">
+                    <form action="" method="post">
+                      <input type="hidden" name="form-action" value="delete-admin">
+                      <input type="hidden" name="id_respuesta" value="'.$admin['nickname'].'">
+                      <button><i class="fa-solid fa-trash-can"></i> Kendu</button>
+                    </form>
+                  </td>';
+          }
+          
+          echo  '</tr>';
+        }
+        echo '</table>';
+      ?>
+      <form id="singupForm" action="" method="post">
+        <h1>Erregistratu - Administratzailea</h1>
+        <!-- Nickname -->
+        <div class="input-container">
+          <i class="fa-solid fa-user"></i>
+          <input type="text" name="nickname" id="nickname" placeholder="Nickname" maxlength="20" autofocus autocomplete="none">
+        </div>
+        <!-- Error: Nickname -->
+        <div class="error hidden" id="nickname-error">
+          <i class="fa-solid fa-circle-exclamation"></i>
+          <p>Ezizenak 4 eta 20 karaktere izan behar ditu, letraz, zenbakiz, marratxoz (-) eta azpimarraz (_) osatuta.</p>
+        </div>
+        <?php
+        if ($nickname_error) {
+          echo '<div class="error">
+                  <i class="fa-solid fa-circle-exclamation"></i>
+                  <p>Nickname hau dagoeneko erabiltzen ari da. Saiatu beste bat.</p>
+                </div>';
+        }
+        ?>
+        <!-- Email -->
+        <div class="input-container">
+          <i class="fa-solid fa-at"></i>
+          <input type="email" name="email" id="email" placeholder="Email-a">
+        </div>
+        <!-- Error: Email -->
+        <div class="error hidden" id="email-error">
+          <i class="fa-solid fa-circle-exclamation"></i>
+          <p>Email-aren formatuak ez du balio.</p>
+        </div>
+        <?php
+        if ($email_error) {
+          echo '<div class="error">
+                  <i class="fa-solid fa-circle-exclamation"></i>
+                  <p>Email hau dagoeneko erabiltzen ari da. Saiatu beste bat.</p>
+                </div>';
+        }
+        ?>
+        <!-- Nombre completo -->
+        <div class="input-container">
+          <i class="fa-solid fa-address-card"></i>
+          <div>
+            <input type="text" name="name" id="name" placeholder="Izena">
+            <input type="text" name="surnames" id="surnames" placeholder="Abizenak">
+          </div>
+        </div>
+        <!-- Error: Nombre completo -->
+        <div class="error hidden" id="name-error">
+          <i class="fa-solid fa-circle-exclamation"></i>
+          <p>Izenak letra larriz hasi behar du eta letrak soilik izan ditzake.</p>
+        </div>
+        <div class="error hidden" id="surnames-error">
+          <i class="fa-solid fa-circle-exclamation"></i>
+          <p>Abizenek letrak soilik izan ditzakete.</p>
+        </div>
+        <!-- Contraseñas -->
+        <div class="input-container">
+          <i class="fa-solid fa-key"></i>
+          <div>
+            <p class="pass-info">Pasahitza nickname-a bezala izango da. Gero aldatzeko posibilitatea izango du.</p>
+          </div>
+        </div>
+        <!-- Error: Formulario -->
+        <div class="error hidden" id="form-error">
+          <i class="fa-solid fa-circle-exclamation"></i>
+          <p>Bete formularioa behar bezala.</p>
+        </div>
+        <!-- Rol -->
+        <input type="hidden" name="role" value="admin">
+        <input type="hidden" name="form-action" value="new-admin">
+        <button>Erregistratu</button>
+      </form>
+      </section>
+      <?php
+      } else {
+        echo '<section class="admins hidden">
+                <h1>Oraindik ez dago irakaslerik onartzeko</h1>
               </section>';
       }
       ?>
