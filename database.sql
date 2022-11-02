@@ -8,8 +8,6 @@ create table if not exists centro(
   nombre varchar(255) not null
 );
 
-
-
 -- TABLA USUARIO
 create table if not exists usuario (
   nickname varchar(255) primary key,
@@ -56,9 +54,9 @@ create table if not exists libro (
   formato enum('Nobela','Komikia','Nobela grafikoa','Manga') not null,
   etiqueta varchar(255),
   portada varchar(255),
-  edad_media int(2) unsigned not null,
-  num_lectores int unsigned not null,
-  nota_media int(1) unsigned not null
+  edad_media int(2) unsigned,
+  num_lectores int unsigned,
+  nota_media int(1) unsigned
 );
 
 -- TABLA COMENTARIO
@@ -140,7 +138,7 @@ create table if not exists respuesta (
 
 -- USUARIO
 INSERT INTO usuario (`nickname`, `nombre`, `apellidos`, `fecha_nacimiento`, `email`, `telefono`, `contrasena`, `rol`, `id_centro`, `cod_grupo`, `estado`) VALUES
-  ('Admin01', 'Admin', 'Administrador', '2000-01-01', 'admin@mail.com', NULL, '$2y$10$SZU5HY0RmiNkvpl7rOoPkeERGKXk0bTNZJoBDTAdzR.VYYEHuZx8q', 'admin', NULL, NULL, 'aceptado');
+  ('Admin', 'Administrador', 'de Prueba', '2000-01-01', 'admin@mail.com', NULL, '$2y$10$SZU5HY0RmiNkvpl7rOoPkeERGKXk0bTNZJoBDTAdzR.VYYEHuZx8q', 'admin', NULL, NULL, 'aceptado');
 
 -- CENTROS
 INSERT INTO centro VALUES
@@ -175,28 +173,33 @@ INSERT INTO solicitud_libro (id_libro, estado) VALUES
   (2, 'aceptado'),
   (3, 'aceptado'),
   (4, 'aceptado'),
-  (5, 'aceptado'),
+  (5, 'espera'),
   (6, 'aceptado'),
   (7, 'aceptado'),
   (8, 'aceptado'),
-  (9, 'aceptado');
+  (9, 'espera');
 
 -- COMENTARIO
 INSERT INTO `comentario`(`id_comentario`, `nickname`, `id_libro`, `mensaje`, `estado`, `fecha`) VALUES
-  ('1','Admin01','1','Esto es un mensaje de prueba','aceptado', NOW());
+  ('1','Admin','1','Esto es un comentario de prueba','aceptado', NOW());
 
 -- IDIOMAS
 INSERT INTO `idioma`(`id_idioma`, `nombre`) VALUES
   ('1','Gaztelania'),
   ('2','Euskera'),
-  ('3','Ingelesa');
-
--- USUARIO PARA LA BBDD
-create user 'igklub'@'%' identified by '655Yj6Rc$F@x';
-grant all on igklub_database.* to 'igklub'@'%';
+  ('3','Ingelesa'),
+  ('4','Frantsesa'),
+  ('5','Portugesa'),
+  ('6','Aleman'),
+  ('7','Txinera'),
+  ('8','Errusiera');
 
 -- BORRAR DATOS DE ALUMNOS
 DROP EVENT IF EXISTS `delete_user`;
 CREATE DEFINER=`root`@`localhost` EVENT `desactivate_user`
 ON SCHEDULE EVERY 1 YEAR STARTS '2023-06-25 00:00:00' ON COMPLETION NOT PRESERVE ENABLE DO
 UPDATE usuario SET id_centro = NULL, cod_grupo = NULL WHERE rol = 'ikasle';
+
+-- USUARIO PARA LA BBDD
+create user 'igklub'@'%' identified by '655Yj6Rc$F@x';
+grant all on igklub_database.* to 'igklub'@'%';
