@@ -7,15 +7,15 @@
   $school_error = false;
   $phone_error = false;
 
-  if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $signup = true;
+  $signup = true;
 
-    $nickname = $_REQUEST["nickname"];
-    $email = $_REQUEST["email"];
-    $name = $_REQUEST["name"];
-    $surnames = $_REQUEST["surnames"];
-    $date = $_REQUEST["date"];
-    $password = $_REQUEST["password"];
+  if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $nickname = $_POST["nickname"];
+    $email = $_POST["email"];
+    $name = $_POST["name"];
+    $surnames = $_POST["surnames"];
+    $date = $_POST["date"];
+    $password = $_POST["password"];
     $password = password_hash($password, PASSWORD_DEFAULT);
     
     $query = $miPDO->prepare('SELECT nickname, email, telefono FROM usuario WHERE nickname=:nickname OR email=:email');
@@ -23,37 +23,31 @@
     $results = $query->fetch();
 
     // Si el nickname existe
-    if ($nickname !== '') {
-      if ($results['nickname'] === $nickname) {
-        $signup = false;
-        $nickname_error = true;
-      }
+    if ($results['nickname'] === $nickname) {
+      $signup = false;
+      $nickname_error = true;
     }
   
     // Si el email existe
-    if ($email !== '') {
-      if ($results['email'] === $email) {
-        $signup = false;
-        $email_error = true;
-      }
+    if ($results['email'] === $email) {
+      $signup = false;
+      $email_error = true;
     }
 
     if ($_GET['role'] === 'Irakasle') {
-      $phone = $_REQUEST["phone"];
-      $school = $_REQUEST["school"];
+      $phone = $_POST["phone"];
+      $school = $_POST["school"];
 
-      $query = $miPDO->prepare('SELECT telefono FROM usuario WHERE telefono=:phone');
+      $query = $miPDO->prepare('SELECT nickname, email, telefono FROM usuario WHERE telefono=:phone');
       $query->execute(['phone' => $phone]);
       $results = $query->fetch();
 
       // Si el telefono existe
-      if ($phone !== '') {
-        if ($results['telefono'] === $phone) {
-          $signup = false;
-          $phone_error = true;
-        }
+      if ($results['telefono'] === $phone) {
+        $signup = false;
+        $phone_error = true;
       }
-    
+
       // Si el centro es por defecto
       if ($school === '-') {
         $signup = false;
@@ -67,7 +61,7 @@
       $query = $miPDO->prepare('INSERT INTO usuario (nickname, email, nombre, apellidos, fecha_nacimiento, contrasena, rol) VALUES (:nickname, :email, :name, :surnames, :date, :password, :role)');
       $query->execute(['nickname' => $nickname, 'email' => $email, 'name' => $name, 'surnames' => $surnames, 'date' => $date, 'password' => $password, 'role' => $_GET['role']]);
 
-      if ($_GET['role'] === 'Irakasle') {
+      if ($role === 'Irakasle') {
         $query = $miPDO->prepare('UPDATE usuario SET telefono = :phone ,id_centro = :school WHERE nickname = :nickname;');
         $query->execute(['phone' => $phone, 'school' => $school, 'nickname' => $nickname]);
       }
@@ -81,22 +75,21 @@
   <link rel="stylesheet" href="../styles/signup.css">
 </head>
 <body>
-  <form id="singupForm" action="" method="post">
-    <?php echo '<h1>Erregistratu - '.$_REQUEST['role'].'a</h1>'; ?>
+  <form id="singupForm" action="" method="POST">
+    <?php echo '<h1>Erregistratu - '.$_GET['role'].'a</h1>'; ?>
     <!-- Nickname -->
     <div class="input-container">
       <i class="fa-solid fa-user"></i>
-      <input type="text" name="nickname" id="nickname" placeholder="Nickname" maxlength="20" autofocus value="<?php if (isset($_REQUEST['nickname'])) echo $_REQUEST['nickname'] ?>">
+      <input type="text" name="nickname" id="nickname" placeholder="Nickname" maxlength="20" autofocus value="<?php if (isset($_POST['nickname'])) echo $_POST['nickname'] ?>">
     </div>
     <!-- Error: Nickname -->
     <div class="error hidden" id="nickname-error">
       <i class="fa-solid fa-circle-exclamation"></i>
       <p>Ezizenak 4 eta 20 karaktere izan behar ditu, letraz, zenbakiz, marratxoz (-) eta azpimarraz (_) osatuta.</p>
     </div>
-
     <?php
     if ($nickname_error) {
-      echo '<div class="error">
+      echo '<div class="error php-error">
               <i class="fa-solid fa-circle-exclamation"></i>
               <p>Nickname hau dagoeneko erabiltzen ari da. Saiatu beste bat.</p>
             </div>';
@@ -105,7 +98,7 @@
     <!-- Email -->
     <div class="input-container">
       <i class="fa-solid fa-at"></i>
-      <input type="email" name="email" id="email" placeholder="Email-a" value="<?php if (isset($_REQUEST['email'])) echo $_REQUEST['email'] ?>">
+      <input type="email" name="email" id="email" placeholder="Email-a" value="<?php if (isset($_POST['email'])) echo $_POST['email'] ?>">
     </div>
     <!-- Error: Email -->
     <div class="error hidden" id="email-error">
@@ -114,7 +107,7 @@
     </div>
     <?php
     if ($email_error) {
-      echo '<div class="error">
+      echo '<div class="error php-error">
               <i class="fa-solid fa-circle-exclamation"></i>
               <p>Email hau dagoeneko erabiltzen ari da. Saiatu beste bat.</p>
             </div>';
@@ -124,8 +117,8 @@
     <div class="input-container">
       <i class="fa-solid fa-address-card"></i>
       <div>
-        <input type="text" name="name" id="name" placeholder="Izena" value="<?php if (isset($_REQUEST['name'])) echo $_REQUEST['name'] ?>">
-        <input type="text" name="surnames" id="surnames" placeholder="Abizenak" value="<?php if (isset($_REQUEST['surnames'])) echo $_REQUEST['surnames'] ?>">
+        <input type="text" name="name" id="name" placeholder="Izena" value="<?php if (isset($_POST['name'])) echo $_POST['name'] ?>">
+        <input type="text" name="surnames" id="surnames" placeholder="Abizenak" value="<?php if (isset($_POST['surnames'])) echo $_POST['surnames'] ?>">
       </div>
     </div>
     <!-- Error: Nombre completo -->
@@ -140,16 +133,16 @@
     <!-- Fecha de nacimiento -->
     <div class="input-container">
       <i class="fa-solid fa-cake-candles"></i>
-      <input type="text" id="date" name="date" placeholder="Jaioteguna" onfocus="(this.type='date')" value="<?php if (isset($_REQUEST['date'])) echo $_REQUEST['date'] ?>">
+      <input type="text" id="date" name="date" placeholder="Jaioteguna" onfocus="(this.type='date')" value="<?php if (isset($_POST['date'])) echo $_POST['date'] ?>">
     </div>
     
     <?php
-    if ($_REQUEST['role'] === 'Irakasle') {
+    if ($_GET['role'] === 'Irakasle') {
       // Telefono
       echo '<div class="input-container">
               <i class="fa-solid fa-phone"></i>
               <input type="tel" id="phone" name="phone" placeholder="Telefono zenbakia" maxlength="9" value="';
-              if (isset($_REQUEST[''])) echo $_REQUEST[''];
+              if (isset($_POST[''])) echo $_POST[''];
       echo    '"></div>';
       // Error: Telefono
       echo '<div class="error hidden" id="phone-error">
@@ -157,7 +150,7 @@
               <p>Telefonoak 6, 7 edo 9rekin hasi behar du. Zenbakiak eta gehienez 9 digitu izan ditzake.</p>
             </div>';
       if ($phone_error) {
-        echo '<div class="error">
+        echo '<div class="error php-error">
                 <i class="fa-solid fa-circle-exclamation"></i>
                 <p>Telefono-zenbaki hau beste kontu batekin erregistratuta dago jada.</p>
               </div>';
@@ -181,7 +174,7 @@
       }
       // Error: Centro
       if ($school_error) {
-        echo '<div class="error">
+        echo '<div class="error php-error">
                 <i class="fa-solid fa-circle-exclamation"></i>
                 <p>Aukeratu eskola bat.</p>
               </div>';

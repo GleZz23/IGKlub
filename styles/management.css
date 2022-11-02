@@ -212,7 +212,7 @@ main section {
   color: black;
 }
 
-form {
+.admins form {
   width: 35rem;
   background-color: lightgray;
   padding: 2rem;

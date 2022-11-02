@@ -138,7 +138,7 @@
   <main>
     <!-- Aceptar nuevos profesores -->
     <?php
-    $query = $miPDO->prepare('SELECT usuario.*, centro.nombre AS nombre_centro FROM usuario, centro WHERE usuario.rol = "irakasle" AND usuario.id_centro = centro.id_centro AND usuario.estado = "espera"');
+    $query = $miPDO->prepare('SELECT usuario.*, centro.nombre AS nombre_centro FROM usuario, centro WHERE usuario.rol = "irakasle" AND usuario.estado = "espera" AND usuario.id_centro = centro.id_centro');
     $query->execute();
     $results = $query->fetchAll();
 
