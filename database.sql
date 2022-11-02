@@ -136,14 +136,15 @@ create table if not exists respuesta (
   foreign key (id_comentario) references comentario(id_comentario) on delete cascade
 );
 
--- USUARIO
-INSERT INTO usuario (`nickname`, `nombre`, `apellidos`, `fecha_nacimiento`, `email`, `telefono`, `contrasena`, `rol`, `id_centro`, `cod_grupo`, `estado`) VALUES
-  ('Admin', 'Administrador', 'de Prueba', '2000-01-01', 'admin@mail.com', NULL, '$2y$10$SZU5HY0RmiNkvpl7rOoPkeERGKXk0bTNZJoBDTAdzR.VYYEHuZx8q', 'admin', NULL, NULL, 'aceptado');
-
 -- CENTROS
 INSERT INTO centro VALUES
   ('1', 'I.E.S. Miguel de Unamuno B.H.I.'),
   ('2', 'CIFP Txurdinaga LHII');
+
+-- USUARIO
+INSERT INTO usuario (`nickname`, `nombre`, `apellidos`, `fecha_nacimiento`, `email`, `telefono`, `contrasena`, `rol`, `id_centro`, `cod_grupo`, `estado`) VALUES
+  ('Admin', 'Administrador', 'de Prueba', '2000-01-01', 'admin@mail.com', NULL, '$2y$10$SZU5HY0RmiNkvpl7rOoPkeERGKXk0bTNZJoBDTAdzR.VYYEHuZx8q', 'admin', NULL, NULL, 'aceptado'),
+  ('Profesor', 'Profesor', 'de Prueba', '2000-01-01', 'profesor@mail.com', 911111111, '$2y$10$SZU5HY0RmiNkvpl7rOoPkeERGKXk0bTNZJoBDTAdzR.VYYEHuZx8q', 'irakasle', 2, NULL, 'espera');
 
 -- LIBROS
 INSERT INTO libro (titulo, escritor, portada, edad_media, nota_media) VALUES 
@@ -173,10 +174,10 @@ INSERT INTO solicitud_libro (id_libro, estado) VALUES
   (2, 'aceptado'),
   (3, 'aceptado'),
   (4, 'aceptado'),
-  (5, 'espera'),
-  (6, 'aceptado'),
-  (7, 'aceptado'),
-  (8, 'aceptado'),
+  (5, 'aceptado'),
+  (6, 'espera'),
+  (7, 'espera'),
+  (8, 'espera'),
   (9, 'espera');
 
 -- COMENTARIO
