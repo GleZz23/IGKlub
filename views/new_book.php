@@ -186,8 +186,8 @@
                 <textarea id="sinopsis" name="sinopsis" placeholder="Sinopsia" required autocomplete="off" maxlength="2300"></textarea>
             </div>
             <!-- Titulo e idioma alternativos -->
-            <button class="alternative-button">Liburu hau beste hizkuntzan irakurrin dut</button>
-            <section class="alternative">
+            <button class="alternative-button"><i class="fa-solid fa-arrow-down"></i> Liburu hau beste hizkuntzan irakurri dut</button>
+            <section class="alternative hidden">
                 <!-- Idioma alternativo -->
                 <div class="input-container">
                     <i class="fa-solid fa-language"></i>

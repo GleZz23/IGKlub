@@ -136,3 +136,27 @@ form.addEventListener('submit', (e) => {
 		}, 3500);
     }
 });
+
+// IDIOMA ALTERANTIVO
+const alternativeButton = document.querySelector('.alternative-button');
+
+alternativeButton.addEventListener('click', (e) => {
+  e.preventDefault();
+  const alternative = document.querySelector('.alternative');
+
+  if (window.getComputedStyle(alternative).getPropertyValue('display') === "none") {
+    alternativeButton.innerHTML = '<i class="fa-solid fa-xmark"></i> Liburu hau beste hizkuntzan irakurri dut';
+    alternative.classList.remove('hidden');
+    setTimeout(() => {
+      alternative.style.opacity = "1";
+      alternative.style.transform = "translateX(0)";
+    }, 10);
+  } else if (window.getComputedStyle(alternative).getPropertyValue('display') === "flex") {
+    alternativeButton.innerHTML = '<i class="fa-solid fa-arrow-down"></i> Liburu hau beste hizkuntzan irakurri dut';
+    alternative.style.opacity = "0";
+    alternative.style.transform = "translateX(100%)";
+    setTimeout(() => {
+      alternative.classList.add('hidden');
+    }, 500);
+  }
+});
