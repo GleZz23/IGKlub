@@ -8,17 +8,7 @@ create table if not exists centro(
   nombre varchar(255) not null
 );
 
--- TABLA GRUPO
-create table if not exists grupo (
-  codigo char(5) primary key,
-  nombre varchar(20) not null,
-  id_centro int(5),
-  nivel varchar(10),
-  curso varchar(10),
-  profesor varchar(255),
-  foreign key (profesor) references usuario(nickname) on delete cascade,
-  foreign key (id_centro) references centro(id_centro)
-);
+
 
 -- TABLA USUARIO
 create table if not exists usuario (
@@ -33,9 +23,20 @@ create table if not exists usuario (
   id_centro int(5),
   cod_grupo char(5),
   estado enum('aceptado','denegado','espera') default 'espera' not null,
-  foreign key (id_centro) references centro(id_centro) on delete cascade,
-  foreign key (cod_grupo) references grupo(codigo) on delete cascade
+  foreign key (id_centro) references centro(id_centro) on delete cascade
 );
+-- TABLA GRUPO
+create table if not exists grupo (
+  codigo char(5) primary key,
+  nombre varchar(20) not null,
+  id_centro int(5),
+  nivel varchar(10),
+  curso varchar(10),
+  profesor varchar(255),
+  foreign key (profesor) references usuario(nickname) on delete cascade,
+  foreign key (id_centro) references centro(id_centro)
+);
+Alter TABLE usuario add foreign key (cod_grupo) references grupo(codigo) on delete cascade;
 
 -- TABLA SOLICITUD GRUPO
 create table if not exists solicitud_grupo (
