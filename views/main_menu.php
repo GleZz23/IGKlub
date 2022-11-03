@@ -14,7 +14,7 @@ $book_alternative_language_error = false;
 $new_book = true;
 $alternative_language = true;
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['form-action'])) {
   $file = $_FILES['cover'];
 
   $imageFileType = strtolower(pathinfo($file['name'], PATHINFO_EXTENSION));
@@ -284,17 +284,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <!-- Error: Titulo del libro -->
     <div class="error hidden" id="title-error">
         <i class="fa-solid fa-circle-exclamation"></i>
-        <p>.</p>
+        <p>Egiaztatu izenburua ondo idatzita dagoela.</p>
     </div>
     <!-- Escritor -->
     <div class="input-container">
         <i class="fa-solid fa-feather"></i>
-        <input type="text" name="writter" id="writter" placeholder="Idazlea" value="<?php if (isset($_REQUEST['email'])) echo $_REQUEST['email'] ?>">
+        <input type="text" name="writter" id="writter" placeholder="Egilea" value="<?php if (isset($_REQUEST['email'])) echo $_REQUEST['email'] ?>">
     </div>
     <!-- Error: Escritor -->
     <div class="error hidden" id="writter-error">
         <i class="fa-solid fa-circle-exclamation"></i>
-        <p>.</p>
+        <p>Egilearen izenak ezin du zenbakirik eduki.</p>
     </div>
     <!-- Portada -->
     <div class="input-container">
@@ -359,10 +359,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </select>
     </div>
     <!-- Error: Formato -->
-    <div class="error hidden" id="format-error">
-        <i class="fa-solid fa-circle-exclamation"></i>
-        <p>Aukeratu formatu bat.</p>
-    </div>
     <?php
         if ($book_format_error) {
         echo '<div class="error php-error">
@@ -400,6 +396,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 ?>
             </select>
         </div>
+        <!-- Error: Idioma -->
+      <?php
+          if ($book_alternative_language_error) {
+          echo '<div class="error php-error">
+                  <i class="fa-solid fa-circle-exclamation"></i>
+                  <p>Aukeratu hizkuntza bat.</p>
+                </div>';
+          }
+      ?>
         <!-- Titulo del libro alternativo -->
         <div class="input-container">
             <i class="fa-solid fa-heading"></i>
@@ -408,7 +413,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <!-- Error: Titulo del libro -->
         <div class="error hidden" id="alternative-title-error">
             <i class="fa-solid fa-circle-exclamation"></i>
-            <p>.</p>
+            <p>Egiaztatu izenburua ondo idatzita dagoela.</p>
         </div>
     </section>
     <!-- Error: Formulario -->
@@ -416,6 +421,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <i class="fa-solid fa-circle-exclamation"></i>
         <p>Bete formularioa behar bezala.</p>
     </div>
+    <input type="hidden" name="form-action" value="newbook">
     <button>Igo liburua</button>
   </form>
   </div>

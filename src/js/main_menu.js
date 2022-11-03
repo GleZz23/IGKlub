@@ -106,7 +106,7 @@ closeButton.addEventListener('click', () => {
   document.getElementById('newBookForm').style.transform = "scale(0)";
   setTimeout(() => {
     document.querySelector('.new-book').style.display = "none";
-    document.querySelector('body').style.overflowY = "visible";
+    document.querySelector('body').style.overflowY = "scroll";
   }, 500);
 });
 

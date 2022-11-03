@@ -260,7 +260,7 @@ main section {
   display: none;
   justify-content: center;
   align-items: center;
-  background-color: #00000050;
+  background-color: #00000080;
   transition: all .3s ease-in-out;
   z-index: 5;
 }
@@ -273,11 +273,13 @@ main section {
   margin: 2rem;
   background-color: transparent;
   border: none;
+  color: gray;
   transition: all .3s ease-in-out;
 }
 
 .closeButton:hover {
   cursor: pointer;
+  color: white;
 }
 
 #newBookForm {
@@ -290,7 +292,7 @@ main section {
   flex-direction: column;
   align-items: center;
   gap: 1rem;
-  box-shadow: .5rem .5rem 1rem #00000050;
+  box-shadow: .5rem .5rem 1rem #00000075;
   transform: scale(0);
   transition: all .3s ease-in-out;
 }
