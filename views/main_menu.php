@@ -138,7 +138,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['form-action'])) {
                 <span class="newBookButton"><i class="fa-solid fa-book"></i>Igo liburu bat</span>
                 <a href="personal_area.php"><i class="fa-solid fa-user"></i>Area pertsonala</a>';
           if ($_SESSION['role'] === 'irakasle') {
-            echo '<a href="class.php"><i class="fa-solid fa-users-rectangle"></i>Nire taldeak</a>
+            echo '<a href="groups.php"><i class="fa-solid fa-users-rectangle"></i>Nire taldeak</a>
                   <a href="requests.php"><i class="fa-solid fa-question"></i>Eskaerak</a>';
           } else if ($_SESSION['role'] === 'admin') {
             echo '<a href="management.php"><i class="fa-solid fa-gear"></i>Administrazioa</a></h1>';
