@@ -138,7 +138,7 @@
     $results = $query->fetchAll();
 
     if ($results) {
-      echo '<section class="accept-teachers hidden">
+      echo '<section class="accept-teachers">
             <table>
               <tr>
                 <th>Nickname</th>
@@ -189,7 +189,7 @@
       $books = $query->fetchAll();
 
       if ($books) {
-        echo '<section class="accept-books hidden">';
+        echo '<section class="accept-books">';
         foreach ($books as $position => $book) {
           echo '<div class="book-container">';
           if ($book['portada'] === '') {
@@ -236,7 +236,7 @@
       $results = $query->fetchAll();
 
       if ($results) {
-        echo '<section class="accept-comments hidden">
+        echo '<section class="accept-comments">
               <table>
                 <tr>
                   <th>Nickname</th>
@@ -269,7 +269,7 @@
         echo '</table>
               </section>';
       } else {
-        echo '<section class="accept-comments hidden">
+        echo '<section class="accept-comments">
                 <h1>Oraindik ez daude iruzkinik onartzeko</h1>
               </section>';
       }
@@ -279,7 +279,7 @@
       $results = $query->fetchAll();
 
       if ($results) {
-        echo '<section class="accept-answers hidden">
+        echo '<section class="accept-answers">
               <table>
                 <tr>
                   <th>Nickname</th>
@@ -313,7 +313,7 @@
               
               </section>';
       } else {
-        echo '<section class="accept-answers hidden">
+        echo '<section class="accept-answers">
                 <h1>Oraindik ez daude erantzunak onartzeko</h1>
               </section>';
       }
@@ -325,7 +325,7 @@
       $results = $query->fetchAll();
 
       if ($results) {
-        echo '<section class="admins hidden">
+        echo '<section class="admins">
               <table>
                 <tr>
                   <th>Nickname</th>
