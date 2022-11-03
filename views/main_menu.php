@@ -83,7 +83,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['form-action'])) {
           }
       }
       
-      $rute = '../src/img/books/'.$id_libro.'.'.$imageFileType;
+      $rute = '../src/img/books/'.$id_libro.'.jpg';
       move_uploaded_file($file['tmp_name'], $rute);
   }
 }

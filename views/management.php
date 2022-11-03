@@ -35,6 +35,8 @@
           case 'no':
             $query = $miPDO->prepare('DELETE FROM solicitud_libro WHERE id_libro = :id_libro;');
             $query->execute(['id_libro' => $_REQUEST['id_libro']]);
+            $rute = '../src/img/books/'.$id_libro.'.jpg';
+            unlink($rute);
             break;
         }
         break;
