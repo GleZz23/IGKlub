@@ -24,6 +24,17 @@ const filtersButton = document.querySelector('#filters');
 const filters = document.querySelector('.filters');
 const closeFilters = document.querySelector('.close-filters');
 
+filtersButton.addEventListener('mouseover', () => {
+  filtersButton.style.transform = 'rotate(-10deg)';
+  filtersButton.style.textShadow = ".3rem .3rem .3rem #00000050";
+  filtersButton.style.cursor = "pointer";
+});
+
+filtersButton.addEventListener('mouseleave', () => {
+  filtersButton.style.transform = 'rotate(0)';
+  filtersButton.style.textShadow = "none";
+});
+
 filtersButton.addEventListener('click', () => {
   filters.style.display = "flex";
   setTimeout(() => {
@@ -52,6 +63,17 @@ const profileButton = document.querySelector('#profile');
 const profile = document.querySelector('.profile');
 const profileLinks = document.querySelectorAll('.profile a, .profile span');
 const closeProfile = document.querySelector('.close-profile');
+
+profileButton.addEventListener('mouseover', () => {
+  profileButton.style.transform = 'rotate(-10deg)';
+  profileButton.style.textShadow = ".3rem .3rem .3rem #00000050";
+  profileButton.style.cursor = "pointer";
+});
+
+profileButton.addEventListener('mouseleave', () => {
+  profileButton.style.transform = 'rotate(0)';
+  profileButton.style.textShadow = "none";
+});
 
 profileButton.addEventListener('click', () => {
   profile.style.display = "flex";
