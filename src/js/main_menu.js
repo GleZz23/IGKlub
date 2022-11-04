@@ -24,17 +24,6 @@ const filtersButton = document.querySelector('#filters');
 const filters = document.querySelector('.filters');
 const closeFilters = document.querySelector('.close-filters');
 
-filtersButton.addEventListener('mouseover', () => {
-  filtersButton.style.transform = 'rotate(-10deg)';
-  filtersButton.style.textShadow = ".3rem .3rem .3rem #00000050";
-  filtersButton.style.cursor = "pointer";
-});
-
-filtersButton.addEventListener('mouseleave', () => {
-  filtersButton.style.transform = 'rotate(0)';
-  filtersButton.style.textShadow = "none";
-});
-
 filtersButton.addEventListener('click', () => {
   filters.style.display = "flex";
   setTimeout(() => {
@@ -42,36 +31,27 @@ filtersButton.addEventListener('click', () => {
   }, 10);
 });
 
-filters.addEventListener('mouseleave', () => {
-  filters.style.transform = "translateX(-100%)";
-  setTimeout(() => {
-    filters.style.display = "none";
-  }, 500);
-})
-
-closeFilters.addEventListener('click', () => {
-  filters.style.transform = "translateX(-100%)";
-  setTimeout(() => {
-    filters.style.display = "none";
-  }, 500);
-});
+if (screen.width > 1280) {
+  filters.addEventListener('mouseleave', () => {
+    filters.style.transform = "translateX(-100%)";
+    setTimeout(() => {
+      filters.style.display = "none";
+    }, 500);
+  })
+} else {
+  closeFilters.addEventListener('click', () => {
+    filters.style.transform = "translateX(-100%)";
+    setTimeout(() => {
+      filters.style.display = "none";
+    }, 500);
+  });
+}
 
 // PERFIL
 const profileButton = document.querySelector('#profile');
 const profile = document.querySelector('.profile');
 const profileLinks = document.querySelectorAll('.profile a, .profile span');
 const closeProfile = document.querySelector('.close-profile');
-
-profileButton.addEventListener('mouseover', () => {
-  profileButton.style.transform = 'rotate(-10deg)';
-  profileButton.style.textShadow = ".3rem .3rem .3rem #00000050";
-  profileButton.style.cursor = "pointer";
-});
-
-profileButton.addEventListener('mouseleave', () => {
-  profileButton.style.transform = 'rotate(0)';
-  profileButton.style.textShadow = "none";
-});
 
 profileButton.addEventListener('click', () => {
   profile.style.display = "flex";
@@ -80,19 +60,21 @@ profileButton.addEventListener('click', () => {
   }, 10);
 });
 
-profile.addEventListener('mouseleave', () => {
-  profile.style.transform = "translateX(100%)";
-  setTimeout(() => {
-    profile.style.display = "none";
-  }, 500);
-})
-
-closeProfile.addEventListener('click', () => {
-  profile.style.transform = "translateX(100%)";
-  setTimeout(() => {
-    profile.style.display = "none";
-  }, 500);
-});
+if (screen.width > 1280) {
+  profile.addEventListener('mouseleave', () => {
+    profile.style.transform = "translateX(100%)";
+    setTimeout(() => {
+      profile.style.display = "none";
+    }, 500);
+  });
+} else {
+  closeProfile.addEventListener('click', () => {
+    profile.style.transform = "translateX(100%)";
+    setTimeout(() => {
+      profile.style.display = "none";
+    }, 500);
+  });
+}
 
 profileLinks.forEach((link) => {
   link.addEventListener('mouseover', () => {
