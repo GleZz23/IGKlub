@@ -38,9 +38,11 @@ const form_validation= (e)=>{
             } else if (e.target.value === '') {
                 document.getElementById('nickname').classList.remove('input_error');
                 document.getElementById('nickname-error').classList.add('hidden');
+                campos.nickname = false;
             } else {
                 document.getElementById('nickname').classList.add('input_error');
                 document.getElementById('nickname-error').classList.remove('hidden');
+                campos.nickname = false;
             }
             break;  
 
@@ -52,9 +54,11 @@ const form_validation= (e)=>{
             } else if (e.target.value === '') {
                 document.getElementById('email').classList.remove('input_error');
                 document.getElementById('email-error').classList.add('hidden');
+                campos.email = false;
             } else {
                 document.getElementById('email').classList.add('input_error');
                 document.getElementById('email-error').classList.remove('hidden');
+                campos.email = false;
             }
             break; 
 
@@ -66,9 +70,11 @@ const form_validation= (e)=>{
             } else if (e.target.value === '') {
                 document.getElementById('name').classList.remove('input_error');
                 document.getElementById('name-error').classList.add('hidden');
+                campos.name = false;
             } else {
                 document.getElementById('name').classList.add('input_error');
                 document.getElementById('name-error').classList.remove('hidden');
+                campos.name = false;
             }
             break;
 
@@ -80,9 +86,11 @@ const form_validation= (e)=>{
             } else if (e.target.value === '') {
                 document.getElementById('surnames').classList.remove('input_error');
                 document.getElementById('surnames-error').classList.add('hidden');
+                campos.surnames = false;
             } else {
                 document.getElementById('surnames').classList.add('input_error');
                 document.getElementById('surnames-error').classList.remove('hidden');
+                campos.surnames = false;
             }
             break;
 
@@ -94,9 +102,11 @@ const form_validation= (e)=>{
             } else if (e.target.value === '') {
                 document.getElementById('phone').classList.remove('input_error');
                 document.getElementById('phone-error').classList.add('hidden');
+                campos.phone = false;
             } else {
                 document.getElementById('phone').classList.add('input_error');
                 document.getElementById('phone-error').classList.remove('hidden');
+                campos.phone = false;
             }
             break;
 
@@ -128,9 +138,11 @@ const form_validation= (e)=>{
             if (edad < 0) {
                 document.getElementById('date').classList.add('input_error');
                 document.getElementById('date-error').classList.remove('hidden');
+                campos.date = false;
             } else if (fechaNacimiento === '') {
                 document.getElementById('date').classList.remove('input_error');
                 document.getElementById('date-error').classList.add('hidden');
+                campos.date = false;
             } else {
                 document.getElementById('date').classList.remove('input_error');
                 document.getElementById('date-error').classList.add('hidden');
@@ -161,9 +173,11 @@ const form_validation= (e)=>{
             } else if (e.target.value === '') {
                 document.getElementById('password2').classList.remove('input_error');
                 document.getElementById('password2-error').classList.add('hidden');
+                campos.password2 = false;
             } else {
                 document.getElementById('password2').classList.add('input_error');
                 document.getElementById('password2-error').classList.remove('hidden');
+                campos.password2 = false;
             }
             break;
     }

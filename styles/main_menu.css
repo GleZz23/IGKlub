@@ -72,7 +72,7 @@ header button {
   outline: none;
   border: none;
   font-size: 1rem;
-  padding-block:  1rem;
+  padding-block: 1rem;
   width: 100%;
 }
 
@@ -151,6 +151,7 @@ main section {
   text-align: center;
   align-items: center;
   color: #EEE;
+  font-size: 1rem;
 }
 
 .book-info .stars {
@@ -202,13 +203,17 @@ main section {
   transform: translateX(100%);
 }
 
-.profile a {
+.profile a, .profile span {
   color: gray;
   text-decoration: none;
   transition: all .3s ease-in-out;
 }
 
-.profile a i{
+.profile span:hover {
+  cursor: pointer;
+}
+
+.profile a i, .profile span i{
   width: 2rem;
   text-align: center;
   margin-right: .5rem;
@@ -246,8 +251,154 @@ main section {
   transition: all .3s ease-in-out;
 }
 
-/* FOOTER */
+/* FORMULARIO */
+.new-book {
+  width: 100%;
+  height: 100vh;
+  position: absolute;
+  top: 0;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  background-color: #00000080;
+  transition: all .3s ease-in-out;
+  z-index: 5;
+}
 
+.closeButton {
+  font-size: 3rem;
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin: 2rem;
+  background-color: transparent;
+  border: none;
+  color: gray;
+  transition: all .3s ease-in-out;
+}
+
+.closeButton:hover {
+  cursor: pointer;
+  color: white;
+}
+
+#newBookForm {
+  width: 50rem;
+  background-color: lightgray;
+  padding: 2rem;
+  border: 2px solid gray;
+  border-radius: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  box-shadow: .5rem .5rem 1rem #00000075;
+  transform: scale(0);
+  transition: all .3s ease-in-out;
+}
+
+#newBookForm .input-container {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  background-color: gray;
+}
+
+#newBookForm .input-container div, .alternative {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.alternative {
+  gap: 1rem;
+  opacity: 0;
+  transform: translateX(100%);
+  transition: all .3s ease-in-out;
+}
+
+.alternative-button {
+  width: 100%;
+  text-align: center;
+  font-size: 1rem;
+  color: black;
+  border: none;
+  background-color: transparent;
+  text-shadow: .5rem .5rem 1rem #00000050;
+}
+
+.alternative-button:hover {
+  cursor: pointer;
+}
+
+#newBookForm i:not(.alternative-button i) {
+  text-align: center;
+  width: 3rem;
+  padding-block: 1rem;
+  font-size: 1rem;
+  color: #eee;
+}
+
+#newBookForm input, #newBookForm select, #newBookForm textarea {
+  width: 100%;
+  height: 3rem;
+  padding-inline: .5rem;
+  outline: none;
+  border: none;
+  background-color: #eee;
+}
+
+#newBookForm textarea {
+  height: 17.5rem;
+  font-size: 1rem;
+  padding: .75rem;
+  resize: none;
+  outline: none;
+}
+  
+#newBookForm button {
+  width: 20%;
+  padding: .5rem 1rem;
+  border: 1px solid gray;
+  background-color: #eee;
+  color: black;
+  transition: ease-in-out .25s;
+}
+
+#newBookForm button:hover:not(.alternative-button) {
+  cursor: pointer;
+  box-shadow: 0 0 .5rem #00000050;
+}
+
+/* ESTILOS JS */
+.input_error{ border-right: 4px solid #E00A35; }
+
+.error {
+  width: 100%;
+  background-color: #E00A35;
+  color: #EEE;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  text-align: left;
+  padding-inline: 1rem;
+  border-radius: .375rem;
+  font-size: .8rem;
+}
+
+.error p {
+  hyphens: auto;
+  -webkit-hyphens: auto;
+}
+
+.error i {
+  width: auto;
+  padding-right: .5rem;
+}
+
+.hidden { display: none; }
+
+/* FOOTER */
 .footer {
   display: flex;
   flex-flow: row wrap;
@@ -379,32 +530,6 @@ main section {
   }
 }
 
-@media screen and (max-width: 540px) {
-  main section {
-    display: grid;
-    grid-template-columns: repeat(1, 1fr);
-  }
-
-
-  .profile {
-    right: 0;
-    border-left: 2px solid gray;
-    border-bottom-left-radius: 1rem;
-    transform: translateX(100%);
-    width: 80%;
-    height: 60%;
-  }
-  
-  .filters {
-    left: 0;
-    border-right: 2px solid gray;
-    border-bottom-right-radius: 1rem;
-    transform: translateX(-100%);
-    width: 80%;
-    height: 60%;
-  }
-} 
-
 /* ----------------------------------------------------------------------- */
 
 /* TABLET */
@@ -430,4 +555,12 @@ main section {
     grid-template-columns: repeat(1, 1fr);
     margin: 4rem 2rem;
   }
-} 
+
+  .filters, .profile {
+    font-size: 1rem;
+  }
+
+  #profile i, #filters i {
+    font-size: 1rem;
+  }
+}

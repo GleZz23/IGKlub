@@ -22,7 +22,6 @@
       echo ' <a class="back" href="management.php"><i class="fa-solid fa-house"></i> Administrazioara joan</a>';
     }
     ?>
-   
     <figure>
       <?php echo '<img src="../src/img/books/'.$results['id_libro'].'.jpg" alt="'.$results['titulo'].'">' ?>
     </figure>
@@ -50,33 +49,31 @@
           ?>
         </div>
       </header>
-      <div class="middle-container">
       <!-- Sinopsis -->
-        <div class="sinopsis">
+      <div class="sinopsis">
+        <?php
+          echo '<p>'.$results['sinopsis'].'</p>';
+        ?>
+      </div>
+      <!-- Demas datos -->
+      <div class="more-info">
+        <div>
+          <h3>Formatua:</h3>
           <?php
-            echo '<p>'.$results['sinopsis'].'</p>';
+            echo '<p>'.$results['formato'].'</p>';
           ?>
         </div>
-        <!-- Demas datos -->
-        <div class="more-info">
-          <div>
-            <h3>Formatua:</h3>
-            <?php
-              echo '<p>'.$results['formato'].'</p>';
-            ?>
-          </div>
-          <div>
-            <h3>Adina:</h3>
-            <?php
-              echo '<p>'.$results['edad_media'].'</p>';
-            ?>
-          </div>
-          <div>
-            <h3>Irakurleak:</h3>
-            <?php
-              echo '<p>'.$results['num_lectores'].'</p>';
-            ?>
-          </div>
+        <div>
+          <h3>Adina:</h3>
+          <?php
+            echo '<p>'.$results['edad_media'].'</p>';
+          ?>
+        </div>
+        <div>
+          <h3>Irakurleak:</h3>
+          <?php
+            echo '<p>'.$results['num_lectores'].'</p>';
+          ?>
         </div>
       </div>
       <!-- Acciones -->
