@@ -273,8 +273,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['form-action'])) {
 
   <!-- NUEVO LIBRO -->
   <div class="new-book">
-  <button class="closeButton"><i class="fa-solid fa-x"></i></button>
   <form id="newBookForm" action="" enctype="multipart/form-data" method="post">
+    <button class="closeButton"><i class="fa-solid fa-x"></i></button>
     <h1>Igo liburu bat</h1>
     <!-- Titulo del libro -->
     <div class="input-container">

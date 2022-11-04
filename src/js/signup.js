@@ -21,13 +21,17 @@ const campos = {
 	email: false,
 	name: false,
 	surnames: false,
-	phone: true,
+	phone: false,
 	date: false,
     password: false,
     password2: false
 }
 
-const form_validation= (e)=>{
+const form_validation = (e) => {
+    if (document.querySelector('#role').value === 'Ikasle') {
+        campos.phone = true;
+        campos.date = true;
+    }
     switch (e.target.name) {
 
         case "nickname":
