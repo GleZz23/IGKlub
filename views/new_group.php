@@ -10,18 +10,25 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
   $colegio = $_REQUEST['school'];
   $nivel = $_REQUEST['level'];
   $curso = $_REQUEST['curso'];
+  
+  $query = $miPDO->prepare('SELECT count(*) FROM grupo');
+  $query->execute();
+  $count = $query->fetch();
+
+  // $codigo = $count;
 
 
 
-  $query = $miPDO->prepare('INSERT INTO Grupo (nombre, nivel, curso) VALUES (:nombre, :nivel, :curso)');
-  $query->execute(['nombre' => $nombre,'nivel' => $nivel,'curso' => $curso]);
+  $query = $miPDO->prepare('INSERT INTO grupo (codigo, nombre) VALUES (:codigo, :nombre)');
+  $query->execute(['codigo' => $codigo['count'], 'nombre' => $nombre]);
 
-  $query = $miPDO->prepare('SELECT codigo FROM grupo WHERE nombre = :nombre');
-  $query->execute(['nombre' => $nombre]);
-  $id = $query->fetch();
 
-  $query = $miPDO->prepare('INSERT INTO solicitud_grupo (nickname, cod_grupo, estado) VALUES (:nickname, :id,"espera")');
-  $query->execute(['nickname' => $_SESSION['nickname'], 'cod_grupo' => $id['codigo']]);
+  // $query = $miPDO->prepare('SELECT codigo FROM grupo WHERE codigo = :codigo');
+  // $query->execute(['codigo' => $codigo]);
+  // $id = $query->fetch();
+
+  $query = $miPDO->prepare('INSERT INTO solicitud_grupo (nickname, cod_grupo, estado) VALUES (:nickname, :codigo,"aceptado")');
+  $query->execute(['nickname' => $_SESSION['nickname'], 'codigo' => $codigo]);
 
 
 }
