@@ -50,7 +50,7 @@ create table if not exists libro (
   id_libro int(5) auto_increment primary key,
   titulo varchar(255) not null,
   escritor varchar(255) not null,
-  sinopsis varchar(2300) not null,
+  sinopsis varchar(2300),
   formato enum('Nobela','Komikia','Nobela grafikoa','Manga') not null,
   etiqueta varchar(255),
   portada varchar(255),
