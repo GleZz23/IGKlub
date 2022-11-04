@@ -7,7 +7,7 @@
 body {
   font-family: Arial, Helvetica, sans-serif;
   background-image: url(../src/img/background.jpg);
-  margin: 4rem;
+  /* margin: 4rem; */
 }
   
 main {
@@ -15,6 +15,7 @@ main {
   justify-content: center;
   align-items: center;
   margin-block: 4rem;
+  padding: 4rem;
 }
 
 /* Portada del libro */
@@ -107,6 +108,10 @@ main section { margin-inline: 2rem; }
 }
 
 /* Reviews */
+.reviews {
+  padding: 4rem;
+}
+
 .reviews header {
   width: 100%;
   display: flex; 
@@ -279,7 +284,7 @@ main section { margin-inline: 2rem; }
   margin: 2rem;
   background-color: transparent;
   border: none;
-  color: gray;
+  color: black;
   transition: all .3s ease-in-out;
 }
 
@@ -310,34 +315,13 @@ main section { margin-inline: 2rem; }
   background-color: gray;
 }
 
-#rateBookForm .input-container div, .alternative {
+#rateBookForm .input-container div {
   display: flex;
   flex-direction: column;
   width: 100%;
 }
 
-.alternative {
-  gap: 1rem;
-  opacity: 0;
-  transform: translateX(100%);
-  transition: all .3s ease-in-out;
-}
-
-.alternative-button {
-  width: 100%;
-  text-align: center;
-  font-size: 1rem;
-  color: black;
-  border: none;
-  background-color: transparent;
-  text-shadow: .5rem .5rem 1rem #00000050;
-}
-
-.alternative-button:hover {
-  cursor: pointer;
-}
-
-#rateBookForm i:not(.alternative-button i) {
+#rateBookForm i {
   text-align: center;
   width: 3rem;
   padding-block: 1rem;
@@ -369,11 +353,6 @@ main section { margin-inline: 2rem; }
   background-color: #eee;
   color: black;
   transition: ease-in-out .25s;
-}
-
-#rateBookForm button:hover:not(.alternative-button) {
-  cursor: pointer;
-  box-shadow: 0 0 .5rem #00000050;
 }
 
 /* ESTILOS JS */

@@ -247,8 +247,8 @@
 
   <!-- VALORAR LIBRO -->
   <div class="rate-book">
+  <button class="closeButton"><i class="fa-solid fa-x"></i></button>
   <form id="rateBookForm" action="" method="post">
-    <button class="closeButton"><i class="fa-solid fa-x"></i></button>
     <h1><?php echo $title ?> baloratu</h1>
     <!-- Edad en la que leyo el libro -->
     <div class="input-container">
