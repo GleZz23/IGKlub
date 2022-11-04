@@ -25,13 +25,13 @@ const filters = document.querySelector('.filters');
 const closeFilters = document.querySelector('.close-filters');
 
 filtersButton.addEventListener('mouseover', () => {
-  filtersButton.style.transform = 'rotate(-10deg)';
+  filtersButton.style.transform = 'scale(1.1)';
   filtersButton.style.textShadow = ".3rem .3rem .3rem #00000050";
   filtersButton.style.cursor = "pointer";
 });
 
 filtersButton.addEventListener('mouseleave', () => {
-  filtersButton.style.transform = 'rotate(0)';
+  filtersButton.style.transform = 'scale(1)';
   filtersButton.style.textShadow = "none";
 });
 
@@ -65,13 +65,13 @@ const profileLinks = document.querySelectorAll('.profile a, .profile span');
 const closeProfile = document.querySelector('.close-profile');
 
 profileButton.addEventListener('mouseover', () => {
-  profileButton.style.transform = 'rotate(-10deg)';
+  profileButton.style.transform = 'scale(1.1)';
   profileButton.style.textShadow = ".3rem .3rem .3rem #00000050";
   profileButton.style.cursor = "pointer";
 });
 
 profileButton.addEventListener('mouseleave', () => {
-  profileButton.style.transform = 'rotate(0)';
+  profileButton.style.transform = 'scale(1)';
   profileButton.style.textShadow = "none";
 });
 
