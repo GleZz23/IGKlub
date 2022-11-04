@@ -190,10 +190,10 @@ INSERT INTO `idioma`(`id_idioma`, `nombre`) VALUES
   ('2','Euskera'),
   ('3','Ingelesa'),
   ('4','Frantsesa'),
-  ('5','Portugesa'),
-  ('6','Aleman'),
-  ('7','Txinera'),
-  ('8','Errusiera');
+  ('5','Aleman'),
+  ('6','Ukrainera'),
+  ('7','Errumaniera'),
+  ('8','Txinera');
 
 -- BORRAR DATOS DE ALUMNOS
 DROP EVENT IF EXISTS `delete_user`;

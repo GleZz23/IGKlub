@@ -8,6 +8,51 @@
   $query = $miPDO->prepare('SELECT libro.*, solicitud_libro.estado AS estado FROM libro, solicitud_libro WHERE libro.id_libro = :book AND libro.id_libro = solicitud_libro.id_libro');
   $query->execute(['book' => $book]);
   $results = $query->fetch();
+
+  $title = $results['titulo'];
+
+  $book_language_error = false;
+  $rate_book = true;
+
+  if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['form-action'])) {
+    
+    // Si el idioma es por defecto
+    if ($_REQUEST['language'] === '-') {
+        $rate_book = false;
+        $book_language_error = true;
+    }
+
+    if ($rate_book) {
+      $query = $miPDO->prepare('INSERT INTO valoracion (nickname, nota, edad, idioma, id_libro, fecha, estado) VALUES (:nickname, :nota, :edad, :idioma, :id_libro, NOW(), "espera")');        
+      $query->execute([
+        'nickname' => $_SESSION['nickname'],
+        'nota' => $_REQUEST['note'],
+        'edad' => ($_REQUEST['age']),
+        'idioma' => $_REQUEST['language'],
+        'id_libro' => $_REQUEST['liburua']
+      ]);
+
+      if ($_SESSION['role'] !== 'ikasle') {
+        $id_valoracion = $miPDO->lastInsertId();
+        $query = $miPDO->prepare('UPDATE valoracion SET estado = "aceptado" WHERE id_valoracion = :id_valoracion');        
+        $query->execute(['id_valoracion' => $id_valoracion]);
+      }
+
+      $query = $miPDO->prepare('INSERT INTO comentario (nickname, id_libro, mensaje, estado, fecha) VALUES (:nickname, :id_libro, :mensaje, "espera", NOW())');
+      $query->execute([
+        'nickname' => $_SESSION['nickname'],
+        'id_libro' => $_REQUEST['liburua'],
+        'mensaje' => nl2br($_REQUEST['opinion'])
+      ]);
+
+      if ($_SESSION['role'] !== 'ikasle') {
+        $query = $miPDO->prepare('UPDATE comentario SET estado = "aceptado" WHERE nickname = :nickname AND id_libro = :id_libro AND mensaje = :mensaje');
+        $query->execute(['nickname' => $_GET['nickname'], 'id_libro' => $_GET['book'], 'mensaje' => nl2br($_GET['mensaje'])]);
+      }
+  
+      
+    }
+  }
 ?>
     <link rel="stylesheet" href="../styles/book_info.css">
     <title> <?php echo $results['titulo'] ?> | IGKlub</title>
@@ -77,9 +122,21 @@
         </div>
       </div>
       <!-- Acciones -->
-      <div class="actions">
-        <a class="rate-book" href="#"><i class="fa-solid fa-star"></i> Liburu hau baloratzea</a> <!-- Cambiar enlace -->
-      </div>
+      <?php
+        $query = $miPDO->prepare('SELECT * FROM valoracion WHERE nickname = :nickname AND id_libro = :id_libro');
+        $query->execute(['nickname' => $_SESSION['nickname'], 'id_libro' => $book]);
+        $results = $query->fetch();
+
+        if ($results) {
+          echo '<div class="actions">
+                  <div><i class="fa-solid fa-star"></i> Liburu hau baloratu duzu</div>
+                </div>';
+        } else {
+          echo '<div class="actions">
+                  <div class="rateBookButton"><i class="fa-regular fa-star"></i> Liburu hau baloratzea</div>
+                </div>';
+        }
+      ?>
     </section>
   </main>
   <!-- Reviews -->
@@ -97,7 +154,7 @@
       </header>
       <div class="mensaje">
         <form action="../modules/new_comment.php" method="get">
-          <textarea id="mensaje" name="mensaje" autofocus required autocomplete="off" maxlength="2300"></textarea>
+          <textarea placeholder="Liburu honi buruz uste dut..." id="mensaje" name="mensaje" autofocus required autocomplete="off" maxlength="2300"></textarea>
           <input type="hidden" name="book" value="<?php echo $_REQUEST['liburua'] ?>">
           <input type="hidden" name="nickname" value="<?php echo $_SESSION['nickname'] ?>">
           <input type="hidden" name="id_comment" value="<?php echo $comment['id_comentario'] ?>">
@@ -143,7 +200,7 @@
         </header>
         <div class="mensaje">
           <form action="../modules/new_answer.php" method="get">
-            <textarea id="mensaje" name="mensaje" autofocus required autocomplete="off" maxlength="2300"></textarea>
+            <textarea placeholder="Erantzuna eman" id="mensaje" name="mensaje" autofocus required autocomplete="off" maxlength="2300"></textarea>
             <input type="hidden" name="book" value="<?php echo $_REQUEST['liburua'] ?>">
             <input type="hidden" name="nickname" value="<?php echo $_SESSION['nickname'] ?>">
             <input type="hidden" name="id_comment" value="<?php echo $comment['id_comentario'] ?>">
@@ -187,5 +244,74 @@
     ?>
     </section>
   </section>
+
+  <!-- VALORAR LIBRO -->
+  <div class="rate-book">
+  <form id="rateBookForm" action="" method="post">
+    <button class="closeButton"><i class="fa-solid fa-x"></i></button>
+    <h1><?php echo $title ?> baloratu</h1>
+    <!-- Edad en la que leyo el libro -->
+    <div class="input-container">
+      <i class="fa-solid fa-calendar-day"></i>
+      <input type="number" name="age" id="age" placeholder="Zenbat urterekin irakurri zenuen liburua?" min="5" max="70">
+    </div>
+    <!-- Error: Edad -->
+    <div class="error hidden" id="age-error">
+        <i class="fa-solid fa-circle-exclamation"></i>
+        <p>Adina 5 eta 70 artekoa izan behar da.</p>
+    </div>
+    <!-- Nota -->
+    <div class="input-container">
+        <input type="hidden" name="note" value="-">
+    </div>
+    <!-- Error: Nota -->
+    <div class="error hidden" id="note-error">
+        <i class="fa-solid fa-circle-exclamation"></i>
+        <p>Nahitaezkoa da liburuari nota ematea.</p>
+    </div>
+    <!-- Opinion -->
+    <div class="input-container">
+      <i class="fa-solid fa-comment"></i>
+      <textarea placeholder="Liburu honi buruz uste dut..." id="opinion" name="opinion" autocomplete="off" maxlength="2300"></textarea>
+    </div>
+    <!-- Error: Opinion -->
+    <div class="error hidden" id="sinopsis-error">
+        <i class="fa-solid fa-circle-exclamation"></i>
+        <p>Sinopsia nahitaezkoa da.</p>
+    </div>
+    <!-- Idioma -->
+    <div class="input-container">
+        <i class="fa-solid fa-language"></i>
+        <select name="language" id="language">
+            <option value="-" selected>Zein hizkuntzatan irakurri zenuen liburua?</option>
+            <?php
+            $query = $miPDO->prepare('SELECT * FROM idioma ORDER BY id_idioma ASC');
+            $query->execute();
+            $results = $query->fetchAll();
+
+            foreach ($results as $position => $language) {
+                echo '<option value="'.$language['id_idioma'].'">'.$language['nombre'].'</option>';
+            }
+            ?>
+        </select>
+    </div>
+    <!-- Error: Idioma -->
+    <?php
+        if ($book_language_error) {
+        echo '<div class="error php-error">
+                <i class="fa-solid fa-circle-exclamation"></i>
+                <p>Aukeratu hizkuntza bat.</p>
+              </div>';
+        }
+    ?>
+    <!-- Error: Formulario -->
+    <div class="error hidden" id="form-error">
+        <i class="fa-solid fa-circle-exclamation"></i>
+        <p>Bete formularioa behar bezala.</p>
+    </div>
+    <input type="hidden" name="form-action" value="ratebook">
+    <button>Liburua baloratu</button>
+  </form>
+  </div>
 </body>
 </html>

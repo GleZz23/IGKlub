@@ -1,3 +1,25 @@
+// MODAL FORMULARIO VALORAR LIBRO
+const rateBookButton = document.querySelector('.rateBookButton');
+const closeButton = document.querySelector('.closeButton');
+
+rateBookButton.addEventListener('click', () => {
+  window.scrollTo(0,0);
+  document.querySelector('body').style.overflowY = "hidden";
+  document.querySelector('.rate-book').style.display = "flex";
+  setTimeout(() => {
+    document.getElementById('rateBookForm').style.transform = "scale(1)";
+  }, 10);
+});
+
+closeButton.addEventListener('click', () => {
+  document.getElementById('rateBookForm').style.transform = "scale(0)";
+  setTimeout(() => {
+    document.querySelector('.rate-book').style.display = "none";
+    document.querySelector('body').style.overflowY = "scroll";
+  }, 500);
+});
+
+// COMENTARIO
 const reviewForm = document.querySelector('.reviews .user-comment');
 const reviewButton = document.querySelector('.reviews header button');
 
@@ -21,6 +43,7 @@ reviewButton.addEventListener('click', () => {
   }
 });
 
+// RESPUESTA
 const answerButton = document.querySelectorAll('.main-comment header .answer-button');
 
 answerButton.forEach((button) => {

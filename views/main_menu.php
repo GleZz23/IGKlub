@@ -424,7 +424,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['form-action'])) {
         <p>Bete formularioa behar bezala.</p>
     </div>
     <input type="hidden" name="form-action" value="newbook">
-    <button>Igo liburua</button>
+    <button>Baloratu</button>
   </form>
   </div>
 </body>
