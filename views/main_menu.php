@@ -118,6 +118,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['form-action'])) {
               <option value="DESC">Beheranzkoa</option>
             </select>
             <button>Iragazi</button>
+            <div class="close-filters">Itxi <i class="fa-solid fa-angles-right"></i></di>
           </form>
         </aside>
         <!-- BARRA DE BUSQUEDA -->
@@ -145,6 +146,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['form-action'])) {
           }
           echo '<a href="../modules/logout.php"><i class="fa-solid fa-user-slash"></i>Saioa itxi</a>';
           ?>
+          <button class="close-profile">Itxi <i class="fa-solid fa-angles-right"></i></button>
         </aside>
       </section>
     </header>

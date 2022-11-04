@@ -22,6 +22,7 @@ bookContainer.forEach((book) => {
 // FILTROS
 const filtersButton = document.querySelector('#filters');
 const filters = document.querySelector('.filters');
+const closeFilters = document.querySelector('.close-filters');
 
 filtersButton.addEventListener('mouseover', () => {
   filtersButton.style.transform = 'rotate(-10deg)';
@@ -48,10 +49,18 @@ filters.addEventListener('mouseleave', () => {
   }, 500);
 })
 
+closeFilters.addEventListener('click', () => {
+  filters.style.transform = "translateX(-100%)";
+  setTimeout(() => {
+    filters.style.display = "none";
+  }, 500);
+});
+
 // PERFIL
 const profileButton = document.querySelector('#profile');
 const profile = document.querySelector('.profile');
 const profileLinks = document.querySelectorAll('.profile a, .profile span');
+const closeProfile = document.querySelector('.close-profile');
 
 profileButton.addEventListener('mouseover', () => {
   profileButton.style.transform = 'rotate(-10deg)';
@@ -77,6 +86,13 @@ profile.addEventListener('mouseleave', () => {
     profile.style.display = "none";
   }, 500);
 })
+
+closeProfile.addEventListener('click', () => {
+  profile.style.transform = "translateX(100%)";
+  setTimeout(() => {
+    profile.style.display = "none";
+  }, 500);
+});
 
 profileLinks.forEach((link) => {
   link.addEventListener('mouseover', () => {

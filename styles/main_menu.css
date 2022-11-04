@@ -249,7 +249,7 @@ main section {
   font-size: 1rem;
 }
 
-.filters button {
+.filters button:not(.close-filters) {
   font-size: 1rem;
   text-decoration: none;
   padding: .5rem 1rem;
@@ -257,6 +257,11 @@ main section {
   background-color: #eee;
   color: black;
   transition: all .3s ease-in-out;
+}
+
+.close-profile, .close-filters {
+  font-size: 1rem;
+  justify-content: center;
 }
 
 /* FORMULARIO */
@@ -404,7 +409,7 @@ main section {
   padding-right: .5rem;
 }
 
-.hidden { display: none; }
+.hidden, .close-profile, .close-filters { display: none; }
 
 /* FOOTER */
 .footer {
@@ -542,21 +547,59 @@ main section {
 
 /* TABLET */
 @media screen and (max-width: 1280px) {
+  main section {
+    margin: 4rem 4rem;
+  }
 
+  .filters, .profile {
+    padding: 1rem;
+    width: 100%;
+    border-radius: 0;
+    border-right: none;
+    border-left: none;
+  }
+
+  .close-profile, .close-filters {
+    display: flex;
+  }
 } 
 
 /* INTERMEDIO */
 @media screen and (max-width: 940px) {
+  main section {
+    margin: 4rem 3rem;
+  }
 
+  header figure {
+    width: 30%;
+  }
 }
 
 /* MOVIL */
 @media screen and (max-width: 600px) {
+  main section {
+    grid-template-columns: repeat(1, 1fr);
+    margin: 4rem 2rem;
+  }
+
+  header {
+    padding: 1.5rem 1rem;
+  }
+
+  header figure {
+    width: 50%;
+  }
+
+  header section {
+    gap: 1rem;
+  }
+
+  .search-bar {
+    padding-inline: 1rem;
+  }
+
   .filters, .profile {
     font-size: 1rem;
   }
 
-  #profile i, #filters i {
-    font-size: 1rem;
-  }
 }
