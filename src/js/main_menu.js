@@ -3,10 +3,10 @@ const bookContainer = document.querySelectorAll('.book-container');
 
 bookContainer.forEach((book) => {
   book.addEventListener('mouseover', () => {
-    book.style.transform = "scale(1.2)";
+    book.style.transform = "scale(1.1)";
     book.style.zIndex = 2;
     book.style.boxShadow = ".5rem .5rem 1rem rgba(0, 0, 0, 0.7)";
-    book.firstElementChild.style.transform = "scale(1.5)";
+    book.firstElementChild.style.transform = "scale(1.4)";
     book.lastElementChild.style.transform = "translateY(0)";
   });
 
@@ -95,7 +95,7 @@ const newBookButton = document.querySelector('.newBookButton');
 const closeButton = document.querySelector('.closeButton');
 
 newBookButton.addEventListener('click', () => {
-  window.scrollTo(0,0)
+  window.scrollTo(0,0);
   document.querySelector('body').style.overflowY = "hidden";
   document.querySelector('.new-book').style.display = "flex";
   setTimeout(() => {
