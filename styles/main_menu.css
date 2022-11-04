@@ -112,9 +112,17 @@ main > h1 {
 }
 
 main section {
+  --grid-layout-gap: 4rem;
+  --grid-column-count: 5;
+  --grid-item--min-width: 250px;
+
+  --gap-count: calc(var(--grid-column-count) - 1);
+  --total-gap-width: calc(var(--gap-count) * var(--grid-layout-gap));
+  --grid-item--max-width: calc((100% - var(--total-gap-width)) / var(--grid-column-count));
+
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  grid-gap: 4rem 6rem;
+  grid-template-columns: repeat(auto-fill, minmax(max(var(--grid-item--min-width), var(--grid-item--max-width)), 1fr));
+  grid-gap: var(--grid-layout-gap);
   margin: 4rem 6rem;
 }
 
@@ -534,28 +542,16 @@ main section {
 
 /* TABLET */
 @media screen and (max-width: 1280px) {
-  main section {
-    grid-template-columns: repeat(3, 1fr);
-    grid-gap: 4rem 6rem;
-    margin: 4rem 4rem;
-  }
+
 } 
 
 /* INTERMEDIO */
 @media screen and (max-width: 940px) {
-  main section {
-    grid-template-columns: repeat(2, 1fr);
-    margin: 4rem 3rem;
-  }
+
 }
 
 /* MOVIL */
 @media screen and (max-width: 600px) {
-  main section {
-    grid-template-columns: repeat(1, 1fr);
-    margin: 4rem 2rem;
-  }
-
   .filters, .profile {
     font-size: 1rem;
   }
