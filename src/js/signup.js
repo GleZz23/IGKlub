@@ -21,7 +21,7 @@ const campos = {
 	email: false,
 	name: false,
 	surnames: false,
-	phone: false,
+	phone: true,
 	date: false,
     password: false,
     password2: false
