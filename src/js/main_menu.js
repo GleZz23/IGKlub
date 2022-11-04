@@ -90,11 +90,12 @@ profileLinks.forEach((link) => {
   });
 });
 
-// POPUP FORMULARIO NUEVO LIBRO
+// MODAL FORMULARIO NUEVO LIBRO
 const newBookButton = document.querySelector('.newBookButton');
 const closeButton = document.querySelector('.closeButton');
 
 newBookButton.addEventListener('click', () => {
+  window.scrollTo(0,0)
   document.querySelector('body').style.overflowY = "hidden";
   document.querySelector('.new-book').style.display = "flex";
   setTimeout(() => {
