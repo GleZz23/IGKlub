@@ -30,7 +30,6 @@ const campos = {
 const form_validation = (e) => {
     if (document.querySelector('#role').value === 'Ikasle') {
         campos.phone = true;
-        campos.date = true;
     }
     switch (e.target.name) {
 
