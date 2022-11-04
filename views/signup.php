@@ -212,7 +212,7 @@
       <p>Bete formularioa behar bezala.</p>
     </div>
     <!-- Rol -->
-    <input type="hidden" id="role" name="role" value="<?php $_GET['role'] ?>">
+    <input type="hidden" id="role" name="role" value="<?php echo $_GET['role']?>">
     <button>Erregistratu</button>
     <p>Baduzu kontu bat? <a href="login.php">Saioa hasi</a></p>
   </form>
