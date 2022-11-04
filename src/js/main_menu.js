@@ -51,7 +51,7 @@ filters.addEventListener('mouseleave', () => {
 // PERFIL
 const profileButton = document.querySelector('#profile');
 const profile = document.querySelector('.profile');
-const profileLinks = document.querySelectorAll('.profile a');
+const profileLinks = document.querySelectorAll('.profile a, .profile span');
 
 profileButton.addEventListener('mouseover', () => {
   profileButton.style.transform = 'rotate(-10deg)';
@@ -88,4 +88,149 @@ profileLinks.forEach((link) => {
     link.style.color = "gray";
     link.style.transform = "translateX(0)";
   });
+});
+
+// POPUP FORMULARIO NUEVO LIBRO
+const newBookButton = document.querySelector('.newBookButton');
+const closeButton = document.querySelector('.closeButton');
+
+newBookButton.addEventListener('click', () => {
+  document.querySelector('body').style.overflowY = "hidden";
+  document.querySelector('.new-book').style.display = "flex";
+  setTimeout(() => {
+    document.getElementById('newBookForm').style.transform = "scale(1)";
+  }, 10);
+});
+
+closeButton.addEventListener('click', () => {
+  document.getElementById('newBookForm').style.transform = "scale(0)";
+  setTimeout(() => {
+    document.querySelector('.new-book').style.display = "none";
+    document.querySelector('body').style.overflowY = "scroll";
+  }, 500);
+});
+
+// FORMULARIO
+const form = document.getElementById('newBookForm');
+const inputs = document.querySelectorAll('#newBookForm input, textarea');
+const errors = document.querySelectorAll('.php-error');
+
+setTimeout(() => {
+    errors.forEach((error) => {error.classList.add('hidden')});
+}, 5000);
+
+const regexs = {
+    title: /^([A-Za-zÀ-ÖØ-öø-ÿ0-9.,:;\- ]{1,})+$/,
+    writter: /^([A-Za-zÀ-ÖØ-öø-ÿ., ]{1,})+$/
+}
+
+// Campos del formulario
+const campos = {
+	title: false,
+	writter: false,
+  sinopsis: false,
+  title2:false
+}
+
+const form_validation= (e)=>{
+  switch (e.target.name) {
+
+    case "title":
+      if (regexs.title.test(e.target.value)) {
+        document.getElementById('title').classList.remove('input_error');
+        document.getElementById('title-error').classList.add('hidden');
+        campos.title = true;
+      } else if (e.target.value === '') {
+        document.getElementById('title').classList.remove('input_error');
+        document.getElementById('title-error').classList.add('hidden');
+        campos.title = false;
+      } else {
+        document.getElementById('title').classList.add('input_error');
+        document.getElementById('title-error').classList.remove('hidden');
+        campos.title = false;
+      }
+      break;
+
+    case "writter":
+      if (regexs.writter.test(e.target.value)){
+        document.getElementById('writter').classList.remove('input_error');
+        document.getElementById('writter-error').classList.add('hidden');
+        campos.writter = true;
+      } else if (e.target.value === '') {
+        document.getElementById('writter').classList.remove('input_error');
+        document.getElementById('writter-error').classList.add('hidden');
+        campos.writter = false;
+      } else {
+        document.getElementById('writter').classList.add('input_error');
+        document.getElementById('writter-error').classList.remove('hidden');
+        campos.writter = false;
+      }
+      break;
+
+    case "sinopsis":
+      if (e.target.value === '') {
+        document.getElementById('sinopsis').classList.remove('input_error');
+        document.getElementById('sinopsis-error').classList.add('hidden');
+        campos.sinopsis = false;
+      } else {
+        document.getElementById('sinopsis').classList.remove('input_error');
+        document.getElementById('sinopsis-error').classList.add('hidden');
+        campos.sinopsis = true;
+      }
+      break;
+
+    case "alternative-title":
+      if (regexs.title.test(e.target.value)) {
+        document.getElementById('alternative-title').classList.remove('input_error');
+        document.getElementById('alternative-title-error').classList.add('hidden');
+        campos.title2 = true;
+      } else if (e.target.value === '') {
+        document.getElementById('alternative-title').classList.remove('input_error');
+        document.getElementById('alternative-title-error').classList.add('hidden');
+        campos.title2 = false;
+      } else {
+        document.getElementById('alternative-title').classList.add('input_error');
+        document.getElementById('alternative-title-error').classList.remove('hidden');
+        campos.title2 = false;
+      }
+      break;
+    }
+}
+
+inputs.forEach((input) => {
+  input.addEventListener('keyup', form_validation);
+  input.addEventListener('blur', form_validation);
+});
+
+form.addEventListener('submit', (e) => {    
+  if (!campos.title || !campos.writter || !campos.sinopsis) {
+    e.preventDefault();
+    document.getElementById('form-error').classList.remove('hidden');
+    setTimeout(() => {
+			document.getElementById('form-error').classList.add('hidden');
+		}, 3500);
+  }
+});
+
+// IDIOMA ALTERANTIVO
+const alternativeButton = document.querySelector('.alternative-button');
+
+alternativeButton.addEventListener('click', () => {
+  const alternative = document.querySelector('.alternative');
+
+  if (window.getComputedStyle(alternative).getPropertyValue('display') === "none") {
+    alternativeButton.innerHTML = '<i class="fa-solid fa-xmark"></i> Liburu hau beste hizkuntzan irakurri dut';
+    alternative.classList.remove('hidden');
+    setTimeout(() => {
+      alternative.style.opacity = "1";
+      alternative.style.transform = "translateX(0)";
+    }, 10);
+  } else if (window.getComputedStyle(alternative).getPropertyValue('display') === "flex") {
+    alternativeButton.innerHTML = '<i class="fa-solid fa-arrow-down"></i> Liburu hau beste hizkuntzan irakurri dut';
+    alternative.style.opacity = "0";
+    alternative.style.transform = "translateX(100%)";
+    setTimeout(() => {
+      alternative.classList.add('hidden');
+    }, 500);
+  }
 });

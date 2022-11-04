@@ -87,7 +87,10 @@ main section {
 .accept-comments,
 .accept-answers {
   display: flex;
+  flex-direction: column;
   justify-content: center;
+  align-items: center;
+  gap: 2rem;
 }
 
 .accept-teachers table,
