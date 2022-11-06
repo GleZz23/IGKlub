@@ -134,7 +134,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['form-action'])) {
         </button>
         <aside class="profile">
           <?php
-          echo '<h1>'.$_SESSION['nickname'].'</h1>';
+          echo '<figure><img src="../src/img/profile/'.$_SESSION['profile_img'].'"></figure>';
           echo '<a href="main_menu.php"><i class="fa-solid fa-house"></i>Hasiera</a>
                 <span class="newBookButton"><i class="fa-solid fa-book"></i>Igo liburu bat</span>
                 <a href="personal_area.php"><i class="fa-solid fa-user"></i>Area pertsonala</a>';
