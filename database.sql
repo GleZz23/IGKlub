@@ -20,6 +20,7 @@ create table if not exists usuario (
   rol enum('admin', 'irakasle', 'ikasle') not null,
   id_centro int(5),
   cod_grupo char(5),
+  imagen varchar(255),
   estado enum('aceptado','denegado','espera') default 'espera' not null,
   foreign key (id_centro) references centro(id_centro) on delete cascade
 );
