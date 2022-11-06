@@ -7,9 +7,36 @@
   $school_error = false;
   $phone_error = false;
 
+  $type_error = false;
+  $size_error = false;
+  $format_error = false;
+
   $signup = true;
 
   if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $file = $_FILES['profile'];
+
+    $imageFileType = strtolower(pathinfo($file['name'], PATHINFO_EXTENSION));
+    $image = getimagesize($file['tmp_name']);
+
+    // No es una imagen
+    if (!$image) {
+      $type_error = true;
+      $signup = false;
+    }
+    
+    // Tamaño no valido
+    if ($file['size'] > 5000000) {
+      $size_error = true;
+      $signup = false;
+    }
+    
+    // Formato no valido
+    if (!in_array($imageFileType, ['jpg', 'jpeg', 'png'])) {
+      $format_error = true;
+      $signup = false;
+    }
+
     $nickname = $_POST["nickname"];
     $email = $_POST["email"];
     $name = $_POST["name"];
@@ -58,13 +85,17 @@
     // Si el registro es valido
     if ($signup) {
       // Inserto el usuario en la base de datos
-      $query = $miPDO->prepare('INSERT INTO usuario (nickname, email, nombre, apellidos, fecha_nacimiento, contrasena, rol) VALUES (:nickname, :email, :name, :surnames, :date, :password, :role)');
-      $query->execute(['nickname' => $nickname, 'email' => $email, 'name' => $name, 'surnames' => $surnames, 'date' => $date, 'password' => $password, 'role' => $_GET['role']]);
+      $query = $miPDO->prepare('INSERT INTO usuario (nickname, email, nombre, apellidos, fecha_nacimiento, contrasena, rol, imagen) VALUES (:nickname, :email, :name, :surnames, :date, :password, :role, :imagen)');
+      $query->execute(['nickname' => $nickname, 'email' => $email, 'name' => $name, 'surnames' => $surnames, 'date' => $date, 'password' => $password, 'role' => $_GET['role'], 'imagen' => $nickname.'.'.$imageFileType]);
 
       if ($role === 'Irakasle') {
         $query = $miPDO->prepare('UPDATE usuario SET telefono = :phone ,id_centro = :school WHERE nickname = :nickname;');
         $query->execute(['phone' => $phone, 'school' => $school, 'nickname' => $nickname]);
       }
+
+      $rute = '../src/img/profile/'.$nickname.'.jpg';
+      move_uploaded_file($file['tmp_name'], $rute);
+
       header('Location: ../views/login.php');
     }
   }
@@ -92,6 +123,32 @@
       echo '<div class="error php-error">
               <i class="fa-solid fa-circle-exclamation"></i>
               <p>Nickname hau dagoeneko erabiltzen ari da. Saiatu beste bat.</p>
+            </div>';
+    }
+    ?>
+    <!-- Imagen de perfil -->
+    <div class="input-container">
+        <i class="fa-solid fa-camera-retro"></i>
+        <input type="text" name="profile" id="profile" placeholder="Profileko argazkia" accept=".jpg,.jpeg,.png" onfocus="(this.type='file')">
+    </div>
+    <!-- Error: Imagen de perfil -->
+    <?php
+    if ($type_error) {
+    echo '<div class="error php-error">
+            <i class="fa-solid fa-circle-exclamation"></i>
+            <p>Artxiboak argazki bat izan behar da.</p>
+        </div>';
+    }
+    if ($size_error) {
+        echo '<div class="error php-error">
+                <i class="fa-solid fa-circle-exclamation"></i>
+                <p>Argazkia 5MB baino txikiagoa izan behar da.</p>
+            </div>';
+    }
+    if ($format_error) {
+        echo '<div class="error php-error">
+                <i class="fa-solid fa-circle-exclamation"></i>
+                <p>Argazkia JPG, JPEG edo PNG formatua izan behar da.</p>
             </div>';
     }
     ?>
