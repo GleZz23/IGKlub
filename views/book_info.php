@@ -11,7 +11,6 @@
 
   $title = $results['titulo'];
 
-  $book_language_error = false;
   $rate_book = true;
 
   if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['form-action'])) {
@@ -23,13 +22,14 @@
     }
 
     if ($rate_book) {
+      // VALORACION DEL LIBRO
       $query = $miPDO->prepare('INSERT INTO valoracion (nickname, nota, edad, idioma, id_libro, fecha, estado) VALUES (:nickname, :nota, :edad, :idioma, :id_libro, NOW(), "espera")');        
       $query->execute([
         'nickname' => $_SESSION['nickname'],
         'nota' => $_REQUEST['note'],
         'edad' => ($_REQUEST['age']),
         'idioma' => $_REQUEST['language'],
-        'id_libro' => $_REQUEST['liburua']
+        'id_libro' => $_GET['liburua']
       ]);
 
       if ($_SESSION['role'] !== 'ikasle') {
@@ -38,19 +38,33 @@
         $query->execute(['id_valoracion' => $id_valoracion]);
       }
 
+      // OPINION DEL LIBRO
       $query = $miPDO->prepare('INSERT INTO comentario (nickname, id_libro, mensaje, estado, fecha) VALUES (:nickname, :id_libro, :mensaje, "espera", NOW())');
       $query->execute([
         'nickname' => $_SESSION['nickname'],
-        'id_libro' => $_REQUEST['liburua'],
+        'id_libro' => $_GET['liburua'],
         'mensaje' => nl2br($_REQUEST['opinion'])
       ]);
 
+      $id_comentario = $miPDO->lastInsertId();
+      $query = $miPDO->prepare('UPDATE valoracion SET id_comentario = :id_comentario WHERE id_valoracion = :id_valoracion');        
+      $query->execute(['id_comentario' => $id_comentario, 'id_valoracion' => $id_valoracion]);
+
       if ($_SESSION['role'] !== 'ikasle') {
         $query = $miPDO->prepare('UPDATE comentario SET estado = "aceptado" WHERE nickname = :nickname AND id_libro = :id_libro AND mensaje = :mensaje');
-        $query->execute(['nickname' => $_GET['nickname'], 'id_libro' => $_GET['book'], 'mensaje' => nl2br($_GET['mensaje'])]);
+        $query->execute(['nickname' => $_SESSION['nickname'], 'id_libro' => $_GET['liburua'], 'mensaje' => nl2br($_REQUEST['opinion'])]);
       }
-  
-      
+
+      // ACTUALIZAR DATOS DEL LIBRO
+      $query = $miPDO->prepare('SELECT COUNT(id_valoracion) AS lectores, ROUND(AVG(nota), 0) AS nota, ROUND(AVG(edad), 0) AS edad FROM valoracion WHERE id_libro = :id_libro');
+      $query->execute(['id_libro' => $_GET['liburua']]);
+      $media = $query->fetch();
+
+      $query = $miPDO->prepare('UPDATE libro SET nota_media = :nota_media, num_lectores = :lectores, edad_media = :edad_media WHERE id_libro = :id_libro');
+      $query->execute(['nota_media' => $media['nota'], 'lectores' => $media['lectores'], 'edad_media' => $media['edad'], 'id_libro' => $_GET['liburua']]);
+
+      // RECARGAR PAGINA
+      header('Location: book_info.php?liburua='.$_GET['liburua']);
     }
   }
 ?>
@@ -250,6 +264,25 @@
   <button class="closeButton"><i class="fa-solid fa-x"></i></button>
   <form id="rateBookForm" action="" method="post">
     <h1><?php echo $title ?> baloratu</h1>
+    <!-- Nota -->
+    <div class="stars-container">
+      <input type="radio" name="rate" id="5">
+      <label for="5" class="fa-solid fa-star"></label>
+      <input type="radio" name="rate" id="4">
+      <label for="4" class="fa-solid fa-star"></label>
+      <input type="radio" name="rate" id="3">
+      <label for="3" class="fa-solid fa-star"></label>
+      <input type="radio" name="rate" id="2">
+      <label for="2" class="fa-solid fa-star"></label>
+      <input type="radio" name="rate" id="1">
+      <label for="1" class="fa-solid fa-star"></label>
+      <input type="hidden" name="note" id="note" value="0">
+    </div>
+    <!-- Error: Nota -->
+    <div class="error hidden" id="note-error">
+        <i class="fa-solid fa-circle-exclamation"></i>
+        <p>Nahitaezkoa da liburuari nota ematea.</p>
+    </div>
     <!-- Edad en la que leyo el libro -->
     <div class="input-container">
       <i class="fa-solid fa-calendar-day"></i>
@@ -259,25 +292,6 @@
     <div class="error hidden" id="age-error">
         <i class="fa-solid fa-circle-exclamation"></i>
         <p>Adina 5 eta 70 artekoa izan behar da.</p>
-    </div>
-    <!-- Nota -->
-    <div class="input-container">
-        <input type="hidden" name="note" value="-">
-    </div>
-    <!-- Error: Nota -->
-    <div class="error hidden" id="note-error">
-        <i class="fa-solid fa-circle-exclamation"></i>
-        <p>Nahitaezkoa da liburuari nota ematea.</p>
-    </div>
-    <!-- Opinion -->
-    <div class="input-container">
-      <i class="fa-solid fa-comment"></i>
-      <textarea placeholder="Liburu honi buruz uste dut..." id="opinion" name="opinion" autocomplete="off" maxlength="2300"></textarea>
-    </div>
-    <!-- Error: Opinion -->
-    <div class="error hidden" id="sinopsis-error">
-        <i class="fa-solid fa-circle-exclamation"></i>
-        <p>Sinopsia nahitaezkoa da.</p>
     </div>
     <!-- Idioma -->
     <div class="input-container">
@@ -296,14 +310,20 @@
         </select>
     </div>
     <!-- Error: Idioma -->
-    <?php
-        if ($book_language_error) {
-        echo '<div class="error php-error">
-                <i class="fa-solid fa-circle-exclamation"></i>
-                <p>Aukeratu hizkuntza bat.</p>
-              </div>';
-        }
-    ?>
+    <div class="error hidden" id="language-error">
+      <i class="fa-solid fa-circle-exclamation"></i>
+      <p>Aukeratu hizkuntza bat.</p>
+    </div>
+    <!-- Opinion -->
+    <div class="input-container">
+      <i class="fa-solid fa-comment"></i>
+      <textarea placeholder="Liburu honi buruz uste dut..." id="opinion" name="opinion" autocomplete="off" maxlength="2300"></textarea>
+    </div>
+    <!-- Error: Opinion -->
+    <div class="error hidden" id="opinion-error">
+        <i class="fa-solid fa-circle-exclamation"></i>
+        <p>Sinopsia nahitaezkoa da.</p>
+    </div>
     <!-- Error: Formulario -->
     <div class="error hidden" id="form-error">
         <i class="fa-solid fa-circle-exclamation"></i>
