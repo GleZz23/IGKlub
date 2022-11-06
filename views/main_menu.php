@@ -40,24 +40,24 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['form-action'])) {
 
   // Si el formato es por defecto
   if ($_REQUEST['format'] === '-') {
-      $new_book = false;
-      $book_format_error = true;
+    $new_book = false;
+    $book_format_error = true;
   }
 
   // Si el idioma es por defecto
   if ($_REQUEST['language'] === '-') {
-      $new_book = false;
-      $book_language_error = true;
+    $new_book = false;
+    $book_language_error = true;
   }
 
   if ($new_book) {
-      $query = $miPDO->prepare('INSERT INTO libro (titulo, escritor, sinopsis, formato) VALUES (:titulo, :escritor, :sinopsis, :formato)');        
-      $query->execute([
-          'titulo' => $_REQUEST['title'],
-          'escritor' => $_REQUEST['writter'],
-          'sinopsis' => nl2br($_REQUEST['sinopsis']),
-          'formato' => $_REQUEST['format']
-      ]);
+    $query = $miPDO->prepare('INSERT INTO libro (titulo, escritor, sinopsis, formato) VALUES (:titulo, :escritor, :sinopsis, :formato)');        
+    $query->execute([
+      'titulo' => $_REQUEST['title'],
+      'escritor' => $_REQUEST['writter'],
+      'sinopsis' => nl2br($_REQUEST['sinopsis']),
+      'formato' => $_REQUEST['format']
+    ]);
 
       $id_libro = $miPDO->lastInsertId();
       $query = $miPDO->prepare('UPDATE libro SET portada = :portada WHERE id_libro = :id_libro');        
