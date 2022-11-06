@@ -83,14 +83,14 @@ create table if not exists valoracion (
   nickname varchar(255),
   nota int unsigned not null,
   edad int(2) unsigned not null,
-  idioma varchar(255),
+  idioma int(5),
   id_comentario int(5),
   id_libro int(5),
   fecha datetime,
   estado enum('aceptado','denegado','espera') default 'espera' not null,
   foreign key (nickname) references usuario(nickname) on delete cascade,
   foreign key (id_comentario) references comentario(id_comentario) on delete cascade,
-  foreign key (idioma) references idioma(nombre) on delete cascade
+  foreign key (idioma) references idioma(id_idioma) on delete cascade
 );
 
 -- TABLA SOLICITUD LIBRO
@@ -147,16 +147,16 @@ INSERT INTO usuario (`nickname`, `nombre`, `apellidos`, `fecha_nacimiento`, `ema
   ('Profesor', 'Profesor', 'de Prueba', '2000-01-01', 'profesor@mail.com', 911111111, '$2y$10$SZU5HY0RmiNkvpl7rOoPkeERGKXk0bTNZJoBDTAdzR.VYYEHuZx8q', 'irakasle', 2, NULL, 'espera');
 
 -- LIBROS
-INSERT INTO libro (titulo, escritor, portada, edad_media, nota_media) VALUES 
-  ('Malaherba', 'Jabois, Manuel', '1.jpg', 17, 3),
-  ('Las Lágrimas de Shiva', 'Mallorquí del Corral, César', '2.jpg', 12, 5),
-  ('Harry Potter', 'Rowling, J.K.', '3.jpg', 12, 4),
-  ('Los Futbolisimos', 'Santiago, Roberto', '4.jpg', 10, 3),
-  ('Cruzada en Jeans', 'Beckman, Thea', '5.jpg', 13, 3),
-  ('My Hero Academia', 'Horikoshi, Kohei', '6.jpg', 13, 5),
-  ('Charlie y La Fábrica De Chocolate', 'Dahl, Roald', '7.jpg', 11, 4),
-  ('Diario de Anne Frank', 'Frank, Anne', '8.jpg', 12, 5),
-  ('El Hobbit', 'Tolkien, J.R.R.', '9.jpg', 14, 4);
+INSERT INTO libro (titulo, escritor, portada, edad_media, num_lectores, nota_media) VALUES 
+  ('Malaherba', 'Jabois, Manuel', '1.jpg', 17, 0, 3),
+  ('Las Lágrimas de Shiva', 'Mallorquí del Corral, César', '2.jpg', 12, 0, 5),
+  ('Harry Potter', 'Rowling, J.K.', '3.jpg', 12, 0, 4),
+  ('Los Futbolisimos', 'Santiago, Roberto', '4.jpg', 10, 0, 3),
+  ('Cruzada en Jeans', 'Beckman, Thea', '5.jpg', 13, 0, 3),
+  ('My Hero Academia', 'Horikoshi, Kohei', '6.jpg', 13, 0, 5),
+  ('Charlie y La Fábrica De Chocolate', 'Dahl, Roald', '7.jpg', 11, 0, 4),
+  ('Diario de Anne Frank', 'Frank, Anne', '8.jpg', 12, 0, 5),
+  ('El Hobbit', 'Tolkien, J.R.R.', '9.jpg', 14, 0, 4);
 
 UPDATE `libro` SET `sinopsis` = '«La primera vez que papá murió todos pensamos que estaba fingiendo.» <br> Así empieza Malaherba de Manuel Jabois. Un día Mr. Tamburino, Tambu, un niño de diez años, se encuentra a su padre tirado en la habitación y conoce a Elvis, un nuevo compañero de su clase. Descubrirá por primera vez el amor y la muerte, pero no de la forma que él cree. Y los dos, Tambu y Elvis, vivirán juntos los últimos días de la niñez, esos en los que aún pasan cosas que no se pueden explicar y sentimientos a los que todavía no se sabe poner nombre. <br> Esta es una historia de dos niños que viven una extraña y solitaria historia de amor. Un libro sobre las cosas terribles que se hacen con cariño, escrito con humor y una prosa rápida que avanza llevando a Tambu y su hermana Rebe, a Claudia y su hermano Elvis, a la frontera de un mundo nuevo. <br> «Bien sabe Dios que es más peligrosa la pena que el odio, porque el odio puede destruir lo que odias, pero la pena lo destruye todo.»' WHERE `libro`.`id_libro` = 1;
 UPDATE `libro` SET `sinopsis` = 'En cierta ocasión, hace ya mucho tiempo, vi un fantasma. Sí, un espectro, una aparición, un espíritu; lo puedes llamar como quieras, el caso es que lo vi. Ocurrió el mismo año en que el hombre llegó a la Luna y, aunque hubo momentos en los que pasé mucho miedo, esta historia no es lo que suele llamarse una novela de terror. --Todo comenzó con un enigma: el misterio de un objeto muy valioso que estuvo perdido durante siete décadas. Las Lágrimas de Shiva, así se llamaba ese objeto extraviado. A su alrededor tuvieron lugar venganzas cruzadas, y amores prohibidos, y extrañas desapariciones.--Hubo un fantasma, sí, y un viejo secreto oculto en las sombras, pero también hubo mucho más.' WHERE `libro`.`id_libro` = 2;
