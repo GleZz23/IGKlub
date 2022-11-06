@@ -16,7 +16,7 @@
 <body>
   <section>
     <?php
-      $query = $miPDO->prepare('SELECT nickname, nombre, apellidos, email, estado, rol, fecha_nacimiento, id_centro FROM usuario WHERE nickname =:nickname;');
+      $query = $miPDO->prepare('SELECT nickname, nombre, apellidos, email, estado, rol, imagen, fecha_nacimiento, id_centro FROM usuario WHERE nickname =:nickname;');
       $query->execute(['nickname' => $nickname]);
       $results = $query->fetch();
 
@@ -35,9 +35,14 @@
       } else if ($results['estado'] === 'denegado') {
         $query = $miPDO->prepare('DELETE FROM usuario WHERE nickname =:nickname;');
         $query->execute(['nickname' => $nickname]);
+
+        $rute = '../src/img/[profile]/'.$nickname.'.jpg';
+        unlink($rute);
+
         echo "<h1>Barkatu $nickname</h1>";
         echo '<p>Zure kontua <b>desaktibatu</b> da, baldintzak betetzen ez dituelako. Saiatu kontu berri bat sortzen.</p>';
         echo '<a href="../index.php">Sortu kontu berri bat</a>';
+        
         session_destroy();
       } else if ($results['estado'] === 'aceptado') {
         $_SESSION['nickname'] = $results['nickname'];
@@ -47,6 +52,7 @@
         $_SESSION['role'] = $results['rol'];
         $_SESSION['date'] = $results['fecha_nacimiento'];
         $_SESSION['school'] = $results['centro'];
+        $_SESSION['profile_img'] = $results['imagen'];
 
         header('Location: ../views/main_menu.php');
       }
