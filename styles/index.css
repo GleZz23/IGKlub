@@ -42,6 +42,7 @@ button {
   text-decoration: underline;
   background: transparent;
 }
+
 button:hover { cursor: pointer; }
 
 .horizontal-bar {
