@@ -129,14 +129,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['form-action'])) {
         </form>
         </div>
         <!-- BOTON DEL MENU HAMBURGUESA -->
-        <button id="profile">
+        <!-- <button id="profile">
           <i class="fa-solid fa-bars"></i>
-        </button>
-        <aside class="profile">
-          <?php
-          echo '<div class="profile-img">
-                  <figure style="background: url(../src/img/profile/'.$_SESSION['profile_img'].'); background-position: center; background-size: cover;"></figure>
-                </div>';
+        </button> -->
+        <br><br><br>
+        
+        <!-- <nav class="profile">
+          
+          <button class="close-profile">Itxi <i class="fa-solid fa-angles-right"></i></button>
+        </nav> -->
+      </section>
+      <nav class="menu">
+
+      <?php
+          // echo '<div class="profile-img">
+          //         <figure style="background: url(../src/img/profile/'.$_SESSION['profile_img'].'); background-position: center; background-size: cover;"></figure>
+          //       </div>';
           echo '<a href="main_menu.php"><i class="fa-solid fa-house"></i>Hasiera</a>
                 <span class="newBookButton"><i class="fa-solid fa-book"></i>Igo liburu bat</span>
                 <a href="personal_area.php"><i class="fa-solid fa-user"></i>Area pertsonala</a>';
@@ -148,9 +156,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['form-action'])) {
           }
           echo '<a href="../modules/logout.php"><i class="fa-solid fa-user-slash"></i>Saioa itxi</a>';
           ?>
-          <button class="close-profile">Itxi <i class="fa-solid fa-angles-right"></i></button>
-        </aside>
-      </section>
+          
+        </nav>
     </header>
     <main>
       <?php

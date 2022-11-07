@@ -22,7 +22,32 @@ header{
   border-bottom: 2px solid gray;
   box-shadow: 0 0 1rem #00000050;
 }
+ 
+ /* header nav{
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+  gap: 2rem;
+}  */
+nav {
+  position: sticky;
+  display: flex;
+}
 
+nav > * {
+  color: black;
+  font-size: 1rem;
+  text-decoration: none;
+  background-color: transparent;
+  border: none;
+  margin-inline: 1.5rem;
+}
+
+nav > *:hover {
+  cursor: pointer;
+  text-decoration: underline;
+}
+  
 /* LOGO */
 header figure {
   width: 15%;
