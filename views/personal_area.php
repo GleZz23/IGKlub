@@ -8,7 +8,6 @@ session_start();
   <!-- <script src="../src/js/hamburgesa.js" defer></script> -->
   <head>
   <script src="../src/js/area_personal_valorated_books.js" defer></script>  
-  <script src="../src/js/profile.js" defer></script>
   <link rel="stylesheet" href="../styles/personal_area.css">
   <title>Hasiera | IGKlub</title>
   </head>
@@ -19,23 +18,27 @@ session_start();
     </figure>
     <section>
       <button id="profile">
-        <i class="fa-solid fa-bars"></i>
+      <i class="fa-solid fa-bars"></i>
       </button>
       <aside class="profile">
-      <?php
-          echo '<h1>'.$_SESSION['nickname'].'</h1>';
+          <?php
+          echo '<div class="profile-img">
+                  <figure style="background: url(../src/img/profile/'.$_SESSION['profile_img'].'); background-position: center; background-size: cover;"></figure>
+                </div>';
           echo '<a href="main_menu.php"><i class="fa-solid fa-house"></i>Hasiera</a>
-                <a href="new_book.php"><i class="fa-solid fa-book"></i>Igo liburu bat</a>
+                <span class="newBookButton"><i class="fa-solid fa-book"></i>Igo liburu bat</span>
                 <a href="personal_area.php"><i class="fa-solid fa-user"></i>Area pertsonala</a>';
           if ($_SESSION['role'] === 'irakasle') {
-            echo '<a href="class.php"><i class="fa-solid fa-chalkboard-user"></i>Nire taldeak</a>
+            echo '<a href="groups.php"><i class="fa-solid fa-users-rectangle"></i>Nire taldeak</a>
                   <a href="requests.php"><i class="fa-solid fa-question"></i>Eskaerak</a>';
           } else if ($_SESSION['role'] === 'admin') {
-            echo '<a href="management.php"><i class="fa-solid fa-gear"></i>Adminiztrazioa</a></h1>';
+            echo '<a href="management.php"><i class="fa-solid fa-gear"></i>Administrazioa</a></h1>';
           }
+          echo '<a href="../modules/logout.php"><i class="fa-solid fa-user-slash"></i>Saioa itxi</a>';
           ?>
-    <!-- PERFIL -->
-  </aside>
+          <button class="close-profile">Itxi <i class="fa-solid fa-angles-right"></i></button>
+        </aside>
+        <!-- PERFIL -->
     </section>
   </header>
   <main>
