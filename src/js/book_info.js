@@ -1,3 +1,30 @@
+// SINOPSIS - FICHA TECNICA
+const infoHeader = document.querySelector('.info-container header');
+const infoContainer = document.querySelector('.info-container .container');
+
+infoHeader.firstElementChild.style.transform = "scale(1.5)";
+infoHeader.lastElementChild.style.opacity = ".7";
+
+infoHeader.addEventListener('click', () => {
+
+  let elementStyle = window.getComputedStyle(infoContainer);
+  let styleTranlate = elementStyle.getPropertyValue('transform');
+
+  if (styleTranlate === "none") {
+    infoContainer.style.transform = "translateX(-50%)";
+    infoHeader.lastElementChild.style.transform = "scale(1.5)";
+    infoHeader.lastElementChild.style.opacity = "1";
+    infoHeader.firstElementChild.style.transform = "scale(1)";
+    infoHeader.firstElementChild.style.opacity = ".7";
+  } else {
+    infoContainer.style.transform = "";
+    infoHeader.firstElementChild.style.transform = "scale(1.5)";
+    infoHeader.firstElementChild.style.opacity = "1";
+    infoHeader.lastElementChild.style.transform = "scale(1)";
+    infoHeader.lastElementChild.style.opacity = ".7";
+  }
+});
+
 // MODAL FORMULARIO VALORAR LIBRO
 const rateBookButton = document.querySelector('.rateBookButton');
 const closeButton = document.querySelector('.closeButton');

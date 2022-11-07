@@ -85,6 +85,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['form-action'])) {
       
       $rute = '../src/img/books/'.$id_libro.'.jpg';
       move_uploaded_file($file['tmp_name'], $rute);
+
+      header('Location: main_menu.php');
   }
 }
 
@@ -277,8 +279,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['form-action'])) {
 
   <!-- NUEVO LIBRO -->
   <div class="new-book">
+  <button class="closeButton"><i class="fa-solid fa-x"></i></button>
   <form id="newBookForm" action="" enctype="multipart/form-data" method="post">
-    <button class="closeButton"><i class="fa-solid fa-x"></i></button>
     <h1>Igo liburu bat</h1>
     <!-- Titulo del libro -->
     <div class="input-container">
@@ -426,7 +428,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['form-action'])) {
         <p>Bete formularioa behar bezala.</p>
     </div>
     <input type="hidden" name="form-action" value="newbook">
-    <button>Baloratu</button>
+    <button>Liburua igo</button>
   </form>
   </div>
 </body>

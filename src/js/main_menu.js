@@ -142,7 +142,7 @@ setTimeout(() => {
 
 const regexs = {
     title: /^([A-Za-zÀ-ÖØ-öø-ÿ0-9.,:;\- ]{1,})+$/,
-    writter: /^([A-Za-zÀ-ÖØ-öø-ÿ., ]{1,})+$/
+    writter: /^([A-Za-zÀ-ÖØ-öø-ÿ.,\- ]{1,})+$/
 }
 
 // Campos del formulario
