@@ -130,7 +130,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['form-action'])) {
         </div>
         <!-- BOTON DEL MENU HAMBURGUESA -->
         <!-- <button id="profile">
-          <i class="fa-solid fa-bars"></i>
+          <i class="fa-solid fa-user"></i>
         </button> -->
         <br><br><br>
         
