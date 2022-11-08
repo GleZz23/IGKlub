@@ -129,12 +129,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['form-action'])) {
       <!-- BARRA DE BUSQUEDA -->
       <div class="search-bar">
         <form action="" method="post">
-          <input type="text" placeholder="Izenburua, idazlea..." name="search" id="search" autocomplete="off"
-            value="<?php if (isset($_REQUEST['search']))
-            echo $_REQUEST['search'] ?>">
+          <input type="text" placeholder="Izenburua, idazlea..." name="search" id="search" autocomplete="off" value="<?php if (isset($_REQUEST['search']))
+              echo $_REQUEST['search'] ?>">
           <button><i class="fa-solid fa-magnifying-glass"></i></button>
         </form>
-<<<<<<< HEAD
       </div>
       <!-- BOTON DEL MENU HAMBURGUESA -->
       <button id="profile">
@@ -142,13 +140,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['form-action'])) {
       </button>
       <aside class="profile">
         <?php
-          echo '<div class="profile-img">
+        echo '<div class="profile-img">
                   <figure style="background: url(../src/img/profile/' . $_SESSION['profile_img'] . '); background-position: center; background-size: cover;"></figure>
                 </div>';
-          echo '<a href="personal_area.php"><i class="fa-solid fa-user"></i>Area pertsonala</a>';
-          echo '<a href="../modules/logout.php"><i class="fa-solid fa-user-slash"></i>Saioa itxi</a>';
+        echo '<a href="personal_area.php"><i class="fa-solid fa-user"></i>Area pertsonala</a>';
+        echo '<a href="../modules/logout.php"><i class="fa-solid fa-user-slash"></i>Saioa itxi</a>';
 
-          ?>
+        ?>
         <button class="close-profile">Itxi <i class="fa-solid fa-angles-right"></i></button>
       </aside>
     </section>
@@ -171,60 +169,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['form-action'])) {
 
     </nav>
   </header>
-
   <main>
     <?php
-=======
-        </div>
-        <!-- BOTON DEL MENU HAMBURGUESA -->
-        <div class="burguer-menu hidden">
-          <button id="profile">
-            <i class="fa-solid fa-bars"></i>
-          </button>
-          <aside class="profile">
-            <?php
-            echo '<div class="profile-img">
-                    <figure style="background: url(../src/img/profile/'.$_SESSION['profile_img'].'); background-position: center; background-size: cover;"></figure>
-                  </div>';
-            echo '<a href="main_menu.php"><i class="fa-solid fa-house"></i>Hasiera</a>
-                  <span class="newBookButton"><i class="fa-solid fa-book"></i>Igo liburu bat</span>
-                  <a href="personal_area.php"><i class="fa-solid fa-user"></i>Area pertsonala</a>';
-            if ($_SESSION['role'] === 'irakasle') {
-              echo '<a href="groups.php"><i class="fa-solid fa-users-rectangle"></i>Nire taldeak</a>
-                    <a href="requests.php"><i class="fa-solid fa-question"></i>Eskaerak</a>';
-            } else if ($_SESSION['role'] === 'admin') {
-              echo '<a href="management.php"><i class="fa-solid fa-gear"></i>Administrazioa</a></h1>';
-            }
-            echo '<a href="../modules/logout.php"><i class="fa-solid fa-user-slash"></i>Saioa itxi</a>';
-            ?>
-            <button class="close-profile">Itxi <i class="fa-solid fa-angles-right"></i></button>
-          </aside>
-        </div>
-        <div class="profile-pic">
-          <?php
-            echo '<a href="personal_area.php" style="background: url(../src/img/profile/'.$_SESSION['profile_img'].'); background-position: center; background-size: cover;"></a>';
-          ?>
-        </div>
-      </section>
-      <nav class="menu">
-      <?php
-        echo '<a href="main_menu.php"><i class="fa-solid fa-house"></i>Hasiera</a>
-              <span class="newBookButton"><i class="fa-solid fa-book"></i>Igo liburu bat</span>
-              <a href="personal_area.php"><i class="fa-solid fa-user"></i>Area pertsonala</a>';
-        if ($_SESSION['role'] === 'irakasle') {
-          echo '<a href="groups.php"><i class="fa-solid fa-users-rectangle"></i>Nire taldeak</a>
-                <a href="requests.php"><i class="fa-solid fa-question"></i>Eskaerak</a>';
-        } else if ($_SESSION['role'] === 'admin') {
-          echo '<a href="management.php"><i class="fa-solid fa-gear"></i>Administrazioa</a></h1>';
-        }
-        echo '<a href="../modules/logout.php"><i class="fa-solid fa-user-slash"></i>Saioa itxi</a>';
-      ?>
-      </nav>
-    </header>
-    
-    <main>
-      <?php
->>>>>>> a80a8a89438c5ffe8deb921fd4a15e0369c3592e
       // Recojo todos los valores de los libros en una variable
       $query = 'SELECT libro.* FROM libro, solicitud_libro WHERE libro.id_libro = solicitud_libro.id_libro AND solicitud_libro.estado = "aceptado"';
 
@@ -357,9 +303,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['form-action'])) {
       <!-- Titulo del libro -->
       <div class="input-container">
         <i class="fa-solid fa-heading"></i>
-        <input type="text" name="title" id="title" placeholder="Izenburua" autofocus
-          value="<?php if (isset($_REQUEST['nickname']))
-          echo $_REQUEST['nickname'] ?>">
+        <input type="text" name="title" id="title" placeholder="Izenburua" autofocus value="<?php if (isset($_REQUEST['nickname']))
+            echo $_REQUEST['nickname'] ?>">
       </div>
       <!-- Error: Titulo del libro -->
       <div class="error hidden" id="title-error">
@@ -369,9 +314,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['form-action'])) {
       <!-- Escritor -->
       <div class="input-container">
         <i class="fa-solid fa-feather"></i>
-        <input type="text" name="writter" id="writter" placeholder="Egilea"
-          value="<?php if (isset($_REQUEST['email']))
-          echo $_REQUEST['email'] ?>">
+        <input type="text" name="writter" id="writter" placeholder="Egilea" value="<?php if (isset($_REQUEST['email']))
+            echo $_REQUEST['email'] ?>">
       </div>
       <!-- Error: Escritor -->
       <div class="error hidden" id="writter-error">
@@ -386,50 +330,50 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['form-action'])) {
       </div>
       <!-- Error: Portada -->
       <?php
-    if ($type_error) {
-      echo '<div class="error php-error">
+      if ($type_error) {
+        echo '<div class="error php-error">
             <i class="fa-solid fa-circle-exclamation"></i>
             <p>Artxiboak argazki bat izan behar da.</p>
         </div>';
-    }
-    if ($size_error) {
-      echo '<div class="error php-error">
+      }
+      if ($size_error) {
+        echo '<div class="error php-error">
                 <i class="fa-solid fa-circle-exclamation"></i>
                 <p>Argazkia 5MB baino txikiagoa izan behar da.</p>
             </div>';
-    }
-    if ($format_error) {
-      echo '<div class="error php-error">
+      }
+      if ($format_error) {
+        echo '<div class="error php-error">
                 <i class="fa-solid fa-circle-exclamation"></i>
                 <p>Argazkia JPG, JPEG edo PNG formatua izan behar da.</p>
             </div>';
-    }
-    ?>
+      }
+      ?>
       <!-- Idioma -->
       <div class="input-container">
         <i class="fa-solid fa-language"></i>
         <select name="language" id="language">
           <option value="-" selected>Hizkuntza</option>
           <?php
-            $query = $miPDO->prepare('SELECT * FROM idioma ORDER BY id_idioma ASC');
-            $query->execute();
-            $results = $query->fetchAll();
+          $query = $miPDO->prepare('SELECT * FROM idioma ORDER BY id_idioma ASC');
+          $query->execute();
+          $results = $query->fetchAll();
 
-            foreach ($results as $position => $language) {
-              echo '<option value="' . $language['id_idioma'] . '">' . $language['nombre'] . '</option>';
-            }
-            ?>
+          foreach ($results as $position => $language) {
+            echo '<option value="' . $language['id_idioma'] . '">' . $language['nombre'] . '</option>';
+          }
+          ?>
         </select>
       </div>
       <!-- Error: Idioma -->
       <?php
-    if ($book_language_error) {
-      echo '<div class="error php-error">
+      if ($book_language_error) {
+        echo '<div class="error php-error">
                 <i class="fa-solid fa-circle-exclamation"></i>
                 <p>Aukeratu hizkuntza bat.</p>
               </div>';
-    }
-    ?>
+      }
+      ?>
       <!-- Formato -->
       <div class="input-container">
         <i class="fa-solid fa-rectangle-list"></i>
@@ -443,13 +387,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['form-action'])) {
       </div>
       <!-- Error: Formato -->
       <?php
-    if ($book_format_error) {
-      echo '<div class="error php-error">
+      if ($book_format_error) {
+        echo '<div class="error php-error">
                 <i class="fa-solid fa-circle-exclamation"></i>
                 <p>Aukeratu formatu bat.</p>
               </div>';
-    }
-    ?>
+      }
+      ?>
       <!-- Sinopsis -->
       <div class="input-container">
         <i class="fa-solid fa-marker"></i>
@@ -471,25 +415,25 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['form-action'])) {
           <select name="alternative_language" id="alternative_language">
             <option value="-" selected>Beste hizkuntza</option>
             <?php
-                $query = $miPDO->prepare('SELECT * FROM idioma ORDER BY id_idioma ASC');
-                $query->execute();
-                $results = $query->fetchAll();
+            $query = $miPDO->prepare('SELECT * FROM idioma ORDER BY id_idioma ASC');
+            $query->execute();
+            $results = $query->fetchAll();
 
-                foreach ($results as $position => $language) {
-                  echo '<option value="' . $language['id_idioma'] . '">' . $language['nombre'] . '</option>';
-                }
-                ?>
+            foreach ($results as $position => $language) {
+              echo '<option value="' . $language['id_idioma'] . '">' . $language['nombre'] . '</option>';
+            }
+            ?>
           </select>
         </div>
         <!-- Error: Idioma -->
         <?php
-      if ($book_alternative_language_error) {
-        echo '<div class="error php-error">
+        if ($book_alternative_language_error) {
+          echo '<div class="error php-error">
                   <i class="fa-solid fa-circle-exclamation"></i>
                   <p>Aukeratu hizkuntza bat.</p>
                 </div>';
-      }
-      ?>
+        }
+        ?>
         <!-- Titulo del libro alternativo -->
         <div class="input-container">
           <i class="fa-solid fa-heading"></i>
