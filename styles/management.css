@@ -6,28 +6,66 @@
 
 body {
   font-family: Arial, Helvetica, sans-serif;
-  background-image: url(../src/img/background.jpg);
+  background-image: url(../src/img/background2.jpg);
   overflow-x: hidden;
+}
+
+/*------------------------------------------------------------------------------------*/
+/* Colors */
+:root {
+  /* COLOR PALETTE */
+  --accent: linear-gradient(90deg, rgb(42, 0, 121) 0%, rgb(99, 42, 190) 100%);
+  --dark-purple: rgb(42, 0, 121);
+  --light-purple: rgb(99, 42, 190);
+  --font: #EEE;
+  --main-bg: #2D2D30;
+  --secundary-bg: #1E1E1E;
+  /* DETAILS */
+  --details: #464646;
+}
+
+/* MENU STICKY */
+.sticky-menu {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  top: 0;
+  position: sticky;
+  width: 100%;
+  background: var(--accent);
+  box-shadow: 0 0 1rem #00000075;
+  z-index: 6;
+}
+
+.sticky-menu > * {
+  text-decoration: none;
+  color: var(--font);
+  background: transparent;
+  border: none;
+  font-size: 1rem;
+  transition: all .3s ease-in-out;
+  padding: 1rem 2rem;
+}
+
+.sticky-menu > * i {
+  margin-right: .5rem;
+}
+
+.sticky-menu > *:hover {
+  cursor: pointer;
+  scale: 1.2;
+  text-decoration: underline;
 }
 
 /* HEADER */
 header{
-  width: 100%;
-  background-color: lightgray;
+  background-color: var(--secundary-bg);
   padding: 1.5rem 2rem;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 1rem;
-  border-bottom: 2px solid gray;
-  box-shadow: 0 0 1rem #00000050;
-}
-
-/* Cabecera del header */
-header section {
+  border-bottom: 2px solid var(--light-purple);
   display: flex;
   justify-content: space-between;
   align-items: center;
+  color: var(--font);
 }
 
 /* LOGO */
@@ -37,31 +75,25 @@ header figure {
   justify-content: space-between;
   align-items: center;
   text-align: center;
-  transition: all .3s ease-in-out;
 }
 
 header figure img {
   width: 100%;
+  filter: invert(100%);
 }
 
-/* CONTROLES */
-nav {
-  position: sticky;
+/* FOTO DE PERFIL - FOTO */
+.profile-pic {
   display: flex;
+  justify-content: end;
+  width: 10%;
 }
 
-nav > * {
-  color: black;
-  font-size: 1rem;
-  text-decoration: none;
-  background-color: transparent;
-  border: none;
-  margin-inline: 1.5rem;
-}
-
-nav > *:hover {
-  cursor: pointer;
-  text-decoration: underline;
+.profile-pic a {
+  border-radius: 50%;
+  width: 5rem;
+  height: 5rem;
+  background-position: center;
 }
 
 /* MAIN */
@@ -75,8 +107,8 @@ main {
 }
 
 main section {
-  background-color: lightgray;
-  border: 2px solid gray;
+  background-color: var(--main-bg);
+  border: 2px solid var(--light-purple);
   border-radius: 1rem;
   padding: 2rem;
   width: 100%;
@@ -91,6 +123,7 @@ main section {
   justify-content: center;
   align-items: center;
   gap: 2rem;
+  color: var(--font);
 }
 
 .accept-teachers table,
@@ -110,6 +143,7 @@ main section {
 .admins th, .admins td {
   padding-inline: 2rem;
   padding-bottom: 1rem;
+  color: var(--font);
 }
 
 .accept-teachers .actions,
@@ -125,7 +159,7 @@ main section {
 .accept-answers .actions button,
 .admins button {
   padding: .5rem;
-  color: black;
+  color: var(--font);
 }
 
 /* Aceptar nuevos libros */
@@ -133,6 +167,7 @@ main section {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   grid-gap: 4rem 6rem;
+  color: var(--font);
 }
 
 .accept-books > h1 {
@@ -145,7 +180,7 @@ main section {
   position: relative;
   overflow: hidden;
   transition: all .3s ease-in-out;
-  background-color: lightgray;
+  background-color: var(--main-bg);
 }
 
 .book-container img {
@@ -172,7 +207,7 @@ main section {
   justify-content: center;
   text-align: center;
   align-items: center;
-  color: #EEE;
+  color: var(--font);
   gap: .5rem;
 }
 
@@ -211,29 +246,33 @@ main section {
   margin: 0;
 }
 
+.admins form h1 {
+  color: var(--font);
+}
+
 .admins .actions form button {
   padding: .5rem;
-  color: black;
+  color: var(--font);
 }
 
 .admins form {
   width: 35rem;
-  background-color: lightgray;
+  background-color: var(--secundary-bg);
   padding: 2rem;
-  border: 2px solid gray;
+  border: 2px solid var(--light-purple);
   border-radius: 1rem;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 1rem;
-  box-shadow: .5rem .5rem 1rem #00000050;
+  box-shadow: 0 0 1rem var(--light-purple);
 }
 
 .input-container {
   width: 100%;
   display: flex;
   align-items: center;
-  background-color: gray;
+  background: var(--accent);
 }
 
 .input-container div {
@@ -242,12 +281,12 @@ main section {
   width: 100%;
 }
 
-i:not(.actions i) {
+i:not(.actions i, .sticky-menu i) {
   text-align: center;
   width: 3rem;
   padding-block: 1rem;
   font-size: 1rem;
-  color: #eee;
+  color: var(--font);
 }
 
 input, select, .pass-info {
@@ -256,22 +295,22 @@ input, select, .pass-info {
   padding-inline: .5rem;
   outline: none;
   border: none;
-  background-color: #eee;
+  background-color: var(--font);
   display: flex;
   align-items: center;
 }
 
 .admins button {
   padding: .5rem 1rem;
-  border: 1px solid gray;
-  background-color: #eee;
-  color: black;
+  border: 1px solid var(--light-purple);
+  background: var(--accent);
+  color: var(--font);
   transition: ease-in-out .25s;
 }
 
 .admins button:hover {
   cursor: pointer;
-  box-shadow: 0 0 .5rem #00000050;
+  box-shadow: 0 0 .5rem var(--light-purple);
 }
 
 .input_error{ border-right: 4px solid #E00A35; }

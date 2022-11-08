@@ -182,7 +182,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['form-action'])) {
         echo '<a href="../modules/logout.php"><i class="fa-solid fa-user-slash"></i>Saioa itxi</a>';
       ?>
     </section>
-  </header>
   <main>
     <?php
       // Recojo todos los valores de los libros en una variable
