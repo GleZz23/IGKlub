@@ -175,6 +175,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['form-action'])) {
       ?>
       </nav>
     </header>
+    
     <main>
       <?php
       // Recojo todos los valores de los libros en una variable

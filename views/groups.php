@@ -25,13 +25,11 @@ session_start();
 
     if ($results) {
       echo '<section>';
-      foreach ($results as $position => $book) {
+      foreach ($results as $position => $group) {
         echo '<div class="class-container">';
-        echo '<div class="book-overlay">
-                <div class="book-info">
-                  <h1 id="title">' . $book['titulo'] . '</h1>
-                  <p id="autor">' . $book['escritor'] . '</p>
-                  <a href="book_info.php?liburua='.$book['id_libro'] .'">Liburu orria</a>
+        echo '<div class="class-overlay">
+                <div class="class-info">
+                  <h1 id="name">' . $group['nombre'] . '</h1>
                 </div>
               </div>
             </div>';
