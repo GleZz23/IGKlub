@@ -164,15 +164,18 @@ main section {
 
 /* Aceptar nuevos libros */
 .accept-books {
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  grid-gap: 4rem 6rem;
-  color: var(--font);
-}
+  --grid-layout-gap: 4rem;
+  --grid-column-count: 5;
+  --grid-item--min-width: 250px;
 
-.accept-books > h1 {
-  grid-area: 1 / 1 / 2 / 6;
-  text-align: center;
+  --gap-count: calc(var(--grid-column-count) - 1);
+  --total-gap-width: calc(var(--gap-count) * var(--grid-layout-gap));
+  --grid-item--max-width: calc((100% - var(--total-gap-width)) / var(--grid-column-count));
+
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(max(var(--grid-item--min-width), var(--grid-item--max-width)), 1fr));
+  grid-gap: var(--grid-layout-gap);
+  color: var(--font);
 }
 
 .book-container {

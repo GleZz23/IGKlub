@@ -117,7 +117,7 @@
 <body>
   <header>
     <figure>
-      <img src="../src/img/logo/logo.png">
+      <a href="main_menu.php"><img src="../src/img/logo/logo.png"></a>
     </figure>
     <h1>Administrazioa</h1>
     <div class="profile-pic">
@@ -127,12 +127,12 @@
     </div>
   </header>
   <section class="sticky-menu">
-    <button id="accept-teachers">Irakasleak onartu</button>
-    <button id="accept-books">Liburuak onartu</button>
-    <button id="accept-comments">Iruzkinak onartu</button>
-    <button id="admins">Administratzaileak</button>
-    <button id="database">Datu-basea</button>
-    <a href="main_menu.php">Hasiera joan</a>
+    <button id="accept-teachers"><i class="fa-solid fa-user-group"></i> Irakasleak onartu</button>
+    <button id="accept-books"><i class="fa-solid fa-book"></i> Liburuak onartu</button>
+    <button id="accept-comments"><i class="fa-solid fa-comments"></i> Iruzkinak onartu</button>
+    <button id="admins"><i class="fa-solid fa-users-gear"></i> Administratzaileak</button>
+    <button id="database"><i class="fa-solid fa-database"></i> Datu-basea</button>
+    <a href="main_menu.php"><i class="fa-solid fa-house"></i>Hasiera</a>
   </section>
   <main>
     <!-- Aceptar nuevos profesores -->
