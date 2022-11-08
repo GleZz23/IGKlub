@@ -131,35 +131,49 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['form-action'])) {
         </form>
         </div>
         <!-- BOTON DEL MENU HAMBURGUESA -->
-        <!-- <button id="profile">
-          <i class="fa-solid fa-user"></i>
-        </button> -->
-        <br><br><br>
-        
-        <!-- <nav class="profile">
-          
-          <button class="close-profile">Itxi <i class="fa-solid fa-angles-right"></i></button>
-        </nav> -->
+        <div class="burguer-menu hidden">
+          <button id="profile">
+            <i class="fa-solid fa-bars"></i>
+          </button>
+          <aside class="profile">
+            <?php
+            echo '<div class="profile-img">
+                    <figure style="background: url(../src/img/profile/'.$_SESSION['profile_img'].'); background-position: center; background-size: cover;"></figure>
+                  </div>';
+            echo '<a href="main_menu.php"><i class="fa-solid fa-house"></i>Hasiera</a>
+                  <span class="newBookButton"><i class="fa-solid fa-book"></i>Igo liburu bat</span>
+                  <a href="personal_area.php"><i class="fa-solid fa-user"></i>Area pertsonala</a>';
+            if ($_SESSION['role'] === 'irakasle') {
+              echo '<a href="groups.php"><i class="fa-solid fa-users-rectangle"></i>Nire taldeak</a>
+                    <a href="requests.php"><i class="fa-solid fa-question"></i>Eskaerak</a>';
+            } else if ($_SESSION['role'] === 'admin') {
+              echo '<a href="management.php"><i class="fa-solid fa-gear"></i>Administrazioa</a></h1>';
+            }
+            echo '<a href="../modules/logout.php"><i class="fa-solid fa-user-slash"></i>Saioa itxi</a>';
+            ?>
+            <button class="close-profile">Itxi <i class="fa-solid fa-angles-right"></i></button>
+          </aside>
+        </div>
+        <div class="profile-pic">
+          <?php
+            echo '<a href="personal_area.php" style="background: url(../src/img/profile/'.$_SESSION['profile_img'].'); background-position: center; background-size: cover;"></a>';
+          ?>
+        </div>
       </section>
       <nav class="menu">
-
       <?php
-          // echo '<div class="profile-img">
-          //         <figure style="background: url(../src/img/profile/'.$_SESSION['profile_img'].'); background-position: center; background-size: cover;"></figure>
-          //       </div>';
-          echo '<a href="main_menu.php"><i class="fa-solid fa-house"></i>Hasiera</a>
-                <span class="newBookButton"><i class="fa-solid fa-book"></i>Igo liburu bat</span>
-                <a href="personal_area.php"><i class="fa-solid fa-user"></i>Area pertsonala</a>';
-          if ($_SESSION['role'] === 'irakasle') {
-            echo '<a href="groups.php"><i class="fa-solid fa-users-rectangle"></i>Nire taldeak</a>
-                  <a href="requests.php"><i class="fa-solid fa-question"></i>Eskaerak</a>';
-          } else if ($_SESSION['role'] === 'admin') {
-            echo '<a href="management.php"><i class="fa-solid fa-gear"></i>Administrazioa</a></h1>';
-          }
-          echo '<a href="../modules/logout.php"><i class="fa-solid fa-user-slash"></i>Saioa itxi</a>';
-          ?>
-          
-        </nav>
+        echo '<a href="main_menu.php"><i class="fa-solid fa-house"></i>Hasiera</a>
+              <span class="newBookButton"><i class="fa-solid fa-book"></i>Igo liburu bat</span>
+              <a href="personal_area.php"><i class="fa-solid fa-user"></i>Area pertsonala</a>';
+        if ($_SESSION['role'] === 'irakasle') {
+          echo '<a href="groups.php"><i class="fa-solid fa-users-rectangle"></i>Nire taldeak</a>
+                <a href="requests.php"><i class="fa-solid fa-question"></i>Eskaerak</a>';
+        } else if ($_SESSION['role'] === 'admin') {
+          echo '<a href="management.php"><i class="fa-solid fa-gear"></i>Administrazioa</a></h1>';
+        }
+        echo '<a href="../modules/logout.php"><i class="fa-solid fa-user-slash"></i>Saioa itxi</a>';
+      ?>
+      </nav>
     </header>
     <main>
       <?php
