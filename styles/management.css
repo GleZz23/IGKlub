@@ -44,7 +44,7 @@ body {
   border: none;
   font-size: 1rem;
   transition: all .3s ease-in-out;
-  padding: 1rem 2rem;
+  padding: 1.5rem;
 }
 
 .sticky-menu > * i {
@@ -55,6 +55,64 @@ body {
   cursor: pointer;
   scale: 1.2;
   text-decoration: underline;
+}
+
+#profile {
+  background: transparent;
+  border: none;
+}
+
+.profile {
+  width: 100%;
+  color: var(--font);
+  background-color: var(--secundary-bg);
+  position: absolute;
+  z-index: 7;
+  padding: 2rem;
+  border-bottom: 2px solid var(--light-purple);
+  box-shadow: .5rem .5rem 1rem #00000050;
+  flex-direction: column;
+  text-align: left;
+  justify-content: center;
+  gap: 1rem;
+  transition: all .3s ease-in-out;
+  display: none;
+  font-size: 1.5rem;
+  right: 0;
+  transform: translateX(100%);
+  top: 0;
+}
+
+.profile > * {
+  background: none;
+  border: none;
+  color: var(--font);
+  font-size: 1.5rem;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  text-decoration: none;
+}
+
+.profile .close-profile { justify-content: center; }
+
+.profile .profile-img {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0;
+  margin: 0;
+}
+
+.profile figure {
+  width: 10rem;
+  height: 10rem;
+  border-radius: 50%;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 /* HEADER */
@@ -160,6 +218,32 @@ main section {
 .admins button {
   padding: .5rem;
   color: var(--font);
+  background: var(--accent);
+  border: none;
+}
+
+.accept-teachers .profile-img,
+.accept-comments .profile-img,
+.accept-answers .profile-img,
+.admins .profile-img {
+  width: 4rem;
+  height: 4rem;
+  padding: 0;
+  margin: 0;
+  border: var(--light-purple);
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.accept-teachers .profile-img figure,
+.accept-comments .profile-img figure,
+.accept-answers .profile-img figure,
+.admins .profile-img figure {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 /* Aceptar nuevos libros */
@@ -341,7 +425,35 @@ input, select, .pass-info {
   padding-right: .5rem;
 }
 
-.hidden { display: none; }
-
 /* ESTILOS JS */
 .hidden { display: none; }
+
+/* ----------------------------------------------------------------------- */
+/* TABLET */
+@media screen and (max-width: 1280px) {
+  .admins {
+    width: 100%;
+    flex-direction: column-reverse;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .admins form {
+    margin-bottom: 2.5rem;
+    width: 100%;
+  }
+} 
+
+/* INTERMEDIO */
+@media screen and (max-width: 940px) {
+  .sticky-menu, .profile-pic { display: none; }
+
+  #profile { display: flex; }
+
+  header nav figure { width: 30%; }
+}
+
+/* MOVIL */
+@media screen and (max-width: 600px) {
+
+}

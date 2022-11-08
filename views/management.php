@@ -120,18 +120,38 @@
       <a href="main_menu.php"><img src="../src/img/logo/logo.png"></a>
     </figure>
     <h1>Administrazioa</h1>
+    <button class="hidden" id="profile">
+      <i class="fa-solid fa-bars"></i>
+    </button>
     <div class="profile-pic">
       <?php
         echo '<a href="personal_area.php" style="background: url(../src/img/profile/'.$_SESSION['profile_img'].'); background-position: center; background-size: cover;"></a>';
       ?>
     </div>
   </header>
+  <!-- BOTON DEL MENU HAMBURGUESA -->
+  <div class="burguer-menu">
+    <aside class="profile">
+      <?php
+      echo '<div class="profile-img">
+              <figure style="background: url(../src/img/profile/'.$_SESSION['profile_img'].'); background-position: center; background-size: cover;"></figure>
+            </div>';
+      ?>
+      <button id="accept-teachers"><i class="fa-solid fa-user-group"></i>Irakasleak onartu</button>
+      <button id="accept-books"><i class="fa-solid fa-book"></i>Liburuak onartu</button>
+      <button id="accept-comments"><i class="fa-solid fa-comments"></i>Iruzkinak onartu</button>
+      <button id="admins"><i class="fa-solid fa-users-gear"></i>Administratzaileak</button>
+      <button id="database"><i class="fa-solid fa-database"></i>Datu-basea</button>
+      <a href="main_menu.php"><i class="fa-solid fa-house"></i>Hasiera</a>
+      <button class="close-profile">Itxi <i class="fa-solid fa-angles-right"></i></button>
+    </aside>
+  </div>
   <section class="sticky-menu">
-    <button id="accept-teachers"><i class="fa-solid fa-user-group"></i> Irakasleak onartu</button>
-    <button id="accept-books"><i class="fa-solid fa-book"></i> Liburuak onartu</button>
-    <button id="accept-comments"><i class="fa-solid fa-comments"></i> Iruzkinak onartu</button>
-    <button id="admins"><i class="fa-solid fa-users-gear"></i> Administratzaileak</button>
-    <button id="database"><i class="fa-solid fa-database"></i> Datu-basea</button>
+    <button id="accept-teachers"><i class="fa-solid fa-user-group"></i>Irakasleak onartu</button>
+    <button id="accept-books"><i class="fa-solid fa-book"></i>Liburuak onartu</button>
+    <button id="accept-comments"><i class="fa-solid fa-comments"></i>Iruzkinak onartu</button>
+    <button id="admins"><i class="fa-solid fa-users-gear"></i>Administratzaileak</button>
+    <button id="database"><i class="fa-solid fa-database"></i>Datu-basea</button>
     <a href="main_menu.php"><i class="fa-solid fa-house"></i>Hasiera</a>
   </section>
   <main>
@@ -145,6 +165,7 @@
       echo '<section class="accept-teachers">
             <table>
               <tr>
+                <th></th>
                 <th>Nickname</th>
                 <th>Izen-abizenak</th>
                 <th>Ikastetxea</th>
@@ -154,6 +175,9 @@
               </tr>';
       foreach ($results as $position => $teacher){
         echo '<tr>
+                <td class="profile-img">
+                  <figure style="background: url(../src/img/profile/'.$teacher['imagen'].'); background-position: center; background-size: cover;"></figure>
+                </td>
                 <td>'.$teacher['nickname'].'</td>
                 <td>'.$teacher['nombre'].' '.$teacher['apellidos'].'</td>
                 <td>'.$teacher['nombre_centro'].'</td>
@@ -243,6 +267,7 @@
         echo '<section class="accept-comments">
               <table>
                 <tr>
+                  <th></th>
                   <th>Nickname</th>
                   <th>Liburua</th>
                   <th>Iruzkina</th>
@@ -250,6 +275,9 @@
                 </tr>';
         foreach ($results as $position => $comment){
           echo '<tr>
+                  <td class="profile-img">
+                    <figure style="background: url(../src/img/profile/'.$comment['imagen'].'); background-position: center; background-size: cover;"></figure>
+                  </td>
                   <td>'.$comment['nickname'].'</td>
                   <td>'.$comment['libro'].'</td>
                   <td>'.$comment['mensaje'].'</td>
@@ -286,6 +314,7 @@
         echo '<section class="accept-answers">
               <table>
                 <tr>
+                  <th></th>
                   <th>Nickname</th>
                   <th>Liburua</th>
                   <th>Iruzkina</th>
@@ -293,6 +322,9 @@
                 </tr>';
         foreach ($results as $position => $answer){
           echo '<tr>
+                  <td class="profile-img">
+                    <figure style="background: url(../src/img/profile/'.$answer['imagen'].'); background-position: center; background-size: cover;"></figure>
+                  </td>
                   <td>'.$answer['nickname'].'</td>
                   <td>'.$answer['libro'].'</td>
                   <td>'.$answer['mensaje'].'</td>
@@ -332,12 +364,16 @@
         echo '<section class="admins">
               <table>
                 <tr>
+                  <th></th>
                   <th>Nickname</th>
                   <th>Izen-abizenak</th>
                   <th>Email-a</th>
                 </tr>';
         foreach ($results as $position => $admin){
           echo '<tr>
+                  <td class="profile-img">
+                    <figure style="background: url(../src/img/profile/'.$admin['imagen'].'); background-position: center; background-size: cover;"></figure>
+                  </td>
                   <td>'.$admin['nickname'].'</td>
                   <td>'.$admin['nombre'].' '.$admin['apellidos'].'</td>
                   <td>'.$admin['email'].'</td>';
@@ -414,7 +450,7 @@
         <div class="input-container">
           <i class="fa-solid fa-key"></i>
           <div>
-            <p class="pass-info">Pasahitza nickname-a bezala izango da. Gero aldatzeko posibilitatea izango du.</p>
+            <p class="pass-info">Nickname-a bezala izango da.</p>
           </div>
         </div>
         <!-- Error: Formulario -->
