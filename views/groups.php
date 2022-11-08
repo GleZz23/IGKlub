@@ -3,7 +3,7 @@ include_once('../templates/head.php');
 include_once('../modules/connection.php');
 session_start();
 ?>
-<link rel="stylesheet" href="../styles/class.css">
+<link rel="stylesheet" href="../styles/groups.css">
 <title>Nire gelak | IGKlub</title>
 </head>
 
