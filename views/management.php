@@ -116,22 +116,24 @@
 </head>
 <body>
   <header>
-    <section>
-      <figure>
-        <img src="../src/img/logo/logo.png">
-      </figure>
-      <h1>Administrazioa</h1>
-    </section>
-    <nav>
-      <button id="accept-teachers">Irakasleak onartu</button>
-      <button id="accept-books">Liburuak onartu</button>
-      <button id="accept-comments">Iruzkinak onartu</button>
-      <button id="admins">Administratzaileak</button>
-      <button id="database">Datu-basea</button>
-      <a href="main_menu.php">Hasiera joan</a>
-    </nav>
+    <figure>
+      <img src="../src/img/logo/logo.png">
+    </figure>
+    <h1>Administrazioa</h1>
+    <div class="profile-pic">
+      <?php
+        echo '<a href="personal_area.php" style="background: url(../src/img/profile/'.$_SESSION['profile_img'].'); background-position: center; background-size: cover;"></a>';
+      ?>
+    </div>
   </header>
-  
+  <section class="sticky-menu">
+    <button id="accept-teachers">Irakasleak onartu</button>
+    <button id="accept-books">Liburuak onartu</button>
+    <button id="accept-comments">Iruzkinak onartu</button>
+    <button id="admins">Administratzaileak</button>
+    <button id="database">Datu-basea</button>
+    <a href="main_menu.php">Hasiera joan</a>
+  </section>
   <main>
     <!-- Aceptar nuevos profesores -->
     <?php
@@ -271,7 +273,7 @@
         echo '</table>
               </section>';
       } else {
-        echo '<section class="accept-comments">
+        echo '<section class="accept-comments hidden">
                 <h1>Oraindik ez daude iruzkinik onartzeko</h1>
               </section>';
       }
@@ -315,7 +317,7 @@
               
               </section>';
       } else {
-        echo '<section class="accept-answers">
+        echo '<section class="accept-answers hidden">
                 <h1>Oraindik ez daude erantzunak onartzeko</h1>
               </section>';
       }

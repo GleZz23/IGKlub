@@ -1,5 +1,5 @@
 // ACCIONES
-const actions = document.querySelectorAll('nav button')
+const actions = document.querySelectorAll('.sticky-menu button')
 const sections = document.querySelectorAll('main section');
 
 actions.forEach((button) => {

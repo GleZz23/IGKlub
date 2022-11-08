@@ -56,12 +56,8 @@ body {
 
 /* HEADER */
 header{
-  width: 100%;
   background-color: var(--secundary-bg);
   padding: 1.5rem 2rem;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
   border-bottom: 2px solid var(--light-purple);
 }
 
@@ -80,7 +76,6 @@ header figure {
   justify-content: space-between;
   align-items: center;
   text-align: center;
-  transition: all .3s ease-in-out;
 }
 
 header figure img {
