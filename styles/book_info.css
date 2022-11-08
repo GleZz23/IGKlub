@@ -320,6 +320,10 @@ main section {
   transition: all .3s ease-in-out;
 }
 
+.back:hover {
+  color: var(--font);
+}
+
 /* FORMULARIO VALORACION DE LIBRO */
 .rate-book:not(.actions .rate-book) {
   width: 100%;

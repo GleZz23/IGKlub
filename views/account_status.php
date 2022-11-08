@@ -36,7 +36,7 @@
         $query = $miPDO->prepare('DELETE FROM usuario WHERE nickname =:nickname;');
         $query->execute(['nickname' => $nickname]);
 
-        $rute = '../src/img/[profile]/'.$nickname.'.jpg';
+        $rute = '../src/img/profile/'.$nickname.'.jpg';
         unlink($rute);
 
         echo "<h1>Barkatu $nickname</h1>";

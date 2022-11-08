@@ -48,6 +48,7 @@ header{
   border-bottom: 2px solid gray;
   box-shadow: 0 0 1rem #00000050;
 }
+
 nav {
   position: sticky;
   display: flex;
@@ -143,6 +144,19 @@ header button {
   margin: 2rem 2rem 0 2rem;
   color: black;
   gap: .5rem;
+}
+
+/* FOTO DE PERFIL - FOTO */
+.profile-pic {
+  display: flex;
+  width: 5rem;
+  height: 5rem;
+}
+
+.profile-pic a {
+  border-radius: 50%;
+  width: 100%;
+  background-position: center;
 }
 
 /* MAIN */
@@ -292,12 +306,6 @@ main section {
   justify-content: center;
   align-items: center;
 }
-
-/* .profile figure img {
-  width: 100%;
-  height: 100%;
-} */
-
 
 /* FILTERS */
 .filters {
