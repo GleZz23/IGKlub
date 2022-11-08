@@ -97,13 +97,29 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['form-action'])) {
   </head>
   <body>
     <header>
-      <figure>
-        <img src="../src/img/logo/logo.png">
-      </figure>
-      <section>
+      <nav>
+        <figure>
+          <img src="../src/img/logo/logo.png">
+        </figure>
+        <!-- BARRA DE BUSQUEDA -->
+        <div class="search-container">
+          <div class="search-bar" >
+            <form action="" method="post"> 
+              <input type="text" placeholder="Izenburua, idazlea..." name="search" id="search" autocomplete="off" value="<?php if (isset($_REQUEST['search'])) echo $_REQUEST['search'] ?>">
+              <button><i class="fa-solid fa-magnifying-glass"></i></button>
+            </form>
+          </div>
+        </div>
         <button id="filters">
           <i class="fa-solid fa-filter"></i>
         </button>
+        <div class="profile-pic">
+          <?php
+            echo '<a href="personal_area.php" style="background: url(../src/img/profile/'.$_SESSION['profile_img'].'); background-position: center; background-size: cover;"></a>';
+          ?>
+        </div>
+      </nav>
+      <section>
         <aside class="filters">
           <h1>Iragazkiak</h1>
           <h2>Ordenatu honela:</h2>
@@ -114,6 +130,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['form-action'])) {
               <option value="escritor">Idazlea</option>
               <option value="nota_media">Balorazio</option>
               <option value="edad_media">Adina</option>
+              <option value="num_lectores">Irakurleak</option>
             </select>
             <select name="order" id="order">
               <option value="ASC">Goranzkoa</option>
@@ -123,13 +140,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['form-action'])) {
             <div class="close-filters">Itxi <i class="fa-solid fa-angles-right"></i></di>
           </form>
         </aside>
-        <!-- BARRA DE BUSQUEDA -->
-        <div class="search-bar" >
-        <form action="" method="post"> 
-          <input type="text" placeholder="Izenburua, idazlea..." name="search" id="search" autocomplete="off" value="<?php if (isset($_REQUEST['search'])) echo $_REQUEST['search'] ?>">
-          <button><i class="fa-solid fa-magnifying-glass"></i></button>
-        </form>
-        </div>
         <!-- BOTON DEL MENU HAMBURGUESA -->
         <div class="burguer-menu hidden">
           <button id="profile">
@@ -154,13 +164,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['form-action'])) {
             <button class="close-profile">Itxi <i class="fa-solid fa-angles-right"></i></button>
           </aside>
         </div>
-        <div class="profile-pic">
-          <?php
-            echo '<a href="personal_area.php" style="background: url(../src/img/profile/'.$_SESSION['profile_img'].'); background-position: center; background-size: cover;"></a>';
-          ?>
-        </div>
       </section>
-      <nav class="menu">
+    </header>
+    <section class="sticky-menu">
       <?php
         echo '<a href="main_menu.php"><i class="fa-solid fa-house"></i>Hasiera</a>
               <span class="newBookButton"><i class="fa-solid fa-book"></i>Igo liburu bat</span>
@@ -173,9 +179,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['form-action'])) {
         }
         echo '<a href="../modules/logout.php"><i class="fa-solid fa-user-slash"></i>Saioa itxi</a>';
       ?>
-      </nav>
-    </header>
-    
+    </section>
     <main>
       <?php
       // Recojo todos los valores de los libros en una variable

@@ -44,19 +44,31 @@ filtersButton.addEventListener('click', () => {
 
 if (screen.width > 1280) {
   filters.addEventListener('mouseleave', () => {
-    filters.style.transform = "translateX(-100%)";
+    filters.style.transform = "translateX(100%)";
     setTimeout(() => {
       filters.style.display = "none";
     }, 500);
   })
 } else {
   closeFilters.addEventListener('click', () => {
-    filters.style.transform = "translateX(-100%)";
+    filters.style.transform = "translateX(100%)";
     setTimeout(() => {
       filters.style.display = "none";
     }, 500);
   });
 }
+
+// BUSQUEDA
+const search = document.querySelector('.search-bar');
+const searchInput = document.querySelector('.search-bar input');
+
+searchInput.addEventListener('focus', () => {
+  search.style.width = '100%';
+});
+
+searchInput.addEventListener('blur', () => {
+  search.style.width = '';
+});
 
 // MODAL FORMULARIO NUEVO LIBRO
 const newBookButton = document.querySelectorAll('.newBookButton');
