@@ -22,6 +22,26 @@ header{
   border-bottom: 2px solid gray;
   box-shadow: 0 0 1rem #00000050;
 }
+nav {
+  position: sticky;
+  display: flex;
+}
+
+nav > * {
+  color: black;
+  font-size: 1rem;
+  text-decoration: none;
+  background-color: transparent;
+  border: none;
+  margin-inline: 1.5rem;
+  transition: all .3s ease-in-out;
+}
+
+nav > *:hover {
+  cursor: pointer;
+  text-decoration: underline;
+  transform: scale(1.2);
+}
 
 /* Cabecera del header */
 header section {
