@@ -10,6 +10,32 @@ body {
   overflow-x: hidden;
 }
 
+/*------------------------------------------------------------------------------------*/
+/* Colors */
+:root {
+  /* COLOR PALETTE */
+  --accent: crimson;
+  --font: #EEE;
+  --main-bg: #2D2D30;
+  --secundary-bg: #1E1E1E;
+  /* DETAILS */
+  --details: #464646;
+  /* FORMS */
+  --correct: #0FB62D;
+  --error: #E00A35;
+  /* OTHERS */
+  --facebook: #4267B2;
+  --twitter: #00ACEE;
+  --google: #DB4437;
+  --instagram: radial-gradient(
+    circle at 10% 100%,
+    #fed373 4%,
+    #f15245 30%,
+    #d92e7f 62%,
+    #9b36b7 85%,
+    #515ecf);
+}
+
 /* HEADER */
 header{
   width: 100%;
@@ -22,7 +48,32 @@ header{
   border-bottom: 2px solid gray;
   box-shadow: 0 0 1rem #00000050;
 }
+ 
+ /* header nav{
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+  gap: 2rem;
+}  */
+nav {
+  position: sticky;
+  display: flex;
+}
 
+nav > * {
+  color: black;
+  font-size: 1rem;
+  text-decoration: none;
+  background-color: transparent;
+  border: none;
+  margin-inline: 1.5rem;
+}
+
+nav > *:hover {
+  cursor: pointer;
+  text-decoration: underline;
+}
+  
 /* LOGO */
 header figure {
   width: 15%;

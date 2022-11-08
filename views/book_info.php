@@ -108,48 +108,71 @@
           ?>
         </div>
       </header>
-      <!-- Sinopsis -->
-      <div class="sinopsis">
-        <?php
-          echo '<p>'.$results['sinopsis'].'</p>';
-        ?>
-      </div>
-      <!-- Demas datos -->
-      <div class="more-info">
-        <div>
-          <h3>Formatua:</h3>
-          <?php
-            echo '<p>'.$results['formato'].'</p>';
-          ?>
-        </div>
-        <div>
-          <h3>Adina:</h3>
-          <?php
-            echo '<p>'.$results['edad_media'].'</p>';
-          ?>
-        </div>
-        <div>
-          <h3>Irakurleak:</h3>
-          <?php
-            echo '<p>'.$results['num_lectores'].'</p>';
-          ?>
+      <div class="info-container">
+        <header>
+          <p>Sinopsia</p>
+          <p>Fitxa teknikoa</p>
+        </header>
+        <div class="container">
+          <!-- Sinopsis -->
+          <div class="sinopsis">
+            <?php
+              echo '<p>'.$results['sinopsis'].'</p>';
+            ?>
+          </div>
+          <!-- Demas datos -->
+          <div class="more-info">
+            <div>
+              <div>
+                <h3>Formatua:</h3>
+                <?php echo '<p>'.$results['formato'].'</p>';?>
+              </div>
+              <div>
+                <h3>Adina:</h3>
+                <?php echo '<p>'.$results['edad_media'].'</p>'; ?>
+              </div>
+              <div>
+                <h3>Irakurleak:</h3>
+                <?php echo '<p>'.$results['num_lectores'].'</p>'; ?>
+              </div>
+            </div>
+            <div>
+              <?php
+                  $query = $miPDO->prepare('SELECT * FROM idioma_libro WHERE libro = :book');
+                  $query->execute(['book' => $book]);
+                  $results = $query->fetchAll();
+                  
+                  if ($results) {
+                    echo '<h3>Hizkuntzak</h3>';
+                    foreach ($results as $position => $book) {
+
+                      $query = $miPDO->prepare('SELECT nombre FROM idioma WHERE id_idioma = :id_idioma');
+                      $query->execute(['id_idioma' => $book['idioma']]);
+                      $idioma = $query->fetch();
+
+                      echo '<p>- '.$book['titulo'].' ('.$idioma['nombre'].')</p>'; 
+                    }
+                  } else {
+                    echo '<h3>Liburu hau ez dauka beste hizkuntzirik</h3>';
+                  }
+              ?>
+            </div>
+          </div>
         </div>
       </div>
       <!-- Acciones -->
       <?php
         $query = $miPDO->prepare('SELECT * FROM valoracion WHERE nickname = :nickname AND id_libro = :id_libro');
-        $query->execute(['nickname' => $_SESSION['nickname'], 'id_libro' => $book]);
+        $query->execute(['nickname' => $_SESSION['nickname'], 'id_libro' => $_REQUEST['liburua']]);
         $results = $query->fetch();
 
+        echo '<div class="actions">';
         if ($results) {
-          echo '<div class="actions">
-                  <div><i class="fa-solid fa-star"></i> Liburu hau baloratu duzu</div>
-                </div>';
+          echo '<div><i class="fa-solid fa-star"></i> Liburu hau baloratu duzu</div>';
         } else {
-          echo '<div class="actions">
-                  <div class="rateBookButton"><i class="fa-regular fa-star"></i> Liburu hau baloratzea</div>
-                </div>';
+          echo '<div class="rateBookButton"><i class="fa-regular fa-star"></i> Liburu hau baloratzea</div>';
         }
+        echo '</div>';
       ?>
     </section>
   </main>
@@ -178,7 +201,7 @@
     </div>
     <?php
     $query = $miPDO->prepare('SELECT * FROM comentario WHERE id_libro = :book AND estado = "aceptado" ORDER BY fecha DESC');
-    $query->execute(['book' => $book]);
+    $query->execute(['book' => $_GET['liburua']]);
     $results = $query->fetchAll();
 
     if ($results) {

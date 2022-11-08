@@ -6,16 +6,29 @@
 
 body {
   font-family: Arial, Helvetica, sans-serif;
-  background-image: url(../src/img/background.jpg);
-  /* margin: 4rem; */
+  background-image: url(../src/img/background2.jpg);
+  overflow-x: hidden;
 }
   
 main {
   display: flex;
-  justify-content: center;
   align-items: center;
   margin-block: 4rem;
   padding: 4rem;
+}
+
+/*------------------------------------------------------------------------------------*/
+/* Colors */
+:root {
+  /* COLOR PALETTE */
+  --accent: linear-gradient(90deg, rgb(42, 0, 121) 0%, rgb(99, 42, 190) 100%);
+  --dark-purple: rgb(42, 0, 121);
+  --light-purple: rgb(99, 42, 190);
+  --font: #EEE;
+  --main-bg: #2D2D30;
+  --secundary-bg: #1E1E1E;
+  /* DETAILS */
+  --details: #464646;
 }
 
 /* Portada del libro */
@@ -26,7 +39,7 @@ figure img {
 }
 
 /* Titulo y escritor */
-main header {
+main header:not(.info-container header) {
   display: flex;
   flex-direction: column;
   padding: 2rem;
@@ -34,9 +47,15 @@ main header {
   gap: 1rem;
 }
 
-main header h1 { font-size: 5rem; }
+main header h1 {
+  font-size: 5rem;
+  color: var(--font);
+}
 
-main header h2 { font-size: 2rem; }
+main header h2 {
+  font-size: 2rem;
+  color: var(--font);
+}
 
 .stars { font-size: 3rem; }
 
@@ -50,20 +69,52 @@ main header h2 { font-size: 2rem; }
   opacity: .3;
 }
 
-main section { margin-inline: 2rem; }
-
-/* Sinopsis */
-.sinopsis, .more-info {
-  display: flex;
-  border: 2px solid gray;
-  border-radius: 2rem;
-  overflow: hidden;
-  background-color: #ffffff50;
-  font-size: 1.2rem;
-  padding: 2rem;
-  margin-bottom: 2rem;
+main section {
+  margin-inline: 2rem;
+  width: 100%;
 }
 
+.info-container {
+  background: var(--accent);
+  width: 100%;
+  overflow: hidden;
+}
+
+.info-container header {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  color: var(--font);
+}
+
+.info-container header:hover {
+  cursor: pointer;
+}
+
+.info-container header p {
+  transition: all .3s ease-in-out;
+  padding: 1rem 2rem;
+}
+
+.info-container .container {
+  display: flex;
+  transition: all .5s ease-in-out;
+  color: var(--font);
+  width: 200%;
+}
+
+.sinopsis, .more-info {
+  display: flex;
+  overflow: hidden;
+  font-size: 1.2rem;
+  padding: 2rem;
+  width: 100%;
+  background-color: var(--secundary-bg);
+  margin: 3px;
+  transition: all .3s ease-in-out;
+}
+
+/* Sinopsis */
 .sinopsis p {
   text-align: justify;
   hyphens: auto;
@@ -73,17 +124,22 @@ main section { margin-inline: 2rem; }
 /* Demas datos */
 .more-info {
   font-size: 1rem;
-  flex-direction: column;
+  flex-direction: row;
+  justify-content: space-around;
 }
 
 .more-info > div {
   display: flex;
+  flex-direction: column;
+}
+
+.more-info > div > div {
+  display: flex;
+  flex-direction: row;
   align-items: center;
 }
 
-.more-info h3 {
-  margin-right: .5rem;
-}
+.more-info h3 { margin-right: .5rem; }
 
 /* Acciones */
 .actions {
@@ -97,32 +153,34 @@ main section { margin-inline: 2rem; }
 
 .actions div {
   padding: .5rem 1rem;
-  border: 1px solid gray;
-  background-color: #efefef;
-  color: black;
+  background: var(--accent);
+  color: var(--font);
   width: 20rem;
 }
 
-.actions div:hover {
-  cursor: pointer;
+.actions .rateBookButton {
+  background: transparent;
+  border: 1px solid var(--light-purple);
+  color: var(--light-purple);
 }
 
+.actions div:hover { cursor: pointer; }
+
 /* Reviews */
-.reviews {
-  padding: 4rem;
-}
+.reviews { padding: 4rem; }
 
 .reviews header {
   width: 100%;
   display: flex; 
   flex-direction: column;
   padding-bottom: 1rem;
-  border-bottom: 2px solid gray;
+  border-bottom: 2px solid var(--light-purple);
   gap: 1rem;
 }
 
 .reviews header h1 {
   font-size: 3rem;
+  color: var(--font);
 }
 
 .reviews header div {
@@ -140,9 +198,9 @@ main section { margin-inline: 2rem; }
 
 .reviews form {
   padding: 1rem;
-  border: 2px solid gray;
+  border: 2px solid var(--dark-purple);
   border-radius: 1rem;
-  background-color: gray;
+  background-color: var(--dark-purple);
   display: none;
   flex-direction: column;
   transition: all .3s ease-in-out;
@@ -170,15 +228,14 @@ main section { margin-inline: 2rem; }
 
 .main-comment, .answer, .user-answer, .user-comment {
   padding: 1rem;
-  background-color: white;
-  border: 2px solid gray;
+  background-color: var(--secundary-bg);
+  border: 2px solid var(--light-purple);
+  color: var(--font);
   box-shadow: .5rem .5rem 1rem rgba(0, 0, 0, 0.5);
   margin-bottom: .5rem;
 }
 
-.main-comment, .user-comment {
-  margin-right: 5rem;
-}
+.main-comment, .user-comment { margin-right: 5rem; }
 
 .answer, .user-answer { margin-left: 5rem; }
 
@@ -248,6 +305,7 @@ main section { margin-inline: 2rem; }
 
 .empty {
   margin: 2rem;
+  color: var(--font);
 }
 
 /* VOLVER A INICIO */
@@ -284,20 +342,20 @@ main section { margin-inline: 2rem; }
   margin: 2rem;
   background-color: transparent;
   border: none;
-  color: black;
+  color: var(--dark-purple);
   transition: all .3s ease-in-out;
 }
 
 .closeButton:hover {
   cursor: pointer;
-  color: white;
+  color: var(--light-purple);
 }
 
 #rateBookForm {
   width: 50rem;
-  background-color: lightgray;
+  background-color: var(--main-bg);
   padding: 2rem;
-  border: 2px solid gray;
+  border: 2px solid var(--light-purple);
   border-radius: 1rem;
   display: flex;
   flex-direction: column;
@@ -308,11 +366,13 @@ main section { margin-inline: 2rem; }
   transition: all .3s ease-in-out;
 }
 
+#rateBookForm h1 { color: var(--font); }
+
 #rateBookForm .input-container:not(.stars-container .input-container) {
   width: 100%;
   display: flex;
   align-items: center;
-  background-color: gray;
+  background: var(--light-purple);
 }
 
 #rateBookForm .input-container div {
@@ -326,7 +386,7 @@ main section { margin-inline: 2rem; }
   width: 3rem;
   padding-block: 1rem;
   font-size: 1rem;
-  color: #eee;
+  color: var(--font);
 }
 
 #rateBookForm input, #rateBookForm select, #rateBookForm textarea {
@@ -335,7 +395,7 @@ main section { margin-inline: 2rem; }
   padding-inline: .5rem;
   outline: none;
   border: none;
-  background-color: #eee;
+  background-color: var(--font);
 }
 
 #rateBookForm textarea {
@@ -349,10 +409,15 @@ main section { margin-inline: 2rem; }
 #rateBookForm button {
   width: 20%;
   padding: .5rem 1rem;
-  border: 1px solid gray;
-  background-color: #eee;
-  color: black;
+  border: 1px solid var(--light-purple);
+  background-color: transparent;
+  color: var(--light-purple);
   transition: all .3s ease-in-out;
+}
+
+#rateBookForm button:hover {
+  background: var(--accent);
+  color: var(--font);
 }
 
 .stars-container {

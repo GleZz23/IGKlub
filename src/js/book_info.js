@@ -1,22 +1,28 @@
-// MODAL FORMULARIO VALORAR LIBRO
-const rateBookButton = document.querySelector('.rateBookButton');
-const closeButton = document.querySelector('.closeButton');
+// SINOPSIS - FICHA TECNICA
+const infoHeader = document.querySelector('.info-container header');
+const infoContainer = document.querySelector('.info-container .container');
 
-rateBookButton.addEventListener('click', () => {
-  window.scrollTo(0,0);
-  document.querySelector('body').style.overflowY = "hidden";
-  document.querySelector('.rate-book').style.display = "flex";
-  setTimeout(() => {
-    document.getElementById('rateBookForm').style.transform = "scale(1)";
-  }, 10);
-});
+infoHeader.firstElementChild.style.transform = "scale(1.5)";
+infoHeader.lastElementChild.style.opacity = ".7";
 
-closeButton.addEventListener('click', () => {
-  document.getElementById('rateBookForm').style.transform = "scale(0)";
-  setTimeout(() => {
-    document.querySelector('.rate-book').style.display = "none";
-    document.querySelector('body').style.overflowY = "scroll";
-  }, 500);
+infoHeader.addEventListener('click', () => {
+
+  let elementStyle = window.getComputedStyle(infoContainer);
+  let styleTranlate = elementStyle.getPropertyValue('transform');
+
+  if (styleTranlate === "none") {
+    infoContainer.style.transform = "translateX(-50%)";
+    infoHeader.lastElementChild.style.transform = "scale(1.5)";
+    infoHeader.lastElementChild.style.opacity = "1";
+    infoHeader.firstElementChild.style.transform = "scale(1)";
+    infoHeader.firstElementChild.style.opacity = ".7";
+  } else {
+    infoContainer.style.transform = "";
+    infoHeader.firstElementChild.style.transform = "scale(1.5)";
+    infoHeader.firstElementChild.style.opacity = "1";
+    infoHeader.lastElementChild.style.transform = "scale(1)";
+    infoHeader.lastElementChild.style.opacity = ".7";
+  }
 });
 
 // COMENTARIO
@@ -161,4 +167,25 @@ answerButton.forEach((button) => {
       button.innerHTML = '<i class="fa-solid fa-reply"></i> Erantzun';
     }
   });
+});
+
+// MODAL FORMULARIO VALORAR LIBRO
+const rateBookButton = document.querySelector('.rateBookButton');
+const closeButton = document.querySelector('.closeButton');
+
+rateBookButton.addEventListener('click', () => {
+  window.scrollTo(0,0);
+  document.querySelector('body').style.overflowY = "hidden";
+  document.querySelector('.rate-book').style.display = "flex";
+  setTimeout(() => {
+    document.getElementById('rateBookForm').style.transform = "scale(1)";
+  }, 10);
+});
+
+closeButton.addEventListener('click', () => {
+  document.getElementById('rateBookForm').style.transform = "scale(0)";
+  setTimeout(() => {
+    document.querySelector('.rate-book').style.display = "none";
+    document.querySelector('body').style.overflowY = "scroll";
+  }, 500);
 });

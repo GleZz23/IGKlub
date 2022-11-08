@@ -85,6 +85,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['form-action'])) {
       
       $rute = '../src/img/books/'.$id_libro.'.jpg';
       move_uploaded_file($file['tmp_name'], $rute);
+
+      header('Location: main_menu.php');
   }
 }
 
@@ -129,14 +131,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['form-action'])) {
         </form>
         </div>
         <!-- BOTON DEL MENU HAMBURGUESA -->
-        <button id="profile">
+        <!-- <button id="profile">
           <i class="fa-solid fa-user"></i>
-        </button>
-        <aside class="profile">
-          <?php
-          echo '<div class="profile-img">
-                  <figure style="background: url(../src/img/profile/'.$_SESSION['profile_img'].'); background-position: center; background-size: cover;"></figure>
-                </div>';
+        </button> -->
+        <br><br><br>
+        
+        <!-- <nav class="profile">
+          
+          <button class="close-profile">Itxi <i class="fa-solid fa-angles-right"></i></button>
+        </nav> -->
+      </section>
+      <nav class="menu">
+
+      <?php
+          // echo '<div class="profile-img">
+          //         <figure style="background: url(../src/img/profile/'.$_SESSION['profile_img'].'); background-position: center; background-size: cover;"></figure>
+          //       </div>';
           echo '<a href="main_menu.php"><i class="fa-solid fa-house"></i>Hasiera</a>
                 <span class="newBookButton"><i class="fa-solid fa-book"></i>Igo liburu bat</span>
                 <a href="personal_area.php"><i class="fa-solid fa-user"></i>Area pertsonala</a>';
@@ -148,9 +158,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['form-action'])) {
           }
           echo '<a href="../modules/logout.php"><i class="fa-solid fa-user-slash"></i>Saioa itxi</a>';
           ?>
-          <button class="close-profile">Itxi <i class="fa-solid fa-angles-right"></i></button>
-        </aside>
-      </section>
+          
+        </nav>
     </header>
     <main>
       <?php
@@ -277,8 +286,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['form-action'])) {
 
   <!-- NUEVO LIBRO -->
   <div class="new-book">
+  <button class="closeButton"><i class="fa-solid fa-x"></i></button>
   <form id="newBookForm" action="" enctype="multipart/form-data" method="post">
-    <button class="closeButton"><i class="fa-solid fa-x"></i></button>
     <h1>Igo liburu bat</h1>
     <!-- Titulo del libro -->
     <div class="input-container">
@@ -426,7 +435,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['form-action'])) {
         <p>Bete formularioa behar bezala.</p>
     </div>
     <input type="hidden" name="form-action" value="newbook">
-    <button>Baloratu</button>
+    <button>Liburua igo</button>
   </form>
   </div>
 </body>
