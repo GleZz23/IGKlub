@@ -10,32 +10,24 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
   $colegio = $_REQUEST['school'];
   $nivel = $_REQUEST['level'];
   $curso = $_REQUEST['curso'];
-  
-  $query = $miPDO->prepare('SELECT count(*) FROM grupo');
-  $query->execute();
-  $count = $query->fetch();
-
-  // $codigo = $count;
+  $codigo = mt_rand(10000,99999);
 
 
 
-  $query = $miPDO->prepare('INSERT INTO grupo (codigo, nombre) VALUES (:codigo, :nombre)');
-  $query->execute(['codigo' => $codigo['count'], 'nombre' => $nombre]);
-
-
-  // $query = $miPDO->prepare('SELECT codigo FROM grupo WHERE codigo = :codigo');
-  // $query->execute(['codigo' => $codigo]);
-  // $id = $query->fetch();
-
-  $query = $miPDO->prepare('INSERT INTO solicitud_grupo (nickname, cod_grupo, estado) VALUES (:nickname, :codigo,"aceptado")');
-  $query->execute(['nickname' => $_SESSION['nickname'], 'codigo' => $codigo]);
-
-
+  $query = $miPDO->prepare('INSERT INTO grupo (codigo,nombre,id_centro,nivel,curso,profesor) VALUES (:codigo, :nombre,:centro,:nivel,:curso,:profesor)');
+  $query->execute(['codigo' => $codigo, 
+                   'nombre' => $nombre, 
+                   'centro' => $_REQUEST['school'],
+                   'nivel' => $nivel, 
+                   'curso' => $curso, 
+                   'profesor' => $_SESSION['nickname']]);
+                   
+  header('Location: ../views/groups.php');
 }
 ?>
 <script src="../src/js/profile.js" defer></script>
 <script src="../src/js/new_book_validation.js" defer></script>
-<link rel="stylesheet" href="../styles/new_book.css">
+<link rel="stylesheet" href="../styles/new_class.css">
   <title>Gela sortu | IGKlub</title>
   </head>
 <body>

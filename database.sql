@@ -33,7 +33,7 @@ create table if not exists grupo (
   curso varchar(10),
   profesor varchar(255),
   foreign key (profesor) references usuario(nickname) on delete cascade,
-  foreign key (id_centro) references centro(id_centro)
+  foreign key (id_centro) references centro(id_centro) on delete cascade
 );
 Alter TABLE usuario add foreign key (cod_grupo) references grupo(codigo) on delete cascade;
 
