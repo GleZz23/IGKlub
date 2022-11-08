@@ -49,20 +49,18 @@ session_start();
         echo '<div class="class-container">';
         echo '<div class="class-overlay">
                 <div class="class-info">
+                <h1 id="name">' . $group['codigo'] . '</h1>
                   <h1 id="name">' . $group['nombre'] . '</h1>
                 </div>
               </div>
             </div>';
       }
-      echo '<div class="class-container">
-              <a href="new_group.php"><i class="fa-solid fa-users-rectangle"></i>Gela sortu</a>
-            </div>';
-    } else {
-      echo '<div class="class-container">
-              <a href="new_group.php"><i class="fa-solid fa-users-rectangle"></i>Gela sortu</a>
-            </div>';
+      
     }
     echo '</section>';
+    echo '<div class="class-container">
+              <a href="new_group.php"><i class="fa-solid fa-users-rectangle"></i>Gela sortu</a>
+            </div>';
     ?>
   </main>
 </body>
