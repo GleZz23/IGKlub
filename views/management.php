@@ -152,15 +152,20 @@
     <figure>
       <a href="main_menu.php"><img src="../src/img/logo/logo.png"></a>
     </figure>
-    <h1>Administrazioa</h1>
-    <button class="hidden" id="profile">
-      <i class="fa-solid fa-bars"></i>
-    </button>
-    <div class="profile-pic">
-      <?php
-        echo '<a href="personal_area.php" style="background: url(../src/img/profile/'.$_SESSION['profile_img'].'); background-position: center; background-size: cover;"></a>';
-      ?>
-    </div>
+    <nav>
+      <figure>
+        <a href="main_menu.php"><img src="../src/img/logo/logo.png"></a>
+      </figure>
+      <h1>Administrazioa</h1>
+      <button class="hidden" id="profile">
+        <i class="fa-solid fa-bars"></i>
+      </button>
+      <div class="profile-pic">
+        <?php
+          echo '<a href="personal_area.php" style="background: url(../src/img/profile/'.$_SESSION['profile_img'].'); background-position: center; background-size: cover;"></a>';
+        ?>
+      </div>
+    </nav>
   </header>
   <!-- BOTON DEL MENU HAMBURGUESA -->
   <div class="burguer-menu">

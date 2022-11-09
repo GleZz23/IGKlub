@@ -116,18 +116,33 @@ body {
 }
 
 /* HEADER */
-header{
+header {
   background-color: var(--secundary-bg);
   padding: 1.5rem 2rem;
   border-bottom: 2px solid var(--light-purple);
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+nav {
+  width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: 2rem;
   color: var(--font);
 }
 
 /* LOGO */
-header figure {
+header figure:not(header nav figure) {
+  margin-bottom: 1rem;
+  display: none;
+}
+
+header nav figure {
   width: 10%;
   display: flex;
   justify-content: space-between;
@@ -139,6 +154,23 @@ header figure img {
   width: 100%;
   filter: invert(100%);
 }
+
+header section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  gap: 2rem;
+}
+
+header button {
+  font-size: 2rem;
+  background: transparent;
+  border: none;
+  transition: all .3s ease-in-out;
+}
+
+header button i:not(.search-bar button i) { color: var(--font); }
 
 /* FOTO DE PERFIL - FOTO */
 .profile-pic {
@@ -190,11 +222,11 @@ main section {
 .accept-answers table,
 .admins table,
 .accept-languages table {
-  width: 100%;
   display: flex;
-  text-align: center;
   align-items: flex-start;
   justify-content: center;
+  table-layout: fixed;
+  width: 100%;  
 }
 
 .accept-teachers th, .accept-teachers td,
@@ -202,9 +234,10 @@ main section {
 .accept-answers th, .accept-answers td,
 .admins th, .admins td,
 .accept-languages th, .accept-languages td {
-  padding-inline: 2rem;
-  padding-bottom: 1rem;
   color: var(--font);
+  text-align: center;
+  padding-inline: 1.5rem;
+  white-space: nowrap;
 }
 
 .accept-teachers .actions,
@@ -213,7 +246,9 @@ main section {
 .accept-languages .actions {
   display: flex;
   justify-content: center;
+  align-items: center;
   gap: 1rem;
+  height: 4rem;
 }
 
 .accept-teachers .actions button,
@@ -248,8 +283,8 @@ button:hover { cursor: pointer; }
 .accept-answers .profile-img figure,
 .admins .profile-img figure,
 .accept-languages .profile-img figure {
-  width: 100%;
-  height: 100%;
+  width: 4rem;
+  height: 4rem;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -440,6 +475,14 @@ input, select, .pass-info {
 /* ----------------------------------------------------------------------- */
 /* TABLET */
 @media screen and (max-width: 1280px) {
+  .sticky-menu, .profile-pic { display: none; }
+
+  #profile { display: flex; }
+
+  #profile i { font-size: 2rem; }
+
+  header { font-size: 1.5rem; }
+
   .admins {
     width: 100%;
     flex-direction: column-reverse;
@@ -451,18 +494,34 @@ input, select, .pass-info {
     margin-bottom: 2.5rem;
     width: 100%;
   }
+
+  .accept-teachers table,
+  .accept-comments table,
+  .accept-answers table,
+  .admins table,
+  .accept-languages table {
+    overflow-x: auto;
+    justify-content: start;
+    padding-bottom: 1.5rem;
+    font-size: 1rem;
+  }
 } 
 
 /* INTERMEDIO */
 @media screen and (max-width: 940px) {
-  .sticky-menu, .profile-pic { display: none; }
-
-  #profile { display: flex; }
-
-  header nav figure { width: 30%; }
+  main { margin: 2rem; }
 }
 
 /* MOVIL */
 @media screen and (max-width: 600px) {
+  main { margin: 1rem; }
 
+  header figure:not(header nav figure) {
+    display: flex;
+    width: 60%;
+  }
+
+  header nav figure { display: none; }
+
+  header { padding: 1.5rem 1rem; }
 }
