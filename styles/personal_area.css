@@ -55,10 +55,15 @@ body {
 }
 
 /* HEADER */
-header{
+header {
   background-color: var(--secundary-bg);
   padding: 1.5rem 2rem;
   border-bottom: 2px solid var(--light-purple);
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 nav {
@@ -70,7 +75,12 @@ nav {
 }
 
 /* LOGO */
-header figure {
+header figure:not(header nav figure) {
+  margin-bottom: 1rem;
+  display: none;
+}
+
+header nav figure {
   width: 10%;
   display: flex;
   justify-content: space-between;
@@ -97,6 +107,8 @@ header button {
   border: none;
   transition: all .3s ease-in-out;
 }
+
+header button i:not(.search-bar button i) { color: var(--font); }
 /* FOTO DE PERFIL - FOTO */
 .profile-pic {
   display: flex;
