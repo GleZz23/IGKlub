@@ -175,7 +175,8 @@ main section {
 /* Aceptar nuevos profesores, comentarios y respuestas, administradores */
 .accept-teachers,
 .accept-comments,
-.accept-answers {
+.accept-answers,
+.accept-languages {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -187,7 +188,8 @@ main section {
 .accept-teachers table,
 .accept-comments table,
 .accept-answers table,
-.admins table {
+.admins table,
+.accept-languages table {
   width: 100%;
   display: flex;
   text-align: center;
@@ -198,7 +200,8 @@ main section {
 .accept-teachers th, .accept-teachers td,
 .accept-comments th, .accept-comments td,
 .accept-answers th, .accept-answers td,
-.admins th, .admins td {
+.admins th, .admins td,
+.accept-languages th, .accept-languages td {
   padding-inline: 2rem;
   padding-bottom: 1rem;
   color: var(--font);
@@ -206,7 +209,8 @@ main section {
 
 .accept-teachers .actions,
 .accept-comments .actions,
-.accept-answers .actions {
+.accept-answers .actions,
+.accept-languages .actions {
   display: flex;
   justify-content: center;
   gap: 1rem;
@@ -215,17 +219,21 @@ main section {
 .accept-teachers .actions button,
 .accept-comments .actions button,
 .accept-answers .actions button,
-.admins button {
+.admins button,
+.accept-languages button {
   padding: .5rem;
   color: var(--font);
   background: var(--accent);
   border: none;
 }
 
+button:hover { cursor: pointer; }
+
 .accept-teachers .profile-img,
 .accept-comments .profile-img,
 .accept-answers .profile-img,
-.admins .profile-img {
+.admins .profile-img,
+.accept-languages .profile-img {
   width: 4rem;
   height: 4rem;
   padding: 0;
@@ -238,7 +246,8 @@ main section {
 .accept-teachers .profile-img figure,
 .accept-comments .profile-img figure,
 .accept-answers .profile-img figure,
-.admins .profile-img figure {
+.admins .profile-img figure,
+.accept-languages .profile-img figure {
   width: 100%;
   height: 100%;
   display: flex;

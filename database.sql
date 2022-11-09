@@ -74,8 +74,8 @@ create table if not exists comentario (
 
 -- TABLA IDIOMA
 create table if not exists idioma (
-  id_idioma int(5) primary key,
-  nombre varchar(255) unique
+  id_idioma int(5) auto_increment primary key,
+  nombre varchar(255)
 );
 
 -- TABLA VALORACION
@@ -107,11 +107,8 @@ create table if not exists solicitud_libro (
 create table if not exists solicitud_idioma (
   nickname varchar(255),
   idioma varchar(255),
-  id_libro int(5),
-  titulo_idioma varchar(255),
   estado enum('aceptado','denegado','espera') default 'espera' not null,
-  foreign key (nickname) references usuario(nickname) on delete cascade,
-  foreign key (id_libro) references libro(id_libro) on delete cascade
+  foreign key (nickname) references usuario(nickname) on delete cascade
 );
 
 -- TABLA IDIOMA LIBRO
@@ -182,15 +179,15 @@ INSERT INTO solicitud_libro (id_libro, estado) VALUES
   (9, 'espera');
 
 -- IDIOMAS
-INSERT INTO `idioma`(`id_idioma`, `nombre`) VALUES
-  ('1','Gaztelania'),
-  ('2','Euskera'),
-  ('3','Ingelesa'),
-  ('4','Frantsesa'),
-  ('5','Aleman'),
-  ('6','Ukrainera'),
-  ('7','Errumaniera'),
-  ('8','Txinera');
+INSERT INTO `idioma`(`nombre`) VALUES
+  ('Gaztelania'),
+  ('Euskera'),
+  ('Ingelesa'),
+  ('Frantsesa'),
+  ('Aleman'),
+  ('Ukrainera'),
+  ('Errumaniera'),
+  ('Txinera');
 
 -- BORRAR DATOS DE ALUMNOS
 DROP EVENT IF EXISTS `delete_user`;
