@@ -86,10 +86,11 @@ session_start();
       }
       
     }
-    echo '</section>';
     echo '<div class="class-container">
-              <a href="new_group.php"><i class="fa-solid fa-users-rectangle"></i>Gela sortu</a>
-            </div>';
+    <a href="new_group.php"><i class="fa-solid fa-users-rectangle"></i>Gela sortu</a>
+  </div>';
+    echo '</section>';
+
     ?>
   </main>
 </body>

@@ -94,6 +94,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['form-action'])) {
 
 ?>
   <script src="../src/js/main_menu.js" defer></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Prompt&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../styles/main_menu.css">
   <title>Hasiera | IGKlub</title>
   </head>
