@@ -13,9 +13,12 @@ session_start();
   </head>
 <body>
 <header>
+<figure>
+          <a href="main_menu.php"><img src="../src/img/logo/logo.png"></a>
+        </figure>
       <nav>
         <figure>
-          <img src="../src/img/logo/logo.png">
+          <a href="main_menu.php"><img src="../src/img/logo/logo.png"></a>
         </figure>
         <div class="profile-pic">
           <?php
