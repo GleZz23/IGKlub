@@ -32,7 +32,7 @@
 ?>
   <script src="../src/js/change_password.js" defer></script>
   <script src="../src/js/profile.js" defer></script>
-  <link rel="stylesheet" href="../styles/personal_area.css">
+  <link rel="stylesheet" href="">
   
   <title>Pasahitza aldatu | IGKlub</title>
 </head>
