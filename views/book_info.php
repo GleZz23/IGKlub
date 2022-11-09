@@ -285,7 +285,7 @@
       </div>
     <?php
         $query = $miPDO->prepare('SELECT * FROM respuesta WHERE id_libro = :book AND id_comentario = :id_comentario AND estado = "aceptado" ORDER BY fecha DESC');
-        $query->execute(['book' => $book, 'id_comentario' => $id_comentario]);
+        $query->execute(['book' => $_REQUEST['liburua'], 'id_comentario' => $id_comentario]);
         $results = $query->fetchAll();
 
         if ($results) {

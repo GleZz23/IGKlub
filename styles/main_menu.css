@@ -2,7 +2,6 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: 'Prompt', sans-serif;
 }
 
 body {
@@ -21,8 +20,6 @@ body {
   --font: #EEE;
   --main-bg: #2D2D30;
   --secundary-bg: #1E1E1E;
-  /* DETAILS */
-  --details: #464646;
 }
 
 /* MENU STICKY */
@@ -188,9 +185,7 @@ main {
   text-align: center;
 }
 
-main > h1 {
-  margin-block: 10rem;
-}
+main > h1 { margin-block: 10rem; }
 
 main section {
   --grid-layout-gap: 4rem;
@@ -212,7 +207,6 @@ main section {
   position: relative;
   overflow: hidden;
   transition: all .3s ease-in-out;
-  background-color: lightgray;
 }
 
 .book-container img {
@@ -239,7 +233,7 @@ main section {
   justify-content: center;
   text-align: center;
   align-items: center;
-  color: #EEE;
+  color: var(--font);
   font-size: 1rem;
 }
 
@@ -297,9 +291,7 @@ main section {
   transition: all .3s ease-in-out;
 }
 
-.profile span:hover {
-  cursor: pointer;
-}
+.profile span:hover { cursor: pointer; }
 
 .profile a i, .profile span i{
   width: 2rem;
@@ -338,9 +330,7 @@ main section {
   gap: 1rem;
 }
 
-.filters select {
-  font-size: 1rem;
-}
+.filters select { font-size: 1rem; }
 
 .filters button:not(.close-filters) {
   font-size: 1rem;
@@ -445,9 +435,7 @@ main section {
   text-shadow: .5rem .5rem 1rem #00000050;
 }
 
-.alternative-button:hover {
-  cursor: pointer;
-}
+.alternative-button:hover { cursor: pointer; }
 
 #newBookForm i:not(.alternative-button i) {
   text-align: center;
@@ -515,9 +503,7 @@ footer > div {
   padding: 1rem 2rem;
 }
 
-footer > div a {
-  color: var(--font);
-}
+footer > div a { color: var(--font); }
 
 /* ESTILOS JS */
 .input_error{ border-right: 4px solid #E00A35; }
@@ -588,13 +574,9 @@ footer > div a {
     margin: 1rem;
   }
 
-  #newBookForm {
-    width: 100%;
-  }
+  #newBookForm { width: 100%; }
 
-  #newBookForm button {
-    width: 100%;
-  }
+  #newBookForm button { width: 100%; }
 }
 
 /* MOVIL */
@@ -603,9 +585,7 @@ footer > div a {
 
   header nav figure { display: none; }
 
-  main section {
-    margin: 4rem 2rem;
-  }
+  main section { margin: 4rem 2rem; }
 
   header { padding: 1.5rem 1rem; }
 
