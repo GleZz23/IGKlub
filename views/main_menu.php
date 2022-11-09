@@ -68,8 +68,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['form-action'])) {
     $insert = $miPDO->prepare('INSERT INTO solicitud_libro VALUES (:nickname, :id_libro, "espera")');
     $insert->execute(['nickname' => $_SESSION['nickname'], 'id_libro' => $id_libro]);
 
-    $query = $miPDO->prepare('INSERT INTO idioma_libro VALUES (:id_libro, :idioma, :titulo)');
-    $query->execute(['id_libro' => $id_libro, 'idioma' => $_REQUEST['language'], 'titulo' => $_REQUEST['title']]);
+    if ($_REQUEST['language'] === 'other') {
+      $query = $miPDO->prepare('INSERT INTO solicitud_idioma VALUES (:nickname, :idioma, "espera", :id_libro, :titulo)');
+      $query->execute(['nickname' => $_SESSION['nickname'] , 'idioma' => $_REQUEST['new-language'], 'id_libro' => $id_libro, 'titulo' => $_REQUEST['title']]);
+    } else {
+      $query = $miPDO->prepare('INSERT INTO idioma_libro VALUES (:id_libro, :idioma, :titulo)');
+      $query->execute(['id_libro' => $id_libro, 'idioma' => $_REQUEST['language'], 'titulo' => $_REQUEST['title']]);
+    }
 
     if (isset($_REQUEST['alternative_language']) && $_REQUEST['alternative_title']) {
 
@@ -80,8 +85,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['form-action'])) {
       }
 
       if ($alternative_language) {
-        $query = $miPDO->prepare('INSERT INTO idioma_libro VALUES (:id_libro, :id_idioma, :titulo)');
-        $query->execute(['id_libro' => $id_libro, 'id_idioma' => $_REQUEST['alternative_language'], 'titulo' => $_REQUEST['alternative_title']]);
+        if ($_REQUEST['alternative-language'] === 'other') {
+          $query = $miPDO->prepare('INSERT INTO solicitud_idioma VALUES (:nickname, :idioma, "espera", :id_libro, :titulo)');
+          $query->execute(['nickname' => $_SESSION['nickname'] , 'idioma' => $_REQUEST['new-alternative-language'], 'id_libro' => $id_libro, 'titulo' => $_REQUEST['title']]);
+        } else {
+          $query = $miPDO->prepare('INSERT INTO idioma_libro VALUES (:id_libro, :id_idioma, :titulo)');
+          $query->execute(['id_libro' => $id_libro, 'id_idioma' => $_REQUEST['alternative_language'], 'titulo' => $_REQUEST['alternative_title']]);
+        }        
       }
     }
 
@@ -329,6 +339,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['form-action'])) {
             echo '<option value="' . $language['id_idioma'] . '">' . $language['nombre'] . '</option>';
           }
           ?>
+          <option value="other">Hizkuntza berria</option>
         </select>
       </div>
       <!-- Error: Idioma -->
@@ -340,6 +351,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['form-action'])) {
               </div>';
       }
       ?>
+      <!-- Nuevo idioma -->
+      <section class="new-language hidden">
+        <div class="input-container">
+          <input type="text" name="new-language" id="new-language" placeholder="Hizkuntza berria">
+        </div>
+      </section>
       <!-- Formato -->
       <div class="input-container">
         <i class="fa-solid fa-rectangle-list"></i>
@@ -366,7 +383,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['form-action'])) {
         <textarea id="sinopsis" name="sinopsis" placeholder="Sinopsia" required autocomplete="off"
           maxlength="2300"></textarea>
       </div>
-      <!-- Error: Formato -->
+      <!-- Error: Sinopsis -->
       <div class="error hidden" id="sinopsis-error">
         <i class="fa-solid fa-circle-exclamation"></i>
         <p>Sinopsia nahitaezkoa da.</p>
@@ -389,8 +406,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['form-action'])) {
               echo '<option value="' . $language['id_idioma'] . '">' . $language['nombre'] . '</option>';
             }
             ?>
+            <option value="other">Hizkuntza berria</option>
           </select>
         </div>
+        <!-- Nuevo idioma -->
+        <section class="new-alternative-language hidden">
+          <div class="input-container">
+            <input type="text" name="new-alternative-language" id="new-alternative-language" placeholder="Hizkuntza berria">
+          </div>
+        </section>
         <!-- Error: Idioma -->
         <?php
         if ($book_alternative_language_error) {

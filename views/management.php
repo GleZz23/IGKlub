@@ -31,8 +31,16 @@
           case 'yes':
             $query = $miPDO->prepare('INSERT INTO idioma (nombre) VALUES (:idioma);');
             $query->execute(['idioma' => $_REQUEST['language']]);
+            
             $query = $miPDO->prepare('UPDATE solicitud_idioma SET estado = "aceptado" WHERE idioma = :idioma;');
             $query->execute(['idioma' => $_REQUEST['language']]);
+
+            $query = $miPDO->prepare('SELECT id_idioma FROM idioma WHERE nombre = :idioma;');
+            $query->execute(['idioma' => $_REQUEST['language']]);
+            $id_idioma = $query->fetch();
+
+            $query = $miPDO->prepare('INSERT INTO idioma_libro VALUES (:id_libro, :idioma, :titulo);');
+            $query->execute(['id_libro' => $_REQUEST['id_libro'], 'idioma' => $id_idioma['id_idioma'], 'titulo' => $_REQUEST['title']]);
             break;
   
           case 'no':
@@ -401,7 +409,9 @@
                 <td class="actions">
                   <form action="" method="post">
                     <input type="hidden" name="form-action" value="accept-language">
+                    <input type="hidden" name="id_libro" value="'.$language['id_libro'].'">
                     <input type="hidden" name="language" value="'.$language['idioma'].'">
+                    <input type="hidden" name="title" value="'.$language['titulo'].'">
                     <input type="hidden" name="accept" value="yes">
                     <button><i class="fa-solid fa-thumbs-up"></i></button>
                   </form>
