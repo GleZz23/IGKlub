@@ -24,6 +24,24 @@
             break;
         }
         break;
+
+      // Aceptar nuevos idiomas
+      case 'accept-language':
+        switch ($_REQUEST['accept']) {
+          case 'yes':
+            $query = $miPDO->prepare('INSERT INTO idioma (nombre) VALUES (:idioma);');
+            $query->execute(['idioma' => $_REQUEST['language']]);
+            $query = $miPDO->prepare('UPDATE solicitud_idioma SET estado = "aceptado" WHERE idioma = :idioma;');
+            $query->execute(['idioma' => $_REQUEST['language']]);
+            break;
+  
+          case 'no':
+            $query = $miPDO->prepare('DELETE FROM idioma WHERE idioma = :idioma;');
+            $query->execute(['idioma' => $_REQUEST['language']]);
+            break;
+        }
+        break;
+
       // Aceptar nuevos libros
       case 'accept-book':
         switch ($_REQUEST['accept']) {
@@ -141,6 +159,7 @@
       <button id="accept-teachers"><i class="fa-solid fa-user-group"></i>Irakasleak onartu</button>
       <button id="accept-books"><i class="fa-solid fa-book"></i>Liburuak onartu</button>
       <button id="accept-comments"><i class="fa-solid fa-comments"></i>Iruzkinak onartu</button>
+      <button id="accept-languages"><i class="fa-solid fa-language"></i></i>Hizkuntzak onartu</button>
       <button id="admins"><i class="fa-solid fa-users-gear"></i>Administratzaileak</button>
       <button id="database"><i class="fa-solid fa-database"></i>Datu-basea</button>
       <a href="main_menu.php"><i class="fa-solid fa-house"></i>Hasiera</a>
@@ -148,12 +167,13 @@
     </aside>
   </div>
   <section class="sticky-menu">
-    <button id="accept-teachers"><i class="fa-solid fa-user-group"></i>Irakasleak onartu</button>
-    <button id="accept-books"><i class="fa-solid fa-book"></i>Liburuak onartu</button>
-    <button id="accept-comments"><i class="fa-solid fa-comments"></i>Iruzkinak onartu</button>
-    <button id="admins"><i class="fa-solid fa-users-gear"></i>Administratzaileak</button>
-    <button id="database"><i class="fa-solid fa-database"></i>Datu-basea</button>
-    <a href="main_menu.php"><i class="fa-solid fa-house"></i>Hasiera</a>
+  <button id="accept-teachers"><i class="fa-solid fa-user-group"></i>Irakasleak onartu</button>
+      <button id="accept-books"><i class="fa-solid fa-book"></i>Liburuak onartu</button>
+      <button id="accept-comments"><i class="fa-solid fa-comments"></i>Iruzkinak onartu</button>
+      <button id="accept-languages"><i class="fa-solid fa-language"></i></i>Hizkuntzak onartu</button>
+      <button id="admins"><i class="fa-solid fa-users-gear"></i>Administratzaileak</button>
+      <button id="database"><i class="fa-solid fa-database"></i>Datu-basea</button>
+      <a href="main_menu.php"><i class="fa-solid fa-house"></i>Hasiera</a>
   </section>
   <main>
     <!-- Aceptar nuevos profesores -->
@@ -356,45 +376,39 @@
       }
       ?>
 
-      <!-- Aceptar nuevos profesores -->
+    <!-- Aceptar nuevos idiomas -->
     <?php
-    $query = $miPDO->prepare('SELECT * FROM solicitud_idioma WHERE usuario.rol = "irakasle" AND usuario.estado = "espera" AND usuario.id_centro = centro.id_centro');
+    $query = $miPDO->prepare('SELECT solicitud_idioma.*, usuario.imagen FROM solicitud_idioma, usuario WHERE solicitud_idioma.estado = "espera" AND solicitud_idioma.nickname = usuario.nickname');
     $query->execute();
     $results = $query->fetchAll();
 
     if ($results) {
-      echo '<section class="accept-teachers">
+      echo '<section class="accept-languages">
             <table>
               <tr>
                 <th></th>
                 <th>Nickname</th>
-                <th>Izen-abizenak</th>
-                <th>Ikastetxea</th>
-                <th>Email-a</th>
-                <th>Telefonoa</th>
+                <th>Hizkuntza</th>
                 <th>Onartu</th>
               </tr>';
-      foreach ($results as $position => $teacher){
+      foreach ($results as $position => $language){
         echo '<tr>
                 <td class="profile-img">
-                  <figure style="background: url(../src/img/profile/'.$teacher['imagen'].'); background-position: center; background-size: cover;"></figure>
+                  <figure style="background: url(../src/img/profile/'.$language['imagen'].'); background-position: center; background-size: cover;"></figure>
                 </td>
-                <td>'.$teacher['nickname'].'</td>
-                <td>'.$teacher['nombre'].' '.$teacher['apellidos'].'</td>
-                <td>'.$teacher['nombre_centro'].'</td>
-                <td>'.$teacher['email'].'</td>
-                <td>'.$teacher['telefono'].'</td>
+                <td>'.$language['nickname'].'</td>
+                <td>'.$language['idioma'].'</td>
                 <td class="actions">
                   <form action="" method="post">
-                    <input type="hidden" name="form-action" value="accept-teacher">
-                    <input type="hidden" name="nickname" value="'.$teacher['nickname'].'">
+                    <input type="hidden" name="form-action" value="accept-language">
+                    <input type="hidden" name="language" value="'.$language['idioma'].'">
                     <input type="hidden" name="accept" value="yes">
                     <button><i class="fa-solid fa-thumbs-up"></i></button>
                   </form>
               
                   <form action="" method="post">
-                    <input type="hidden" name="form-action" value="accept-teacher">
-                    <input type="hidden" name="nickname" value="'.$teacher['nickname'].'">
+                    <input type="hidden" name="form-action" value="accept-language">
+                    <input type="hidden" name="language" value="'.$language['idioma'].'">
                     <input type="hidden" name="accept" value="no">
                     <button><i class="fa-solid fa-thumbs-down"></i></button>
                   </form>
@@ -404,8 +418,8 @@
       echo '</table>
             </section>';
     } else {
-      echo '<section class="accept-teachers hidden">
-              <h1>Oraindik ez dago irakaslerik onartzeko</h1>
+      echo '<section class="accept-languages hidden">
+              <h1>Oraindik ez dago hizkuntzarik onartzeko</h1>
             </section>';
     }
     ?>

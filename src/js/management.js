@@ -18,6 +18,17 @@ actions.forEach((button) => {
         }
         break;
 
+      case 'accept-languages':
+        const acceptLanguages = document.querySelector('.'+button.id);
+        if (window.getComputedStyle(acceptLanguages).getPropertyValue('display') === "none") {
+          acceptLanguages.classList.remove('hidden');
+          button.style.textDecoration = "underline";
+        } else if (window.getComputedStyle(document.querySelector('.'+button.id)).getPropertyValue('display') === "flex") {
+          acceptLanguages.classList.add('hidden');
+          button.style.textDecoration = "none";
+        }
+        break;
+
       case 'accept-books':
         const acceptBooks = document.querySelector('.'+button.id);
         if (window.getComputedStyle(acceptBooks).getPropertyValue('display') === "none") {
