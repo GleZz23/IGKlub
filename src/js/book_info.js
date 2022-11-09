@@ -175,7 +175,7 @@ const closeButton = document.querySelector('.closeButton');
 
 rateBookButton.addEventListener('click', () => {
   window.scrollTo(0,0);
-  document.querySelector('body').style.overflowY = "hidden";
+  document.querySelector('body').style.overflowY = "auto";
   document.querySelector('.rate-book').style.display = "flex";
   setTimeout(() => {
     document.getElementById('rateBookForm').style.transform = "scale(1)";
