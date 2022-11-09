@@ -359,7 +359,7 @@ main section {
   display: none;
   justify-content: center;
   align-items: center;
-  background-color: #00000080;
+  background-color: #000000dd;
   transition: all .3s ease-in-out;
   z-index: 10;
   padding: 2rem 4rem;
@@ -374,7 +374,7 @@ main section {
   margin: 2rem;
   background-color: transparent;
   border: none;
-  color: var(--dark-purple);
+  color: var(--font);
   transition: all .3s ease-in-out;
 }
 

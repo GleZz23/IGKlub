@@ -101,12 +101,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['form-action'])) {
     header('Location: main_menu.php');
   }
 }
-
 ?>
   <script src="../src/js/main_menu.js" defer></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Prompt&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Prompt&display=swap" rel="stylesheet">
+  <!-- ESTILOS CSS -->
   <link rel="stylesheet" href="../styles/main_menu.css">
   <title>Hasiera | IGKlub</title>
   </head>
@@ -270,7 +270,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['form-action'])) {
       <p>Webgune hau Txurdinagako Lanbide Heziketako azken mailako Iker, Andrei, Iñigo eta Cipri ikasleek diseinatu dute.</p>
     </div>
   </footer>
-
+  <!-- AÑADIR NUEVO LIBRO -->
   <!-- NUEVO LIBRO -->
   <div class="new-book">
     <button class="closeButton"><i class="fa-solid fa-x"></i></button>
