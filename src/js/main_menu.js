@@ -260,12 +260,10 @@ if (screen.width > 1280) {
 
 profileLinks.forEach((link) => {
   link.addEventListener('mouseover', () => {
-    link.style.color = "black";
     link.style.transform = "translateX(1rem)";
   });
 
   link.addEventListener('mouseout', () => {
-    link.style.color = "gray";
     link.style.transform = "translateX(0)";
   });
 });
