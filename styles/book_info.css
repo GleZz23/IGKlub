@@ -141,6 +141,23 @@ main section {
 
 .more-info h3 { margin-right: .5rem; }
 
+/* Añadir nuevo idioma */
+.new-language-button {
+  padding: .5rem;
+  margin-top: 1rem;
+  font-size: 1rem;
+  text-align: center;
+  border: 2px solid var(--light-purple);
+  color: var(--light-purple);
+  transition: all .3s ease-in-out;
+}
+
+.new-language-button:hover {
+  cursor: pointer;
+  color: var(--font);
+  background: var(--accent);
+}
+
 /* Acciones */
 .actions {
   margin-top: 2rem;
@@ -162,9 +179,15 @@ main section {
   background: transparent;
   border: 1px solid var(--light-purple);
   color: var(--light-purple);
+  transition: all .3s ease-in-out;
 }
 
 .actions div:hover { cursor: pointer; }
+
+.actions .rateBookButton:hover {
+  color: var(--font);
+  background: var(--accent);
+}
 
 /* Reviews */
 .reviews { padding: 4rem; }
@@ -226,7 +249,10 @@ main section {
 /* Comentarios */
 .comments, .user-comment { margin: 2.5rem 1rem; }
 
-.main-comment, .answer, .user-answer, .user-comment {
+.main-comment,
+.answer,
+.user-answer,
+.user-comment {
   padding: 1rem;
   background-color: var(--secundary-bg);
   border: 2px solid var(--light-purple);
@@ -239,21 +265,26 @@ main section {
 
 .answer, .user-answer { margin-left: 5rem; }
 
-.main-comment header, .answer header {
+.main-comment header,
+.answer header {
   width: 100%;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
 }
 
-.main-comment header h1, .answer header h1, .user-answer header h1, .user-comment header h1 {
+.main-comment header h1,
+.answer header h1,
+.user-answer header h1,
+.user-comment header h1 {
   font-size: 2rem;
   margin-left: 1rem;
 }
 
 .main-comment header button, .answer header button { padding: .5rem 1rem; }
 
-.main-comment .mensaje, .answer .mensaje {
+.main-comment .mensaje,
+.answer .mensaje {
   padding: 1rem;
   font-size: 1.5rem;
   text-align: justify;
@@ -262,7 +293,8 @@ main section {
 }
 
 /* FORMULARIO DE COMENTARIO - RESPUESTA */
-.user-answer, .user-comment {
+.user-answer,
+.user-comment {
   display: none;
   flex-direction: column;
   opacity: 0;
@@ -270,13 +302,15 @@ main section {
   transition: all .3s ease-in-out;
 }
 
-.user-answer .mensaje form, .user-comment .mensaje form {
+.user-answer .mensaje form,
+.user-comment .mensaje form {
   display: flex;
   background-color: transparent;
   border: none;
 }
 
-.user-answer form textarea, .user-comment form textarea {
+.user-answer form textarea,
+.user-comment form textarea {
   width: 100%;
   height: 17.5rem;
   font-size: 1rem;
@@ -295,7 +329,8 @@ main section {
 }
 
 /* BOTON BORRAR COMENTARIO */
-.answer header form, .main-comment header form {
+.answer header form,
+.main-comment header form {
   display: flex;
   background-color: transparent;
   border: none;
@@ -320,12 +355,13 @@ main section {
   transition: all .3s ease-in-out;
 }
 
-.back:hover {
-  color: var(--font);
-}
+.back:hover { color: var(--font); }
 
 /* FORMULARIO VALORACION DE LIBRO */
-.rate-book:not(.actions .rate-book) {
+.rate-book:not(.actions .rate-book),
+.new-language {
+  overflow-y: auto;
+  overflow-x: hidden;
   width: 100%;
   height: 100%;
   position: fixed;
@@ -337,6 +373,7 @@ main section {
   background-color: #00000080;
   transition: all .3s ease-in-out;
   z-index: 10;
+  padding: 2rem 4rem;
 }
 
 .closeButton {
@@ -356,7 +393,8 @@ main section {
   color: var(--light-purple);
 }
 
-#rateBookForm {
+#rateBookForm,
+#newLanguageForm {
   width: 50rem;
   background-color: var(--secundary-bg);
   padding: 2rem;
@@ -371,22 +409,34 @@ main section {
   transition: all .3s ease-in-out;
 }
 
-#rateBookForm h1 { color: var(--font); }
+#rateBookForm h1, #newLanguageForm h1 { color: var(--font); }
 
-#rateBookForm .input-container:not(.stars-container .input-container) {
+#rateBookForm .input-container:not(.stars-container .input-container),
+#newLanguageForm .input-container {
   width: 100%;
   display: flex;
   align-items: center;
   background: var(--light-purple);
 }
 
-#rateBookForm .input-container div {
+#rateBookForm .input-container div,
+#newLanguageForm .input-container div,
+#newLanguageForm .new-language-section {
   display: flex;
   flex-direction: column;
   width: 100%;
 }
 
-#rateBookForm i:not(.stars-container span i) {
+#newLanguageForm .new-language-section {
+  display: none;
+  gap: 1rem;
+  opacity: 0;
+  transform: translateX(100%);
+  transition: all .3s ease-in-out;
+}
+
+#rateBookForm i:not(.stars-container span i),
+#newLanguageForm i {
   text-align: center;
   width: 3rem;
   padding-block: 1rem;
@@ -394,7 +444,11 @@ main section {
   color: var(--font);
 }
 
-#rateBookForm input, #rateBookForm select, #rateBookForm textarea {
+#rateBookForm input,
+#rateBookForm select,
+#rateBookForm textarea,
+#newLanguageForm input,
+#newLanguageForm select {
   width: 100%;
   height: 3rem;
   padding-inline: .5rem;
@@ -411,8 +465,9 @@ main section {
   outline: none;
 }
   
-#rateBookForm button {
-  width: 20%;
+#rateBookForm button,
+#newLanguageForm button {
+  width: auto;
   padding: .5rem 1rem;
   border: 1px solid var(--light-purple);
   background-color: transparent;
@@ -420,7 +475,8 @@ main section {
   transition: all .3s ease-in-out;
 }
 
-#rateBookForm button:hover {
+#rateBookForm button:hover,
+#newLanguageForm button:hover {
   background: var(--accent);
   color: var(--font);
 }
@@ -433,9 +489,7 @@ main section {
   flex-direction: row-reverse;
 }
 
-.stars-container input {
-  display: none;
-}
+.stars-container input { display: none; }
 
 .stars-container label {
   font-size: 3rem;

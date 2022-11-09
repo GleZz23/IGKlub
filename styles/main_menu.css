@@ -418,7 +418,8 @@ main section {
 }
 
 #newBookForm .input-container div,
-.alternative, .new-language,
+.alternative,
+.new-language,
 .new-alternative-language {
   display: flex;
   flex-direction: column;
@@ -456,7 +457,9 @@ main section {
   color: var(--font);
 }
 
-#newBookForm input, #newBookForm select, #newBookForm textarea {
+#newBookForm input,
+#newBookForm select,
+#newBookForm textarea {
   width: 100%;
   height: 3rem;
   padding-inline: .5rem;

@@ -11,60 +11,94 @@
 
   $title = $results['titulo'];
 
+  $book_language_error = false;
+
   $rate_book = true;
+  $new_language = true;
 
   if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['form-action'])) {
-    
-    // Si el idioma es por defecto
-    if ($_REQUEST['language'] === '-') {
-        $rate_book = false;
-        $book_language_error = true;
-    }
+    switch ($_REQUEST['form-action']) {
+      case 'ratebook':
+        // Si el idioma es por defecto
+        if ($_REQUEST['language'] === '-') {
+          $rate_book = false;
+          $book_language_error = true;
+        }
 
-    if ($rate_book) {
-      // VALORACION DEL LIBRO
-      $query = $miPDO->prepare('INSERT INTO valoracion (nickname, nota, edad, idioma, id_libro, fecha, estado) VALUES (:nickname, :nota, :edad, :idioma, :id_libro, NOW(), "espera")');        
-      $query->execute([
-        'nickname' => $_SESSION['nickname'],
-        'nota' => $_REQUEST['note'],
-        'edad' => ($_REQUEST['age']),
-        'idioma' => $_REQUEST['language'],
-        'id_libro' => $_GET['liburua']
-      ]);
+        if ($rate_book) {
+          // VALORACION DEL LIBRO
+          $query = $miPDO->prepare('INSERT INTO valoracion (nickname, nota, edad, idioma, id_libro, fecha, estado) VALUES (:nickname, :nota, :edad, :idioma, :id_libro, NOW(), "espera")');        
+          $query->execute([
+            'nickname' => $_SESSION['nickname'],
+            'nota' => $_REQUEST['note'],
+            'edad' => ($_REQUEST['age']),
+            'idioma' => $_REQUEST['language'],
+            'id_libro' => $_GET['liburua']
+          ]);
 
-      if ($_SESSION['role'] !== 'ikasle') {
-        $id_valoracion = $miPDO->lastInsertId();
-        $query = $miPDO->prepare('UPDATE valoracion SET estado = "aceptado" WHERE id_valoracion = :id_valoracion');        
-        $query->execute(['id_valoracion' => $id_valoracion]);
-      }
+          if ($_SESSION['role'] !== 'ikasle') {
+            $id_valoracion = $miPDO->lastInsertId();
+            $query = $miPDO->prepare('UPDATE valoracion SET estado = "aceptado" WHERE id_valoracion = :id_valoracion');        
+            $query->execute(['id_valoracion' => $id_valoracion]);
+          }
 
-      // OPINION DEL LIBRO
-      $query = $miPDO->prepare('INSERT INTO comentario (nickname, id_libro, mensaje, estado, fecha) VALUES (:nickname, :id_libro, :mensaje, "espera", NOW())');
-      $query->execute([
-        'nickname' => $_SESSION['nickname'],
-        'id_libro' => $_GET['liburua'],
-        'mensaje' => nl2br($_REQUEST['opinion'])
-      ]);
+          // OPINION DEL LIBRO
+          $query = $miPDO->prepare('INSERT INTO comentario (nickname, id_libro, mensaje, estado, fecha) VALUES (:nickname, :id_libro, :mensaje, "espera", NOW())');
+          $query->execute([
+            'nickname' => $_SESSION['nickname'],
+            'id_libro' => $_GET['liburua'],
+            'mensaje' => nl2br($_REQUEST['opinion'])
+          ]);
 
-      $id_comentario = $miPDO->lastInsertId();
-      $query = $miPDO->prepare('UPDATE valoracion SET id_comentario = :id_comentario WHERE id_valoracion = :id_valoracion');        
-      $query->execute(['id_comentario' => $id_comentario, 'id_valoracion' => $id_valoracion]);
+          $id_comentario = $miPDO->lastInsertId();
+          $query = $miPDO->prepare('UPDATE valoracion SET id_comentario = :id_comentario WHERE id_valoracion = :id_valoracion');        
+          $query->execute(['id_comentario' => $id_comentario, 'id_valoracion' => $id_valoracion]);
 
-      if ($_SESSION['role'] !== 'ikasle') {
-        $query = $miPDO->prepare('UPDATE comentario SET estado = "aceptado" WHERE nickname = :nickname AND id_libro = :id_libro AND mensaje = :mensaje');
-        $query->execute(['nickname' => $_SESSION['nickname'], 'id_libro' => $_GET['liburua'], 'mensaje' => nl2br($_REQUEST['opinion'])]);
-      }
+          if ($_SESSION['role'] !== 'ikasle') {
+            $query = $miPDO->prepare('UPDATE comentario SET estado = "aceptado" WHERE nickname = :nickname AND id_libro = :id_libro AND mensaje = :mensaje');
+            $query->execute(['nickname' => $_SESSION['nickname'], 'id_libro' => $_GET['liburua'], 'mensaje' => nl2br($_REQUEST['opinion'])]);
+          }
 
-      // ACTUALIZAR DATOS DEL LIBRO
-      $query = $miPDO->prepare('SELECT COUNT(id_valoracion) AS lectores, ROUND(AVG(nota), 0) AS nota, ROUND(AVG(edad), 0) AS edad FROM valoracion WHERE id_libro = :id_libro');
-      $query->execute(['id_libro' => $_GET['liburua']]);
-      $media = $query->fetch();
+          // ACTUALIZAR DATOS DEL LIBRO
+          $query = $miPDO->prepare('SELECT COUNT(id_valoracion) AS lectores, ROUND(AVG(nota), 0) AS nota, ROUND(AVG(edad), 0) AS edad FROM valoracion WHERE id_libro = :id_libro');
+          $query->execute(['id_libro' => $_GET['liburua']]);
+          $media = $query->fetch();
 
-      $query = $miPDO->prepare('UPDATE libro SET nota_media = :nota_media, num_lectores = :lectores, edad_media = :edad_media WHERE id_libro = :id_libro');
-      $query->execute(['nota_media' => $media['nota'], 'lectores' => $media['lectores'], 'edad_media' => $media['edad'], 'id_libro' => $_GET['liburua']]);
+          $query = $miPDO->prepare('UPDATE libro SET nota_media = :nota_media, num_lectores = :lectores, edad_media = :edad_media WHERE id_libro = :id_libro');
+          $query->execute(['nota_media' => $media['nota'], 'lectores' => $media['lectores'], 'edad_media' => $media['edad'], 'id_libro' => $_GET['liburua']]);
 
-      // RECARGAR PAGINA
-      header('Location: book_info.php?liburua='.$_GET['liburua']);
+          // RECARGAR PAGINA
+          header('Location: book_info.php?liburua='.$_GET['liburua']);
+        }
+        break;
+
+      case 'newlanguage':
+        // Si el idioma es por defecto
+        if ($_REQUEST['language'] === '-') {
+          $new_language = false;
+          $book_language_error = true;
+        }
+
+        if ($new_language) {
+
+
+          if ($_REQUEST['language'] === 'other') {
+            $query = $miPDO->prepare('INSERT INTO solicitud_idioma VALUES (:nickname, :idioma, :id_libro, :titulo, "espera")');
+            $query->execute(['nickname' => $_SESSION['nickname'] , 'idioma' => $_REQUEST['new-language'], 'id_libro' => $_GET['liburua'], 'titulo' => $_REQUEST['title']]);
+          } else {
+            $query = $miPDO->prepare('SELECT nombre FROM idioma WHERE id_idioma = :id_idioma');
+            $query->execute(['id_idioma' => $_REQUEST['language']]);
+            $idioma = $query->fetch();
+
+            $query = $miPDO->prepare('INSERT INTO solicitud_idioma VALUES (:nickname, :idioma, :id_libro, :titulo, "espera")');
+            $query->execute(['nickname' => $_SESSION['nickname'] , 'idioma' => $idioma['nombre'], 'id_libro' => $_GET['liburua'], 'titulo' => $_REQUEST['title']]);
+          }
+          
+          // RECARGAR PAGINA
+          header('Location: book_info.php?liburua='.$_GET['liburua']);
+        }
+
+        break;
     }
   }
 ?>
@@ -143,19 +177,23 @@
                   $results = $query->fetchAll();
                   
                   if ($results) {
-                    echo '<h3>Hizkuntzak</h3>';
+                    echo '<h3>Hizkuntzak:</h3>';
                     foreach ($results as $position => $book) {
 
                       $query = $miPDO->prepare('SELECT nombre FROM idioma WHERE id_idioma = :id_idioma');
                       $query->execute(['id_idioma' => $book['idioma']]);
                       $idioma = $query->fetch();
 
-                      echo '<p>- '.$book['titulo'].' ('.$idioma['nombre'].')</p>'; 
+                      echo '<div>
+                              <h3>- '.$book['titulo'].'</h3>
+                              <p>('.$idioma['nombre'].')</p>
+                            </div>';
                     }
                   } else {
                     echo '<h3>Liburu hau ez dauka beste hizkuntzirik</h3>';
                   }
               ?>
+              <span class="new-language-button"><i class="fa-solid fa-language"></i> Hizkuntza berria gehitu</span>
             </div>
           </div>
         </div>
@@ -313,8 +351,8 @@
     </div>
     <!-- Error: Edad -->
     <div class="error hidden" id="age-error">
-        <i class="fa-solid fa-circle-exclamation"></i>
-        <p>Adina 5 eta 70 artekoa izan behar da.</p>
+      <i class="fa-solid fa-circle-exclamation"></i>
+      <p>Adina 5 eta 70 artekoa izan behar da.</p>
     </div>
     <!-- Idioma -->
     <div class="input-container">
@@ -354,6 +392,63 @@
     </div>
     <input type="hidden" name="form-action" value="ratebook">
     <button>Liburua baloratu</button>
+  </form>
+  </div>
+  <!-- AÑADIR NUEVO IDIOMA -->
+  <div class="new-language">
+  <button class="closeButton"><i class="fa-solid fa-x"></i></button>
+  <form id="newLanguageForm" action="" method="post">
+    <h1>Hizkuntza berria gehitu</h1>
+    <!-- Idioma -->
+    <div class="input-container">
+      <i class="fa-solid fa-language"></i>
+      <select name="language" id="language">
+        <option value="-" selected>Hizkuntza</option>
+        <?php
+        $query = $miPDO->prepare('SELECT * FROM idioma ORDER BY id_idioma ASC');
+        $query->execute();
+        $results = $query->fetchAll();
+
+        foreach ($results as $position => $language) {
+          echo '<option value="' . $language['id_idioma'] . '">' . $language['nombre'] . '</option>';
+        }
+        ?>
+        <option value="other">Hizkuntza berria</option>
+      </select>
+    </div>
+    <!-- Error: Idioma -->
+    <?php
+    if ($book_language_error) {
+      echo '<div class="error php-error">
+              <i class="fa-solid fa-circle-exclamation"></i>
+              <p>Aukeratu hizkuntza bat.</p>
+            </div>';
+    }
+    ?>
+    <!-- Nuevo idioma -->
+    <section class="new-language-section">
+      <div class="input-container">
+        <input type="text" name="new-language" id="new-language" placeholder="Hizkuntza berria">
+      </div>
+    </section>
+    <!-- Titulo del libro -->
+    <div class="input-container">
+      <i class="fa-solid fa-heading"></i>
+      <input type="text" name="title" id="title" placeholder="Izenburua hizkuntza berrian" autofocus value="<?php if (isset($_REQUEST['title']))
+          echo $_REQUEST['title'] ?>">
+    </div>
+    <!-- Error: Titulo del libro -->
+    <div class="error hidden" id="title-error">
+      <i class="fa-solid fa-circle-exclamation"></i>
+      <p>Egiaztatu izenburua ondo idatzita dagoela.</p>
+    </div>
+    <!-- Error: Formulario -->
+    <div class="error hidden" id="form-error">
+        <i class="fa-solid fa-circle-exclamation"></i>
+        <p>Bete formularioa behar bezala.</p>
+    </div>
+    <input type="hidden" name="form-action" value="newlanguage">
+    <button>Hizkuntza berria gehitu</button>
   </form>
   </div>
 </body>

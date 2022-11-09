@@ -233,20 +233,6 @@ inputs[9].addEventListener('input', (e) => {
   }
 });
 
-if (inputs[6].value === 'other') {
-  newLanguage.classList.remove('hidden');
-  setTimeout(() => {
-    newLanguage.style.opacity = "1";
-    newLanguage.style.transform = "translateX(0)";
-  }, 10);
-} else {
-  newLanguage.style.opacity = "0";
-  newLanguage.style.transform = "translateX(100%)";
-  setTimeout(() => {
-    newLanguage.classList.add('hidden');
-  }, 500);
-}
-
 alternativeButton.addEventListener('click', () => {
   const alternative = document.querySelector('.alternative');
 

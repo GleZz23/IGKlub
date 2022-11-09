@@ -29,8 +29,14 @@
       case 'accept-language':
         switch ($_REQUEST['accept']) {
           case 'yes':
-            $query = $miPDO->prepare('INSERT INTO idioma (nombre) VALUES (:idioma);');
+            $query = $miPDO->prepare('SELECT nombre FROM idioma WHERE nombre = :idioma;');
             $query->execute(['idioma' => $_REQUEST['language']]);
+            $results = $query->fetchAll();
+
+            if (!$results) {
+              $query = $miPDO->prepare('INSERT INTO idioma (nombre) VALUES (:idioma);');
+              $query->execute(['idioma' => $_REQUEST['language']]);
+            }
             
             $query = $miPDO->prepare('UPDATE solicitud_idioma SET estado = "aceptado" WHERE idioma = :idioma;');
             $query->execute(['idioma' => $_REQUEST['language']]);

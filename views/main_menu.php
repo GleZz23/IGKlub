@@ -279,8 +279,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['form-action'])) {
       <!-- Titulo del libro -->
       <div class="input-container">
         <i class="fa-solid fa-heading"></i>
-        <input type="text" name="title" id="title" placeholder="Izenburua" autofocus value="<?php if (isset($_REQUEST['nickname']))
-            echo $_REQUEST['nickname'] ?>">
+        <input type="text" name="title" id="title" placeholder="Izenburua" autofocus value="<?php if (isset($_REQUEST['title']))
+            echo $_REQUEST['title'] ?>">
       </div>
       <!-- Error: Titulo del libro -->
       <div class="error hidden" id="title-error">
@@ -290,8 +290,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['form-action'])) {
       <!-- Escritor -->
       <div class="input-container">
         <i class="fa-solid fa-feather"></i>
-        <input type="text" name="writter" id="writter" placeholder="Egilea" value="<?php if (isset($_REQUEST['email']))
-            echo $_REQUEST['email'] ?>">
+        <input type="text" name="writter" id="writter" placeholder="Egilea" value="<?php if (isset($_REQUEST['writter']))
+            echo $_REQUEST['writter'] ?>">
       </div>
       <!-- Error: Escritor -->
       <div class="error hidden" id="writter-error">
@@ -389,7 +389,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['form-action'])) {
         <p>Sinopsia nahitaezkoa da.</p>
       </div>
       <!-- Titulo e idioma alternativos -->
-      <div class="alternative-button"><i class="fa-solid fa-arrow-down"></i> Liburu hau beste hizkuntzan irakurri dut
+      <div class="alternative-button">
+        <i class="fa-solid fa-arrow-down"></i> Liburu hau beste hizkuntzan irakurri dut
       </div>
       <section class="alternative hidden">
         <!-- Idioma alternativo -->
@@ -428,8 +429,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['form-action'])) {
         <div class="input-container">
           <i class="fa-solid fa-heading"></i>
           <input type="text" name="alternative_title" id="alternative-title" placeholder="Izenburua hizkuntza horretan"
-            value="<?php if (isset($_REQUEST['nickname']))
-              echo $_REQUEST['nickname'] ?>">
+            value="<?php if (isset($_REQUEST['alternative_title']))
+              echo $_REQUEST['alternative_title'] ?>">
         </div>
         <!-- Error: Titulo del libro -->
         <div class="error hidden" id="alternative-title-error">

@@ -169,9 +169,9 @@ answerButton.forEach((button) => {
   });
 });
 
-// MODAL FORMULARIO VALORAR LIBRO
+// MODAL FORMULARIO VALORAR LIBRO - FORMULARIO NUEVO IDIOMA
 const rateBookButton = document.querySelector('.rateBookButton');
-const closeButton = document.querySelector('.closeButton');
+const closeButtonRateBook = document.querySelector('.rate-book button');
 
 rateBookButton.addEventListener('click', () => {
   window.scrollTo(0,0);
@@ -182,10 +182,50 @@ rateBookButton.addEventListener('click', () => {
   }, 10);
 });
 
-closeButton.addEventListener('click', () => {
+closeButtonRateBook.addEventListener('click', () => {
   document.getElementById('rateBookForm').style.transform = "scale(0)";
   setTimeout(() => {
     document.querySelector('.rate-book').style.display = "none";
     document.querySelector('body').style.overflowY = "scroll";
   }, 500);
+});
+
+const newLanguageButton = document.querySelector('.new-language-button');
+const closeButtonNewLanguage = document.querySelector('.new-language button');
+
+newLanguageButton.addEventListener('click', () => {
+  window.scrollTo(0,0);
+  document.querySelector('body').style.overflowY = "hidden";
+  document.querySelector('.new-language').style.display = "flex";
+  setTimeout(() => {
+    document.getElementById('newLanguageForm').style.transform = "scale(1)";
+  }, 10);
+});
+
+closeButtonNewLanguage.addEventListener('click', () => {
+  document.getElementById('newLanguageForm').style.transform = "scale(0)";
+  setTimeout(() => {
+    document.querySelector('.new-language').style.display = "none";
+    document.querySelector('body').style.overflowY = "scroll";
+  }, 500);
+});
+
+// IDIOMA NUEVO - ALTERANTIVO
+const optionsNewLanguage = document.querySelector('#newLanguageForm select')
+const newLanguage = document.querySelector('.new-language-section');
+
+optionsNewLanguage.addEventListener('input', (e) => {
+  if (e.target.value === 'other') {
+    newLanguage.style.display = "flex";
+    setTimeout(() => {
+      newLanguage.style.opacity = "1";
+      newLanguage.style.transform = "translateX(0)";
+    }, 10);
+  } else {
+    newLanguage.style.opacity = "0";
+    newLanguage.style.transform = "translateX(100%)";
+    setTimeout(() => {
+      newLanguage.style.display = "none";
+    }, 500);
+  }
 });
