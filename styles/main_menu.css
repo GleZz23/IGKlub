@@ -378,35 +378,37 @@ main section {
   margin: 2rem;
   background-color: transparent;
   border: none;
-  color: gray;
+  color: var(--dark-purple);
   transition: all .3s ease-in-out;
 }
 
 .closeButton:hover {
   cursor: pointer;
-  color: white;
+  color: var(--light-purple);
 }
 
 #newBookForm {
   width: 50rem;
-  background-color: lightgray;
+  background-color: var(--secundary-bg);
   padding: 2rem;
-  border: 2px solid gray;
+  border: 2px solid var(--light-purple);
   border-radius: 1rem;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 1rem;
-  box-shadow: .5rem .5rem 1rem #00000075;
+  box-shadow: 0 0 .5rem var(--light-purple);
   transform: scale(0);
   transition: all .3s ease-in-out;
 }
+
+#newBookForm h1 { color: var(--font); }
 
 #newBookForm .input-container {
   width: 100%;
   display: flex;
   align-items: center;
-  background-color: gray;
+  background: var(--accent);
 }
 
 #newBookForm .input-container div, .alternative {
@@ -426,7 +428,7 @@ main section {
   width: 100%;
   text-align: center;
   font-size: 1rem;
-  color: black;
+  color: var(--font);
   border: none;
   background-color: transparent;
   text-shadow: .5rem .5rem 1rem #00000050;
@@ -441,7 +443,7 @@ main section {
   width: 3rem;
   padding-block: 1rem;
   font-size: 1rem;
-  color: #eee;
+  color: var(--font);
 }
 
 #newBookForm input, #newBookForm select, #newBookForm textarea {
@@ -450,7 +452,7 @@ main section {
   padding-inline: .5rem;
   outline: none;
   border: none;
-  background-color: #eee;
+  background-color: var(--font);
 }
 
 #newBookForm textarea {
@@ -464,15 +466,15 @@ main section {
 #newBookForm button {
   width: 20%;
   padding: .5rem 1rem;
-  border: 1px solid gray;
-  background-color: #eee;
-  color: black;
+  border: 1px solid var(--light-purple);
+  background: var(--accent);
+  color: var(--font);
   transition: ease-in-out .25s;
 }
 
 #newBookForm button:hover:not(.alternative-button) {
   cursor: pointer;
-  box-shadow: 0 0 .5rem #00000050;
+  box-shadow: 0 0 .5rem var(--light-purple);
 }
 
 /* FOOTER */
@@ -567,6 +569,24 @@ footer > div a {
   header nav figure { width: 30%; }
 
   .search-bar { width: 100%; }
+
+  .new-book {
+    padding: 4rem 2rem;
+    height: fit-content;
+  }
+
+  .closeButton {
+    font-size: 2rem;
+    margin: 1rem;
+  }
+
+  #newBookForm {
+    width: 100%;
+  }
+
+  #newBookForm button {
+    width: 100%;
+  }
 }
 
 /* MOVIL */
