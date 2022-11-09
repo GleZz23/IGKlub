@@ -327,15 +327,16 @@ main section {
 /* FORMULARIO VALORACION DE LIBRO */
 .rate-book:not(.actions .rate-book) {
   width: 100%;
-  height: 100vh;
-  position: absolute;
+  height: 100%;
+  position: fixed;
   top: 0;
+  left: 0;
   display: none;
   justify-content: center;
   align-items: center;
   background-color: #00000080;
   transition: all .3s ease-in-out;
-  z-index: 5;
+  z-index: 10;
 }
 
 .closeButton {
@@ -357,7 +358,7 @@ main section {
 
 #rateBookForm {
   width: 50rem;
-  background-color: var(--main-bg);
+  background-color: var(--secundary-bg);
   padding: 2rem;
   border: 2px solid var(--light-purple);
   border-radius: 1rem;
@@ -365,7 +366,7 @@ main section {
   flex-direction: column;
   align-items: center;
   gap: 1rem;
-  box-shadow: .5rem .5rem 1rem #00000075;
+  box-shadow: 0 0 .5rem var(--light-purple);
   transform: scale(0);
   transition: all .3s ease-in-out;
 }

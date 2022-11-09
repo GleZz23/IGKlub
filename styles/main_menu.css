@@ -409,7 +409,7 @@ main section {
   width: 100%;
   display: flex;
   align-items: center;
-  background: var(--accent);
+  background: var(--light-purple);
 }
 
 #newBookForm .input-container div, .alternative {
@@ -468,14 +468,14 @@ main section {
   width: 20%;
   padding: .5rem 1rem;
   border: 1px solid var(--light-purple);
-  background: var(--accent);
-  color: var(--font);
-  transition: ease-in-out .25s;
+  background-color: transparent;
+  color: var(--light-purple);
+  transition: all .3s ease-in-out;
 }
 
 #newBookForm button:hover:not(.alternative-button) {
-  cursor: pointer;
-  box-shadow: 0 0 .5rem var(--light-purple);
+  background: var(--accent);
+  color: var(--font);
 }
 
 /* FOOTER */
