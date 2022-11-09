@@ -106,6 +106,7 @@
             $query->execute(['nickname' => $nickname, 'email' => $email, 'name' => $name, 'surnames' => $surnames, 'password' => $password]);
           }
           break;
+        // Aceptar o denegar idiomas
     }
   }
 
@@ -354,7 +355,62 @@
               </section>';
       }
       ?>
-      <!-- Agregar nuevos administradores -->
+
+      <!-- Aceptar nuevos profesores -->
+    <?php
+    $query = $miPDO->prepare('SELECT * FROM solicitud_idioma WHERE usuario.rol = "irakasle" AND usuario.estado = "espera" AND usuario.id_centro = centro.id_centro');
+    $query->execute();
+    $results = $query->fetchAll();
+
+    if ($results) {
+      echo '<section class="accept-teachers">
+            <table>
+              <tr>
+                <th></th>
+                <th>Nickname</th>
+                <th>Izen-abizenak</th>
+                <th>Ikastetxea</th>
+                <th>Email-a</th>
+                <th>Telefonoa</th>
+                <th>Onartu</th>
+              </tr>';
+      foreach ($results as $position => $teacher){
+        echo '<tr>
+                <td class="profile-img">
+                  <figure style="background: url(../src/img/profile/'.$teacher['imagen'].'); background-position: center; background-size: cover;"></figure>
+                </td>
+                <td>'.$teacher['nickname'].'</td>
+                <td>'.$teacher['nombre'].' '.$teacher['apellidos'].'</td>
+                <td>'.$teacher['nombre_centro'].'</td>
+                <td>'.$teacher['email'].'</td>
+                <td>'.$teacher['telefono'].'</td>
+                <td class="actions">
+                  <form action="" method="post">
+                    <input type="hidden" name="form-action" value="accept-teacher">
+                    <input type="hidden" name="nickname" value="'.$teacher['nickname'].'">
+                    <input type="hidden" name="accept" value="yes">
+                    <button><i class="fa-solid fa-thumbs-up"></i></button>
+                  </form>
+              
+                  <form action="" method="post">
+                    <input type="hidden" name="form-action" value="accept-teacher">
+                    <input type="hidden" name="nickname" value="'.$teacher['nickname'].'">
+                    <input type="hidden" name="accept" value="no">
+                    <button><i class="fa-solid fa-thumbs-down"></i></button>
+                  </form>
+                </td>
+              </tr>';
+      }
+      echo '</table>
+            </section>';
+    } else {
+      echo '<section class="accept-teachers hidden">
+              <h1>Oraindik ez dago irakaslerik onartzeko</h1>
+            </section>';
+    }
+    ?>
+
+    <!-- Agregar nuevos administradores -->
     <?php
       $query = $miPDO->prepare('SELECT * FROM usuario WHERE rol = "admin" AND estado != "denegado"');
       $query->execute();

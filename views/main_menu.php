@@ -153,7 +153,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['form-action'])) {
           <aside class="profile">
             <?php
             echo '<div class="profile-img">
-                    <figure style="background: url(../src/img/profile/'.$_SESSION['profile_img'].'); background-position: center; background-size: cover;"></figure>
+            <a href="personal_area.php" style="background: url(../src/img/profile/'.$_SESSION['profile_img'].'); background-position: center; background-size: cover;"></a>
                   </div>';
             echo '<a href="main_menu.php"><i class="fa-solid fa-house"></i>Hasiera</a>
                   <span class="newBookButton"><i class="fa-solid fa-book"></i>Igo liburu bat</span>
