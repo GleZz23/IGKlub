@@ -28,11 +28,13 @@ filtersButton.addEventListener('mouseover', () => {
   filtersButton.style.transform = 'scale(1.1)';
   filtersButton.style.textShadow = ".3rem .3rem .3rem #00000050";
   filtersButton.style.cursor = "pointer";
+  filtersButton.style.rotate = '90deg'
 });
 
 filtersButton.addEventListener('mouseleave', () => {
   filtersButton.style.transform = 'scale(1)';
   filtersButton.style.textShadow = "none";
+  filtersButton.style.rotate = '90deg'
 });
 
 filtersButton.addEventListener('click', () => {

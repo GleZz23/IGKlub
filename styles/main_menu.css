@@ -319,6 +319,8 @@ main section {
 }
 
 /* FILTERS */
+#filters { transform: rotate(90deg); }
+
 .filters h2 {
   font-size: 1.5rem;
   color: var(--font);

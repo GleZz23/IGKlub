@@ -102,7 +102,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['form-action'])) {
   }
 }
 ?>
+  <!-- JAVASCRIPTS -->
   <script src="../src/js/main_menu.js" defer></script>
+  <!-- FUENTES -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Prompt&display=swap" rel="stylesheet">
@@ -129,7 +131,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['form-action'])) {
           </div>
         </div>
         <button id="filters">
-          <i class="fa-solid fa-filter"></i>
+          <i class="fa-solid fa-arrow-right-arrow-left"></i>
         </button>
         <button class="hidden" id="profile">
           <i class="fa-solid fa-bars"></i>
