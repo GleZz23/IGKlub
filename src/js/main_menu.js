@@ -77,7 +77,7 @@ const closeButton = document.querySelector('.closeButton');
 newBookButton.forEach((button) => {
   button.addEventListener('click', () => {
     window.scrollTo(0,0);
-    document.querySelector('body').style.overflowY = "hidden";
+    document.querySelector('body').style.overflowY = "auto";
     document.querySelector('.new-book').style.display = "flex";
     setTimeout(() => {
       document.getElementById('newBookForm').style.transform = "scale(1)";
