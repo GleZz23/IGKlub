@@ -41,26 +41,28 @@
   <link rel="stylesheet" href="../styles/login.css">
 </head>
 <body>
-  <form action="" method="post">
-    <h1>Saioa hasi</h1>
-    <div class="input-container">
-      <i class="fa-solid fa-user"></i>
-      <input type="text" name="nickname" id="" placeholder="Nickname" autofocus autocomplete="off">
-    </div>
-    <div class="input-container">
-      <i class="fa-solid fa-key"></i>
-      <input type="password" name="password" id="" placeholder="Pasahitza">
-    </div>
-    <!-- Error -->
-    <?php
-    if ($error) {
-      echo '<div class="error" id="error-email">
-              <i class="fa-solid fa-circle-exclamation"></i>
-              <p>Nickname edo pasahitza okerra. Saiatu berriro</p>
-            </div>';
-    }
-    ?>
-    <button>Saioa hasi</button>
-  </form>
+  <div class="general-container">
+    <form action="" method="post">
+      <h1>Saioa hasi</h1>
+      <div class="input-container">
+        <i class="fa-solid fa-user"></i>
+        <input type="text" name="nickname" id="" placeholder="Nickname" autofocus autocomplete="off">
+      </div>
+      <div class="input-container">
+        <i class="fa-solid fa-key"></i>
+        <input type="password" name="password" id="" placeholder="Pasahitza">
+      </div>
+      <!-- Error -->
+      <?php
+      if ($error) {
+        echo '<div class="error" id="error-email">
+                <i class="fa-solid fa-circle-exclamation"></i>
+                <p>Nickname edo pasahitza okerra. Saiatu berriro</p>
+              </div>';
+      }
+      ?>
+      <button>Saioa hasi</button>
+    </form>
+  </div>
 </body>
 </html>
