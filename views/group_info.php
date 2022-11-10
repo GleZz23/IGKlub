@@ -256,7 +256,7 @@
     <!-- Aceptar nuevos libros -->
     <?php
       // Recojo todos los valores de los libros en una variable
-      $query = $miPDO->prepare('SELECT libro.*, solicitud_libro.nickname FROM libro, solicitud_libro WHERE libro.id_libro = solicitud_libro.id_libro AND solicitud_libro.estado = "espera"');
+      $query = $miPDO->prepare('SELECT libro.*, solicitud_libro.nickname FROM libro, solicitud_libro, usuario WHERE libro.id_libro = solicitud_libro.id_libro AND solicitud_libro.estado = "espera" AND solicitud_libro.nickname = usuario.nickname AND usuario.cod_grupo = :code');
       $query->execute();
       $books = $query->fetchAll();
 
@@ -303,7 +303,7 @@
 
       <!-- Aceptar comentarios y respuestas -->
       <?php
-      $query = $miPDO->prepare('SELECT *, libro.titulo AS libro FROM comentario, libro WHERE estado = "espera" AND comentario.id_libro = libro.id_libro');
+      $query = $miPDO->prepare('SELECT *, libro.titulo AS libro FROM comentario, libro, usuario WHERE comentario.estado = "espera" AND comentario.id_libro = libro.id_libro AND comentario.nickname = usuario.nickname AND usuario.cod_grupo = :code');
       $query->execute();
       $results = $query->fetchAll();
 
@@ -350,7 +350,7 @@
               </section>';
       }
       
-      $query = $miPDO->prepare('SELECT *, libro.titulo AS libro FROM respuesta, libro WHERE estado = "espera" AND respuesta.id_libro = libro.id_libro');
+      $query = $miPDO->prepare('SELECT *, libro.titulo AS libro FROM respuesta, libro, usuario WHERE respuesta.estado = "espera" AND respuesta.id_libro = libro.id_libro AND respuesta.nickname = usuario.nickname AND usuario.cod_grupo = :code');
       $query->execute();
       $results = $query->fetchAll();
 
@@ -401,7 +401,7 @@
 
     <!-- Aceptar nuevos idiomas -->
     <?php
-    $query = $miPDO->prepare('SELECT solicitud_idioma.*, usuario.imagen FROM solicitud_idioma, usuario WHERE solicitud_idioma.estado = "espera" AND solicitud_idioma.nickname = usuario.nickname');
+    $query = $miPDO->prepare('SELECT solicitud_idioma.*, usuario.imagen FROM solicitud_idioma, usuario WHERE solicitud_idioma.estado = "espera" AND solicitud_idioma.nickname = usuario.nickname AND usuario.cod_grupo = :code');
     $query->execute();
     $results = $query->fetchAll();
 
