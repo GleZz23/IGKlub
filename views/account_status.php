@@ -20,6 +20,10 @@
       $query->execute(['nickname' => $nickname]);
       $results = $query->fetch();
 
+      $query = $miPDO->prepare('SELECT nombre FROM centro WHERE id_centro = :id_centro;');
+      $query->execute(['id_centro' => $results['id_centro']]);
+      $centro = $query->fetch();
+
       if ($results['estado'] === 'espera') {
         switch ($results['rol']) {
           case 'irakasle':
@@ -51,7 +55,7 @@
         $_SESSION['email'] = $results['email'];
         $_SESSION['role'] = $results['rol'];
         $_SESSION['date'] = $results['fecha_nacimiento'];
-        $_SESSION['school'] = $results['centro'];
+        $_SESSION['school'] = $centro['nombre'];
         $_SESSION['profile_img'] = $results['imagen'];
 
         header('Location: ../views/main_menu.php');
