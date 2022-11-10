@@ -69,21 +69,26 @@ session_start();
       <div class="profile-data">
         <h1><?php echo $_SESSION['name'] ?> <?php echo $_SESSION['surnames'] ?> </h1>
         <h2 id="nickname"><?php echo $_SESSION['nickname']?></h2>
-        <p id="fec_nacimiento">Jaiotza data: <?php echo $_SESSION['date']?></p>
         <p id="email">Email-a: <?php echo $_SESSION['email']?></p>
-        <p id="school">Ikastetxea: <?php echo $_SESSION['school']?></p>
+        <p id="fec_nacimiento">Jaiotze-data: <?php echo $_SESSION['date']?></p>
+        <p id="telefono">Telefonoa: <?php echo $_SESSION['phone']?></p>
+        <?php
+          if ($_SESSION['role'] !== 'admin') {
+            echo '<p id="school">Ikastetxea: '.$_SESSION['school'].'</p>';
+          }
+        ?>
         <div class="actions">
           <button id="profile_edit_btn" onclick="location.href='../views/change_personal_area.php'"><i class="fa-solid fa-key"></i> Pasahitza aldatu</button>
           <button><i class="fa-solid fa-trash-can"></i> Kontua ezabatu</button>
         </div>
       </div>
     </div>
-
-    <div id="valorated_book">
+    <!-- LIBROS VALORADOS -->
+    <div class="valorated-books">
       <div>
         <h1>Baloratutako liburuak</h1>
       </div>
-      <div id="valorated_book_list">
+      <div class="book-list">
       <?php
       // Recojo todos los valores de los libros en una variable
       $query = $miPDO->prepare('SELECT libro.* FROM libro, valoracion WHERE libro.id_libro = valoracion.id_libro AND valoracion.nickname =:nickname');

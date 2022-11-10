@@ -133,6 +133,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['form-action'])) {
         <button id="filters">
           <i class="fa-solid fa-arrow-right-arrow-left"></i>
         </button>
+        <span class="newBookButton">
+          <i class="fa-solid fa-book-medical"></i>
+        </span>
         <button class="hidden" id="profile">
           <i class="fa-solid fa-bars"></i>
         </button>
@@ -171,7 +174,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['form-action'])) {
             <a href="personal_area.php" style="background: url(../src/img/profile/'.$_SESSION['profile_img'].'); background-position: center; background-size: cover;"></a>
                   </div>';
             echo '<a href="main_menu.php"><i class="fa-solid fa-house"></i>Hasiera</a>
-                  <span class="newBookButton"><i class="fa-solid fa-book"></i>Igo liburu bat</span>
                   <a href="personal_area.php"><i class="fa-solid fa-user"></i>Area pertsonala</a>';
             if ($_SESSION['role'] === 'irakasle') {
               echo '<a href="groups.php"><i class="fa-solid fa-users-rectangle"></i>Nire taldeak</a>
@@ -189,7 +191,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['form-action'])) {
     <section class="sticky-menu">
       <?php
         echo '<a href="main_menu.php"><i class="fa-solid fa-house"></i>Hasiera</a>
-              <span class="newBookButton"><i class="fa-solid fa-book"></i>Igo liburu bat</span>
               <a href="personal_area.php"><i class="fa-solid fa-user"></i>Area pertsonala</a>';
         if ($_SESSION['role'] === 'irakasle') {
           echo '<a href="groups.php"><i class="fa-solid fa-users-rectangle"></i>Nire taldeak</a>
