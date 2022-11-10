@@ -55,7 +55,6 @@ session_start();
     <section class="sticky-menu">
       <?php
         echo '<a href="main_menu.php"><i class="fa-solid fa-house"></i>Hasiera</a>
-              <span class="newBookButton"><i class="fa-solid fa-book"></i>Igo liburu bat</span>
               <a href="personal_area.php"><i class="fa-solid fa-user"></i>Area pertsonala</a>';
         if ($_SESSION['role'] === 'irakasle') {
           echo '<a href="groups.php"><i class="fa-solid fa-users-rectangle"></i>Nire taldeak</a>
