@@ -1,4 +1,4 @@
-body {
+div:not(.horizontal-bar) {
   height: 100vh;
   display: flex;
   justify-content: center;
@@ -7,12 +7,17 @@ body {
 }
 
 section {
-  background-color:   var(--main-bg);
+  width: fit-content;
+  background-color: var(--main-bg);
   padding: 3rem 4rem;
   border:2px solid var(--light-purple);
   border-radius: 1rem;
-  box-shadow: .5rem .5rem 1rem #00000050;
+  box-shadow: 0 0 1rem var(--light-purple);
   color:var( --font);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 section h1 {
@@ -41,8 +46,33 @@ button {
 button:hover { cursor: pointer; }
 
 .horizontal-bar {
-  width: 100%;
+  width: 120%;
   height: 3px;
   background-color: var(--light-purple);
-  margin-block: .5rem;
+  margin-block: 1rem;
+}
+
+/* ----------------------------------------------------------------------- */
+/* TABLET */
+@media screen and (max-width: 1280px) {
+
+} 
+
+/* INTERMEDIO */
+@media screen and (max-width: 940px) {
+
+}
+
+/* MOVIL */
+@media screen and (max-width: 600px) {
+  div:not(.horizontal-bar) {
+    margin: 2rem;
+  }
+
+  section {
+    width: 100%;
+    padding: 2rem;
+  }
+
+  .horizontal-bar { width: 100%; }
 }
