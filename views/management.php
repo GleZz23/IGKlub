@@ -72,6 +72,7 @@
             break;
         }
         break;
+
       // Aceptar comentarios y respuestas
       case 'accept-comment':
         switch ($_REQUEST['accept']) {
@@ -87,19 +88,20 @@
         }
         break;
 
-        case 'accept-answer':
-          switch ($_REQUEST['accept']) {
-            case 'yes':
-              $query = $miPDO->prepare('UPDATE respuesta SET estado = "aceptado" WHERE id_respuesta = :id_respuesta;');
-              $query->execute(['id_respuesta' => $_REQUEST['id_respuesta']]);
-              break;
-    
-            case 'no':
-              $query = $miPDO->prepare('DELETE FROM comentario WHERE id_respuesta = :id_respuesta;');
-              $query->execute(['id_respuesta' => $_REQUEST['id_respuesta']]);
-              break;
-          }
-          break;
+      case 'accept-answer':
+        switch ($_REQUEST['accept']) {
+          case 'yes':
+            $query = $miPDO->prepare('UPDATE respuesta SET estado = "aceptado" WHERE id_respuesta = :id_respuesta;');
+            $query->execute(['id_respuesta' => $_REQUEST['id_respuesta']]);
+            break;
+  
+          case 'no':
+            $query = $miPDO->prepare('DELETE FROM comentario WHERE id_respuesta = :id_respuesta;');
+            $query->execute(['id_respuesta' => $_REQUEST['id_respuesta']]);
+            break;
+        }
+        break;
+
         // Agregar y eliminar nuevos administradores
         case 'delete-admin':
             $query = $miPDO->prepare('UPDATE usuario SET estado = "denegado" WHERE nickname = :nickname;');
@@ -138,8 +140,8 @@
             $query->execute(['nickname' => $nickname, 'email' => $email, 'name' => $name, 'surnames' => $surnames, 'password' => $password]);
           }
           break;
-        // Aceptar o denegar idiomas
     }
+    header('Location: management.php');
   }
 
 ?>
