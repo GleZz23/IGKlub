@@ -19,7 +19,7 @@ bookContainer.forEach((book) => {
   });
 });
 
-// FILTROS
+// FILTROS - NUEVO LIBRO
 const filtersButton = document.querySelector('#filters');
 const filters = document.querySelector('.filters');
 const closeFilters = document.querySelector('.close-filters');
@@ -73,8 +73,8 @@ searchInput.addEventListener('blur', () => {
 });
 
 // MODAL FORMULARIO NUEVO LIBRO
-const newBookButton = document.querySelectorAll('.newBookButton');
 const closeButton = document.querySelector('.closeButton');
+const newBookButton = document.querySelectorAll('.newBookButton');
 
 newBookButton.forEach((button) => {
   button.addEventListener('click', () => {
