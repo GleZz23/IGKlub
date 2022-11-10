@@ -11,15 +11,16 @@ body {
   align-items: center;
   text-align: center;
   font-family: Arial, Helvetica, sans-serif;
-  background-image: url(../src/img/background.jpg);
+  background-image: url(../src/img/background2.jpg);
 }
 
 section {
-  background-color: lightgray;
   padding: 3rem 4rem;
-  border: 2px solid gray;
   border-radius: 1rem;
   box-shadow: .5rem .5rem 1rem #00000050;
+  border: 2px solid var(--light-purple);
+  background-color: var(--main-bg);
+  color: var(--font);
 }
 
 section h1 {
@@ -33,17 +34,19 @@ section p {
 }
 
 section a {
-  color: black;
   text-decoration: none;
   width: 20%;
   padding: .5rem 1rem;
-  border: 1px solid gray;
-  background-color: #eee;
-  color: black;
-  transition: ease-in-out .25s;
+  border: 2px solid var(--light-purple);
+  color: var(--light-purple);
+  transition: all .3s ease-in-out ;
+  background: transparent;
 }
 
 section a:hover {
   cursor: pointer;
-  box-shadow: 0 0 .5rem #00000050;
+  color: var(--font);
+  background: var(--accent);
+  box-shadow: 0 0 .5rem var(--light-purple);
 }
+
