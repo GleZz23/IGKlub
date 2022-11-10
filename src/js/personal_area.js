@@ -1,3 +1,97 @@
+// MODAL FORMULARIO NUEVO LIBRO
+const closeButton = document.querySelector('.closeButton');
+const changePasswordButton = document.querySelectorAll('#change-password');
+
+changePasswordButton.forEach((button) => {
+  button.addEventListener('click', () => {
+    window.scrollTo(0,0);
+    document.querySelector('body').style.overflowY = "hidden";
+    document.querySelector('.change-password').style.display = "flex";
+    setTimeout(() => {
+      document.getElementById('changePasswordForm').style.transform = "scale(1)";
+    }, 10);
+  });
+});
+
+closeButton.addEventListener('click', () => {
+  document.getElementById('changePasswordForm').style.transform = "scale(0)";
+  setTimeout(() => {
+    document.querySelector('.change-password').style.display = "none";
+    document.querySelector('body').style.overflowY = "scroll";
+  }, 500);
+});
+
+// VALIDACION FORMULARIO
+const form = document.getElementById('changePasswordForm');
+const inputs = document.querySelectorAll('#changePasswordForm input');
+const errors = document.querySelectorAll('.php-error');
+
+const phpError = () => {
+  errors.forEach((error) => {error.classList.add('hidden')});
+}
+
+const regexs = {
+  password: /(?=(.*[0-9]))(?=.*[a-z])(?=(.*[A-Z]))(?=(.*)).{4,}/
+}
+
+// Campos del formulario
+const campos = {
+  password: false,
+  password2: false
+}
+
+const form_validation = (e) => {
+    switch (e.target.name) {
+
+        case "new-password":
+            if (regexs.password.test(e.target.value)) {
+                document.getElementById('new-password').classList.remove('input_error');
+                document.getElementById('password-error').classList.add('hidden');
+                campos.password = true;
+            } else if (e.target.value === '') {
+                document.getElementById('new-password').classList.remove('input_error');
+                document.getElementById('password-error').classList.add('hidden');
+            } else {
+                document.getElementById('new-password').classList.add('input_error');
+                document.getElementById('password-error').classList.remove('hidden');
+            }
+            break;
+
+        case "new-password2":
+            let password = document.getElementById('new-password');
+            if (password.value === e.target.value) {
+                document.getElementById('new-password2').classList.remove('input_error');
+                document.getElementById('password2-error').classList.add('hidden');
+                campos.password2 = true;
+            } else if (e.target.value === '') {
+                document.getElementById('new-password2').classList.remove('input_error');
+                document.getElementById('password2-error').classList.add('hidden');
+                campos.password2 = false;
+            } else {
+                document.getElementById('new-password2').classList.add('input_error');
+                document.getElementById('password2-error').classList.remove('hidden');
+                campos.password2 = false;
+            }
+            break;
+    }
+}
+
+inputs.forEach((input) => {
+    input.addEventListener('keyup', form_validation);
+    input.addEventListener('blur', form_validation);
+    input.addEventListener('focus', phpError);
+});
+
+form.addEventListener('submit', (e) => {
+  if(!campos.password || !campos.password2) {
+    e.preventDefault();
+    document.getElementById('form-error').classList.remove('hidden');
+    setTimeout(() => {
+      document.getElementById('form-error').classList.add('hidden');
+    }, 3500);
+  }
+});
+
 // LIBROS
 const bookContainer = document.querySelectorAll('.book-container');
 
