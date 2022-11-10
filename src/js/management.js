@@ -64,16 +64,17 @@ actions.forEach((button) => {
           button.style.textDecoration = "none";
         }
         break;
-        case 'accept-students':
-        const acceptStudents = document.querySelector('.'+button.id);
-        if (window.getComputedStyle(acceptStudents).getPropertyValue('display') === "none") {
-          acceptStudents.classList.remove('hidden');
-          button.style.textDecoration = "underline";
-        } else if (window.getComputedStyle(document.querySelector('.'+button.id)).getPropertyValue('display') === "flex") {
-          acceptStudents.classList.add('hidden');
-          button.style.textDecoration = "none";
-        }
-        break;
+        
+      case 'accept-students':
+      const acceptStudents = document.querySelector('.'+button.id);
+      if (window.getComputedStyle(acceptStudents).getPropertyValue('display') === "none") {
+        acceptStudents.classList.remove('hidden');
+        button.style.textDecoration = "underline";
+      } else if (window.getComputedStyle(document.querySelector('.'+button.id)).getPropertyValue('display') === "flex") {
+        acceptStudents.classList.add('hidden');
+        button.style.textDecoration = "none";
+      }
+      break;
     }
   });
 });
