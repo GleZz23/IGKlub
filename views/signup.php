@@ -106,7 +106,7 @@
   <link rel="stylesheet" href="../styles/signup.css">
 </head>
 <body>
-  <form id="singupForm" action="" method="POST">
+  <form id="singupForm" enctype="multipart/form-data" action="" method="POST">
     <?php echo '<h1>Erregistratu - '.$_GET['role'].'a</h1>'; ?>
     <!-- Nickname -->
     <div class="input-container">
@@ -129,7 +129,7 @@
     <!-- Imagen de perfil -->
     <div class="input-container">
         <i class="fa-solid fa-camera-retro"></i>
-        <input type="file" name="profile" id="profile" placeholder="Profileko argazkia" accept=".jpg,.jpeg,.png" onfocus="(this.type='file')">
+        <input type="text" name="profile" id="profile" placeholder="Profileko argazkia" accept=".jpg,.jpeg,.png" onfocus="(this.type='file')">
     </div>
     <!-- Error: Imagen de perfil -->
     <?php

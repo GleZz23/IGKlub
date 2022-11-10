@@ -56,6 +56,7 @@ input, select {
   outline: none;
   border: none;
   background-color: #eee;
+  color: black;
 }
 
 .input-checkbox {
