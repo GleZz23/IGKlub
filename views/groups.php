@@ -4,6 +4,7 @@
   include_once('../modules/session_control.php');
 ?>
 <link rel="stylesheet" href="../styles/groups.css">
+<script src="../src/js/groups.js" defer></script>
 <title>Nire gelak | IGKlub</title>
 </head>
 
