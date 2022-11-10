@@ -5,7 +5,7 @@
 }
 
 body {
-
+  font-family: Arial, Helvetica, sans-serif;
   background-image: url(../src/img/background2.jpg);
   overflow-x: hidden;
 }
@@ -99,14 +99,18 @@ header section {
   gap: 2rem;
 }
 
-header button {
+header button, header span {
+  color: var(--font);
   font-size: 2rem;
   background: transparent;
   border: none;
   transition: all .3s ease-in-out;
 }
 
-header button i:not(.search-bar button i) { color: var(--font); }
+header span:hover {
+  cursor: pointer;
+  transform: scale(1.1);
+}
 
 /* BARRA DE BUSQUEDA */
 .search-container {
@@ -583,7 +587,7 @@ footer > div a { color: var(--font); }
 
 /* MOVIL */
 @media screen and (max-width: 600px) {
-  header figure:not(header nav figure) { display: flex; }
+  header figure:not(header nav figure) {display: flex; }
 
   header nav figure { display: none; }
 
