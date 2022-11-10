@@ -1,8 +1,7 @@
 <?php
-include('../templates/head.php');
-include_once('../modules/connection.php');
-session_start();
-// FILTROS
+  include('../templates/head.php');
+  include_once('../modules/connection.php');
+  include_once('../modules/session_control.php');
 ?>
   <script src="../src/js/area_personal_valorated_books.js" defer></script>  
   <link rel="stylesheet" href="../styles/personal_area.css">

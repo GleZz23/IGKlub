@@ -1,7 +1,7 @@
 <?php
   include('../templates/head.php');
   include_once('../modules/connection.php');
-  session_start();
+  include_once('../modules/session_control.php');
 
   $nickname_error = false;
   $email_error = false;

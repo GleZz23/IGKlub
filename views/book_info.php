@@ -1,7 +1,7 @@
 <?php
-  include_once('../modules/connection.php');
   include('../templates/head.php');
-  session_start();
+  include_once('../modules/connection.php');
+  include_once('../modules/session_control.php');
 
   $book = $_REQUEST['liburua'];
 

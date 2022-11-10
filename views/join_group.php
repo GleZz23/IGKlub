@@ -1,6 +1,7 @@
 <?php
   include('../templates/head.php');
   include_once('../modules/connection.php');
+  include_once('../modules/session_control.php');
   
   $error = false;
 
@@ -19,8 +20,6 @@
     }
 
     if ($join) {
-      session_start();
-
       $query = $miPDO->prepare('SELECT id_centro FROM grupo WHERE codigo =:group_code;');
       $query->execute(['group_code' => $group_code]);
       $result = $query->fetch();

@@ -1,7 +1,7 @@
 <?php
   include('../templates/head.php');
   include_once('../modules/connection.php');
-  session_start();
+  include_once('../modules/session_control.php');
 
   $password_error = false;
   $password_updated = false;

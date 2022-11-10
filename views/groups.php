@@ -1,7 +1,7 @@
 <?php
-include('../templates/head.php');
-include_once('../modules/connection.php');
-session_start();
+  include('../templates/head.php');
+  include_once('../modules/connection.php');
+  include_once('../modules/session_control.php');
 ?>
 <link rel="stylesheet" href="../styles/groups.css">
 <title>Nire gelak | IGKlub</title>

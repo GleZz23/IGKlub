@@ -1,10 +1,10 @@
 <?php 
   include('../templates/head.php');
   include_once('../modules/connection.php');
+  include_once('../modules/session_control.php');
 
   $activator = '';
 
-  session_start();
   if (isset($_SESSION['nickname'])) {
     $nickname = $_SESSION['nickname'];
   }

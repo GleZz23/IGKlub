@@ -1,7 +1,7 @@
 <?php
 include('../templates/head.php');
 include_once('../modules/connection.php');
-session_start();
+include_once('../modules/session_control.php');
 
 $type_error = false;
 $size_error = false;
