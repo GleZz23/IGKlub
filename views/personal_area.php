@@ -76,8 +76,7 @@
           echo '<a href="main_menu.php"><i class="fa-solid fa-house"></i>Hasiera</a>
                 <a href="personal_area.php"><i class="fa-solid fa-user"></i>Area pertsonala</a>';
           if ($_SESSION['role'] === 'irakasle') {
-            echo '<a href="groups.php"><i class="fa-solid fa-users-rectangle"></i>Nire taldeak</a>
-                  <a href="requests.php"><i class="fa-solid fa-question"></i>Eskaerak</a>';
+            echo '<a href="groups.php"><i class="fa-solid fa-users-rectangle"></i>Nire taldeak</a>';
           } else if ($_SESSION['role'] === 'admin') {
             echo '<a href="management.php"><i class="fa-solid fa-gear"></i>Administrazioa</a></h1>';
           }

@@ -21,7 +21,7 @@
                      'curso' => $_REQUEST['curso'], 
                      'profesor' => $_SESSION['nickname']
                     ]);  
-                    
+
     header('Location: ../views/groups.php');
   }
 
@@ -55,19 +55,17 @@
       <div class="burguer-menu">
         <aside class="profile">
           <?php
-            echo '<div class="profile-img">
-                    <figure style="background: url(../src/img/profile/'.$_SESSION['profile_img'].'); background-position: center; background-size: cover;"></figure>
-                  </div>';
-            echo '<a href="main_menu.php"><i class="fa-solid fa-house"></i>Hasiera</a>
-                  <span class="newBookButton"><i class="fa-solid fa-book"></i>Igo liburu bat</span>
-                  <a href="personal_area.php"><i class="fa-solid fa-user"></i>Area pertsonala</a>';
-            if ($_SESSION['role'] === 'irakasle') {
-              echo '<a href="groups.php"><i class="fa-solid fa-users-rectangle"></i>Nire taldeak</a>
-                    <a href="requests.php"><i class="fa-solid fa-question"></i>Eskaerak</a>';
-            } else if ($_SESSION['role'] === 'admin') {
-              echo '<a href="management.php"><i class="fa-solid fa-gear"></i>Administrazioa</a></h1>';
-            }
-            echo '<a href="../modules/logout.php"><i class="fa-solid fa-user-slash"></i>Saioa itxi</a>';
+          echo '<div class="profile-img">
+                  <a href="personal_area.php"><figure style="background: url(../src/img/profile/'.$_SESSION['profile_img'].'); background-position: center; background-size: cover;"></figure></a>
+                </div>';
+          echo '<a href="main_menu.php"><i class="fa-solid fa-house"></i>Hasiera</a>
+                <a href="personal_area.php"><i class="fa-solid fa-user"></i>Area pertsonala</a>';
+          if ($_SESSION['role'] === 'irakasle') {
+            echo '<a href="groups.php"><i class="fa-solid fa-users-rectangle"></i>Nire taldeak</a>';
+          } else if ($_SESSION['role'] === 'admin') {
+            echo '<a href="management.php"><i class="fa-solid fa-gear"></i>Administrazioa</a></h1>';
+          }
+          echo '<a href="../modules/logout.php"><i class="fa-solid fa-user-slash"></i>Saioa itxi</a>';
           ?>
           <button class="close-profile">Itxi <i class="fa-solid fa-angles-right"></i></button>
         </aside>

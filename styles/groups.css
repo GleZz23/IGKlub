@@ -152,7 +152,7 @@ main section {
   display: flex;
   flex-direction: column;
   align-items: start;
-  font-size: 1.2rem;
+  font-size: 1rem;
 }
 
 .class-container a:not(#new-group) {
@@ -189,9 +189,21 @@ main section {
 
 #new-group:hover { cursor: pointer; }
 
-/* ASIDES */
+/* ASIDE */
+.profile a {
+  color: var(--font);
+  text-decoration: none;
+  transition: all .3s ease-in-out;
+}
+
+.profile a i {
+  width: 2rem;
+  text-align: center;
+  margin-right: .5rem;
+}
+
 .profile {
-  width: 15%;
+  width: 100%;
   color: var(--font);
   background-color: var(--secundary-bg);
   position: absolute;
@@ -207,27 +219,25 @@ main section {
   display: none;
   font-size: 1.5rem;
   right: 0;
-  border-left: 2px solid var(--light-purple);
-  border-bottom-left-radius: 1rem;
   transform: translateX(100%);
   top: 0;
 }
 
-/* PERFIL DE USUARIO */
-.profile a, .profile span {
+.profile > * {
+  background: none;
+  border: none;
   color: var(--font);
+  font-size: 1.5rem;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
   text-decoration: none;
-  transition: all .3s ease-in-out;
 }
 
-.profile span:hover {
-  cursor: pointer;
-}
-
-.profile a i, .profile span i{
-  width: 2rem;
-  text-align: center;
-  margin-right: .5rem;
+.profile .close-profile {
+  width: 100%;
+  font-size: 1rem;
+  justify-content: center;
 }
 
 .profile .profile-img {
@@ -247,6 +257,12 @@ main section {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.close-profile {
+  width: 100%;
+  font-size: 1rem;
+  justify-content: center;
 }
 
 /* FORMULARIO */
@@ -379,6 +395,20 @@ main section {
 /* TABLET */
 @media screen and (max-width: 1280px) {
   main section { margin: 4rem 4rem; }
+
+  .profile {
+    padding: 1rem;
+    width: 100%;
+    border-radius: 0;
+    border-right: none;
+    border-left: none;
+  }
+
+  .close-profile {
+    display: flex;
+    color: var(--font);
+  }
+
 } 
 
 /* INTERMEDIO */
@@ -390,23 +420,34 @@ main section {
   main section { margin: 4rem 3rem; }
 
   header nav figure { width: 30%; }
+
+  .closeButton {
+    font-size: 2rem;
+    margin: 1rem;
+  }
+
+  #newGroupForm { width: 100%; }
+
+  #newGroupForm button { width: 100%; }
 }
 
 /* MOVIL */
 @media screen and (max-width: 600px) {
-  header figure:not(header nav figure) { display: flex; }
+  header figure:not(header nav figure) {display: flex; }
 
   header nav figure { display: none; }
 
-  main section {
-    grid-template-columns: repeat(1, 1fr);
-    margin: 4rem 2rem;
-   
-  }
+  main section { margin: 4rem 2rem; }
 
   header { padding: 1.5rem 1rem; }
 
   header figure { width: 50%; }
 
   header section { gap: 1rem; }
+
+  .profile { font-size: 1rem; }
+
+  .new-group { padding: 4rem 1rem; }
+
+  .new-group h1 { font-size: 1.5rem; }
 }
