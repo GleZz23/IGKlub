@@ -34,22 +34,24 @@
   <link rel="stylesheet" href="../styles/login.css">
 </head>
 <body>
-  <form action="" method="post">
-    <h1>Talde batean sartu</h1>
-    <div class="input-container">
-      <i class="fa-solid fa-lock"></i>
-      <input type="text" name="group_code" id="" placeholder="Taldearen kodea" maxlength="5">
-    </div>
-    <!-- Error -->
-    <?php
-    if ($error) {
-      echo '<div class="error" id="error-email">
-              <i class="fa-solid fa-circle-exclamation"></i>
-              <p>Talde-kode hau okerra da. Saiatu beste batekin.</p>
-            </div>';
-      }
-    ?>
-    <button>Taldean sartu</button>
-  </form>
+  <div class="general-container">
+    <form action="" method="post">
+      <h1>Talde batean sartu</h1>
+      <div class="input-container">
+        <i class="fa-solid fa-lock"></i>
+        <input type="text" name="group_code" id="" placeholder="Taldearen kodea" maxlength="5">
+      </div>
+      <!-- Error -->
+      <?php
+      if ($error) {
+        echo '<div class="error" id="error-email">
+                <i class="fa-solid fa-circle-exclamation"></i>
+                <p>Talde-kode hau okerra da. Saiatu beste batekin.</p>
+              </div>';
+        }
+      ?>
+      <button>Taldean sartu</button>
+    </form>
+  </div>
 </body>
 </html>
