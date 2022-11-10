@@ -145,6 +145,7 @@
       <a href="personal_area.php"><figure style="background: url(../src/img/profile/'.$_SESSION['profile_img'].'); background-position: center; background-size: cover;"></figure></a>
             </div>';
       ?>
+       <button id="current-students"><i class="fa-solid fa-user-check"></i>Taldeko ikasleak</button>
       <button id="accept-students"><i class="fa-solid fa-user-check"></i>Ikasleak onartu</button>
       <button id="accept-books"><i class="fa-solid fa-book"></i>Liburuak onartu</button>
       <button id="accept-comments"><i class="fa-solid fa-comments"></i>Iruzkinak onartu</button>
@@ -154,6 +155,7 @@
     </aside>
   </div>
   <section class="sticky-menu">
+  <button id="current-students"><i class="fa-solid fa-user-check"></i>Taldeko ikasleak</button>
     <button id="accept-students"><i class="fa-solid fa-user-check"></i>Ikasleak onartu</button>
     <button id="accept-books"><i class="fa-solid fa-book"></i>Liburuak onartu</button>
     <button id="accept-comments"><i class="fa-solid fa-comments"></i>Iruzkinak onartu</button>
@@ -161,6 +163,44 @@
     <a href="main_menu.php"><i class="fa-solid fa-house"></i>Hasiera</a>
   </section>
   <main>
+
+ <!-- Mostrar alumnos del grupo -->
+ <?php
+    $query = $miPDO->prepare('SELECT usuario.*, centro.nombre AS nombre_centro FROM usuario, centro WHERE usuario.rol = "ikasle" AND usuario.estado = "aceptado" AND usuario.id_centro = centro.id_centro');
+    $query->execute();
+    $alumnosAceptados = $query->fetchAll();
+
+    if ($alumnosAceptados) {
+      echo '<section class="current-students">
+      <h1>Taldeko Ikasleak</h1>
+            <table>
+              <tr>
+                <th></th>
+                <th>Nickname</th>
+                <th>Izen-abizenak</th>
+                <th>Ikastetxea</th>
+                <th>Email-a</th>
+              </tr>';
+      foreach ($alumnosAceptados as $position => $student){
+        echo '<tr>
+                <td class="profile-img">
+                  <figure style="background: url(../src/img/profile/'.$student['imagen'].'); background-position: center; background-size: cover;"></figure>
+                </td>
+                <td>'.$student['nickname'].'</td>
+                <td>'.$student['nombre'].' '.$student['apellidos'].'</td>
+                <td>'.$student['nombre_centro'].'</td>
+                <td>'.$student['email'].'</td>
+              </tr>';
+      }
+      echo '</table>
+            </section>';
+    } else {
+      echo '<section class="accept-students hidden">
+              <h1>Oraindik ez daude ikaslerik taldean</h1>
+            </section>';
+    }
+    ?>
+
     <!-- Aceptar nuevos Alumnos -->
     <?php
     $query = $miPDO->prepare('SELECT usuario.*, centro.nombre AS nombre_centro FROM usuario, centro WHERE usuario.rol = "ikasle" AND usuario.estado = "espera" AND usuario.id_centro = centro.id_centro');

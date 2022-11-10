@@ -75,6 +75,16 @@ actions.forEach((button) => {
         button.style.textDecoration = "none";
       }
       break;
+      case 'current-students':
+      const currentStudents = document.querySelector('.'+button.id);
+      if (window.getComputedStyle(currentStudents).getPropertyValue('display') === "none") {
+        currentStudents.classList.remove('hidden');
+        button.style.textDecoration = "underline";
+      } else if (window.getComputedStyle(document.querySelector('.'+button.id)).getPropertyValue('display') === "flex") {
+        currentStudents.classList.add('hidden');
+        button.style.textDecoration = "none";
+      }
+      break;
     }
   });
 });
@@ -184,21 +194,6 @@ const form_validation= (e)=>{
     }
 }
 
-inputs.forEach((input) => {
-  input.addEventListener('keyup', form_validation);
-  input.addEventListener('blur', form_validation);
-});
-
-form.addEventListener('submit', (e) => {  
-  if(!campos.nickname || !campos.name || !campos.surnames || !campos.email) {
-      e.preventDefault();
-      document.getElementById('form-error').classList.remove('hidden');
-      setTimeout(() => {
-    document.getElementById('form-error').classList.add('hidden');
-  }, 3500);
-  }
-});
-
 // PERFIL
 const profileButton = document.querySelector('#profile');
 const profile = document.querySelector('.profile');
@@ -249,4 +244,33 @@ profileLinks.forEach((link) => {
     link.style.color = "gray";
     link.style.transform = "translateX(0)";
   });
+});
+inputs.forEach((input) => {
+  input.addEventListener('keyup', form_validation);
+  input.addEventListener('blur', form_validation);
+});
+
+form.addEventListener('submit', (e) => {  
+  if(!campos.nickname || !campos.name || !campos.surnames || !campos.email) {
+      e.preventDefault();
+      document.getElementById('form-error').classList.remove('hidden');
+      setTimeout(() => {
+    document.getElementById('form-error').classList.add('hidden');
+  }, 3500);
+  }
+});
+
+inputs.forEach((input) => {
+  input.addEventListener('keyup', form_validation);
+  input.addEventListener('blur', form_validation);
+});
+
+form.addEventListener('submit', (e) => {  
+  if(!campos.nickname || !campos.name || !campos.surnames || !campos.email) {
+      e.preventDefault();
+      document.getElementById('form-error').classList.remove('hidden');
+      setTimeout(() => {
+    document.getElementById('form-error').classList.add('hidden');
+  }, 3500);
+  }
 });

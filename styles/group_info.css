@@ -186,7 +186,8 @@
   .accept-students,
   .accept-comments,
   .accept-answers,
-  .accept-languages {
+  .accept-languages,
+  .current-students {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -199,7 +200,8 @@
   .accept-comments table,
   .accept-answers table,
   .admins table,
-  .accept-languages table {
+  .accept-languages table,
+  .current-students table {
     display: flex;
     align-items: flex-start;
     justify-content: center;
@@ -211,7 +213,8 @@
   .accept-comments th, .accept-comments td,
   .accept-answers th, .accept-answers td,
   .admins th, .admins td,
-  .accept-languages th, .accept-languages td {
+  .accept-languages th, .accept-languages td,
+  .current-students th, .current-students td {
     color: var(--font);
     text-align: center;
     padding-inline: 1.5rem;
@@ -246,7 +249,8 @@
   .accept-comments .profile-img,
   .accept-answers .profile-img,
   .admins .profile-img,
-  .accept-languages .profile-img {
+  .accept-languages .profile-img,
+  .current-students .profile-img {
     width: 4rem;
     height: 4rem;
     padding: 0;
@@ -260,7 +264,8 @@
   .accept-comments .profile-img figure,
   .accept-answers .profile-img figure,
   .admins .profile-img figure,
-  .accept-languages .profile-img figure {
+  .accept-languages .profile-img figure,
+  .current-students .profile-img figure {
     width: 4rem;
     height: 4rem;
     display: flex;
@@ -372,7 +377,8 @@
     .accept-comments table,
     .accept-answers table,
     .admins table,
-    .accept-languages table {
+    .accept-languages table,
+    .current-students table {
       overflow-x: auto;
       justify-content: start;
       padding-bottom: 1.5rem;
