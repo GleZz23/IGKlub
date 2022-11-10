@@ -90,8 +90,8 @@
       $query->execute(['teacher' => $_SESSION['nickname']]);
       $results = $query->fetchAll();
 
+      echo '<section>';
       if ($results) {
-        echo '<section>';
         foreach ($results as $position => $group) {
           echo '<div class="class-container">
                   <header>
