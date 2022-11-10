@@ -114,9 +114,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['form-action'])) {
   </head>
   <body>
     <header>
-        <figure>
-          <a href="main_menu.php"><img src="../src/img/logo/logo.png"></a>
-        </figure>
+      <figure>
+        <a href="main_menu.php"><img src="../src/img/logo/logo.png"></a>
+      </figure>
       <nav>
         <figure>
           <a href="main_menu.php"><img src="../src/img/logo/logo.png"></a>

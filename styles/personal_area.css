@@ -109,6 +109,7 @@ header button {
 }
 
 header button i:not(.search-bar button i) { color: var(--font); }
+
 /* FOTO DE PERFIL - FOTO */
 .profile-pic {
   display: flex;
@@ -122,29 +123,55 @@ header button i:not(.search-bar button i) { color: var(--font); }
   height: 5rem;
   background-position: center;
 }
-main{
+
+main {
+  background-color: yellowgreen;
+  margin: 4rem 6rem;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: center;
 }
 
-#profile_container{
-  width: 35rem;
-  margin-top: 2rem;
-  box-shadow: .5rem .5rem 1rem #00000050;
-  column-gap: 1rem;
-  background-color: var(--main-bg);
-  border: 2px solid var(--light-purple);
-  border-radius: 1rem;
-  padding: 2rem;
+/* DATOS DEL USUARIO */
+.profile-container {
+  background-color: #FFD700;
+  width: 100%;
+  height: fit-content;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
   color: var(--font);
+  gap: 3rem;
 }
-#profile_container > * {
-  margin-bottom: 1rem;
+
+.profile-container .profile-img {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0;
+  margin: 0;
+}
+
+.profile-container figure {
+  width: 15rem;
+  height: 15rem;
+  border-radius: 50%;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.profile-data {
+  background-color: #E00A35;
+}
+
+.profile-data button {
+  width: 100%;
 }
 
 /* CAJA INFORMACION PERFIL */
-
 #valorated_book{
   width: 35rem;
   margin-top: 2rem;
