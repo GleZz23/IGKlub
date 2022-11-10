@@ -8,13 +8,18 @@
 
   $signup_admin = true;
 
+  $query = $miPDO->prepare('SELECT nombre FROM grupo WHERE codigo = :codigo;');
+  $query->execute(['codigo' => $_GET['code']]);
+  $nombreGrupo = $query->fetch();
+
   if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    
     switch ($_REQUEST['form-action']) {
       // Aceptar nuevos profesores
       case 'accept-student':
         switch ($_REQUEST['accept']) {
           case 'yes':
-            $query = $miPDO->prepare('UPDATE solicitud_grupo SET estado = "aceptado" WHERE nickname = :nickname;');
+            $query = $miPDO->prepare('UPDATE usuario SET estado = "aceptado" WHERE nickname = :nickname;');
             $query->execute(['nickname' => $_REQUEST['nickname']]);
             break;
   
@@ -102,13 +107,15 @@
           break;
         
         // Aceptar o denegar idiomas
+        
     }
+    header('Location:group_info.php?code='.$_GET['code']);
   }
 
 ?>
     <script src="../src/js/management.js" defer></script>
     <link rel="stylesheet" href="../styles/group_info.css">
-    <title>Administrazioa | IGKlub</title>
+    <title><?php echo $nombreGrupo['nombre']; ?> | IGKlub</title>
 </head>
 <body>
   <header>
@@ -119,7 +126,7 @@
       <figure>
         <a href="main_menu.php"><img src="../src/img/logo/logo.png"></a>
       </figure>
-      <h1>Administrazioa</h1>
+      <h1><?php echo $nombreGrupo['nombre']; ?></h1>
       <button class="hidden" id="profile">
         <i class="fa-solid fa-bars"></i>
       </button>
@@ -201,7 +208,7 @@
             </section>';
     } else {
       echo '<section class="accept-students hidden">
-              <h1>Oraindik ez dago ikaslerik onartzeko</h1>
+              <h1>Oraindik ez daude ikaslerik onartzeko</h1>
             </section>';
     }
     ?>
