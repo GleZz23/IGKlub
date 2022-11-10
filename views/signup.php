@@ -36,41 +36,30 @@
       $format_error = true;
       $signup = false;
     }
-
-    $nickname = $_POST["nickname"];
-    $email = $_POST["email"];
-    $name = $_POST["name"];
-    $surnames = $_POST["surnames"];
-    $date = $_POST["date"];
-    $password = $_POST["password"];
-    $password = password_hash($password, PASSWORD_DEFAULT);
     
     $query = $miPDO->prepare('SELECT nickname, email, telefono FROM usuario WHERE nickname=:nickname OR email=:email');
-    $query->execute(['nickname' => $nickname, 'email' => $email]);
+    $query->execute(['nickname' => $_POST["nickname"], 'email' => $_POST["email"]]);
     $results = $query->fetch();
 
     // Si el nickname existe
-    if ($results['nickname'] === $nickname) {
+    if ($results['nickname'] === $_POST["nickname"]) {
       $signup = false;
       $nickname_error = true;
     }
   
     // Si el email existe
-    if ($results['email'] === $email) {
+    if ($results['email'] === $_POST["email"]) {
       $signup = false;
       $email_error = true;
     }
 
     if ($_GET['role'] === 'Irakasle') {
-      $phone = $_POST["phone"];
-      $school = $_POST["school"];
-
       $query = $miPDO->prepare('SELECT nickname, email, telefono FROM usuario WHERE telefono=:phone');
-      $query->execute(['phone' => $phone]);
+      $query->execute(['phone' => $_POST["phone"]]);
       $results = $query->fetch();
 
       // Si el telefono existe
-      if ($results['telefono'] === $phone) {
+      if ($results['telefono'] === $_POST["phone"]) {
         $signup = false;
         $phone_error = true;
       }
@@ -86,14 +75,22 @@
     if ($signup) {
       // Inserto el usuario en la base de datos
       $query = $miPDO->prepare('INSERT INTO usuario (nickname, email, nombre, apellidos, fecha_nacimiento, contrasena, rol, imagen) VALUES (:nickname, :email, :name, :surnames, :date, :password, :role, :imagen)');
-      $query->execute(['nickname' => $nickname, 'email' => $email, 'name' => $name, 'surnames' => $surnames, 'date' => $date, 'password' => $password, 'role' => $_GET['role'], 'imagen' => $nickname.'.'.$imageFileType]);
+      $query->execute(['nickname' => $_POST["nickname"],
+                        'email' => $_POST["email"],
+                        'name' => $_POST["name"],
+                        'surnames' => $_POST["surnames"],
+                        'date' => $_POST["date"],
+                        'password' => password_hash($_POST["password"], PASSWORD_DEFAULT),
+                        'role' => $_GET['role'],
+                        'imagen' => $_POST["nickname"].'.'.$imageFileType
+                      ]);
 
-      if ($role === 'Irakasle') {
+      if ($_GET['role'] === 'Irakasle') {
         $query = $miPDO->prepare('UPDATE usuario SET telefono = :phone ,id_centro = :school WHERE nickname = :nickname;');
-        $query->execute(['phone' => $phone, 'school' => $school, 'nickname' => $nickname]);
+        $query->execute(['phone' => $_POST["phone"], 'school' => $_POST["school"], 'nickname' => $_POST["nickname"]]);
       }
 
-      $rute = '../src/img/profile/'.$nickname.'.jpg';
+      $rute = '../src/img/profile/'.$_POST["nickname"].'.'.$imageFileType;
       move_uploaded_file($file['tmp_name'], $rute);
 
       header('Location: ../views/login.php');
@@ -112,7 +109,7 @@
       <!-- Nickname -->
       <div class="input-container">
         <i class="fa-solid fa-user"></i>
-        <input type="text" name="nickname" id="nickname" placeholder="Nickname" maxlength="20" autofocus value="<?php if (isset($_POST['nickname'])) echo $_POST['nickname'] ?>">
+        <input type="text" name="nickname" id="nickname" placeholder="Nickname" maxlength="20" autofocus>
       </div>
       <!-- Error: Nickname -->
       <div class="error hidden" id="nickname-error">
@@ -156,7 +153,7 @@
       <!-- Email -->
       <div class="input-container">
         <i class="fa-solid fa-at"></i>
-        <input type="email" name="email" id="email" placeholder="Email-a" value="<?php if (isset($_POST['email'])) echo $_POST['email'] ?>">
+        <input type="email" name="email" id="email" placeholder="Email-a">
       </div>
       <!-- Error: Email -->
       <div class="error hidden" id="email-error">
@@ -175,8 +172,8 @@
       <div class="input-container">
         <i class="fa-solid fa-address-card"></i>
         <div>
-          <input type="text" name="name" id="name" placeholder="Izena" value="<?php if (isset($_POST['name'])) echo $_POST['name'] ?>">
-          <input type="text" name="surnames" id="surnames" placeholder="Abizenak" value="<?php if (isset($_POST['surnames'])) echo $_POST['surnames'] ?>">
+          <input type="text" name="name" id="name" placeholder="Izena">
+          <input type="text" name="surnames" id="surnames" placeholder="Abizenak">
         </div>
       </div>
       <!-- Error: Nombre completo -->
@@ -191,7 +188,7 @@
       <!-- Fecha de nacimiento -->
       <div class="input-container">
         <i class="fa-solid fa-cake-candles"></i>
-        <input type="text" id="date" name="date" placeholder="Jaiotze-data" onfocus="(this.type='date')" value="<?php if (isset($_POST['date'])) echo $_POST['date'] ?>">
+        <input type="text" id="date" name="date" placeholder="Jaiotze-data" onfocus="(this.type='date')">
       </div>
       <!-- Error: Fecha de nacimiento -->
       <div class="error hidden" id="date-error">
@@ -203,8 +200,7 @@
         // Telefono
         echo '<div class="input-container">
                 <i class="fa-solid fa-phone"></i>
-                <input type="tel" id="phone" name="phone" placeholder="Telefono zenbakia" maxlength="9" value="';
-                if (isset($_POST[''])) echo $_POST[''];
+                <input type="tel" id="phone" name="phone" placeholder="Telefono zenbakia" maxlength="9"';
         echo    '"></div>';
         // Error: Telefono
         echo '<div class="error hidden" id="phone-error">

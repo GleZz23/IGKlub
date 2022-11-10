@@ -169,27 +169,6 @@ answerButton.forEach((button) => {
   });
 });
 
-// MODAL FORMULARIO VALORAR LIBRO - FORMULARIO NUEVO IDIOMA
-const rateBookButton = document.querySelector('.rateBookButton');
-const closeButtonRateBook = document.querySelector('.rate-book button');
-
-rateBookButton.addEventListener('click', () => {
-  window.scrollTo(0,0);
-  document.querySelector('body').style.overflowY = "auto";
-  document.querySelector('.rate-book').style.display = "flex";
-  setTimeout(() => {
-    document.getElementById('rateBookForm').style.transform = "scale(1)";
-  }, 10);
-});
-
-closeButtonRateBook.addEventListener('click', () => {
-  document.getElementById('rateBookForm').style.transform = "scale(0)";
-  setTimeout(() => {
-    document.querySelector('.rate-book').style.display = "none";
-    document.querySelector('body').style.overflowY = "scroll";
-  }, 500);
-});
-
 const newLanguageButton = document.querySelector('.new-language-button');
 const closeButtonNewLanguage = document.querySelector('.new-language button');
 
@@ -228,4 +207,25 @@ optionsNewLanguage.addEventListener('input', (e) => {
       newLanguage.style.display = "none";
     }, 500);
   }
+});
+
+// MODAL FORMULARIO VALORAR LIBRO - FORMULARIO NUEVO IDIOMA
+const rateBookButton = document.querySelector('.rateBookButton');
+const closeButtonRateBook = document.querySelector('.rate-book button');
+
+rateBookButton.addEventListener('click', () => {
+  window.scrollTo(0,0);
+  document.querySelector('body').style.overflowY = "auto";
+  document.querySelector('.rate-book').style.display = "flex";
+  setTimeout(() => {
+    document.getElementById('rateBookForm').style.transform = "scale(1)";
+  }, 10);
+});
+
+closeButtonRateBook.addEventListener('click', () => {
+  document.getElementById('rateBookForm').style.transform = "scale(0)";
+  setTimeout(() => {
+    document.querySelector('.rate-book').style.display = "none";
+    document.querySelector('body').style.overflowY = "scroll";
+  }, 500);
 });
