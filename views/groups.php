@@ -78,8 +78,12 @@ session_start();
         echo '<div class="class-container">';
         echo '<div class="class-overlay">
                 <div class="class-info">
-                <h1 id="name">' . $group['codigo'] . '</h1>
+                <h1 id="name">' . $group['codigo'] . '</h1><br>
+
+                  <a href="group_info.php?gela=' . $group['codigo'] . '">
+                  
                   <h1 id="name">' . $group['nombre'] . '</h1>
+                  </a>
                 </div>
               </div>
             </div>';
