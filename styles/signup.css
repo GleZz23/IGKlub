@@ -80,7 +80,7 @@ button:hover {
   box-shadow: 0 0 .5rem var(--light-purple);
 }
 
-.input_error{ border-right: 4px solid #E00A35; }
+.input_error { border-right: 4px solid #E00A35; }
 
 .error {
   width: 100%;

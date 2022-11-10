@@ -4,6 +4,7 @@
 
   <title>IGKlub</title>
   <link rel="stylesheet" href="styles/index.css">
+  <link rel="stylesheet" href="styles/general.css">
 </head>
 <body>
   <section>

@@ -2,11 +2,35 @@
   include('../templates/head.php');
   include_once('../modules/connection.php');
   include_once('../modules/session_control.php');
+
+  $password_error = false;
+  $change = true;
+
+  if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    // Consulto la contraseña en la BBDD
+    $query = $miPDO->prepare('SELECT contrasena FROM usuario WHERE nickname=:nickname');
+    $query->execute(['nickname' => $_SESSION['nickname']]);
+    $result = $query->fetch();
+
+    // Compruebo que la contraseña introducida es igual a la contraseña de la BBDD
+    if (!password_verify($_REQUEST["password"], $result['contrasena'])) {
+      $change = false;
+      $password_error = true;
+    }
+
+    // Cambio la contraseña en la BBDD
+    if ($change) {
+      $query = $miPDO->prepare('UPDATE usuario SET contrasena = :pass WHERE nickname = :nickname');
+      $query->execute(['nickname' => $_SESSION['nickname'],'pass' => password_hash($_REQUEST['new-password'],PASSWORD_DEFAULT)]);
+
+      header('Location: personal_area.php');
+    }
+  }
 ?>
   <script src="../src/js/personal_area.js" defer></script>  
   <link rel="stylesheet" href="../styles/personal_area.css">
   <title>Area pertsonala | IGKlub</title>
-  </head>
+</head>
 <body>
   <header>
     <figure>
@@ -76,7 +100,7 @@
           }
         ?>
         <div class="actions">
-          <button id="change-password" onclick="location.href='../views/change_personal_area.php'"><i class="fa-solid fa-key"></i> Pasahitza aldatu</button>
+          <button id="change-password"><i class="fa-solid fa-key"></i> Pasahitza aldatu</button>
           <!-- <button><i class="fa-solid fa-trash-can"></i> Kontua ezabatu</button> -->
         </div>
       </div>
@@ -133,5 +157,47 @@
       </div>
     </div>
   </main>
+  <div class="change-password">
+    <button class="closeButton"><i class="fa-solid fa-x"></i></button>
+    <form id="changePasswordForm" action="" method="post">
+      <!-- Contraseña actual -->
+      <div class="input-container">
+        <i class="fa-solid fa-lock"></i>
+        <input type="password" name="password" id="password" placeholder="Oraingo pasahitza">
+      </div>
+      <!-- Error: Contraseña actual -->
+      <?php
+        if ($password_error) {
+          echo '<div class="error php-error" id="password">
+                  <i class="fa-solid fa-circle-exclamation"></i>
+                  <p>Oraingo pasahitza ez da zuzena.</p>
+                </div>';
+        }
+      ?>
+      <!-- Contraseñas nuevas -->
+      <div class="input-container">
+        <i class="fa-solid fa-key"></i>
+        <div>
+          <input type="password" name="new-password" id="new-password" placeholder="Pasahitza berria">
+          <input type="password" name="new-password2" id="new-password2" placeholder="Pasahitza egiaztatu">
+        </div>
+      </div>
+      <!-- Error: Contraseñas nuevas -->
+      <div class="error hidden" id="password-error">
+        <i class="fa-solid fa-circle-exclamation"></i>
+        <p>Pasahitzak 4 karaktere izan behar ditu gutxienez eta letra larria, minuskula eta zenbaki bat izan behar ditu.</p>
+      </div>
+      <div class="error hidden" id="password2-error">
+        <i class="fa-solid fa-circle-exclamation"></i>
+        <p>Bi pasahitzek berdinak izan behar dira.</p>
+      </div>
+      <!-- Error: Formulario -->
+      <div class="error hidden" id="form-error">
+        <i class="fa-solid fa-circle-exclamation"></i>
+        <p>Bete formularioa behar bezala.</p>
+      </div>
+      <button>Pasahitza aldatu</button>
+    </form>
+  </div>
 </body>
 </html>
