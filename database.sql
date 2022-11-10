@@ -24,6 +24,7 @@ create table if not exists usuario (
   estado enum('aceptado','denegado','espera') default 'espera' not null,
   foreign key (id_centro) references centro(id_centro) on delete cascade
 );
+
 -- TABLA GRUPO
 create table if not exists grupo (
   codigo char(5) primary key,

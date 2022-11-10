@@ -256,7 +256,7 @@
     <!-- Aceptar nuevos libros -->
     <?php
       // Recojo todos los valores de los libros en una variable
-      $query = $miPDO->prepare('SELECT libro.*, solicitud_libro.nickname FROM libro, solicitud_libro WHERE libro.id_libro = solicitud_libro.id_libro AND solicitud_libro.estado = "espera"');
+      $query = $miPDO->prepare('SELECT libro.*, solicitud_libro.nickname FROM libro, solicitud_libro, usuario WHERE libro.id_libro = solicitud_libro.id_libro AND solicitud_libro.estado = "espera" AND solicitud_libro.nickname = usuario.nickname AND usuario.cod_grupo = :code');
       $query->execute();
       $books = $query->fetchAll();
 

@@ -245,6 +245,8 @@ profileLinks.forEach((link) => {
     link.style.transform = "translateX(0)";
   });
 });
+
+// ADMINISTRADORES
 inputs.forEach((input) => {
   input.addEventListener('keyup', form_validation);
   input.addEventListener('blur', form_validation);
