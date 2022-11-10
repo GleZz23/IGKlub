@@ -69,8 +69,16 @@ nav {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: 2rem;
+  gap: 1rem;
 }
+
+nav .actions {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+nav .actions > * { margin-inline: 1rem; }
 
 /* LOGO */
 header figure:not(header nav figure) {
@@ -105,6 +113,12 @@ header button, header span {
   background: transparent;
   border: none;
   transition: all .3s ease-in-out;
+  align-items: center;
+}
+
+header span {
+  display: flex;
+  align-items: center;
 }
 
 header span:hover {
@@ -591,6 +605,8 @@ footer > div a { color: var(--font); }
 
   header nav figure { display: none; }
 
+  header nav { flex-direction: column; }
+
   main section { margin: 4rem 2rem; }
 
   header { padding: 1.5rem 1rem; }
@@ -602,6 +618,10 @@ footer > div a { color: var(--font); }
   .search-bar { padding-inline: 1rem; }
 
   .filters, .profile { font-size: 1rem; }
+
+  .new-book { padding: 4rem 1rem; }
+
+  .new-book h1 { font-size: 1.5rem; }
 
   footer > p { font-size: 1rem; }
 }

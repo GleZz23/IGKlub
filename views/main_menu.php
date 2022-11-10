@@ -130,15 +130,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['form-action'])) {
             </form>
           </div>
         </div>
-        <button id="filters">
-          <i class="fa-solid fa-arrow-right-arrow-left"></i>
-        </button>
-        <span class="newBookButton">
-          <i class="fa-solid fa-book-medical"></i>
-        </span>
-        <button class="hidden" id="profile">
-          <i class="fa-solid fa-bars"></i>
-        </button>
+        <div class="actions">
+          <button id="filters">
+            <i class="fa-solid fa-arrow-right-arrow-left"></i>
+          </button>
+          <span class="newBookButton">
+            <i class="fa-solid fa-book-medical"></i>
+          </span>
+          <button class="hidden" id="profile">
+            <i class="fa-solid fa-bars"></i>
+          </button>
+        </div>
         <div class="profile-pic">
           <?php
             echo '<a href="personal_area.php" style="background: url(../src/img/profile/'.$_SESSION['profile_img'].'); background-position: center; background-size: cover;"></a>';
