@@ -1,5 +1,5 @@
 <?php 
-  include_once('../templates/head.php');
+  include('../templates/head.php');
   include_once('../modules/connection.php');
 
   $nickname_error = false;
@@ -129,7 +129,7 @@
     <!-- Imagen de perfil -->
     <div class="input-container">
         <i class="fa-solid fa-camera-retro"></i>
-        <input type="text" name="profile" id="profile" placeholder="Profileko argazkia" accept=".jpg,.jpeg,.png" onfocus="(this.type='file')">
+        <input type="file" name="profile" id="profile" placeholder="Profileko argazkia" accept=".jpg,.jpeg,.png" onfocus="(this.type='file')">
     </div>
     <!-- Error: Imagen de perfil -->
     <?php

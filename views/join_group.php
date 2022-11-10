@@ -1,5 +1,5 @@
 <?php
-  include_once('../templates/head.php');
+  include('../templates/head.php');
   include_once('../modules/connection.php');
   
   $error = false;

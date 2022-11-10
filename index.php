@@ -1,5 +1,5 @@
 <?php 
-  include_once('templates/head.php');
+  include('templates/head.php');
 ?>
 
   <title>IGKlub</title>
