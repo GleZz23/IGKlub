@@ -6,8 +6,6 @@
   $nickname_error = false;
   $email_error = false;
 
-  $signup_admin = true;
-
   if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     switch ($_REQUEST['form-action']) {
       // Aceptar nuevos profesores

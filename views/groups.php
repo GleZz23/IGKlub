@@ -131,7 +131,7 @@
       <div class="input-container">
         <i class="fa-solid fa-school"></i>
         <select name="school" id="school">
-            <option value="-" selected>Ikastetxea</option>
+          <option value="-" selected>Ikastetxea</option>
         <?php
             $query = $miPDO->prepare('SELECT * FROM centro ORDER BY nombre ASC');
             $query->execute();
