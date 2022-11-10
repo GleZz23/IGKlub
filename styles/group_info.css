@@ -1,0 +1,506 @@
+/* MENU STICKY */
+.sticky-menu {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    top: 0;
+    position: sticky;
+    width: 100%;
+    background: var(--accent);
+    box-shadow: 0 0 1rem #00000075;
+    z-index: 6;
+  }
+  
+  .sticky-menu > * {
+    text-decoration: none;
+    color: var(--font);
+    background: transparent;
+    border: none;
+    font-size: 1rem;
+    transition: all .3s ease-in-out;
+    padding: 1.5rem;
+  }
+  
+  .sticky-menu > * i {
+    margin-right: .5rem;
+  }
+  
+  .sticky-menu > *:hover {
+    cursor: pointer;
+    scale: 1.2;
+    text-decoration: underline;
+  }
+  
+  #profile {
+    background: transparent;
+    border: none;
+  }
+  
+  .profile {
+    width: 100%;
+    color: var(--font);
+    background-color: var(--secundary-bg);
+    position: absolute;
+    z-index: 7;
+    padding: 2rem;
+    border-bottom: 2px solid var(--light-purple);
+    box-shadow: .5rem .5rem 1rem #00000050;
+    flex-direction: column;
+    text-align: left;
+    justify-content: center;
+    gap: 1rem;
+    transition: all .3s ease-in-out;
+    display: none;
+    font-size: 1.5rem;
+    right: 0;
+    transform: translateX(100%);
+    top: 0;
+  }
+  
+  .profile > * {
+    background: none;
+    border: none;
+    color: var(--font);
+    font-size: 1.5rem;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    text-decoration: none;
+  }
+  
+  .profile .close-profile {
+    width: 100%;
+    font-size: 1rem;
+    justify-content: center;
+  }
+  
+  .profile .profile-img {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .profile figure {
+    width: 10rem;
+    height: 10rem;
+    border-radius: 50%;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  /* HEADER */
+  header {
+    background-color: var(--secundary-bg);
+    padding: 1.5rem 2rem;
+    border-bottom: 2px solid var(--light-purple);
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  nav {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 2rem;
+    color: var(--font);
+  }
+  
+  /* LOGO */
+  header figure:not(header nav figure) {
+    margin-bottom: 1rem;
+    display: none;
+  }
+  
+  header nav figure {
+    width: 10%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    text-align: center;
+  }
+  
+  header figure img {
+    width: 100%;
+    filter: invert(100%);
+  }
+  
+  header section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    gap: 2rem;
+  }
+  
+  header button {
+    font-size: 2rem;
+    background: transparent;
+    border: none;
+    transition: all .3s ease-in-out;
+  }
+  
+  header button i:not(.search-bar button i) { color: var(--font); }
+  
+  /* FOTO DE PERFIL - FOTO */
+  .profile-pic {
+    display: flex;
+    justify-content: end;
+    width: 10%;
+  }
+  
+  .profile-pic a {
+    border-radius: 50%;
+    width: 5rem;
+    height: 5rem;
+    background-position: center;
+  }
+  
+  /* MAIN */
+  main {
+    margin: 5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 3rem;
+  }
+  
+  main section {
+    background-color: var(--main-bg);
+    border: 2px solid var(--light-purple);
+    border-radius: 1rem;
+    padding: 2rem;
+    width: 100%;
+  }
+  
+  /* Aceptar nuevos profesores, comentarios y respuestas, administradores */
+  .accept-students,
+  .accept-comments,
+  .accept-answers,
+  .accept-languages {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+    color: var(--font);
+  }
+  
+  .accept-students table,
+  .accept-comments table,
+  .accept-answers table,
+  .admins table,
+  .accept-languages table {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    table-layout: fixed;
+    width: 100%;  
+  }
+  
+  .accept-students th, .accept-students td,
+  .accept-comments th, .accept-comments td,
+  .accept-answers th, .accept-answers td,
+  .admins th, .admins td,
+  .accept-languages th, .accept-languages td {
+    color: var(--font);
+    text-align: center;
+    padding-inline: 1.5rem;
+    white-space: nowrap;
+  }
+  
+  .accept-students .actions,
+  .accept-comments .actions,
+  .accept-answers .actions,
+  .accept-languages .actions {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    height: 4rem;
+  }
+  
+  .accept-students .actions button,
+  .accept-comments .actions button,
+  .accept-answers .actions button,
+  .admins button,
+  .accept-languages button {
+    padding: .5rem;
+    color: var(--font);
+    background: var(--accent);
+    border: none;
+  }
+  
+  button:hover { cursor: pointer; }
+  
+  .accept-students .profile-img,
+  .accept-comments .profile-img,
+  .accept-answers .profile-img,
+  .admins .profile-img,
+  .accept-languages .profile-img {
+    width: 4rem;
+    height: 4rem;
+    padding: 0;
+    margin: 0;
+    border: var(--light-purple);
+    border-radius: 50%;
+    overflow: hidden;
+  }
+  
+  .accept-students .profile-img figure,
+  .accept-comments .profile-img figure,
+  .accept-answers .profile-img figure,
+  .admins .profile-img figure,
+  .accept-languages .profile-img figure {
+    width: 4rem;
+    height: 4rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  /* Aceptar nuevos libros */
+  .accept-books {
+    --grid-layout-gap: 4rem;
+    --grid-column-count: 5;
+    --grid-item--min-width: 250px;
+  
+    --gap-count: calc(var(--grid-column-count) - 1);
+    --total-gap-width: calc(var(--gap-count) * var(--grid-layout-gap));
+    --grid-item--max-width: calc((100% - var(--total-gap-width)) / var(--grid-column-count));
+  
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(max(var(--grid-item--min-width), var(--grid-item--max-width)), 1fr));
+    grid-gap: var(--grid-layout-gap);
+    color: var(--font);
+  }
+  
+  .book-container {
+    display: flex;
+    position: relative;
+    overflow: hidden;
+    transition: all .3s ease-in-out;
+    background-color: var(--main-bg);
+  }
+  
+  .book-container img {
+    width: 100%;
+    transition: all .6s ease-in-out;
+  }
+  
+  .book-overlay {
+    position: absolute;
+    background: #000000bf;
+    width: 100%;
+    height: 100%;
+    bottom: 0;
+    transform: translateY(-100%);
+    padding-inline: .5rem;
+    transition: all .3s ease-in-out;
+  }
+  
+  .book-info {
+    font-size: 70%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+    color: var(--font);
+    gap: .5rem;
+  }
+  
+  .book-info .actions {
+    margin-top: 2rem;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+  }
+  
+  .book-info .actions button {
+    padding: .5rem;
+  }
+  
+  .book-info a {
+    padding: .5rem 1rem;
+    background-color: white;
+    border-radius: 1rem;
+    text-decoration: none;
+    color: black;
+  }
+  
+  /* Administradores */
+  .admins {
+    display: flex;
+    justify-content: flex-start;
+  }
+  
+  .admins .actions form {
+    border: none;
+    box-shadow: none;
+    background-color: none;
+    width: auto;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .admins form h1 {
+    color: var(--font);
+  }
+  
+  .admins .actions form button {
+    padding: .5rem;
+    color: var(--font);
+  }
+  
+  .admins form {
+    width: 35rem;
+    background-color: var(--secundary-bg);
+    padding: 2rem;
+    border: 2px solid var(--light-purple);
+    border-radius: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    box-shadow: 0 0 1rem var(--light-purple);
+  }
+  
+  .input-container {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    background: var(--accent);
+  }
+  
+  .input-container div {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+  
+  i:not(.actions i, .sticky-menu i) {
+    text-align: center;
+    width: 3rem;
+    padding-block: 1rem;
+    font-size: 1rem;
+    color: var(--font);
+  }
+  
+  input, select, .pass-info {
+    width: 100%;
+    height: 3rem;
+    padding-inline: .5rem;
+    outline: none;
+    border: none;
+    background-color: var(--font);
+    display: flex;
+    align-items: center;
+  }
+  
+  .admins button {
+    padding: .5rem 1rem;
+    border: 1px solid var(--light-purple);
+    background: var(--accent);
+    color: var(--font);
+    transition: ease-in-out .25s;
+  }
+  
+  .admins button:hover {
+    cursor: pointer;
+    box-shadow: 0 0 .5rem var(--light-purple);
+  }
+  
+  .input_error{ border-right: 4px solid #E00A35; }
+  
+  .error {
+    width: 100%;
+    background-color: #E00A35;
+    color: #EEE;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    text-align: left;
+    padding-inline: 1rem;
+    border-radius: .375rem;
+    font-size: .8rem;
+  }
+  
+  .error p {
+    hyphens: auto;
+    -webkit-hyphens: auto;
+  }
+  
+  .error i {
+    width: auto;
+    padding-right: .5rem;
+  }
+  
+  /* ESTILOS JS */
+  .hidden { display: none; }
+  
+  /* ----------------------------------------------------------------------- */
+  /* TABLET */
+  @media screen and (max-width: 1280px) {
+    .sticky-menu, .profile-pic { display: none; }
+  
+    #profile { display: flex; }
+  
+    #profile i { font-size: 2rem; }
+  
+    header { font-size: 1.5rem; }
+  
+    .admins {
+      width: 100%;
+      flex-direction: column-reverse;
+      justify-content: center;
+      align-items: center;
+    }
+  
+    .admins form {
+      margin-bottom: 2.5rem;
+      width: 100%;
+    }
+  
+    .accept-students table,
+    .accept-comments table,
+    .accept-answers table,
+    .admins table,
+    .accept-languages table {
+      overflow-x: auto;
+      justify-content: start;
+      padding-bottom: 1.5rem;
+      font-size: 1rem;
+    }
+  } 
+  
+  /* INTERMEDIO */
+  @media screen and (max-width: 940px) {
+    main { margin: 2rem; }
+  }
+  
+  /* MOVIL */
+  @media screen and (max-width: 600px) {
+    main { margin: 1rem; }
+  
+    header figure:not(header nav figure) {
+      display: flex;
+      width: 60%;
+    }
+  
+    header nav figure { display: none; }
+  
+    header { padding: 1.5rem 1rem; }
+  }
+  
