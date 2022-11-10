@@ -583,7 +583,7 @@ footer > div a { color: var(--font); }
 
 /* MOVIL */
 @media screen and (max-width: 600px) {
-  header figure:not(header nav figure) { display: flex; }
+  header figure:not(header nav figure) {display: flex; }
 
   header nav figure { display: none; }
 

@@ -24,6 +24,10 @@ body {
   --details: #464646;
 }
 
+#cl{
+color: white;
+}
+
 /* MENU STICKY */
 .sticky-menu {
   display: flex;
@@ -264,11 +268,12 @@ main {
 /* ASIDES */
 .filters, .profile {
   width: 15%;
-  background-color: lightgray;
+  color: var(--font);
+  background-color: var(--secundary-bg);
   position: absolute;
-  z-index: 3;
+  z-index: 7;
   padding: 2rem;
-  border-bottom: 2px solid gray;
+  border-bottom: 2px solid var(--light-purple);
   box-shadow: .5rem .5rem 1rem #00000050;
   flex-direction: column;
   text-align: left;
@@ -277,26 +282,20 @@ main {
   transition: all .3s ease-in-out;
   display: none;
   font-size: 1.5rem;
-  top: 0;
-}
-
-/* PERFIL DE USUARIO */
-.profile {
   right: 0;
-  border-left: 2px solid gray;
+  border-left: 2px solid var(--light-purple);
   border-bottom-left-radius: 1rem;
   transform: translateX(100%);
+  top: 0;
 }
-
+/* PERFIL DE USUARIO */
 .profile a, .profile span {
-  color: gray;
+  color: var(--font);
   text-decoration: none;
   transition: all .3s ease-in-out;
 }
 
-.profile span:hover {
-  cursor: pointer;
-}
+.profile span:hover { cursor: pointer; }
 
 .profile a i, .profile span i{
   width: 2rem;
@@ -440,7 +439,7 @@ button:hover {
   padding-right: .5rem;
 }
 
-.hidden { display: none; }
+.hidden, .close-profile, .close-filters { display: none; }
 /* ----------------------------------------------------------------------- */
 /* TABLET */
 @media screen and (max-width: 1280px) {
@@ -498,7 +497,9 @@ button:hover {
 
 /* MOVIL */
 @media screen and (max-width: 600px) {
-  header figure:not(header nav figure) { display: flex; }
+  header figure:not(header nav figure) { display: flex;
+    
+   }
 
   header nav figure { display: none; }
 
@@ -506,7 +507,7 @@ button:hover {
     grid-template-columns: repeat(1, 1fr);
     margin: 4rem 2rem;
   }
-
+  #profile { display: flex; }
   header { padding: 1.5rem 1rem; }
 
   header figure { width: 50%; }
@@ -515,6 +516,15 @@ button:hover {
 
   .search-bar { padding-inline: 1rem; }
 
+  #valorated_book {
+    width: 100%;
+  }
+  /* #titulo{
+  : center;
+  } */
+.profile-container{
+  flex-direction: column;
+}
   .filters, .profile { font-size: 1rem; }
 
   footer > p { font-size: 1rem; }
