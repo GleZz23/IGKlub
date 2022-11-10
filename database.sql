@@ -136,8 +136,8 @@ INSERT INTO centro VALUES
 
 -- USUARIO
 INSERT INTO usuario (`nickname`, `nombre`, `apellidos`, `fecha_nacimiento`, `email`, `telefono`, `contrasena`, `rol`, `id_centro`, `cod_grupo`, `estado`, `imagen`) VALUES
-  ('Admin', 'Administrador', 'de Prueba', '2000-01-01', 'admin@mail.com', NULL, '$2y$10$SZU5HY0RmiNkvpl7rOoPkeERGKXk0bTNZJoBDTAdzR.VYYEHuZx8q', 'admin', NULL, NULL, 'aceptado', 'Admin.jpg'),
-  ('Profesor', 'Profesor', 'de Prueba', '2000-01-01', 'profesor@mail.com', 911111111, '$2y$10$SZU5HY0RmiNkvpl7rOoPkeERGKXk0bTNZJoBDTAdzR.VYYEHuZx8q', 'irakasle', 2, NULL, 'espera', 'Profesor.jpg');
+  ('Admin', 'Administrador', 'de Prueba', '2000-01-01', 'admin@mail.com', NULL, '$2y$10$SZU5HY0RmiNkvpl7rOoPkeERGKXk0bTNZJoBDTAdzR.VYYEHuZx8q', 'admin', NULL, NULL, 'aceptado', 'Admin.png'),
+  ('Profesor', 'Profesor', 'de Prueba', '2000-01-01', 'profesor@mail.com', 911111111, '$2y$10$SZU5HY0RmiNkvpl7rOoPkeERGKXk0bTNZJoBDTAdzR.VYYEHuZx8q', 'irakasle', 2, NULL, 'espera', 'Profesor.png');
 
 -- LIBROS
 INSERT INTO libro (titulo, escritor, portada) VALUES 

@@ -448,8 +448,6 @@
             </section>';
     }
     ?>
-
-    
   </main>
 </body>
 </html>

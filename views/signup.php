@@ -90,7 +90,7 @@
         $query->execute(['phone' => $_POST["phone"], 'school' => $_POST["school"], 'nickname' => $_POST["nickname"]]);
       }
 
-      $rute = '../src/img/profile/'.$_POST["nickname"].'.'.$imageFileType;
+      $rute = '../src/img/profile/'.$_POST["nickname"].'.png';
       move_uploaded_file($file['tmp_name'], $rute);
 
       header('Location: ../views/login.php');
