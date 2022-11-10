@@ -1,0 +1,16 @@
+*{
+    /* font-family: 'Anybody'; */
+/* font-family: 'Prompt', sans-serif; */
+font-family: 'Trade Winds', cursive;
+}
+
+/* Colors */
+:root {
+    /* COLOR PALETTE */
+    --accent: linear-gradient(90deg, rgb(42, 0, 121) 0%, rgb(99, 42, 190) 100%);
+    --dark-purple: rgb(42, 0, 121);
+    --light-purple: rgb(99, 42, 190);
+    --font: #EEE;
+    --main-bg: #2D2D30;
+    --secundary-bg: #1E1E1E;
+}

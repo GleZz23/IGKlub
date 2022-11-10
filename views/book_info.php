@@ -208,7 +208,7 @@
         if ($results) {
           echo '<div><i class="fa-solid fa-star"></i> Liburu hau baloratu duzu</div>';
         } else {
-          echo '<div class="rateBookButton"><i class="fa-regular fa-star"></i> Liburu hau baloratzea</div>';
+          echo '<div class="rateBookButton"><i class="fa-regular fa-star"></i> Liburu hau baloratu</div>';
         }
         echo '</div>';
       ?>
