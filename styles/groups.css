@@ -258,8 +258,7 @@ main section {
   position: fixed;
   top: 0;
   left: 0;
-  /* display: none; */
-  display: flex;
+  display: none;
   justify-content: center;
   align-items: center;
   background-color: #000000dd;
@@ -297,7 +296,7 @@ main section {
   align-items: center;
   gap: 1rem;
   box-shadow: 0 0 .5rem var(--light-purple);
-  /* transform: scale(0); */
+  transform: scale(0);
   transition: all .3s ease-in-out;
 }
 

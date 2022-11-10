@@ -94,7 +94,7 @@
   <div class="new-group">
     <button class="closeButton"><i class="fa-solid fa-x"></i></button>
     <form id="newGroupForm" action="" method="post">
-      <h1>Talde bat sortu</h1>
+      <h1>Talde berri bat sortu</h1>
       <!-- Nombre del grupo -->
       <div class="input-container">
         <i class="fa-solid fa-heading"></i>
@@ -133,7 +133,7 @@
       </div>
       <!-- Nivel -->
       <div class="input-container">
-        <i class="fa-solid fa-heading"></i>
+        <i class="fa-solid fa-hashtag"></i>
         <input type="text" name="level" id="level" placeholder="Maila" value="<?php if (isset($_REQUEST['nickname'])) echo $_REQUEST['nickname'] ?>">
       </div>
       <!-- Error: Nivel -->
@@ -141,7 +141,7 @@
         <i class="fa-solid fa-circle-exclamation"></i>
         <p>.</p>
       </div>
-      <button>Gorde gela</button>
+      <button>Taldea sortu</button>
     </form>
   </div>
 </body>
