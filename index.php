@@ -6,7 +6,7 @@
   <link rel="stylesheet" href="styles/general.css">
 </head>
 <body>
-  <div>
+  <div class="general-container">
     <section>
       <h1>IGKlub</h1> <!-- Cambiar por logo -->
       <form action="views/signup.php" method="get">
