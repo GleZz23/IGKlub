@@ -12,14 +12,15 @@ body {
   align-items: center;
   text-align: center;
   font-family: Arial, Helvetica, sans-serif;
-  background-image: url(../src/img/background.jpg);
+  background-image: url(../src/img/background2.jpg);
 }
 
 form {
   width: 35rem;
-  background-color: lightgray;
+  background-color:   var(--main-bg);
+  border:2px solid var(--light-purple);
+  color:var( --font);
   padding: 2rem;
-  border: 2px solid gray;
   border-radius: 1rem;
   display: flex;
   flex-direction: column;
@@ -32,7 +33,7 @@ form {
   width: 100%;
   display: flex;
   align-items: center;
-  background-color: gray;
+  background: var(--light-purple);
 }
 
 .input-container div {
@@ -69,17 +70,21 @@ input, select {
 }
 
 button {
-  width: 20%;
+  width: 25%;
   padding: .5rem 1rem;
   border: 1px solid gray;
-  background-color: #eee;
-  color: black;
-  transition: ease-in-out .25s;
+  background: transparent;
+  border: 2px solid var(--light-purple);
+  color: var(--light-purple);
+  
+  transition:all .3s ease-in-out;
 }
 
 button:hover {
   cursor: pointer;
-  box-shadow: 0 0 .5rem #00000050;
+  color: var(--font);
+  background: var(--accent);
+  box-shadow: 0 0 .5rem var(--light-purple);
 }
 
 .input_error{ border-right: 4px solid #E00A35; }
