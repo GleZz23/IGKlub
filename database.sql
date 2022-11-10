@@ -37,15 +37,6 @@ create table if not exists grupo (
 );
 Alter TABLE usuario add foreign key (cod_grupo) references grupo(codigo) on delete cascade;
 
--- TABLA SOLICITUD GRUPO
-create table if not exists solicitud_grupo (
-  nickname varchar(255),
-  cod_grupo char(5),
-  estado enum('aceptado','denegado','espera') default 'espera' not null,
-  foreign key (nickname) references usuario(nickname) on delete cascade,
-  foreign key (cod_grupo) references grupo(codigo) on delete cascade
-);
-
 -- TABLA LIBRO
 create table if not exists libro (
   id_libro int(5) auto_increment primary key,
