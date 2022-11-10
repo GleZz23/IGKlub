@@ -107,8 +107,11 @@ create table if not exists solicitud_libro (
 create table if not exists solicitud_idioma (
   nickname varchar(255),
   idioma varchar(255),
+  id_libro int(5),
+  titulo varchar(255) not null,
   estado enum('aceptado','denegado','espera') default 'espera' not null,
-  foreign key (nickname) references usuario(nickname) on delete cascade
+  foreign key (nickname) references usuario(nickname) on delete cascade,
+  foreign key (id_libro) references libro(id_libro) on delete cascade
 );
 
 -- TABLA IDIOMA LIBRO

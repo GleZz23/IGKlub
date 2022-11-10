@@ -28,11 +28,13 @@ filtersButton.addEventListener('mouseover', () => {
   filtersButton.style.transform = 'scale(1.1)';
   filtersButton.style.textShadow = ".3rem .3rem .3rem #00000050";
   filtersButton.style.cursor = "pointer";
+  filtersButton.style.rotate = '90deg'
 });
 
 filtersButton.addEventListener('mouseleave', () => {
   filtersButton.style.transform = 'scale(1)';
   filtersButton.style.textShadow = "none";
+  filtersButton.style.rotate = '90deg'
 });
 
 filtersButton.addEventListener('click', () => {
@@ -77,7 +79,7 @@ const closeButton = document.querySelector('.closeButton');
 newBookButton.forEach((button) => {
   button.addEventListener('click', () => {
     window.scrollTo(0,0);
-    document.querySelector('body').style.overflowY = "auto";
+    document.querySelector('body').style.overflowY = "hidden";
     document.querySelector('.new-book').style.display = "flex";
     setTimeout(() => {
       document.getElementById('newBookForm').style.transform = "scale(1)";
@@ -95,7 +97,7 @@ closeButton.addEventListener('click', () => {
 
 // FORMULARIO
 const form = document.getElementById('newBookForm');
-const inputs = document.querySelectorAll('#newBookForm input, textarea');
+const inputs = document.querySelectorAll('#newBookForm input, textarea, select');
 const errors = document.querySelectorAll('.php-error');
 
 setTimeout(() => {
@@ -177,6 +179,7 @@ const form_validation= (e)=>{
         campos.title2 = false;
       }
       break;
+    
     }
 }
 
@@ -195,8 +198,42 @@ form.addEventListener('submit', (e) => {
   }
 });
 
-// IDIOMA ALTERANTIVO
+// IDIOMA NUEVO - ALTERANTIVO
+const newLanguage = document.querySelector('.new-language');
+const newAlternativeLanguage = document.querySelector('.new-alternative-language');
 const alternativeButton = document.querySelector('.alternative-button');
+
+inputs[5].addEventListener('input', (e) => {
+  if (e.target.value === 'other') {
+    newLanguage.classList.remove('hidden');
+    setTimeout(() => {
+      newLanguage.style.opacity = "1";
+      newLanguage.style.transform = "translateX(0)";
+    }, 10);
+  } else {
+    newLanguage.style.opacity = "0";
+    newLanguage.style.transform = "translateX(100%)";
+    setTimeout(() => {
+      newLanguage.classList.add('hidden');
+    }, 500);
+  }
+});
+
+inputs[9].addEventListener('input', (e) => {
+  if (e.target.value === 'other') {
+    newAlternativeLanguage.classList.remove('hidden');
+    setTimeout(() => {
+      newAlternativeLanguage.style.opacity = "1";
+      newAlternativeLanguage.style.transform = "translateX(0)";
+    }, 10);
+  } else {
+    newAlternativeLanguage.style.opacity = "0";
+    newAlternativeLanguage.style.transform = "translateX(100%)";
+    setTimeout(() => {
+      newAlternativeLanguage.classList.add('hidden');
+    }, 500);
+  }
+});
 
 alternativeButton.addEventListener('click', () => {
   const alternative = document.querySelector('.alternative');

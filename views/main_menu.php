@@ -68,8 +68,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['form-action'])) {
     $insert = $miPDO->prepare('INSERT INTO solicitud_libro VALUES (:nickname, :id_libro, "espera")');
     $insert->execute(['nickname' => $_SESSION['nickname'], 'id_libro' => $id_libro]);
 
-    $query = $miPDO->prepare('INSERT INTO idioma_libro VALUES (:id_libro, :idioma, :titulo)');
-    $query->execute(['id_libro' => $id_libro, 'idioma' => $_REQUEST['language'], 'titulo' => $_REQUEST['title']]);
+    if ($_REQUEST['language'] === 'other') {
+      $query = $miPDO->prepare('INSERT INTO solicitud_idioma VALUES (:nickname, :idioma, "espera", :id_libro, :titulo)');
+      $query->execute(['nickname' => $_SESSION['nickname'] , 'idioma' => $_REQUEST['new-language'], 'id_libro' => $id_libro, 'titulo' => $_REQUEST['title']]);
+    } else {
+      $query = $miPDO->prepare('INSERT INTO idioma_libro VALUES (:id_libro, :idioma, :titulo)');
+      $query->execute(['id_libro' => $id_libro, 'idioma' => $_REQUEST['language'], 'titulo' => $_REQUEST['title']]);
+    }
 
     if (isset($_REQUEST['alternative_language']) && $_REQUEST['alternative_title']) {
 
@@ -80,8 +85,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['form-action'])) {
       }
 
       if ($alternative_language) {
-        $query = $miPDO->prepare('INSERT INTO idioma_libro VALUES (:id_libro, :id_idioma, :titulo)');
-        $query->execute(['id_libro' => $id_libro, 'id_idioma' => $_REQUEST['alternative_language'], 'titulo' => $_REQUEST['alternative_title']]);
+        if ($_REQUEST['alternative-language'] === 'other') {
+          $query = $miPDO->prepare('INSERT INTO solicitud_idioma VALUES (:nickname, :idioma, "espera", :id_libro, :titulo)');
+          $query->execute(['nickname' => $_SESSION['nickname'] , 'idioma' => $_REQUEST['new-alternative-language'], 'id_libro' => $id_libro, 'titulo' => $_REQUEST['title']]);
+        } else {
+          $query = $miPDO->prepare('INSERT INTO idioma_libro VALUES (:id_libro, :id_idioma, :titulo)');
+          $query->execute(['id_libro' => $id_libro, 'id_idioma' => $_REQUEST['alternative_language'], 'titulo' => $_REQUEST['alternative_title']]);
+        }        
       }
     }
 
@@ -91,12 +101,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['form-action'])) {
     header('Location: main_menu.php');
   }
 }
-
 ?>
+  <!-- JAVASCRIPTS -->
   <script src="../src/js/main_menu.js" defer></script>
+  <!-- FUENTES -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Prompt&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Prompt&display=swap" rel="stylesheet">
+  <!-- ESTILOS CSS -->
   <link rel="stylesheet" href="../styles/main_menu.css">
   <title>Hasiera | IGKlub</title>
   </head>
@@ -119,7 +131,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['form-action'])) {
           </div>
         </div>
         <button id="filters">
-          <i class="fa-solid fa-filter"></i>
+          <i class="fa-solid fa-arrow-right-arrow-left"></i>
         </button>
         <button class="hidden" id="profile">
           <i class="fa-solid fa-bars"></i>
@@ -260,7 +272,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['form-action'])) {
       <p>Webgune hau Txurdinagako Lanbide Heziketako azken mailako Iker, Andrei, Iñigo eta Cipri ikasleek diseinatu dute.</p>
     </div>
   </footer>
-
+  <!-- AÑADIR NUEVO LIBRO -->
   <!-- NUEVO LIBRO -->
   <div class="new-book">
     <button class="closeButton"><i class="fa-solid fa-x"></i></button>
@@ -269,8 +281,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['form-action'])) {
       <!-- Titulo del libro -->
       <div class="input-container">
         <i class="fa-solid fa-heading"></i>
-        <input type="text" name="title" id="title" placeholder="Izenburua" autofocus value="<?php if (isset($_REQUEST['nickname']))
-            echo $_REQUEST['nickname'] ?>">
+        <input type="text" name="title" id="title" placeholder="Izenburua" autofocus value="<?php if (isset($_REQUEST['title']))
+            echo $_REQUEST['title'] ?>">
       </div>
       <!-- Error: Titulo del libro -->
       <div class="error hidden" id="title-error">
@@ -280,8 +292,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['form-action'])) {
       <!-- Escritor -->
       <div class="input-container">
         <i class="fa-solid fa-feather"></i>
-        <input type="text" name="writter" id="writter" placeholder="Egilea" value="<?php if (isset($_REQUEST['email']))
-            echo $_REQUEST['email'] ?>">
+        <input type="text" name="writter" id="writter" placeholder="Egilea" value="<?php if (isset($_REQUEST['writter']))
+            echo $_REQUEST['writter'] ?>">
       </div>
       <!-- Error: Escritor -->
       <div class="error hidden" id="writter-error">
@@ -329,6 +341,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['form-action'])) {
             echo '<option value="' . $language['id_idioma'] . '">' . $language['nombre'] . '</option>';
           }
           ?>
+          <option value="other">Hizkuntza berria</option>
         </select>
       </div>
       <!-- Error: Idioma -->
@@ -340,6 +353,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['form-action'])) {
               </div>';
       }
       ?>
+      <!-- Nuevo idioma -->
+      <section class="new-language hidden">
+        <div class="input-container">
+          <input type="text" name="new-language" id="new-language" placeholder="Hizkuntza berria">
+        </div>
+      </section>
       <!-- Formato -->
       <div class="input-container">
         <i class="fa-solid fa-rectangle-list"></i>
@@ -366,13 +385,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['form-action'])) {
         <textarea id="sinopsis" name="sinopsis" placeholder="Sinopsia" required autocomplete="off"
           maxlength="2300"></textarea>
       </div>
-      <!-- Error: Formato -->
+      <!-- Error: Sinopsis -->
       <div class="error hidden" id="sinopsis-error">
         <i class="fa-solid fa-circle-exclamation"></i>
         <p>Sinopsia nahitaezkoa da.</p>
       </div>
       <!-- Titulo e idioma alternativos -->
-      <div class="alternative-button"><i class="fa-solid fa-arrow-down"></i> Liburu hau beste hizkuntzan irakurri dut
+      <div class="alternative-button">
+        <i class="fa-solid fa-arrow-down"></i> Liburu hau beste hizkuntzan irakurri dut
       </div>
       <section class="alternative hidden">
         <!-- Idioma alternativo -->
@@ -389,8 +409,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['form-action'])) {
               echo '<option value="' . $language['id_idioma'] . '">' . $language['nombre'] . '</option>';
             }
             ?>
+            <option value="other">Hizkuntza berria</option>
           </select>
         </div>
+        <!-- Nuevo idioma -->
+        <section class="new-alternative-language hidden">
+          <div class="input-container">
+            <input type="text" name="new-alternative-language" id="new-alternative-language" placeholder="Hizkuntza berria">
+          </div>
+        </section>
         <!-- Error: Idioma -->
         <?php
         if ($book_alternative_language_error) {
@@ -404,8 +431,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['form-action'])) {
         <div class="input-container">
           <i class="fa-solid fa-heading"></i>
           <input type="text" name="alternative_title" id="alternative-title" placeholder="Izenburua hizkuntza horretan"
-            value="<?php if (isset($_REQUEST['nickname']))
-              echo $_REQUEST['nickname'] ?>">
+            value="<?php if (isset($_REQUEST['alternative_title']))
+              echo $_REQUEST['alternative_title'] ?>">
         </div>
         <!-- Error: Titulo del libro -->
         <div class="error hidden" id="alternative-title-error">

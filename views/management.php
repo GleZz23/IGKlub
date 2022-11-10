@@ -29,10 +29,24 @@
       case 'accept-language':
         switch ($_REQUEST['accept']) {
           case 'yes':
-            $query = $miPDO->prepare('INSERT INTO idioma (nombre) VALUES (:idioma);');
+            $query = $miPDO->prepare('SELECT nombre FROM idioma WHERE nombre = :idioma;');
             $query->execute(['idioma' => $_REQUEST['language']]);
+            $results = $query->fetchAll();
+
+            if (!$results) {
+              $query = $miPDO->prepare('INSERT INTO idioma (nombre) VALUES (:idioma);');
+              $query->execute(['idioma' => $_REQUEST['language']]);
+            }
+            
             $query = $miPDO->prepare('UPDATE solicitud_idioma SET estado = "aceptado" WHERE idioma = :idioma;');
             $query->execute(['idioma' => $_REQUEST['language']]);
+
+            $query = $miPDO->prepare('SELECT id_idioma FROM idioma WHERE nombre = :idioma;');
+            $query->execute(['idioma' => $_REQUEST['language']]);
+            $id_idioma = $query->fetch();
+
+            $query = $miPDO->prepare('INSERT INTO idioma_libro VALUES (:id_libro, :idioma, :titulo);');
+            $query->execute(['id_libro' => $_REQUEST['id_libro'], 'idioma' => $id_idioma['id_idioma'], 'titulo' => $_REQUEST['title']]);
             break;
   
           case 'no':
@@ -138,15 +152,20 @@
     <figure>
       <a href="main_menu.php"><img src="../src/img/logo/logo.png"></a>
     </figure>
-    <h1>Administrazioa</h1>
-    <button class="hidden" id="profile">
-      <i class="fa-solid fa-bars"></i>
-    </button>
-    <div class="profile-pic">
-      <?php
-        echo '<a href="personal_area.php" style="background: url(../src/img/profile/'.$_SESSION['profile_img'].'); background-position: center; background-size: cover;"></a>';
-      ?>
-    </div>
+    <nav>
+      <figure>
+        <a href="main_menu.php"><img src="../src/img/logo/logo.png"></a>
+      </figure>
+      <h1>Administrazioa</h1>
+      <button class="hidden" id="profile">
+        <i class="fa-solid fa-bars"></i>
+      </button>
+      <div class="profile-pic">
+        <?php
+          echo '<a href="personal_area.php" style="background: url(../src/img/profile/'.$_SESSION['profile_img'].'); background-position: center; background-size: cover;"></a>';
+        ?>
+      </div>
+    </nav>
   </header>
   <!-- BOTON DEL MENU HAMBURGUESA -->
   <div class="burguer-menu">
@@ -401,7 +420,9 @@
                 <td class="actions">
                   <form action="" method="post">
                     <input type="hidden" name="form-action" value="accept-language">
+                    <input type="hidden" name="id_libro" value="'.$language['id_libro'].'">
                     <input type="hidden" name="language" value="'.$language['idioma'].'">
+                    <input type="hidden" name="title" value="'.$language['titulo'].'">
                     <input type="hidden" name="accept" value="yes">
                     <button><i class="fa-solid fa-thumbs-up"></i></button>
                   </form>

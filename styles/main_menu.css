@@ -20,8 +20,6 @@ body {
   --font: #EEE;
   --main-bg: #2D2D30;
   --secundary-bg: #1E1E1E;
-  /* DETAILS */
-  --details: #464646;
 }
 
 /* MENU STICKY */
@@ -187,9 +185,7 @@ main {
   text-align: center;
 }
 
-main > h1 {
-  margin-block: 10rem;
-}
+main > h1 { margin-block: 10rem; }
 
 main section {
   --grid-layout-gap: 4rem;
@@ -211,7 +207,6 @@ main section {
   position: relative;
   overflow: hidden;
   transition: all .3s ease-in-out;
-  background-color: lightgray;
 }
 
 .book-container img {
@@ -238,7 +233,7 @@ main section {
   justify-content: center;
   text-align: center;
   align-items: center;
-  color: #EEE;
+  color: var(--font);
   font-size: 1rem;
 }
 
@@ -296,9 +291,7 @@ main section {
   transition: all .3s ease-in-out;
 }
 
-.profile span:hover {
-  cursor: pointer;
-}
+.profile span:hover { cursor: pointer; }
 
 .profile a i, .profile span i{
   width: 2rem;
@@ -326,6 +319,8 @@ main section {
 }
 
 /* FILTERS */
+#filters { transform: rotate(90deg); }
+
 .filters h2 {
   font-size: 1.5rem;
   color: var(--font);
@@ -337,9 +332,7 @@ main section {
   gap: 1rem;
 }
 
-.filters select {
-  font-size: 1rem;
-}
+.filters select { font-size: 1rem; }
 
 .filters button:not(.close-filters) {
   font-size: 1rem;
@@ -358,6 +351,8 @@ main section {
 
 /* FORMULARIO */
 .new-book {
+  overflow-y: auto;
+  overflow-x: hidden;
   width: 100%;
   height: 100%;
   position: fixed;
@@ -366,9 +361,11 @@ main section {
   display: none;
   justify-content: center;
   align-items: center;
-  background-color: #00000080;
+  background-color: #000000dd;
   transition: all .3s ease-in-out;
   z-index: 10;
+  padding: 2rem 4rem;
+  align-items: flex-start;
 }
 
 .closeButton {
@@ -379,7 +376,7 @@ main section {
   margin: 2rem;
   background-color: transparent;
   border: none;
-  color: var(--dark-purple);
+  color: var(--font);
   transition: all .3s ease-in-out;
 }
 
@@ -412,13 +409,18 @@ main section {
   background: var(--light-purple);
 }
 
-#newBookForm .input-container div, .alternative {
+#newBookForm .input-container div,
+.alternative,
+.new-language,
+.new-alternative-language {
   display: flex;
   flex-direction: column;
   width: 100%;
 }
 
-.alternative {
+.alternative,
+.new-language,
+.new-alternative-language {
   gap: 1rem;
   opacity: 0;
   transform: translateX(100%);
@@ -435,9 +437,7 @@ main section {
   text-shadow: .5rem .5rem 1rem #00000050;
 }
 
-.alternative-button:hover {
-  cursor: pointer;
-}
+.alternative-button:hover { cursor: pointer; }
 
 #newBookForm i:not(.alternative-button i) {
   text-align: center;
@@ -447,7 +447,9 @@ main section {
   color: var(--font);
 }
 
-#newBookForm input, #newBookForm select, #newBookForm textarea {
+#newBookForm input,
+#newBookForm select,
+#newBookForm textarea {
   width: 100%;
   height: 3rem;
   padding-inline: .5rem;
@@ -503,9 +505,7 @@ footer > div {
   padding: 1rem 2rem;
 }
 
-footer > div a {
-  color: var(--font);
-}
+footer > div a { color: var(--font); }
 
 /* ESTILOS JS */
 .input_error{ border-right: 4px solid #E00A35; }
@@ -571,23 +571,14 @@ footer > div a {
 
   .search-bar { width: 100%; }
 
-  .new-book {
-    padding: 4rem 2rem;
-    height: fit-content;
-  }
-
   .closeButton {
     font-size: 2rem;
     margin: 1rem;
   }
 
-  #newBookForm {
-    width: 100%;
-  }
+  #newBookForm { width: 100%; }
 
-  #newBookForm button {
-    width: 100%;
-  }
+  #newBookForm button { width: 100%; }
 }
 
 /* MOVIL */
@@ -596,10 +587,7 @@ footer > div a {
 
   header nav figure { display: none; }
 
-  main section {
-    grid-template-columns: repeat(1, 1fr);
-    margin: 4rem 2rem;
-  }
+  main section { margin: 4rem 2rem; }
 
   header { padding: 1.5rem 1rem; }
 
