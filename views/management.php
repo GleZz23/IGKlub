@@ -172,7 +172,7 @@
     <aside class="profile">
       <?php
       echo '<div class="profile-img">
-              <figure style="background: url(../src/img/profile/'.$_SESSION['profile_img'].'); background-position: center; background-size: cover;"></figure>
+      <a href="personal_area.php"><figure style="background: url(../src/img/profile/'.$_SESSION['profile_img'].'); background-position: center; background-size: cover;"></figure></a>
             </div>';
       ?>
       <button id="accept-teachers"><i class="fa-solid fa-user-check"></i>Irakasleak onartu</button>
@@ -185,12 +185,12 @@
     </aside>
   </div>
   <section class="sticky-menu">
-  <button id="accept-teachers"><i class="fa-solid fa-user-check"></i>Irakasleak onartu</button>
-      <button id="accept-books"><i class="fa-solid fa-book"></i>Liburuak onartu</button>
-      <button id="accept-comments"><i class="fa-solid fa-comments"></i>Iruzkinak onartu</button>
-      <button id="accept-languages"><i class="fa-solid fa-language"></i></i>Hizkuntzak onartu</button>
-      <button id="admins"><i class="fa-solid fa-users-gear"></i>Administratzaileak</button>
-      <a href="main_menu.php"><i class="fa-solid fa-house"></i>Hasiera</a>
+    <button id="accept-teachers"><i class="fa-solid fa-user-check"></i>Irakasleak onartu</button>
+    <button id="accept-books"><i class="fa-solid fa-book"></i>Liburuak onartu</button>
+    <button id="accept-comments"><i class="fa-solid fa-comments"></i>Iruzkinak onartu</button>
+    <button id="accept-languages"><i class="fa-solid fa-language"></i></i>Hizkuntzak onartu</button>
+    <button id="admins"><i class="fa-solid fa-users-gear"></i>Administratzaileak</button>
+    <a href="main_menu.php"><i class="fa-solid fa-house"></i>Hasiera</a>
   </section>
   <main>
     <!-- Aceptar nuevos profesores -->

@@ -3,7 +3,7 @@
   include_once('../modules/connection.php');
   include_once('../modules/session_control.php');
 ?>
-  <script src="../src/js/area_personal_valorated_books.js" defer></script>  
+  <script src="../src/js/personal_area.js" defer></script>  
   <link rel="stylesheet" href="../styles/personal_area.css">
   <title>Area pertsonala | IGKlub</title>
   </head>
@@ -16,9 +16,7 @@
       <figure>
         <a href="main_menu.php"><img src="../src/img/logo/logo.png"></a>
       </figure>
-      <h1 id="cl">
-      Area pertzonala
-      </h1>
+      <h1>Area pertsonala</h1>
       <button class="hidden" id="profile">
           <i class="fa-solid fa-bars"></i>
         </button>
@@ -40,32 +38,31 @@
   </section>
   <main>
     <div class="profile-container">
-    <?php
-      echo '<div class="profile-img">
-              <figure style="background: url(../src/img/profile/'.$_SESSION['profile_img'].'); background-position: center; background-size: cover;"></figure>
-            </div>';
-    ?>
-    <!-- BOTON DEL MENU HAMBURGUESA -->
-    <div class="burguer-menu">
-          <aside class="profile">
-            <?php
-            echo '<div class="profile-img">
-            <a href="personal_area.php" style="background: url(../src/img/profile/'.$_SESSION['profile_img'].'); background-position: center; background-size: cover;"></a>
-                  </div>';
-            echo '<a href="main_menu.php"><i class="fa-solid fa-house"></i>Hasiera</a>
-                  <span class="newBookButton"><i class="fa-solid fa-book"></i>Igo liburu bat</span>
-                  <a href="personal_area.php"><i class="fa-solid fa-user"></i>Area pertsonala</a>';
-            if ($_SESSION['role'] === 'irakasle') {
-              echo '<a href="groups.php"><i class="fa-solid fa-users-rectangle"></i>Nire taldeak</a>
-                    <a href="requests.php"><i class="fa-solid fa-question"></i>Eskaerak</a>';
-            } else if ($_SESSION['role'] === 'admin') {
-              echo '<a href="management.php"><i class="fa-solid fa-gear"></i>Administrazioa</a></h1>';
-            }
-            echo '<a href="../modules/logout.php"><i class="fa-solid fa-user-slash"></i>Saioa itxi</a>';
-            ?>
-            <button class="close-profile">Itxi <i class="fa-solid fa-angles-right"></i></button>
-          </aside>
-        </div>
+      <?php
+        echo '<div class="profile-img">
+                <figure style="background: url(../src/img/profile/'.$_SESSION['profile_img'].'); background-position: center; background-size: cover;"></figure>
+              </div>';
+      ?>
+      <!-- BOTON DEL MENU HAMBURGUESA -->
+      <div class="burguer-menu">
+        <aside class="profile">
+          <?php
+          echo '<div class="profile-img">
+                  <a href="personal_area.php"><figure style="background: url(../src/img/profile/'.$_SESSION['profile_img'].'); background-position: center; background-size: cover;"></figure></a>
+                </div>';
+          echo '<a href="main_menu.php"><i class="fa-solid fa-house"></i>Hasiera</a>
+                <a href="personal_area.php"><i class="fa-solid fa-user"></i>Area pertsonala</a>';
+          if ($_SESSION['role'] === 'irakasle') {
+            echo '<a href="groups.php"><i class="fa-solid fa-users-rectangle"></i>Nire taldeak</a>
+                  <a href="requests.php"><i class="fa-solid fa-question"></i>Eskaerak</a>';
+          } else if ($_SESSION['role'] === 'admin') {
+            echo '<a href="management.php"><i class="fa-solid fa-gear"></i>Administrazioa</a></h1>';
+          }
+          echo '<a href="../modules/logout.php"><i class="fa-solid fa-user-slash"></i>Saioa itxi</a>';
+          ?>
+          <button class="close-profile">Itxi <i class="fa-solid fa-angles-right"></i></button>
+        </aside>
+      </div>
       </section>
       <div class="profile-data">
         <h1><?php echo $_SESSION['name'] ?> <?php echo $_SESSION['surnames'] ?> </h1>
@@ -79,8 +76,8 @@
           }
         ?>
         <div class="actions">
-          <button id="profile_edit_btn" onclick="location.href='../views/change_personal_area.php'"><i class="fa-solid fa-key"></i> Pasahitza aldatu</button>
-          <button><i class="fa-solid fa-trash-can"></i> Kontua ezabatu</button>
+          <button id="change-password" onclick="location.href='../views/change_personal_area.php'"><i class="fa-solid fa-key"></i> Pasahitza aldatu</button>
+          <!-- <button><i class="fa-solid fa-trash-can"></i> Kontua ezabatu</button> -->
         </div>
       </div>
     </div>
@@ -92,7 +89,7 @@
       <div class="book-list">
       <?php
       // Recojo todos los valores de los libros en una variable
-      $query = $miPDO->prepare('SELECT libro.* FROM libro, valoracion WHERE libro.id_libro = valoracion.id_libro AND valoracion.nickname =:nickname');
+      $query = $miPDO->prepare('SELECT libro.* FROM libro, valoracion WHERE libro.id_libro = valoracion.id_libro AND valoracion.nickname =:nickname ORDER BY valoracion.fecha DESC');
       $query->execute(['nickname' => $_SESSION['nickname'] ]);
       $results = $query->fetchAll();
 
@@ -130,7 +127,7 @@
         }
         echo '</section>';
       } else {
-        echo '<h1>Ez da ezer aurkitu</h1>';
+        echo '<h1>Oraindik ez duzu libururik baloratu</h1>';
       }
       ?>
       </div>

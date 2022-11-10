@@ -1,17 +1,9 @@
-*, *::after, *::before {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
-
 body {
   height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
   text-align: center;
-  font-family: Arial, Helvetica, sans-serif;
-  background-image: url(../src/img/background2.jpg);
 }
 
 form {
