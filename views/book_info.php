@@ -1,6 +1,6 @@
 <?php
   include_once('../modules/connection.php');
-  include_once('../templates/head.php');
+  include('../templates/head.php');
   session_start();
 
   $book = $_REQUEST['liburua'];
