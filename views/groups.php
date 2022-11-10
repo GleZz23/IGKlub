@@ -2,6 +2,29 @@
   include('../templates/head.php');
   include_once('../modules/connection.php');
   include_once('../modules/session_control.php');
+
+  if($_SERVER['REQUEST_METHOD'] == 'POST'){
+
+    $code = mt_rand(10000,99999);
+
+    $query = $miPDO->prepare('SELECT codigo FROM grupo WHERE codigo = :code');
+    $query->execute(['code' => $code]);
+    $result = $query->fetch();
+
+    if ($result) { $code = mt_rand(10000,99999); }
+  
+    $query = $miPDO->prepare('INSERT INTO grupo (codigo, nombre, id_centro, nivel, curso, profesor) VALUES (:codigo, :nombre,:centro,:nivel,:curso,:profesor)');
+    $query->execute(['codigo' => $code, 
+                     'nombre' => $_REQUEST['title'], 
+                     'centro' => $_REQUEST['school'],
+                     'nivel' => $_REQUEST['level'], 
+                     'curso' => $_REQUEST['curso'], 
+                     'profesor' => $_SESSION['nickname']
+                    ]);  
+                    
+    header('Location: ../views/groups.php');
+  }
+
 ?>
 <link rel="stylesheet" href="../styles/groups.css">
 <script src="../src/js/groups.js" defer></script>
