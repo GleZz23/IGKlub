@@ -113,6 +113,7 @@ header button i:not(.search-bar button i) { color: var(--font); }
 }
 /* MAIN */
 main {
+  
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   grid-gap: 4rem 6rem;
@@ -187,7 +188,7 @@ main, section{
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  margin:0;
+  margin-top:0;
 }
 
 .class-container {
@@ -196,7 +197,7 @@ main, section{
   display: flex;
   justify-content: center;
   align-items: center;
-  
+  margin:2rem;
   border-radius: 1rem;
   border: 2px solid var(--light-purple);
   background-color: var(--main-bg);
@@ -318,6 +319,7 @@ main, section{
   main section {
     grid-template-columns: repeat(1, 1fr);
     margin: 4rem 2rem;
+   
   }
 
   header { padding: 1.5rem 1rem; }
