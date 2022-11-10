@@ -376,7 +376,7 @@ main {
   background-color: #000000dd;
   transition: all .3s ease-in-out;
   z-index: 10;
-  padding: 2rem 4rem;
+  padding: 2rem;
 }
 
 .closeButton {
@@ -525,6 +525,8 @@ main {
   }
 
   .profile { font-size: 1rem; }
+
+  #changePasswordForm button { width: 100%; }
 }
 
 /* MOVIL */
