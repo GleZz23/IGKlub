@@ -20,12 +20,14 @@
     }
 
     if ($join) {
-      $query = $miPDO->prepare('SELECT id_centro FROM grupo WHERE codigo =:group_code;');
-      $query->execute(['group_code' => $group_code]);
+      $query = $miPDO->prepare('SELECT id_centro FROM grupo WHERE codigo = :group_code;');
+      $query->execute(['group_code' => $_REQUEST['group_code']]);
       $result = $query->fetch();
 
       $query = $miPDO->prepare('UPDATE usuario SET id_centro = :school, cod_grupo = :group_code WHERE nickname = :nickname;');
-      $query->execute(['school' => $result[''] ,'group_code' => $group_code, 'nickname' => $_SESSION['nickname']]);
+      $query->execute(['school' => $result['id_centro'] ,'group_code' => $_REQUEST['group_code'], 'nickname' => $_SESSION['nickname']]);
+
+      header('Location: ../views/account_status.php');
     }
   }
 ?>
