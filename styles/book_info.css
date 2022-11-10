@@ -113,7 +113,7 @@ main section {
   align-items: center;
 }
 
-.more-info h3 { margin-right: .5rem; }
+.more-info h3 { margin-inline: .5rem; }
 
 /* Añadir nuevo idioma */
 .new-language-button {
@@ -358,7 +358,7 @@ main section {
   margin: 2rem;
   background-color: transparent;
   border: none;
-  color: var(--dark-purple);
+  color: var(--font);
   transition: all .3s ease-in-out;
 }
 
@@ -456,7 +456,7 @@ main section {
 }
 
 .stars-container {
-  width: 100%;
+  width: fit-content;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -513,3 +513,101 @@ main section {
 }
 
 .hidden { display: none; }
+
+/* ----------------------------------------------------------------------- */
+/* TABLET */
+@media screen and (max-width: 1280px) {
+  main {
+    flex-direction: column;
+    padding-block: 0;
+    padding-inline: 1rem;
+    margin-block: 0;
+    margin-top: 6rem;
+    width: 100%;
+  }
+
+  main header:not(.info-container header) {
+    padding-block: 2rem;
+    padding-inline: 0;
+    align-items: center;
+  }
+} 
+
+/* INTERMEDIO */
+@media screen and (max-width: 940px) {
+  main header h1 { font-size: 2rem;}
+
+  #rateBookForm h1, #newLanguageForm h1 { font-size: 1.5rem;}
+  
+  main header h2,
+  .reviews header h1 {
+    font-size: 1.5rem;
+  }
+
+  .main-comment header,
+  .answer header,
+  .user-answer header,
+  .user-comment header {
+    align-items: center;
+  }
+
+  .main-comment header h1,
+  .answer header h1,
+  .user-answer header h1,
+  .user-comment header h1 {
+    font-size: 1rem;
+  }
+
+  .more-info {
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: 4rem;
+  }
+
+  .closeButton {
+    font-size: 2rem;
+    margin: 1rem;
+  }
+
+  #rateBookForm,
+  #newLanguageForm {
+    width: 100%;
+  }
+
+  #rateBookForm button,
+  #newLanguageForm button {
+    width: 100%;
+  }
+}
+
+/* MOVIL */
+@media screen and (max-width: 600px) {
+  .reviews { padding-inline: 1rem; }
+
+  .main-comment, .user-comment { margin-right: .75rem; }
+
+  .answer, .user-answer { margin-left: .75rem; }
+
+  figure {
+    margin-inline: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  figure img {
+    width: 100%;
+    height: auto;
+  }
+
+  .rate-book:not(.actions .rate-book),
+  .new-language {
+    padding: 4rem 1rem;
+  }
+
+  .stars-container label {
+    font-size: 2rem;
+    padding-inline: .5rem;
+  }
+
+}
