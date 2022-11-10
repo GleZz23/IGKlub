@@ -437,7 +437,10 @@ main section {
 
   header nav figure { display: none; }
 
-  main section { margin: 4rem 2rem; }
+  main section {
+    grid-template-columns: repeat(1, 1fr);
+    margin: 4rem 2rem;
+  }
 
   header { padding: 1.5rem 1rem; }
 
