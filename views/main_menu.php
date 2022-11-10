@@ -63,7 +63,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['form-action'])) {
 
     $id_libro = $miPDO->lastInsertId();
     $query = $miPDO->prepare('UPDATE libro SET portada = :portada WHERE id_libro = :id_libro');
-    $query->execute(['portada' => $id_libro . '.' . $imageFileType, 'id_libro' => $id_libro]);
+    $query->execute(['portada' => $id_libro . '.png', 'id_libro' => $id_libro]);
 
     $insert = $miPDO->prepare('INSERT INTO solicitud_libro VALUES (:nickname, :id_libro, "espera")');
     $insert->execute(['nickname' => $_SESSION['nickname'], 'id_libro' => $id_libro]);

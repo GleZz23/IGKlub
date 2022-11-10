@@ -145,7 +145,7 @@
       <a href="personal_area.php"><figure style="background: url(../src/img/profile/'.$_SESSION['profile_img'].'); background-position: center; background-size: cover;"></figure></a>
             </div>';
       ?>
-       <button id="current-students"><i class="fa-solid fa-user-check"></i>Taldeko ikasleak</button>
+      <button id="current-students"><i class="fa-solid fa-users"></i>Taldeko ikasleak</button>
       <button id="accept-students"><i class="fa-solid fa-user-check"></i>Ikasleak onartu</button>
       <button id="accept-books"><i class="fa-solid fa-book"></i>Liburuak onartu</button>
       <button id="accept-comments"><i class="fa-solid fa-comments"></i>Iruzkinak onartu</button>
@@ -155,7 +155,7 @@
     </aside>
   </div>
   <section class="sticky-menu">
-  <button id="current-students"><i class="fa-solid fa-user-check"></i>Taldeko ikasleak</button>
+    <button id="current-students"><i class="fa-solid fa-users"></i>Taldeko ikasleak</button>
     <button id="accept-students"><i class="fa-solid fa-user-check"></i>Ikasleak onartu</button>
     <button id="accept-books"><i class="fa-solid fa-book"></i>Liburuak onartu</button>
     <button id="accept-comments"><i class="fa-solid fa-comments"></i>Iruzkinak onartu</button>
@@ -166,13 +166,13 @@
 
  <!-- Mostrar alumnos del grupo -->
  <?php
-    $query = $miPDO->prepare('SELECT usuario.*, centro.nombre AS nombre_centro FROM usuario, centro WHERE usuario.rol = "ikasle" AND usuario.estado = "aceptado" AND usuario.id_centro = centro.id_centro');
-    $query->execute();
+    $query = $miPDO->prepare('SELECT usuario.*, centro.nombre AS nombre_centro FROM usuario, centro WHERE usuario.rol = "ikasle" AND usuario.estado = "aceptado" AND usuario.id_centro = centro.id_centro AND usuario.cod_grupo = :code');
+    $query->execute(['code' => $_GET['code']]);
     $alumnosAceptados = $query->fetchAll();
 
     if ($alumnosAceptados) {
       echo '<section class="current-students">
-      <h1>Taldeko Ikasleak</h1>
+            <h1>Taldeko Ikasleak</h1>
             <table>
               <tr>
                 <th></th>
@@ -203,8 +203,8 @@
 
     <!-- Aceptar nuevos Alumnos -->
     <?php
-    $query = $miPDO->prepare('SELECT usuario.*, centro.nombre AS nombre_centro FROM usuario, centro WHERE usuario.rol = "ikasle" AND usuario.estado = "espera" AND usuario.id_centro = centro.id_centro');
-    $query->execute();
+    $query = $miPDO->prepare('SELECT usuario.*, centro.nombre AS nombre_centro FROM usuario, centro WHERE usuario.rol = "ikasle" AND usuario.estado = "espera" AND usuario.id_centro = centro.id_centro AND usuario.cod_grupo = :code');
+    $query->execute(['code' => $_GET['code']]);
     $results = $query->fetchAll();
 
     if ($results) {
@@ -257,7 +257,7 @@
     <?php
       // Recojo todos los valores de los libros en una variable
       $query = $miPDO->prepare('SELECT libro.*, solicitud_libro.nickname FROM libro, solicitud_libro, usuario WHERE libro.id_libro = solicitud_libro.id_libro AND solicitud_libro.estado = "espera" AND solicitud_libro.nickname = usuario.nickname AND usuario.cod_grupo = :code');
-      $query->execute();
+      $query->execute(['code' => $_GET['code']]);
       $books = $query->fetchAll();
 
       if ($books) {
@@ -304,7 +304,7 @@
       <!-- Aceptar comentarios y respuestas -->
       <?php
       $query = $miPDO->prepare('SELECT *, libro.titulo AS libro FROM comentario, libro, usuario WHERE comentario.estado = "espera" AND comentario.id_libro = libro.id_libro AND comentario.nickname = usuario.nickname AND usuario.cod_grupo = :code');
-      $query->execute();
+      $query->execute(['code' => $_GET['code']]);
       $results = $query->fetchAll();
 
       if ($results) {
@@ -351,7 +351,7 @@
       }
       
       $query = $miPDO->prepare('SELECT *, libro.titulo AS libro FROM respuesta, libro, usuario WHERE respuesta.estado = "espera" AND respuesta.id_libro = libro.id_libro AND respuesta.nickname = usuario.nickname AND usuario.cod_grupo = :code');
-      $query->execute();
+      $query->execute(['code' => $_GET['code']]);
       $results = $query->fetchAll();
 
       if ($results) {
@@ -402,7 +402,7 @@
     <!-- Aceptar nuevos idiomas -->
     <?php
     $query = $miPDO->prepare('SELECT solicitud_idioma.*, usuario.imagen FROM solicitud_idioma, usuario WHERE solicitud_idioma.estado = "espera" AND solicitud_idioma.nickname = usuario.nickname AND usuario.cod_grupo = :code');
-    $query->execute();
+    $query->execute(['code' => $_GET['code']]);
     $results = $query->fetchAll();
 
     if ($results) {

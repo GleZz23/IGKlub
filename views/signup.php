@@ -82,7 +82,7 @@
                         'date' => $_POST["date"],
                         'password' => password_hash($_POST["password"], PASSWORD_DEFAULT),
                         'role' => $_GET['role'],
-                        'imagen' => $_POST["nickname"].'.'.$imageFileType
+                        'imagen' => $_POST["nickname"].'.png'
                       ]);
 
       if ($_GET['role'] === 'Irakasle') {
