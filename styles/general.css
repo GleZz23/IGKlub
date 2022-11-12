@@ -14,7 +14,10 @@ body {
   overflow-x: hidden;
 }
 
-form { color: black; }
+form input *:not(form a, form i) {
+  color: black;
+  font-size: 1rem;
+}
 
 /* Scrolllbar styles */
 ::-webkit-scrollbar { width: .5rem; }

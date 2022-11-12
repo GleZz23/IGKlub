@@ -67,7 +67,7 @@
           case 'no':
             $query = $miPDO->prepare('DELETE FROM libro WHERE id_libro = :id_libro;');
             $query->execute(['id_libro' => $_REQUEST['id_libro']]);
-            $rute = '../src/img/books/'.$_REQUEST['id_libro'].'.jpg';
+            $rute = '../src/img/books/'.$_REQUEST['id_libro'].'.png';
             unlink($rute);
             break;
         }
@@ -183,7 +183,6 @@
       <button id="accept-languages"><i class="fa-solid fa-language"></i></i>Hizkuntzak onartu</button>
       <button id="admins"><i class="fa-solid fa-users-gear"></i>Administratzaileak</button>
       <a href="main_menu.php"><i class="fa-solid fa-house"></i>Hasiera</a>
-      <button class="close-profile">Itxi <i class="fa-solid fa-angles-right"></i></button>
     </aside>
   </div>
   <section class="sticky-menu">
@@ -263,7 +262,7 @@
           if ($book['portada'] === '') {
           echo '<img src="../src/img/books/default.jpg">';
           } else {
-          echo '<img src="../src/img/books/'.$book['id_libro'].'.jpg">';
+          echo '<img src="../src/img/books/'.$book['portada'].'">';
         }
           echo '<div class="book-overlay">
                   <div class="book-info">

@@ -96,6 +96,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['form-action'])) {
     }
 
     $rute = '../src/img/books/'.$id_libro.'.png';
+    unlink($rute);
     move_uploaded_file($file['tmp_name'], $rute);
 
     header('Location: main_menu.php');
