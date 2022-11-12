@@ -137,7 +137,9 @@ INSERT INTO centro VALUES
 -- USUARIO
 INSERT INTO usuario (`nickname`, `nombre`, `apellidos`, `fecha_nacimiento`, `email`, `telefono`, `contrasena`, `rol`, `id_centro`, `cod_grupo`, `estado`, `imagen`) VALUES
   ('Admin', 'Administrador', 'de Prueba', '2000-01-01', 'admin@mail.com', NULL, '$2y$10$SZU5HY0RmiNkvpl7rOoPkeERGKXk0bTNZJoBDTAdzR.VYYEHuZx8q', 'admin', NULL, NULL, 'aceptado', 'Admin.png'),
-  ('Profesor', 'Profesor', 'de Prueba', '2000-01-01', 'profesor@mail.com', 911111111, '$2y$10$SZU5HY0RmiNkvpl7rOoPkeERGKXk0bTNZJoBDTAdzR.VYYEHuZx8q', 'irakasle', 2, NULL, 'espera', 'Profesor.png');
+  ('Admin2', 'Administrador', 'de Prueba Segundo', '2000-01-01', 'admin2@mail.com', NULL, '$2y$10$SZU5HY0RmiNkvpl7rOoPkeERGKXk0bTNZJoBDTAdzR.VYYEHuZx8q', 'admin', NULL, NULL, 'aceptado', 'Admin.png'),
+  ('Profesor', 'Profesor', 'de Prueba', '2000-01-01', 'profesor@mail.com', 911111111, '$2y$10$SZU5HY0RmiNkvpl7rOoPkeERGKXk0bTNZJoBDTAdzR.VYYEHuZx8q', 'irakasle', 2, NULL, 'espera', 'Profesor.png'),
+  ('Alumno', 'Alumno', 'de Prueba', '2000-01-01', 'alumno@mail.com', NULL, '$2y$10$SZU5HY0RmiNkvpl7rOoPkeERGKXk0bTNZJoBDTAdzR.VYYEHuZx8q', 'ikasle', 2, NULL, 'espera', NULL);
 
 -- LIBROS
 INSERT INTO libro (titulo, escritor, portada) VALUES 
@@ -161,17 +163,16 @@ UPDATE `libro` SET `sinopsis` = 'Charlie y la fábrica de chocolate es una histo
 UPDATE `libro` SET `sinopsis` = 'Tras la invasión de Holanda, los Frank, comerciantes judíos alemanes emigrados a Amsterdam en 1933, se ocultaron de la Gestapo en una buhardilla anexa al edificio donde el padre de Anne tenía sus oficinas. Ocho personas permanecieron recluidas desde junio de 1942 hasta agosto de 1944, fecha en que fueron detenidas y enviadas a campos de concentración. Desde su escondite y en las más precarias condiciones, Anne, una niña de trece años, escribió su estremecedor Diario: un testimonio único en su género sobre el horror y la barbarie nazi, y sobre los sentimientos y experiencias de la propia Anne y sus acompañantes. Anne murió en el campo de Bergen-Belsen en marzo de 1945. Su Diario nunca morirá.' WHERE `libro`.`id_libro` = 8;
 UPDATE `libro` SET `sinopsis` = 'Smaug parecía profundamente dormido cuando Bilbo espió una vez más desde la entrada. ¡Pero fingía! ¡Estaba vigilando la entrada del túnel!... Sacado de su cómodo agujero-hobbit por Gandalf y una banda de enanos, Bilbo se encuentra de pronto en medio de una conspiración que pretende apoderarse del tesoro de Smaug el Magnífico, un enorme y muy peligroso dragón...' WHERE `libro`.`id_libro` = 9;
 
--- SOLICITUD DE LIBROS
-INSERT INTO solicitud_libro (id_libro, estado) VALUES
-  (1, 'aceptado'),
-  (2, 'aceptado'),
-  (3, 'aceptado'),
-  (4, 'aceptado'),
-  (5, 'aceptado'),
-  (6, 'espera'),
-  (7, 'espera'),
-  (8, 'espera'),
-  (9, 'espera');
+INSERT INTO solicitud_libro (nickname, id_libro, estado) VALUES
+  (NULL, 1, 'aceptado'),
+  (NULL, 2, 'aceptado'),
+  (NULL, 3, 'aceptado'),
+  (NULL, 4, 'aceptado'),
+  (NULL, 5, 'aceptado'),
+  (NULL, 6, 'espera'),
+  (NULL, 7, 'espera'),
+  (NULL, 8, 'espera'),
+  ('Alumno', 9, 'espera');
 
 -- IDIOMAS
 INSERT INTO `idioma`(`nombre`) VALUES
