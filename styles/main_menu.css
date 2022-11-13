@@ -1,3 +1,8 @@
+body {
+  display: flex;
+  flex-direction: column;
+}
+
 /* MENU STICKY */
 .sticky-menu {
   display: flex;
@@ -491,6 +496,7 @@ footer {
   color: var(--font);
   background-color: var(--secundary-bg);
   border-top: 2px solid var(--light-purple);
+  margin-top: auto;
 }
 
 footer > p {
