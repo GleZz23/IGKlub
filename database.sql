@@ -194,5 +194,3 @@ UPDATE usuario SET id_centro = NULL, cod_grupo = NULL WHERE rol = 'ikasle';
 -- USUARIO PARA LA BBDD
 create user 'igklub'@'%' identified by '655Yj6Rc$F@x';
 grant all on igklub_database.* to 'igklub'@'%';
-
--- CAMBIO DE PRUEBAS
