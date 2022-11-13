@@ -1,3 +1,10 @@
+// FOOTER
+if (document.querySelector('main').innerText == 'Ez da ezer aurkitu') {
+  console.log('Cambair el footer');
+  document.querySelector('footer').style.bottom = '0';
+  document.querySelector('footer').style.position = 'absolute';
+}
+
 // LIBROS
 const bookContainer = document.querySelectorAll('.book-container');
 
