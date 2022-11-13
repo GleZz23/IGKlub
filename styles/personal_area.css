@@ -258,16 +258,13 @@ main {
   width: 100%;
   padding-block: .5rem;
   font-size: 1rem;
-}
-
-#change-password {
   color: var(--light-purple);
   border: 2px solid var(--light-purple);
   background: transparent;
   transition: all .3s ease-in-out;
 }
 
-#change-password:hover {
+.actions button:hover {
   color: var(--font);
   box-shadow: 0 0 .5rem var(--light-purple);
   background: var(--accent);

@@ -238,7 +238,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['form-action'])) {
           if ($book['portada'] === '') {
             echo '<img src="../src/img/books/default.jpg">';
           } else {
-            echo '<img src="../src/img/books/' . $book['id_libro'] . '.jpg">';
+            echo '<img src="../src/img/books/'.$book['portada'].'">';
           }
           echo '<div class="book-overlay">
                   <div class="book-info">
@@ -258,7 +258,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['form-action'])) {
             }
           }
           echo '</div>
-                  <a href="book_info.php?liburua=' . $book['id_libro'] . '">Liburu orria</a>
+                  <a href="book_info.php?liburua='.$book['id_libro'].'">Liburu orria</a>
                 </div>
               </div>
             </div>';
