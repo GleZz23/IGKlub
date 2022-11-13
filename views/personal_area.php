@@ -90,7 +90,7 @@
         <h1><?php echo $_SESSION['name'] ?> <?php echo $_SESSION['surnames'] ?> </h1>
         <h2 id="nickname"><?php echo $_SESSION['nickname']?></h2>
         <p id="email">Email-a: <?php echo $_SESSION['email']?></p>
-        <p id="fec_nacimiento">Jaiotze-data: <?php echo $_SESSION['date']?></p>
+        <p id="fec_nacimiento">Jaiotze-data: <?php echo date_format(date_create($_SESSION['date']), 'Y/m/j')?></p>
         <p id="telefono">Telefonoa: <?php echo $_SESSION['phone']?></p>
         <?php
           if ($_SESSION['role'] !== 'admin') {

@@ -116,7 +116,7 @@
     }
     ?>
     <figure>
-      <?php echo '<img src="../src/img/books/'.$results['id_libro'].'.jpg" alt="'.$results['titulo'].'">' ?>
+      <?php echo '<img src="../src/img/books/'.$results['portada'].'" alt="'.$results['titulo'].'">' ?>
     </figure>
     <section>
       <!-- Titulo y escritor -->
