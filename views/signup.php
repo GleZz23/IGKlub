@@ -91,7 +91,6 @@
       }
 
       $rute = '../src/img/profile/'.$_POST["nickname"].'.png';
-      unlink($rute);
       move_uploaded_file($file['tmp_name'], $rute);
 
       header('Location: ../views/login.php');

@@ -14,7 +14,8 @@ body {
   overflow-x: hidden;
 }
 
-form input *:not(form a, form i) {
+form input *:not(form a, form i),
+.input-container {
   color: black;
   font-size: 1rem;
 }
